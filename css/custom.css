@@ -125,8 +125,8 @@ body {
  .app-header-fixed .app-header {
      padding: 10px 0px;
      background: #fff;
-     border-top: 2px solid #252E65;
-     border-bottom: 2px solid #252E65;
+     border-top: 2px solid #3f4a8e;
+     border-bottom: 2px solid #3f4a8e;
      box-shadow: 1px 9px 5px #00000057;
 }
 /* .app-aside-fixed .aside-wrap {
@@ -534,7 +534,7 @@ body {
      color: #fff !important;
 }
  .bg-main2 {
-     background-color: #252E65 !important;
+     background-color: #3f4a8e !important;
      color: #fff !important;
 }
  .color-main-1 {
@@ -1356,7 +1356,7 @@ border: 0px;
 }
 .navbar-right .nav-button
 {
-    background-color: #252E65 !important;
+    background-color: #3f4a8e !important;
     color: #fff !important;
     margin: 8px 5px;
     padding: 5px 15px !important;
@@ -1364,7 +1364,7 @@ border: 0px;
 }
 .navbar-right .nav-button:hover
 {
-    background-color: #252E65 !important;
+    background-color: #3f4a8e !important;
     color: #fff !important;
     margin: 5px 5px;
     padding: 5px 15px !important;
