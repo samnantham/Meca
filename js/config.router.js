@@ -118,6 +118,12 @@ angular.module('app')
                   resolve: load(['moment','fullcalendar','ui.calendar','js/controllers/calendar.js'])
               })
 
+              .state('app.contactus', {
+                  url: 'contactus',
+                  templateUrl: 'tpl/contactus.html',
+                  resolve: load(['js/controllers/contactus.js'])
+              })
+
               .state('app.404', {
                   url: '404',
                   templateUrl: 'tpl/page_404.html'
