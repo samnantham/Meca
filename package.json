@@ -3,9 +3,9 @@
   "authors": [
     "samnantham"
   ],
-  "description": "Toyota-Meca",
-  "engines": {
-    "node": "12.x"
+  "description": "Web application",
+  "scripts": {
+    "start": "node node_modules/http-server/bin/http-server -o"
   },
   "keywords": [],
   "private": true,
