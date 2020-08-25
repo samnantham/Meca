@@ -4,6 +4,9 @@
     "samnantham"
   ],
   "description": "Toyota-Meca",
+  "engines": {
+    "node": "12.x"
+  },
   "keywords": [],
   "private": true,
   "ignore": [
