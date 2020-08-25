@@ -18,7 +18,7 @@ angular.module('app')
             window.location.href = 'signin';
           }
           
-          $locationProvider.html5Mode(true);
+         /* $locationProvider.html5Mode(true);*/
           
           $stateProvider
               .state('app', {
