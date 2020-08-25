@@ -1,0 +1,49 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ContactusCtrl">
+    <!-- main -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none m-b ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none ">
+            <div class="panel panel-default r-3x  m-l">
+                <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold">
+                    Contact Us
+                </div>
+                <div class="bg-white padder-v padder r-b-6x m-b" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                    <div class="col-xs-12 p-l-none p-r-none">
+                        <div class="m-t m-b">
+                            <div class="col-xs-4 p-l-none">
+                                <div class="bg-main1 text-center h5 sm-padder-v sm-padder">Category</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="bg-main1 text-center h5 sm-padder-v sm-padder">Person Incharge</div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="bg-main1 text-center h5 sm-padder-v sm-padder">Email</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 p-l-none p-r-none border-bottom-1" ng-repeat="(key,contact) in contacts">
+                        <div class="m-t m-b">
+                            <div class="col-xs-4 p-l-none">
+                                <div class="text-center h5 sm-padder-v sm-padder color_2  f-12 m-t-xs">
+                                    <strong>
+                                       {{contact.category}}
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="text-center h5 sm-padder-v sm-padder color_3">
+                                    <strong> {{contact.incharge}} </strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="text-center h5 font-bold sm-padder-v sm-padder cursor">
+                                     <a class=" r-2x text-u-c cursor" ng-href="mailto:{{contact.email}}" target="_blank"> {{contact.email}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
