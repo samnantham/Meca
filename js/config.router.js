@@ -36,6 +36,13 @@ angular.module('app')
               })
 
               //MEBIT Events
+
+              .state('app.mebitdashboard', {
+                  url: 'mebit/dashboard',
+                  templateUrl: 'tpl/events/dashboard.html',
+                  resolve: load(['moment','fullcalendar','ui.calendar','js/controllers/home.js'])
+              })
+
               .state('app.events', {
                   url: 'events/list/:type?',
                   templateUrl: 'tpl/events/list.html',

@@ -1078,6 +1078,9 @@ body {
  .mCustomScrollbar {
      height: calc(100vh - 187px) !important;
 }
+.whatsnew .mCustomScrollbar{
+     height: calc(120vh - 187px) !important;
+}
  .app-content-body {
      padding-bottom: 41px;
      padding-top: 22px;

@@ -9,8 +9,8 @@
     </a>
 </li>
 
-<li ng-class="{active: $state.includes('app.events')  || $state.includes('app.viewevent') || $state.includes('app.editevent')}">
-    <a ui-sref="app.events({type:'all'})" class="auto">
+<li ng-class="{active: $state.includes('app.events')  || $state.includes('app.viewevent') || $state.includes('app.editevent') || $state.includes('app.mebitdashboard') }">
+    <a ui-sref="app.mebitdashboard" class="auto">
      <span class="icon-holder"><img class="menu-icon" ng-src="{{(currentState == 'app.events') || (currentState == 'app.viewevent')  || (currentState == 'app.editevent') ? 'img/logo.png' : 'img/logo.png' }}" style="width: 100%; height: auto;">
         <p>MEBIT EVENT</p>
     </span>
@@ -48,17 +48,10 @@
 <li ng-class="{active: $state.includes('app.tbps') || $state.includes('app.viewtbp')}">
     <a ui-sref="app.tbps({type:'0'})" class="auto">
        <span class="icon-holder"><img class="menu-icon" ng-src="{{(currentState == 'app.tbps') || (currentState == 'app.viewtbp') ? 'img/tbp.png' : 'img/tbp_active.png' }}">
-        <p>TBP</p>
+        <p>Training</p>
     </span>
 
 </a>
-</li>
-<li>
-    <a class="auto">
-        <span class="icon-holder"><img class="menu-icon" src="img/kaizen_active.png">
-            <p>Training</p>
-        </span>
-    </a>
 </li>
 <!-- <li ng-class="{active: $state.includes('app.chats')}">
     <a ui-sref="app.chats" class="auto">

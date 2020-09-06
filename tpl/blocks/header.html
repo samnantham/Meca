@@ -9,7 +9,7 @@
         <i class="fa fa-bars"></i>
     </button>
     <!-- brand -->
-     <a class="navbar-brand text-lt ">
+     <a class="navbar-brand text-lt" ui-sref="app.home">
         <img class="header-logo " src="img/meca.png" ng-if="!app.settings.asideFolded">
         <img class="header-logo " src="img/meca.png" ng-if="app.settings.asideFolded">
     </a>
@@ -19,7 +19,7 @@
 
 <!-- navbar collapse -->
 <div class="collapse pos-rlt navbar-collapse  {{app.settings.navbarCollapseColor}} p-l-none">
-    <a class="text-lt pull-left nav-brand">
+    <a class="text-lt pull-left nav-brand" ui-sref="app.home">
         <!-- <img class="header-logo" src="img/logo.png" ng-if="!app.settings.asideFolded"> -->
          <img class="header-logo " src="img/meca.png" ng-if="app.settings.asideFolded" width="155px;">
     </a>
