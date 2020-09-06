@@ -7,15 +7,16 @@
                     What's New
                 </div>
                 <div class="bg-white padder-v padder r-b-6x m-b" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                     <div class="col-xs-12 bg-main1 text-center sm-padder-v sm-padder">MECA CAMPUS </div>
                     <div class="col-xs-12 p-l-none p-r-none">
                         <div class="m-t m-b">
-                            <div class="col-xs-2 p-l-none">
+                            <div class="col-xs-3 p-l-none">
                                 <div class="bg-main1 text-center h5 sm-padder-v sm-padder">Category</div>
                             </div>
                             <div class="col-xs-2">
                                 <div class="bg-main1 text-center h5 sm-padder-v sm-padder">Time</div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
                                 <div class="bg-main1 text-center h5 sm-padder-v sm-padder">Title</div>
                             </div>
                             <div class="col-xs-2 p-r-none">
@@ -24,13 +25,15 @@
                         </div>
                     </div>
                     <div class="col-xs-12 p-l-none p-r-none border-bottom-1" ng-repeat="(key,whatsnew) in homeData.whatsnew">
-                        <div class="m-t m-b">
-                            <div class="col-xs-2 p-l-none">
-                                <div class="text-center h5 sm-padder-v sm-padder color_2">
+                        <div class="m-t-xs m-b-xs">
+                            <div class="col-xs-3 p-l-none">
+                                <div class="text-left h5 sm-padder-v sm-padder color_2">
                                     <strong>
-                                        <span ng-if="whatsnew.whatsnew_type == 2">MEBIT Event</span>
-                                        <span ng-if="whatsnew.whatsnew_type == 3">{{ 'Kaizen - ' + whatsnew.typeData.type }}</span>
+                                        <img class="new-icon" src="img/new.png">
+                                        <span class="pad-left-30px" ng-if="whatsnew.whatsnew_type == 2">MEBIT Event</span>
+                                        <span class="pad-left-30px" ng-if="whatsnew.whatsnew_type == 3">{{ 'Kaizen - ' + whatsnew.typeData.type }}</span>
                                     </strong>
+                                    <div class="clear"></div>
                                 </div>
                             </div>
                             <div class="col-xs-2">
@@ -38,7 +41,7 @@
                                     {{convertDate(whatsnew.created_at) | date:'dd MMM yyyy HH:mm'}}
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
                                 <div class="text-left h5 font-bold sm-padder-v sm-padder cursor" ng-click="goToitem(whatsnew)">
                                     {{whatsnew.title}}
                                 </div>
@@ -62,7 +65,8 @@
                         Promotion
                     </div> -->
                 
-                     <div class="bg-white padder-v padder r-b-6x">
+                     <div class="bg-white padder-v padder r-3x pos-rlt bdr-2px">
+                        <div class="top-caption">Promotion</div>
                         <slick ng-if="!loading" init-onload="false" data="homeData.blogs" settings="slickConfig">
                             <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder" ng-repeat="(key,data) in homeData.blogs">
                             	 

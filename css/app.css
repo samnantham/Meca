@@ -2767,7 +2767,8 @@ body {
      color: inherit;
 }
  .bg-white a:hover {
-     color: inherit;
+    color: #23527c;
+    font-weight: bold;
 }
  .bg-white .text-muted {
      color: #98a6ad !important;
