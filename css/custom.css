@@ -1395,3 +1395,13 @@ border: 0px;
 {
      padding-left: 30px;
 }
+@media only screen and (max-width: 767px) {
+  .p-xs-l
+  {
+     padding-left: 15px !important;
+  }
+  .p-xs-r
+  {
+     padding-right: 15px !important;
+  }
+}
