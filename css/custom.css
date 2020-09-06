@@ -1080,6 +1080,8 @@ body {
 }
 .whatsnew .mCustomScrollbar{
      height: calc(120vh - 187px) !important;
+}.mebit-whatsnew .mCustomScrollbar{
+     height: calc(85vh - 187px) !important;
 }
  .app-content-body {
      padding-bottom: 41px;
@@ -1407,4 +1409,53 @@ border: 0px;
   {
      padding-right: 15px !important;
   }
+}
+.bg-main3 {
+    background-color: #FA9F34 !important;
+    color: #fff !important;
+}
+.bg-main4 {
+    background-color: #F1592A !important;
+    color: #fff !important;
+}
+.color_4 {
+    color: #F1592A !important;
+}
+.newcalendar .fc-prev-button,.newcalendar .fc-next-button {
+    background: #FA9F34 !important;
+    color: #fff !important;
+    padding: 0px 11px !important;
+    margin-right: 10px !important;
+    height: auto !important;
+    margin-top: 10px !important;
+    color: #fff !important;
+}
+.newcalendar .fc-state-active {
+    background: #FA9F34 !important;
+    height: auto !important;
+    padding: 0px 11px !important;
+    margin-top: 10px !important;
+    border: 1px solid #FA9F34 !important;
+    color: #fff !important;
+}
+.height_150
+{
+     min-height: 150px;
+}
+.align-center
+{
+     align-items: center;
+     display: flex;
+     text-align: center;
+}
+.height_350
+{
+     min-height: 350px;
+}
+.padder-2v{
+     padding: 30px 0px;
+}
+.hover_color:hover
+{
+background: #F1592A !important;
 }
