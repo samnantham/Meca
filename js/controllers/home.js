@@ -159,8 +159,6 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             });
         }
 
-        EventInfoModal
-
         $rootScope.closeModal = function() {
             $rootScope.formData = {};
             $('#PopupModal').modal('hide');

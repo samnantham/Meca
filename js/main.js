@@ -349,6 +349,8 @@ angular.module('app')
                 $scope.formData = {};
                 $scope.isedit = false;
                 $('#HeaderModal').modal('hide');
+                $('#PopupModal').modal('hide');
+                $('#EventInfoModal').modal('hide');
                 $rootScope.modalerrors = [];
             }
 
