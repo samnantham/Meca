@@ -104,6 +104,41 @@ var app =
                     type: 'Step 1-3 Revised',
                     typename:'step1_3_revised'
                 }];
+
+                app.organizationdocs = [{
+                    name:'Bahrain EKK MEBIT Organization Structure (2020)_ver2',
+                    link:'docs/Organization/Bahrain EKK MEBIT Organization Structure (2020)_ver2.xlsx',
+                },{
+                    name:'IRAQ TIQ BIT Organization Structure',
+                    link:'docs/Organization/IRAQ TIQ BIT Organization Structur.xlsx'
+                },{
+                    name:'Jordan CTA _ MEBIT Organization Structure - Markazia Jordan (CTA)',
+                    link:'docs/Organization/Jordan CTA _ MEBIT Organization Structure - Markazia Jordan (CTA).xlsx'
+                },{
+                    name:'Kuwait MNSS _Copy of 2. MEBIT Organization Structure Template_(completed...',
+                    link:'docs/Organization/Kuwait MNSS _Copy of 2. MEBIT Organization Structure Template_(completed).xlsx'
+                },{
+                    name:'Lebanon BUMC _ MEBIT Organization Structure Template_',
+                    link:'docs/Organization/Lebanon BUMC _ MEBIT Organization Structure Template.xlsx'
+                },{
+                    name:'MEBIT Organization Structure - SBA',
+                    link:'docs/Organization/MEBIT Organization Structure - SBA.xlsx'
+                },{
+                    name:'MEBIT',
+                    link:'docs/Organization/MEBIT.xlsx'
+                },{
+                    name:'Qatar AAB_ MEBIT',
+                    link:'docs/Organization/Qatar AAB_ MEBIT.xlsx'
+                },{
+                    name:'Saudi ALJ_ 2020  MEBIT Organization Structure ALJ',
+                    link:'docs/Organization/Saudi ALJ_ 2020  MEBIT Organization Structure ALJ.xlsx'
+                },{
+                    name:'UAE AFM_ BIT Org Struture Temp',
+                    link:'docs/Organization/UAE AFM_ BIT Org Struture Temp.xlsx'
+                },{
+                    name:'Yemen AMTC _ MEBIT Organization Structure Template v2',
+                    link:'docs/Organization/Yemen AMTC _ MEBIT Organization Structure Template v2.xlsx'
+                }];
             }
 
         ]).config(function (ScrollBarsProvider) {

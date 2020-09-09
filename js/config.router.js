@@ -13,7 +13,7 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider, $locationProvider , JQ_CONFIG, MODULE_CONFIG) {
           
           var layout = "tpl/app.html";
-          $urlRouterProvider.otherwise('/#/signin');
+          $urlRouterProvider.otherwise('signin');
           if((window.location.href.substr(window.location.href.lastIndexOf('/') + 1)) == ''){
             window.location.href = '/#/signin';
           }
@@ -126,8 +126,14 @@ angular.module('app')
               })
 
               .state('app.contactus', {
-                  url: 'contactus',
+                  url: 'support',
                   templateUrl: 'tpl/contactus.html',
+                  resolve: load(['js/controllers/contactus.js'])
+              })
+
+              .state('app.orgdocs', {
+                  url: 'mebit/organization/documents',
+                  templateUrl: 'tpl/organizationdocs.html',
                   resolve: load(['js/controllers/contactus.js'])
               })
 
