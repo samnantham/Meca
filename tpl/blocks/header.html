@@ -24,10 +24,16 @@
         <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" width="155px;" />
     </a>
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a class="nav-button" ng-click="openheaderaddModal();">
-                Create New
+        <li class="dropdown" dropdown>
+            <a class="nav-button dropdown-toggle"  dropdown-toggle>
+                Create New  <b class="caret"></b>
             </a>
+            <ul class="dropdown-menu animated fadeInRight chat_buble">
+                <li>
+                    <a class="text-muted text-white" > menu</a>
+                </li>
+                
+            </ul>
         </li>
         <li>
             <a class="nav-button" ui-sref="app.chats">
