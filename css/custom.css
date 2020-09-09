@@ -1471,10 +1471,10 @@ box-shadow:
   0 100px 80px rgba(0, 0, 0, 0.12)
 ;
 }
-.btn_pad
-{
-padding-left: 40px;
-padding-right: 40px;
+.btn_pad {
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .black
 {
@@ -1500,4 +1500,8 @@ padding-right: 40px;
 {
      background: #9D9D9D;
      color: #fff;
+}
+.vt_center
+{
+     top: 30%;
 }
