@@ -38,16 +38,16 @@ var app =
                 }];
                 app.kaizentypes = [{
                     id: 1,
-                    type: 'Report'
+                    type: 'New Car Sales'
                 }, {
                     id: 2,
-                    type: 'Branch SGA'
+                    type: 'After Sales'
                 }, {
                     id: 3,
-                    type: 'Practices'
+                    type: 'Trade In'
                 },{
                     id: 4,
-                    type: 'Others'
+                    type: 'BIT Foundation'
                 },{
                     id: 5,
                     type: 'News Room'

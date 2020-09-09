@@ -1,8 +1,8 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="DashboardCtrl">
     <!-- main -->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none m-b ">
-        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 m-t p-l-none ">
-            <div class="panel panel-default r-3x  m-l mebit-whatsnew">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none m-b">
+        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12 m-t p-l-none">
+            <div class="panel panel-default r-3x m-l mebit-whatsnew">
                 <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
                     What's New
                 </div>
@@ -28,7 +28,7 @@
                             <div class="col-sm-3 p-l-none">
                                 <div class="text-left h5 sm-padder-v sm-padder color_4">
                                     <strong>
-                                        <img class="new-icon" src="img/new.png" ng-if="key < 3">
+                                        <img class="new-icon" src="img/new.png" ng-if="key < 3" />
                                         <span class="pad-left-30px" ng-if="whatsnew.whatsnew_type == 2">MEBIT Event</span>
                                         <span class="pad-left-30px" ng-if="whatsnew.whatsnew_type == 3">{{ 'Kaizen - ' + whatsnew.typeData.type }}</span>
                                     </strong>
@@ -49,7 +49,8 @@
                                 <div class="text-left h5 sm-padder-v sm-padder color_4">
                                     <strong>
                                         <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
-                                        <span ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.ownerprofile.first_name ? (whatsnew.ownerprofile.first_name + ' ' + whatsnew.ownerprofile.last_name) : whatsnew.ownerprofile.username  }}</span></strong>
+                                        <span ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.ownerprofile.distributorinformation.name ? whatsnew.ownerprofile.distributorinformation.name : 'Admin' }}</span>
+                                    </strong>
                                 </div>
                             </div>
                         </div>
@@ -57,48 +58,51 @@
                 </div>
             </div>
         </div>
-  
-    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 m-t" ng-if="!loading">
-        <div class="panel panel-default r-3x newcalendar">
-            <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
-                Calendar
+
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 m-t" ng-if="!loading">
+            <div class="panel panel-default r-3x newcalendar">
+                <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
+                    Calendar
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x">
+                    <div class="calendar" ng-model="eventSources" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+                </div>
             </div>
-            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x">
-                <div class="calendar" ng-model="eventSources" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t" ng-if="!loading">
+            <div class="panel panel-default r-3x newcalendar">
+                <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
+                    From Distributor
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x padder-v">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"><p class="text-center col-xs-12 font-bold cursor">BIT FOUNDATION/TRA</p></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"><p class="text-center col-xs-12 font-bold cursor">NEW CAR SALES</p></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"><p class="text-center col-xs-12 font-bold cursor">TRADE IN/RE-PURCHASE</p></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"><p class="text-center col-xs-12 font-bold cursor">AFTER SALES/PARTS</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t" ng-if="!loading">
+            <div class="panel panel-default r-3x newcalendar">
+                <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
+                    From TMC
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x padder-v height_350">
+                    <div class="bg-main3 text-center padder-2v m-b m-t-md font-bold cursor hover_color">What is mebit</div>
+                    <div class="bg-main3 text-center padder-2v m-b font-bold cursor hover_color" ui-sref="app.events({type:'all'})">Mebit Event</div>
+                    <div class="bg-main3 text-center padder-2v m-b-lg font-bold cursor hover_color">Organisation</div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t" ng-if="!loading">
-        <div class="panel panel-default r-3x newcalendar">
-            <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
-                From Distributor 
-            </div>
-            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x  padder-v">
-                  <div class="col-lg-6 col-md-6  ">
-                      <div class=" height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"><p class="text-center col-xs-12 font-bold cursor">BIT FOUNDATION/TRA</p> </div>                 </div>
-                  <div class="col-lg-6 col-md-6  ">
-                     <div class=" height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"> <p class="text-center col-xs-12 font-bold cursor">NEW CAR SALES</p>     </div>             </div>
-                  <div class="col-lg-6 col-md-6  ">
-                      <div class=" height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"><p class="text-center col-xs-12 font-bold cursor">TRADE IN/RE-PURCHASE</p></div>
-                  </div>
-                  <div class="col-lg-6 col-md-6  ">
-                     <div class=" height_150 col-xs-12 bg-main3 m-b-sm align-center hover_color"> <p class="text-center col-xs-12 font-bold cursor">AFTER SALES/PARTS</p> </div>                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t" ng-if="!loading">
-        <div class="panel panel-default r-3x newcalendar">
-            <div class="panel-heading r-3x r-b-none bg-main4 text-center font-bold">
-                From TMC
-            </div>
-            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x padder-v height_350">
-                  <div class="bg-main3 text-center padder-2v m-b m-t-md font-bold cursor hover_color"> What is mebit</div>
-                  <div class="bg-main3 text-center padder-2v m-b font-bold cursor hover_color">Past Event</div>
-                  <div class="bg-main3 text-center padder-2v m-b-lg font-bold cursor hover_color"> Organisation</div>
-            </div>
-        </div>
-    </div>
-  </div>
     <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
         <div class="modal-dialog" role="document" style="width: 50%;">
             <div class="modal-content">
@@ -124,14 +128,14 @@
                     </div>
                 </div>
                 <div class="modal-footer text-center b-no">
-                    <div class="col-xs-12 text-center ">
+                    <div class="col-xs-12 text-center">
                         <button type="button" class="btn btn-primary no-border m-auto bg-main4 w-xs" ng-click="closeModal()" ng-disabled="loading">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="EventInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -147,12 +151,14 @@
                     </div>
                     <div class="row m-t-sm">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="formData.caleventInfo.type < 4">
-                            <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor" ng-click="viewEvent()" target="_blank">Goto {{ (formData.caleventInfo.type == '1' ? 'Event' : formData.caleventInfo.type == '2' ? 'TBP' : (formData.caleventInfo.type == '3' ? 'Report' : formData.caleventInfo.type)) }}</a>
+                            <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor" ng-click="viewEvent()" target="_blank">
+                                Goto {{ (formData.caleventInfo.type == '1' ? 'Event' : formData.caleventInfo.type == '2' ? 'TBP' : (formData.caleventInfo.type == '3' ? 'Report' : formData.caleventInfo.type)) }}
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer text-center b-no">
-                    <div class="col-xs-12 text-center ">
+                    <div class="col-xs-12 text-center">
                         <button type="button" class="btn btn-primary no-border m-auto bg-main4 w-xs" ng-click="closeModal()" ng-disabled="loading">Close</button>
                     </div>
                 </div>

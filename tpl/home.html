@@ -50,7 +50,7 @@
                                 <div class="text-left h5 sm-padder-v sm-padder color_2">
                                     <strong>
                                         <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
-                                        <span ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.ownerprofile.first_name ? (whatsnew.ownerprofile.first_name + ' ' + whatsnew.ownerprofile.last_name) : whatsnew.ownerprofile.username  }}</span></strong>
+                                        <span ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.ownerprofile.distributorinformation.name ? whatsnew.ownerprofile.distributorinformation.name : 'Admin' }}</span></strong>
                                 </div>
                             </div>
                         </div>

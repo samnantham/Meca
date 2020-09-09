@@ -122,7 +122,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                         }
                     });
                     $scope.eventSources = [$scope.calendarevents];
-                    console.log($scope.eventSources)
+                    console.log($scope.homeData)
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
