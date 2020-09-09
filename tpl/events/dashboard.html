@@ -2743,7 +2743,7 @@
                            <linearGradient id="linear-gradient-1373" x1="-88.68" y1="876.83" x2="-87.63" y2="874.74" gradientTransform="matrix(2.6, 0, 0, -2.18, 945.23, 2606.67)" xlink:href="#linear-gradient-342"/>
                         </defs>
                         <title>Distributor 01</title>
-                        <g id="New_car_sale" data-name="New car sale">
+                        <g id="new_car_sale" data-name="New car sale" ui-sref="app.kaizens({type:'1'})">
                            <path id="Path_9257" data-name="Path 9257" class="cls-2" d="M510.2,530.65h0l-307-300.19a459.67,459.67,0,0,1,232.39-124,468.28,468.28,0,0,1,92.76-9.24A460.75,460.75,0,0,1,788,176.53,454.09,454.09,0,0,1,953.84,380.29L510.2,530.67Z" transform="translate(-12.44 -65.07)"/>
                            <g id="NEW_CAR_SALES" data-name="NEW CAR SALES" class="cls-3">
                               <text class="cls-4" transform="translate(332.18 160.5)">
@@ -3746,7 +3746,7 @@
                               </g>
                            </g>
                         </g>
-                        <g id="Trade_in" data-name="Trade in">
+                        <g id="trade_in" data-name="Trade in" ui-sref="app.kaizens({type:'3'})">
                            <path id="Subtraction_1" data-name="Subtraction 1" class="cls-738" d="M468.49,1011.71h0c-247.3-30.12-423.37-255-393.26-502.31a451,451,0,0,1,90-220.17L468.49,590.46Z" transform="translate(-12.44 -65.07)"/>
                            <g id="TRADE_IN-2" data-name="TRADE IN-2" class="cls-3">
                               <text class="cls-7" transform="translate(245.17 789)">
@@ -3819,7 +3819,7 @@
                               </g>
                            </g>
                         </g>
-                         <g id="AFTER_SALES-2" data-name="AFTER SALES-2" class="cls-3">
+                         <g id="after_sales" data-name="AFTER SALES-2" class="cls-3" ui-sref="app.kaizens({type:'2'})">
                         <path id="Path_9256" data-name="Path 9256" class="cls-743" d="M535,1015h0V596.21l435.75-150A450.92,450.92,0,0,1,535,1015Z" transform="translate(-12.44 -65.07)"/>
                        
                            <text class="cls-7" transform="translate(554.15 816.17)">
@@ -5444,7 +5444,7 @@
                      <div class="height_350 text-center pos-rlt">
                         <div class="pos-abt vt_center">
                            <div class="col-sm-12">
-                              <button class="btn btn-block bg-main3  m-b-lg r-3x text-xs p-l p-r box_shade btn_pad">Bit Foundation</button>
+                              <button class="btn btn-block bg-main3  m-b-lg r-3x text-xs p-l p-r box_shade btn_pad" ui-sref="app.kaizens({type:'4'})">Bit Foundation</button>
                            </div>
                            <div class="col-sm-12">
                               <button class="btn btn-block  bg-main4 m-t-lg r-3x text-xs p-l p-r box_shade btn_pad">Organization</button>
@@ -5462,9 +5462,9 @@
                From TMC
             </div>
             <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x padder-v height_350 text-center">
-               <div class="text-center"><button class="btn btn-block btn_1 m-t-xxl  m-b-lg   r-3x text-xs p-l p-r box_shade btn_pad">Organization</button></div>
-               <div class="text-center"><button class="btn btn-block btn_2 m-t-xxl m-b-lg r-3x text-xs p-l p-r box_shade btn_pad">Bit Foundation</button></div>
-               <div class="text-center"><button class="btn btn-block btn_3 m-t-xxl  m-b-xxl  r-3x text-xs p-l p-r box_shade btn_pad">Organization</button></div>
+               <div class="text-center"><button class="btn btn-block btn_1 m-t-xxl  m-b-lg  r-3x text-xs p-l p-r box_shade btn_pad" ng-click="openDoc();">What is Mebit?</button></div>
+               <div class="text-center"><button class="btn btn-block btn_2 m-t-xxl m-b-lg r-3x text-xs p-l p-r box_shade btn_pad" ui-sref="app.events({type:'all'})">Mebit Events</button></div>
+               <div class="text-center"><button class="btn btn-block btn_3 m-t-xxl  m-b-xxl  r-3x text-xs p-l p-r box_shade btn_pad" ui-sref="app.orgdocs">Organization</button></div>
             </div>
          </div>
       </div>
