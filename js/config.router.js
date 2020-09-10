@@ -39,26 +39,26 @@ angular.module('app')
 
               .state('app.mebitdashboard', {
                   url: 'mebit/dashboard',
-                  templateUrl: 'tpl/events/dashboard.html',
+                  templateUrl: 'tpl/mebit/dashboard.html',
                   resolve: load(['moment','fullcalendar','ui.calendar','js/controllers/home.js'])
               })
 
               .state('app.events', {
-                  url: 'events/list/:type?',
-                  templateUrl: 'tpl/events/list.html',
-                  resolve: load(['js/controllers/events/list.js'])
+                  url: 'mebit/event/list/:type?',
+                  templateUrl: 'tpl/mebit/list.html',
+                  resolve: load(['js/controllers/mebit/list.js'])
               })
 
               .state('app.viewevent', {
                   url: 'event/info/:id',
-                  templateUrl: 'tpl/events/view.html',
-                  resolve: load(['js/controllers/events/view.js'])
+                  templateUrl: 'tpl/mebit/view.html',
+                  resolve: load(['js/controllers/mebit/view.js'])
               })
 
               .state('app.editevent', {
                   url: 'event/edit/:id',
-                  templateUrl: 'tpl/events/edit.html',
-                  resolve: load(['js/controllers/events/edit.js'])
+                  templateUrl: 'tpl/mebit/edit.html',
+                  resolve: load(['js/controllers/mebit/edit.js'])
               })
 
               //TBP

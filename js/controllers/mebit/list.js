@@ -10,6 +10,7 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
     $rootScope.loading = true;
     $scope.filterData = {};
     $scope.filterData.sortorder = '';
+    $scope.filterData.status = 'all';
     $scope.errorData = {};
 
     $scope.seterrorMsg = function(){
@@ -22,24 +23,16 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
         if($scope.activetab != tab){
             $rootScope.loading = true;
             $scope.activetab = tab;
-            $scope.filterData.status = tab;
-            if(tab != 'create'){
-                $scope.getResults();
-            }else{
-                
-                $timeout(function() {
-                    $scope.formData = {};
-                    $scope.formData.event_files = [];
-                    $scope.formData.event_documents = [];
-                    $scope.formData.event_start_time = new Date().setHours(8,0);
-                    $scope.formData.event_end_time = new Date().setHours(18,0);
-                    $scope.formData.latitude = $rootScope.latlong.lat;
-                    $scope.formData.longitude = $rootScope.latlong.long;
-                    $scope.formData.location = $rootScope.latlong.location;
-                    $scope.autocomplete = $rootScope.latlong.location;
-                    $rootScope.loading = false;
-                }, 1000);
-            }
+            $scope.filterData.category = tab;
+            $scope.getResults();
+        }
+    }
+
+    $scope.changeStatus = function(status){
+        if($scope.filterData.status != status){
+            $rootScope.loading = true;
+            $scope.filterData.status = status;
+            $scope.getResults();
         }
     }
 
@@ -226,11 +219,11 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
     };
 
     if(!$stateParams.type){
-        $scope.activetab = 'all';
-        $scope.filterData.status = 'all';
+        $scope.activetab = '0';
+        $scope.filterData.category = '0';
     }else{
         $scope.activetab = $stateParams.type;
-        $scope.filterData.status = $stateParams.type;
+        $scope.filterData.category = $stateParams.type;
     }
 
      $scope.placeChanged =  function() {

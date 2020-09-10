@@ -91,6 +91,8 @@ angular.module('app')
                 Lightbox.openModal(files, key);
             }
 
+            console.log(window.location.href.split('#'))
+
             $rootScope.height_to_reduce = 100;
             $rootScope.loadingMsg = 'Loading please Wait....';
             $rootScope.year = new Date().getFullYear();
@@ -109,6 +111,7 @@ angular.module('app')
             $rootScope.tbp_upload_types = angular.copy(app.tbp_upload_types);
             $rootScope.pdca_upload_types = angular.copy(app.pdca_upload_types);
             $rootScope.organizationdocs = angular.copy(app.organizationdocs);
+            $rootScope.eventtypes = angular.copy(app.eventtypes);
             $rootScope.dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
             $rootScope.scrollconfig = {
@@ -136,6 +139,11 @@ angular.module('app')
 
             $rootScope.getfileCounts = function(files, type) {
                 return files.filter((obj) => obj.filetype === type).length;
+            }
+
+            $rootScope.openDoc = function(URL){
+                var base = window.location.href.split('#');
+                window.open(base[0] + URL, '_blank');
             }
 
             $rootScope.splitFiles = function(files) {

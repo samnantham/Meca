@@ -23,6 +23,24 @@ var app =
                 app.maxUploadFiles = 15;
                 app.validextensions = ['jpeg', 'png', 'jpg', 'gif', '3gp', 'mp4'];
                 app.validfileextensions = ['pdf', 'xls', 'xlsx', 'csv', 'doc', 'docx'];
+
+                app.eventtypes = [{
+                    id: 1,
+                    type: 'TBP'
+                }, {
+                    id: 2,
+                    type: 'Workshop'
+                }, {
+                    id: 3,
+                    type: 'Seminar'
+                }, {
+                    id: 4,
+                    type: 'HR'
+                }, {
+                    id: 5,
+                    type: 'Others'
+                }];
+
                 app.tbptypes = [{
                     id: 1,
                     type: 'DMDP'
@@ -36,6 +54,7 @@ var app =
                     id: 4,
                     type: 'PDCA'
                 }];
+
                 app.kaizentypes = [{
                     id: 1,
                     type: 'New Car Sales'

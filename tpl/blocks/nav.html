@@ -8,7 +8,7 @@
         </a>
     </li> -->
 
-    <li ng-class="{active: $state.includes('app.events')  || $state.includes('app.viewevent') || $state.includes('app.editevent') || $state.includes('app.mebitdashboard') }">
+    <li ng-class="{active: ($state.includes('app.events')  || $state.includes('app.viewevent') || $state.includes('app.mebitdashboard')) }">
         <a ui-sref="app.mebitdashboard" class="auto">
             <span class="icon-holder">
                 <img class="menu-icon" ng-src="{{ ((currentState == 'app.events') || (currentState == 'app.viewevent') || (currentState == 'app.mebitdashboard')) ? 'img/menu/mebit-active.png' : 'img/menu/mebit.png' }}"/>
