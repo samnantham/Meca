@@ -17,6 +17,7 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
                 $scope.event.videocount = $rootScope.getfileCounts($scope.event.event_files,'video'); 
                 $scope.event.imagecount = $rootScope.getfileCounts($scope.event.event_files,'image'); 
                 $scope.getComments();
+                console.log($scope.event)
             } else {
                 $rootScope.$emit("showISError",getData);
             }

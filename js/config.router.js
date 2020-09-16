@@ -13,12 +13,13 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider, $locationProvider , JQ_CONFIG, MODULE_CONFIG) {
           
           var layout = "tpl/app.html";
-          $urlRouterProvider.otherwise('/#/signin');
+          
+          $urlRouterProvider.otherwise('/signin');
           if((window.location.href.substr(window.location.href.lastIndexOf('/') + 1)) == ''){
-            window.location.href = '#/signin';
+            window.location.href = 'signin';
           }
           
-         /* $locationProvider.html5Mode(true);*/
+          $locationProvider.html5Mode(true);
           
           $stateProvider
               .state('app', {
