@@ -30,7 +30,7 @@
                            <strong>
                            <img class="new-icon" src="img/new.png" ng-if="key < 3" />
                            <span ng-class="{'pad-left-30px': key < 3}" ng-if="whatsnew.whatsnew_type == 2">MEBIT Event</span>
-                           <span ng-class="{'pad-left-30px': key < 3}" ng-if="whatsnew.whatsnew_type == 3">{{ 'Kaizen - ' + whatsnew.typeData.type }}</span>
+                           <span ng-class="{'pad-left-30px': key < 3}" ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.typeData.type }}</span>
                            </strong>
                            <div class="clear"></div>
                         </div>
@@ -67,7 +67,7 @@
                <div class="calendar " ng-model="eventSources" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
             </div>
             <div class="col-sm-12 text-center">
-               <button class="btn btn-lg bg-main3 m-t-xxl m-b-xxl r-3x text-xs box_shade btn_pad" ng-click="openDoc('docs/MEBIT-Schedule/MEBIT Total Programs Rough schedule.xlsx');">MEBIT overall schedule</button>
+               <button class="btn btn-lg bg-main3 m-t-xxl m-b-xxl r-3x text-xs box_shade btn_pad" ng-click="openDoc('docs/MEBIT-Total-Programs-Rough-schedule.pdf');">MEBIT overall schedule</button>
             </div>
          </div>
       </div>
@@ -5462,7 +5462,7 @@
                From TMC
             </div>
             <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x padder-v height_350 text-center">
-               <div class="text-center"><button class="btn btn-block btn_1 m-t-xxl  m-b-lg  r-3x text-xs p-l p-r box_shade btn_pad" ng-click="openDoc('docs/What-is-MEBIT/What is MEBIT.pptx');">What is Mebit?</button></div>
+               <div class="text-center"><button class="btn btn-block btn_1 m-t-xxl  m-b-lg  r-3x text-xs p-l p-r box_shade btn_pad" ng-click="openDoc('docs/What-is-MEBIT.pdf');">What is Mebit?</button></div>
 
                <div class="text-center"><button class="btn btn-block btn_2 m-t-xxl m-b-lg r-3x text-xs p-l p-r box_shade btn_pad" ui-sref="app.events({type:'0'})">Mebit Events</button></div>
                

@@ -1556,4 +1556,6 @@ menu-icon {
      border-right: solid 1px #fff!important;
 }.color-main-3 {
      color:#fa9f34 !important;
+}.mebit-whatsnew .mCustomScrollbar {
+    height: auto !important;
 }

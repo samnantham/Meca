@@ -88,6 +88,12 @@ angular.module('app')
                   resolve: load(['js/controllers/kaizen/list.js'])
               })
 
+              .state('app.newsroom', {
+                  url: 'newsroom',
+                  templateUrl: 'tpl/newsroom.html',
+                  resolve: load(['js/controllers/newsroom.js'])
+              })
+
               //Kaizen
               .state('app.viewkaizen', {
                   url: 'kaizen/view/:id',

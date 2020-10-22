@@ -80,8 +80,8 @@
         </a>
     </li> -->
 
-    <li>
-        <a class="auto">
+    <li ng-class="{active: $state.includes('app.newsroom')  }">
+        <a class="auto" ui-sref="app.newsroom">
             <span class="icon-holder">
                 <img class="menu-icon" src="img/menu/news-room.png" />
                 <p>NEWS ROOM</p>

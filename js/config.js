@@ -22,7 +22,7 @@ var app =
                 app.maxFilesize = '1024MB';
                 app.maxUploadFiles = 15;
                 app.validextensions = ['jpeg', 'png', 'jpg', 'gif', '3gp', 'mp4'];
-                app.validfileextensions = ['pdf', 'xls', 'xlsx', 'csv', 'doc', 'docx'];
+                app.validfileextensions = ['pdf', 'xls', 'pdf', 'csv', 'doc', 'docx'];
 
                 app.eventtypes = [{
                     id: 1,
@@ -67,10 +67,10 @@ var app =
                 },{
                     id: 4,
                     type: 'BIT Foundation'
-                },{
+                }/*,{
                     id: 5,
                     type: 'News Room'
-                }];
+                }*/];
 
                 app.tbp_upload_types = [{
                     id: 1,
@@ -126,37 +126,37 @@ var app =
 
                 app.organizationdocs = [{
                     name:'Bahrain EKK MEBIT Organization Structure (2020)_ver2',
-                    link:'docs/Organization/Bahrain EKK MEBIT Organization Structure (2020)_ver2.xlsx',
+                    link:'docs/Organization/Bahrain EKK MEBIT Organization Structure (2020)_ver2.pdf',
                 },{
                     name:'IRAQ TIQ BIT Organization Structure',
-                    link:'docs/Organization/IRAQ TIQ BIT Organization Structur.xlsx'
+                    link:'docs/Organization/IRAQ TIQ BIT Organization Structur.pdf'
                 },{
                     name:'Jordan CTA _ MEBIT Organization Structure - Markazia Jordan (CTA)',
-                    link:'docs/Organization/Jordan CTA _ MEBIT Organization Structure - Markazia Jordan (CTA).xlsx'
+                    link:'docs/Organization/Jordan CTA _ MEBIT Organization Structure - Markazia Jordan (CTA).pdf'
                 },{
                     name:'Kuwait MNSS _Copy of 2. MEBIT Organization Structure Template_(completed...',
-                    link:'docs/Organization/Kuwait MNSS _Copy of 2. MEBIT Organization Structure Template_(completed).xlsx'
+                    link:'docs/Organization/Kuwait MNSS _Copy of 2. MEBIT Organization Structure Template_(completed).pdf'
                 },{
                     name:'Lebanon BUMC _ MEBIT Organization Structure Template_',
-                    link:'docs/Organization/Lebanon BUMC _ MEBIT Organization Structure Template.xlsx'
+                    link:'docs/Organization/Lebanon BUMC _ MEBIT Organization Structure Template.pdf'
                 },{
                     name:'MEBIT Organization Structure - SBA',
-                    link:'docs/Organization/MEBIT Organization Structure - SBA.xlsx'
+                    link:'docs/Organization/MEBIT Organization Structure - SBA.pdf'
                 },{
                     name:'MEBIT',
-                    link:'docs/Organization/MEBIT.xlsx'
+                    link:'docs/Organization/MEBIT.pdf'
                 },{
                     name:'Qatar AAB_ MEBIT',
-                    link:'docs/Organization/Qatar AAB_ MEBIT.xlsx'
+                    link:'docs/Organization/Qatar AAB_ MEBIT.pdf'
                 },{
                     name:'Saudi ALJ_ 2020  MEBIT Organization Structure ALJ',
-                    link:'docs/Organization/Saudi ALJ_ 2020  MEBIT Organization Structure ALJ.xlsx'
+                    link:'docs/Organization/Saudi ALJ_ 2020  MEBIT Organization Structure ALJ.pdf'
                 },{
                     name:'UAE AFM_ BIT Org Struture Temp',
-                    link:'docs/Organization/UAE AFM_ BIT Org Struture Temp.xlsx'
+                    link:'docs/Organization/UAE AFM_ BIT Org Struture Temp.pdf'
                 },{
                     name:'Yemen AMTC _ MEBIT Organization Structure Template v2',
-                    link:'docs/Organization/Yemen AMTC _ MEBIT Organization Structure Template v2.xlsx'
+                    link:'docs/Organization/Yemen AMTC _ MEBIT Organization Structure Template v2.pdf'
                 }];
             }
 

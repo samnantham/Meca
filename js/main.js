@@ -142,8 +142,8 @@ angular.module('app')
             }
 
             $rootScope.openDoc = function(URL){
-                var base = window.location.href.split('#');
-                window.open(base[0] + URL, '_blank');
+                var base = window.location.origin + '/';
+                window.open(base + URL, '_blank');
             }
 
             $rootScope.splitFiles = function(files) {
@@ -162,68 +162,69 @@ angular.module('app')
                 return files.filter((obj) => obj.filetype === type).length;
             }
 
-            $rootScope.openheaderaddModal = function(){
-                $scope.inputchange();
-                $scope.formData = {};
+            $rootScope.openheaderaddModal = function(type){
+                $scope.headerinputchange();
+                $scope.headerFormData = {};
+                $scope.HeaderVideoData = {};
                 $scope.documentData = {};
-                $scope.formData.type = 1;
-                $scope.formData.kaizen_files = [];
-                $scope.formData.video_links = [];
-                $scope.formData.kaizen_documents = [];
-                $scope.formData.document_links = [];
+                $scope.headerFormData.type = type.toString();
+                $scope.headerFormData.kaizen_files = [];
+                $scope.headerFormData.video_links = [];
+                $scope.headerFormData.kaizen_documents = [];
+                $scope.headerFormData.document_links = [];
                 $('#HeaderModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 });
             }
 
-            $scope.inputchange = function() {
-                $scope.errorData = {};
-                $scope.seterrorMsg();
+            $scope.headerinputchange = function() {
+                $scope.headerErrorData = {};
+                $scope.setheadererrorMsg();
             }
 
-            $scope.seterrorMsg = function(){
-                $scope.errorData.title_errorMsg = 'Enter Title';
-                $scope.errorData.description_errorMsg = 'Please add kaizen Study';
+            $scope.setheadererrorMsg = function(){
+                $scope.headerErrorData.title_errorMsg = 'Enter Title';
+                $scope.headerErrorData.description_errorMsg = 'Please add kaizen Study';
             }
 
-            $scope.removeVideoLink = function(key){
-                $scope.formData.video_links.splice(key,1);
+            $scope.removeHeaderVideoLink = function(key){
+                $scope.headerFormData.video_links.splice(key,1);
             }
 
-            $scope.uploadvideo = function() {
-                if (($rootScope.validURL($scope.videoData.link))&&($rootScope.validvideo($scope.videoData.link))) {
+            $scope.uploadHeadervideo = function() {
+                if (($rootScope.validURL($scope.HeaderVideoData.link))&&($rootScope.validvideo($scope.HeaderVideoData.link))) {
 
-                    if($scope.formData.video_links.some(videolink => videolink.link === $scope.videoData.link)){
+                    if($scope.headerFormData.video_links.some(videolink => videolink.link === $scope.HeaderVideoData.link)){
                         $rootScope.$emit("showErrorMsg", 'Video already added');
                     } else{
                         var newobj = {};
-                        newobj.link = $scope.videoData.link;
-                        newobj.title = 'video link' + ($scope.formData.video_links.length + 1);
+                        newobj.link = $scope.HeaderVideoData.link;
+                        newobj.title = 'video link' + ($scope.headerFormData.video_links.length + 1);
                         newobj.info = '';
-                        $scope.formData.video_links.push(newobj);
-                        $scope.videoData = {};
+                        $scope.headerFormData.video_links.push(newobj);
+                        $scope.HeaderVideoData = {};
                     }
                 }else{
                     $rootScope.$emit("showErrorMsg", 'Please upload valid video url.');
-                    $scope.videoData.link = '';
+                    $scope.HeaderVideoData.link = '';
                 }  
             }
 
-            $scope.removeDocumentLink = function(key){
-                $scope.formData.document_links.splice(key,1);
+            $scope.removeHeaderDocumentLink = function(key){
+                $scope.headerFormData.document_links.splice(key,1);
             }
 
-            $scope.uploaddocumentlink = function() {
+            $scope.uploadHeaderdocumentlink = function() {
                 if ($rootScope.validURL($scope.documentData.link)) {
-                    if($scope.formData.document_links.some(documentlink => documentlink.link === $scope.documentData.link)){
+                    if($scope.headerFormData.document_links.some(documentlink => documentlink.link === $scope.documentData.link)){
                         $rootScope.$emit("showErrorMsg", 'Document already added');
                     } else{
                         var newobj = {};
                         newobj.link = $scope.documentData.link;
-                        newobj.name = 'External link' + ($scope.formData.document_links.length + 1);
+                        newobj.name = 'External link' + ($scope.headerFormData.document_links.length + 1);
                         newobj.info = '';
-                        $scope.formData.document_links.push(newobj);
+                        $scope.headerFormData.document_links.push(newobj);
                         $scope.documentData = {};
                     }
                 }else{
@@ -232,21 +233,21 @@ angular.module('app')
                 }  
             }
 
-            $scope.setservererrorMsg = function(errors){
-                $scope.errorData = {};
+            $scope.setHeaderservererrorMsg = function(errors){
+                $scope.headerErrorData = {};
                 angular.forEach(errors, function(error, no) {
-                    $scope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-                    $scope.errorData[no.replace('new','')+'_error'] = true;
+                    $scope.headerErrorData[no.replace('new','')+'_errorMsg'] = error[0];
+                    $scope.headerErrorData[no.replace('new','')+'_error'] = true;
                 });
             }
 
-            $scope.uploadCover = function(files) {
+            $scope.uploadHeaderCover = function(files) {
                 $scope.errors = [];
                 if (files && files.length) {
                     var extn = files[0].name.split(".").pop();
                     if ($rootScope.imgextensions.includes(extn.toLowerCase())) {
                         if (files[0].size <= $rootScope.maxUploadsize) {
-                            $scope.formData.newcover = files[0];
+                            $scope.headerFormData.newcover = files[0];
                         } else {
                             $scope.errors.push(files[0].name + ' size exceeds 2MB.')
                         }
@@ -259,17 +260,17 @@ angular.module('app')
                 }
             }
 
-            $scope.addData = function(form) {
-                $scope.seterrorMsg();
+            $scope.addHeaderData = function(form) {
+                $scope.setheadererrorMsg();
                 if (form.$valid) {
                     $rootScope.loading = true;
-                    webServices.upload('kaizen', $scope.formData).then(function(getData) {
+                    webServices.upload('kaizen', $scope.headerFormData).then(function(getData) {
                         $rootScope.loading = false;
                         if (getData.status == 200) {
-                            $scope.closeModal();
+                            $scope.closeHeaderModal();
                             $rootScope.$emit("showSuccessMsg", getData.data.message);
                         } else if (getData.status == 401) {
-                            $scope.setservererrorMsg(getData.data.message);
+                            $scope.setHeaderservererrorMsg(getData.data.message);
                             $rootScope.loading = false;
                         } else {
                             $rootScope.$emit("showISError", getData);
@@ -277,19 +278,19 @@ angular.module('app')
                     });
                 } else {
                     if (!form.title.$valid) {
-                        $scope.errorData.title_error = true;
+                        $scope.headerErrorData.title_error = true;
                     }if (!form.description.$valid) {
-                        $scope.errorData.description_error = true;
+                        $scope.headerErrorData.description_error = true;
                     }
                     $rootScope.$emit("showErrors", $scope.errors);
                 }
             }
 
-            $scope.addkaizenfiles = function(files) {
+            $scope.addkaizenHeaderfiles = function(files) {
                 $scope.errors = [];
-                if ($scope.formData.kaizen_files.length < $rootScope.maxUploadFiles) {
+                if ($scope.headerFormData.kaizen_files.length < $rootScope.maxUploadFiles) {
                     if (files && files.length) {
-                        if (($rootScope.maxUploadFiles - $scope.formData.kaizen_files.length) >= files.length) {
+                        if (($rootScope.maxUploadFiles - $scope.headerFormData.kaizen_files.length) >= files.length) {
                             for (var i = 0; i < files.length; i++) {
                                 var extn = files[i].name.split(".").pop();
                                 if ($rootScope.validextensions.includes(extn.toLowerCase())) {
@@ -299,7 +300,7 @@ angular.module('app')
                                         newobj.filename = files[i].name;
                                         newobj.filetype = files[i].type.split("/")[0];
                                         newobj.isfile = 1;
-                                        $scope.formData.kaizen_files.push(newobj);
+                                        $scope.headerFormData.kaizen_files.push(newobj);
                                     } else {
                                         $scope.errors.push(files[i].name + ' size exceeds 2MB.')
                                     }
@@ -319,11 +320,11 @@ angular.module('app')
                 }
             }
 
-            $scope.addkaizenDocuments = function(files) {
+            $scope.addkaizenHeaderDocuments = function(files) {
                 $scope.errors = [];
-                if ($scope.formData.kaizen_documents.length < $rootScope.maxUploadFiles) {
+                if ($scope.headerFormData.kaizen_documents.length < $rootScope.maxUploadFiles) {
                     if (files && files.length) {
-                        if (($rootScope.maxUploadFiles - $scope.formData.kaizen_documents.length) >= files.length) {
+                        if (($rootScope.maxUploadFiles - $scope.headerFormData.kaizen_documents.length) >= files.length) {
                             for (var i = 0; i < files.length; i++) {
                                 var extn = files[i].name.split(".").pop();
                                 if ($rootScope.validfileextensions.includes(extn.toLowerCase())) {
@@ -334,7 +335,7 @@ angular.module('app')
                                         newobj.info = '';
                                         newobj.filetype = files[i].type.split("/")[0];
                                         newobj.isfile = 1;
-                                        $scope.formData.kaizen_documents.push(newobj);
+                                        $scope.headerFormData.kaizen_documents.push(newobj);
                                     } else {
                                         $scope.errors.push(files[i].name + ' size exceeds 2MB.')
                                     }
@@ -354,21 +355,19 @@ angular.module('app')
                 }
             }
 
-            $scope.closeModal = function() {
-                $scope.formData = {};
+            $scope.closeHeaderModal = function() {
+                $scope.headerFormData = {};
                 $scope.isedit = false;
                 $('#HeaderModal').modal('hide');
-                $('#PopupModal').modal('hide');
-                $('#EventInfoModal').modal('hide');
                 $rootScope.modalerrors = [];
             }
 
-            $scope.removeFile = function(key,data){
-                $scope.formData.kaizen_files.splice(key,1);
+            $scope.removeHeaderFile = function(key,data){
+                $scope.headerFormData.kaizen_files.splice(key,1);
             }
 
-            $scope.removeDocuments = function(key,data){
-                $scope.formData.kaizen_documents.splice(key,1);
+            $scope.removeHeaderDocuments = function(key,data){
+                $scope.headerFormData.kaizen_documents.splice(key,1);
             }
 
             $rootScope.getVideoUrl = function(url) {
