@@ -1,14 +1,27 @@
 'use strict';
-app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope', 'authServices', '$timeout', '$sessionStorage', 'NgMap', '$http', '$filter',
-    function($scope, $state, webServices, $rootScope, authServices, $timeout, $sessionStorage, NgMap, $http, $filter) {
+app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope', 'authServices', '$timeout', '$sessionStorage', 'NgMap', '$http', '$filter','$sce',
+    function($scope, $state, webServices, $rootScope, authServices, $timeout, $sessionStorage, NgMap, $http, $filter, $sce) {
 
         $rootScope.$emit("setSliderConfig", {});
         $scope.firstloadingdone = false;
+
+        $scope.doclink = '';
+
+        $scope.openPDF = function(link){
+            console.log(link)
+            $scope.doclink = $sce.trustAsResourceUrl(link);
+
+            $('#PDFModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
         
         $scope.uiConfig = {
             calendar: {
                 height: 'auto',
                 editable: true,
+                fixedWeekCount: false,
                 header: {
                     left: 'prev,next',
                     center: 'title',
@@ -163,6 +176,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             $rootScope.formData = {};
             $('#PopupModal').modal('hide');
             $('#EventInfoModal').modal('hide');
+            $('#PDFModal').modal('hide');
         }
 
         $scope.getData();

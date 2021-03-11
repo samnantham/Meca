@@ -14,18 +14,21 @@ app.controller('SignUpFormController', ['$scope', '$timeout', '$state', 'authSer
             $rootScope.loading = true;
             webServices.normalpost('register', $scope.formData).then(function(getData) {
                 $rootScope.loading = false;
+                console.log(getData)
                 if(getData.status==200) {
                     $rootScope.user = $sessionStorage.user = getData.data;
                     localStorage.user = JSON.stringify($sessionStorage.user);
                     $state.go('app.chatlist');
                 } else {
-                    $scope.errors = utility.getError(getData.data.message);
                     if(getData.data.authstatus == 1){
-                        $rootScope.$emit("showSuccessMsg", $scope.errors[0]);
+                        $scope.errors = [];
+                        $scope.errors = getData.data.message.message;
+                        $rootScope.$emit("showSuccessMsg",  $scope.errors[0]);
                         $timeout(function() {
                             $state.go('access.signin');
                         }, 5000);
                     }else{
+                        $scope.errors = utility.getError(getData.data.message);
                         $rootScope.$emit("showErrors", $scope.errors);
                     }
                 }
@@ -56,6 +59,7 @@ app.controller('SignUpFormController', ['$scope', '$timeout', '$state', 'authSer
         webServices.get('distributor/list').then(function(getData) {
             if (getData.status == 200) {
                 $scope.distributors = getData.data;
+                console.log($scope.distributors)
                 $rootScope.loading = false;
             } else {
                 $rootScope.$emit("showISError", getData);
@@ -64,7 +68,7 @@ app.controller('SignUpFormController', ['$scope', '$timeout', '$state', 'authSer
     }
 
     $scope.getDivisions = function(){
-        webServices.get('division/list/'+$scope.formData.distributor).then(function(getData) {
+        webServices.get('division/list/'+ $scope.formData.distributor).then(function(getData) {
             if (getData.status == 200) {
                 $scope.divisions = getData.data;
                 $rootScope.loading = false;

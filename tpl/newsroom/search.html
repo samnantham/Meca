@@ -1,0 +1,88 @@
+<div ng-controller="NewsRoomSearchController">
+    <div class="wrapper-md p-t-none p-b-none m-t">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-l-none m-b ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-l-none m-p-r-none">
+                <div class="panel panel-default r-3x">
+                    <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                        <div class="row m-t">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 web-visible  inner-addon right-addon">
+                                <i class="fa fa-search"></i>
+                                <input type="text" ng-model="filterData.keyword" class="form-control r-2x box-shadow" ng-change="getResults();" placeholder="Search" aria-invalid="false">
+                            </div>
+                            <div class="col-md-8 col-lg-8 col-sm-6">
+                                
+                            </div>
+                            
+                        </div>
+                        <div class="row m-t">
+                            <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
+                                <button class="btn btn-sm m-b-xs m-r-xs" type="button" ng-repeat="(num,tag) in newstags" ng-click="addremovetags(tag)" ng-class="filterData.tags.includes(tag)  ? 'btn-warning' : 'btn-default'">{{tag}} <i class="fa m-l-xs" ng-class="filterData.tags.includes(tag)  ? 'fa-times' : 'fa-plus'"></i></button>
+                            </div>
+                        </div>
+                        <div class="row m-t-lg">
+                            <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12 b-b">
+                                <li class="dropdown pull-right list-none" dropdown>
+                                    <span class="dropdown-toggle clear m-r-lg" dropdown-toggle ng-class="{'m-t-xs' : isMobile}">
+                                        Sort By: <span class="font-bold text-capt cursor">{{filterData.sortlabel ? filterData.sortlabel : 'Newest'}}</span> 
+                                    </span>
+                                    <!-- dropdown -->
+                                    <ul class="dropdown-menu animated fadeInRight">
+                                        <li ng-if="filterData.sortkey"><a ng-click="sortData('','')"><i class="fa fa-repeat m-r-sm"></i> <small>Reset</small></a></li>
+                                        <li><a ng-click="sortData('title','asc','Topic ASC')"><i class="fa fa-sort-alpha-asc m-r-sm"></i> <small>Topic ASC</small></a></li>
+                                        <li><a ng-click="sortData('title','desc','Topic DESC')"><i class="fa fa-sort-alpha-desc m-r-sm"></i> <small>Topic DSC</small></a></li>
+                                        <li><a ng-click="sortData('created_at','asc','Newest')"><i class="fa fa-sort-alpha-asc m-r-sm"></i> <small>Newest</small></a></li>
+                                        <li><a ng-click="sortData('created_at','desc','Oldest')"><i class="fa fa-sort-alpha-desc m-r-sm"></i> <small>Oldest</small></a></li>
+                                    </ul>
+                                    <!-- / dropdown -->
+                                </li>
+                            </div>
+                        </div>
+                        <div class="row m-t">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 b-b m-b-sm p-l-none"
+                                dir-paginate="(key,data) in newslist.data | itemsPerPage: totalPerPage"
+                                total-items="newslist.total" current-page="pagination.current">
+                                <div class="col-xs-12 m-b wrapper bg-white r-3x m-p-n">
+
+                                    <div class="col-xs-12 col-lg-4 col-sm-4 col-md-4 sm-padder"
+                                        ng-class="{'m-p-l m-p-r  m-t' : isMobile}">
+                                        <div class="mbit-img box-shadow b r-3x"
+                                            background-image="{{IMGURL}}{{data.cover_image}}"  ui-sref="app.viewnews({'id':data.id})"></div>
+                                    </div>
+                                    <div class="col-xs-12 sm-padder col-lg-8 col-sm-8 col-md-8"
+                                        ng-class="{'m-p-l m-p-r m-b' : isMobile}">
+                                        <div class="col-xs-12 no-padder text-danger text-too-small m-t-xs"
+                                            ng-class="{'m-b' : isMobile}">
+                                            {{convertDate(data.created_at) | date:'MMM. dd,  yyyy'}} </div>
+                                        <div class="col-xs-12 no-padder text-danger text-too-small m-t-xs"
+                                            ng-class="{'m-b' : isMobile}">
+                                            <a class="h5 font-bold m-t"  ui-sref="app.viewnews({'id':data.id})">{{data.title}}</a>
+                                        </div>
+                                        <div class="col-xs-12  m-t-sm b-b b-2x m-b-sm"></div>
+                                        <div class="col-xs-12 p-l-none">
+                                            <a class="color_2 text-xs m-t text-ov" ng-repeat="(num,tag) in data.tags track by $index" ui-sref="app.searchnews({'tag': tag})">{{tag}}
+                                                {{$last ? '' : ', '}}</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="newslist.total  ==  0">
+                            <div class="w-full text-center bg-white wrapper-lg m-t-md margin_mid">
+                                <h4>No Results</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-b-md">
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="newslist.last_page > 0 && !loading">
+                            <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"
+                                class="pagination-ctrl"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

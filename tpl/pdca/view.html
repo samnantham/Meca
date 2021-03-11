@@ -1,0 +1,48 @@
+<div ng-controller="PDCAController">
+    <div class="wrapper-md p-t-none p-b-none m-t-sm">
+        <div class="panel panel-default r-3x">
+            <div class="panel-heading r-3x r-b-none bg-main2 text-center">
+                <span class="font-normal">{{pdca.title}}</span>
+            </div>
+            <div class="bg-white padder r-b-6x " ng-scrollbars ng-scrollbars-config="scrollconfig">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-t-none m-t-sm">
+                        <div class="sm-padder-v col-md-12 col-lg-12 col-sm-12 col-xs-12 m-p-n m-t">
+                        <div class="m-b-sm">
+                            <a class="h5 font-bold text-black">Description</a>
+                        </div>
+                        <div class="m-b-sm">
+                            <p>{{pdca.description}}</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 wrapper-md p-t-none" ng-repeat="(num,session) in pdca.sessions track by $index">
+                        <div class="bg-white sm-padder-v sm-padder col-md-12 col-lg-12 col-sm-12  col-xs-12 m-p-n m-t">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 padder-v bg-white b-light b b-2x r-3x">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padder">
+                                    <h5 class="font-bold"> {{session.session_name}} <a class="btn btn-warning r-2x pull-right b-no minus-mt-5" ng-href="{{IMGURL}}{{session.session_file}}" download="{{session.session_file.split('/').pop()}}" target="_blank" tooltip="Click here to view Quiz Document" tooltip-trigger="mouseenter" tooltip-placement="left"><i class="fa fa-download"></i></a> <button class="btn btn-default bdrc-bg2 minus-mt-5 pull-right b-no m-r-xs opa-less" tooltip="Please view all videos to upload quiz"  tooltip-trigger="mouseenter" tooltip-placement="left" ng-if="!session.is_viewed && !session.is_completed">Upload</button> <button class="btn btn-default bdrc-bg2 minus-mt-5 pull-right b-no m-r-xs" tooltip="Upload your document"  tooltip-trigger="mouseenter" tooltip-placement="left" ng-if="session.is_viewed" ng-disabled="session.upload_disabled"  ngf-select ngf-drop ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="false" ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv'" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="uploadReport(session.id,$files);">Upload</button> </h5>
+                                </div>
+                                <div class="line b-b line-lg m-t-none m-b-none b-2x"></div>
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 b-light p-r-none p-l-none sm-padder-v" ng-repeat="(no,video) in session.videos track by $index" ng-class="{'b-b': !$last }"> <a class="cursor" ng-click="openVideo(no, video)" tooltip="{{video.info}}" tooltip-trigger="mouseenter" tooltip-placement="right" tooltip-class="preview-tooltip"> {{video.title}} </a>
+                                    <i class="fa-2x fa fa-eye pull-right" ng-class="(video.hasOwnProperty('viewstatus') && video['viewstatus']) ? '': 'opa-less'"></i>
+                                </div>
+                                <div ng-if="session.uploads.length > 0">
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 no-padder">
+                                        <h5 class="font-bold"> Uploads </h5>
+                                    </div>
+                                    <div class="line b-b line-lg m-t-none m-b-none b-2x"></div>
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 b-light p-r-none p-l-none sm-padder-v" ng-repeat="(no,upload) in session.uploads track by $index" ng-class="{'b-b': !$last }"> <a class="cursor" ng-href="{{IMGURL}}{{upload.document_link}}" target="_blank"> Attempt {{ upload.no_of_attempts }} {{upload.is_admin_upload ? ' - Admin Revised' : '' }} </a> 
+                                        <!-- {{upload.document_link.split('/')[(upload.document_link.split('/').length) - 1]}} -->
+                                        <span class="text-xs pull-right" ng-class="(upload.status == '0' ? 'text-warning' : upload.status == '1' ? 'text-success' : upload.status == '2' ? 'text-red': upload.status) ">{{ (!upload.status ? (!upload.is_admin_upload ? 'Waiting for Approval' : '') : upload.status == '1' ? 'Approved By Admin' : upload.status == '2' ? 'Revised By Admin': upload.status) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

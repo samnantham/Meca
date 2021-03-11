@@ -1,0 +1,142 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="GRDashboardCtrl">
+   <!-- main -->
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none m-b">
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 m-t p-l-none">
+         <div class="panel panel-default r-3x m-l mebit-whatsnew m-b-sm">
+            <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+               What's New
+               <a class="btn btn-default btn-xs bg-main2 pull-right b-no" ng-click="ModalOpen('grModal','GRModalController');">Create New</a>
+            </div>
+            <div class="bg-white padder-v padder r-b-6x m-b" ng-scrollbars ng-scrollbars-config="scrollconfig">
+               <div class="col-xs-12 p-l-none p-r-none">
+                  <div class="m-t m-b">
+                     <div class="col-sm-3 p-l-none p-xs-l">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Title</div>
+                     </div>
+                     <div class="col-sm-5">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Description</div>
+                     </div>
+                     <div class="col-sm-2">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Time</div>
+                     </div>
+                     <div class="col-sm-2 p-r-none p-xs-r">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Written by</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xs-12 p-l-none p-r-none border-bottom-1" ng-repeat="(key,gr) in grData.grs | limitTo: 8">
+                  <div class="m-t-xs m-b-xs">
+                     <div class="col-sm-3 p-l-none">
+                        <div class="text-left h5 sm-padder-v sm-padder color_2 text-ov">
+                           <strong class="cursor" ui-sref="app.viewgr({id:gr.id})">
+                              <i class="fa fa-circle" ng-if=" key < 3"></i>
+                              <span ng-class="{'m-l-sm': key < 3}">{{gr.title}}</span>
+                           </strong>
+                           <div class="clear"></div>
+                        </div>
+                     </div>
+                     <div class="col-sm-5">
+                        <div class="text-left h5 font-bold sm-padder-v sm-padder text-ov">
+                           {{gr.description}}
+                        </div>
+                     </div>
+                     <div class="col-sm-2">
+                        <div class="text-left h5 sm-padder-v sm-padder color_3 f-10">
+                           {{convertDate(gr.created_at) | date:'dd-MMM-yy HH:mm'}}
+                        </div>
+                     </div>
+
+                     <div class="col-sm-2 p-r-none">
+                        <div class="text-left h5 sm-padder-v sm-padder color_2 text-ov">
+                           <strong>
+                              <span ng-if="gr.is_admin">{{gr.ownerprofile.username}}</span>
+                              <span
+                                 ng-if="!gr.is_admin">{{gr.writerinfo ? gr.writerinfo.name : (gr.is_admin ? gr.ownerprofile.username + '(Admin)' : gr.ownerprofile.first_name + ' ' + gr.ownerprofile.last_name + ' - ' + gr.ownerprofile.distributorinfo.name)}}</span>
+                           </strong>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 m-t" ng-if="!loading">
+         <div class="panel panel-default r-3x sdgs-calendar">
+            <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+               Calendar
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x ">
+               <div class="calendar " ng-model="eventSources" config="uiConfig.calendar"
+                  ui-calendar="uiConfig.calendar"></div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-l-none m-b-xl">
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 p-l-none">
+         <div class="panel panel-default r-3x m-l mebit-whatsnew">
+            <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+               Activity Report
+            </div>
+            <div class="bg-white padder-v padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
+               <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-t-xs m-b-xs allign-center"
+                  ng-repeat="(key,gr) in grData.ars | limitTo: 8">
+                  <div class="col-sm-3 p-l-none">
+                     <div class="mbit-img box-shadow b r-3x m-b-sm h-100 cursor"
+                        background-image="{{IMGURL}}{{gr.cover_image}}" ui-sref="app.viewgr({id:gr.id})"></div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="text-left h5 sm-padder-v sm-padder color_2">
+                        <strong class="cursor" ui-sref="app.viewgr({id:gr.id})">{{gr.title}} </strong>
+                        <div class="clear"></div>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                     <div class="text-left h5 sm-padder-v sm-padder color_2 text-ov">
+                        <strong>
+                           <span ng-if="gr.is_admin">{{gr.ownerprofile.username}}</span>
+                           <span
+                              ng-if="!gr.is_admin">{{ gr.ownerprofile.distributorinformation.name ? gr.ownerprofile.distributorinformation.name : 'Admin' }}</span>
+                        </strong>
+                     </div>
+                  </div>
+
+                  <div class="col-sm-3 p-r-none">
+                     <div class="text-left h6 font-bold sm-padder-v sm-padder text-ov pre">
+                        {{gr.description}}
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12" ng-if="grData.ars.length  ==  0">
+                  <div class="w-full text-center bg-white wrapper-lg m-t-xxl">
+                      <h4>No Reports Found</h4>
+                  </div>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+         <div class="panel panel-default r-3x mebit-whatsnew">
+             <div class="panel-heading r-3x r-b-none bg-main1 text-center">
+                <b>Links</b> 
+                <a class="btn btn-default btn-xs bg-main2 pull-right b-no" ui-sref="app.grcontacts">Contact</a>
+             </div>
+             <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white  dash-2-div r-b-6x m-p-n" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                 <div class="col-xs-12 border-bottom-1 m-t-xs m-b-xs text-center allign-center" ng-repeat="(key,link) in grData.links">
+                  <div class="col-sm-3 p-l-none text-center">
+                     <div class="mbit-img box-shadow b r-3x m-b-sm h-60"
+                        background-image="{{IMGURL}}{{link.icon}}"></div>
+                  </div>
+                     <div class="col-xs-4 text-center h6"><b>{{link.title}}</b></div>
+                     <div class="col-xs-5 text-center h6"><a class="text-info"
+                        ng-href="{{link.href}}" target="_blank">{{link.href}}</a></div>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+   </div>
+</div>

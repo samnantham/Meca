@@ -2,7 +2,7 @@
     <toaster-container toaster-options="{'position-class': 'toast-top-center','time-out':3000, 'close-button':true}"></toaster-container>
     <div class="auth-form r-3x b b-2x m-auto v-mid-align w-max-550 box-shadow bdr-gray">
         <div class="wrapper text-center m-t-lg">
-            <img class="logo-img" src="img/logoLG.png">
+            <img class="logo-img" src="img/meca.png">
         </div>
         <div class="wrapper-lg m-b-sm">
             <form role="form" name="signupForm" novalidate ng-submit="register(signupForm)">
@@ -13,7 +13,7 @@
                         </select>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12 m-b-md">
-                        <select name="account" class="form-control r-2x" name="division" ng-model="formData.division" required ng-options="division.id as division.division_name for division in divisions">
+                        <select name="division" class="form-control r-2x" name="division" ng-model="formData.division" required ng-options="division.id as division.division_name for division in divisions">
                             <option value="">Select Division</option>
                         </select>
                     </div>
@@ -51,12 +51,6 @@
                 </div>
                 <div class="form-group m-b-none">
                     <button type="submit" class="btn btn-md btn-warning m-t-xxl m-b-sm text-u-c r-3x" button-spinner="loading" ng-disabled="loading">Signup</button>
-                </div>
-                <div class="form-group m-b-none">
-                    <span class="text-muted text-xs">or</span>
-                </div>
-                <div class="form-group m-b-none">
-                    <button type="submit" class="btn btn-md btn-danger text-u-c r-3x m-t-sm" ui-sref="access.signin">Signin</button>
                 </div>
             </form>
         </div>

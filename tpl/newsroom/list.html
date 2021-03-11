@@ -1,0 +1,258 @@
+<div ng-controller="NewsRoomController">
+    <div class="wrapper-md p-t-none p-b-none m-t">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-l-none m-b ">
+            <div class="col-lg-12 col-md-12 p-l-none p-r-none m-t-sm">
+                <div class="col-sm-3 p-l-none m-t-sm m-b-sm cursor" ng-click="changeActive('')"><img class="toyota"
+                        src="img/toyota.png"></div>
+                <div class="col-sm-9 p-r-none">
+                    <nav class="navbar navbar-expand-lg navbar-light m-t-sm m-b-sm float-right">
+                        <div class="collapse navbar-collapse p-r-none" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-item nav-link" ng-repeat="(key,category) in newscategories"
+                                    ng-click="changeActive(category)"
+                                    ng-class=" activetab == category.category ? 'text-red' : ''"
+                                    ng-if="key < newscategories.length - 2">{{category.category}}</a>
+                                <a class="nav-item nav-link border-left p-r-none" slide-toggle="#search-area"><i
+                                        class="fa m-l-sm w-1x" ng-click="searchClick();"
+                                        ng-class="isSearch ? 'fa-times':'fa-search'"></i></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-t m-t m-b bg-white slideable r-3x"
+                    id="search-area">
+                    <h4 class="font-bold">SEARCH BY KEYWORD</h4>
+
+                    <div class="search_holder">
+                        <i class="fa fa-search m-l-sm"></i>
+                        <input type="text" placeholder="Enter your keyword" class="col-sm-12 m-b r-2x"
+                            ng-model="filterData.keyword" ng-change="getResults();">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 p-l-none m-p-r-none">
+                <div class="panel panel-default r-3x">
+                    <div class="panel-heading r-3x r-b-none bg-black"
+                        ng-class="{ 'text-center' : subcategorylist.length == 0 }">
+                        <span class="font-bold" ng-if="activetab == '' && subcategorylist.length == 0">{{activetab == ''
+                            ? 'News Room' : ''}}</span>
+                        <span class="font-bold"
+                            ng-if="activetab != '' && subcategorylist.length == 0">{{activetab}}</span>
+                        <button class="btn no-shadow b-no  btn-default panel-tab web-visible"
+                            ng-click="changeSub(subcategory)"
+                            ng-class="activesubcategory == subcategory ? 'active' : ''"
+                            ng-if="subcategorylist.length > 0" ng-repeat="subcategory in subcategorylist"
+                            ng-click="changeSub(subcategory)">{{subcategory}}</button>
+                        <a class="btn btn-default btn-xs pull-right b-no"
+                            ng-click="ModalOpen('newsModal','NewsModalController');">Create New</a>
+                    </div>
+
+                    <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                        <!-- <div class="row m-t">
+                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                               <div class="input-grou " ng-class="{'pull-left' : !isMobile}">
+                                  <button class="btn btn-md btn-warning" ng-click="ModalOpen('newsModal','NewsModalController');" ng-class="{'w-full' : isMobile}">     Create New</button>
+                               </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 web-visible">
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6 inner-addon right-addon">
+                               <i class="fa fa-search"></i>
+                               <input type="text" ng-model="filterData.keyword" class="form-control r-2x box-shadow" ng-change="getResults();" placeholder="Search" aria-invalid="false">
+                            </div>
+                         </div> -->
+
+
+                        <div class="row m-t" ng-if="marketTotal > 0">
+                            <div class="col-sm-12 m-b" ng-if="activetab == ''">
+                                <h4 class="font-bold">MARKET LATEST NEWS</h4>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 b-b m-b-sm p-l-none p-r-none"
+                                ng-repeat="(key,data) in newslist.data" ng-if="data.category == 'Market Latest News'">
+                                <div class="col-xs-12 m-b wrapper bg-white r-3x m-p-n">
+
+                                    <div class="col-xs-12 col-lg-4 col-sm-4 col-md-4 sm-padder"
+                                        ng-class="{'m-p-l m-p-r  m-t' : isMobile}">
+                                        <div class="mbit-img box-shadow b r-3x"
+                                            background-image="{{IMGURL}}{{data.cover_image}}"
+                                            ui-sref="app.viewnews({'id':data.id})"></div>
+                                    </div>
+                                    <div class="col-xs-12 sm-padder col-lg-8 col-sm-8 col-md-8"
+                                        ng-class="{'m-p-l m-p-r m-b' : isMobile}">
+                                        <div class="col-xs-12 no-padder text-danger text-xs m-t-xs color_2"
+                                            ng-class="{'m-b' : isMobile}">
+                                            {{convertDate(data.created_at) | date:'MMM. dd, yyyy'}} </div>
+                                        <div class="col-xs-12 no-padder text-danger text-too-small m-t-xs"
+                                            ng-class="{'m-b' : isMobile}" ui-sref="app.viewnews({'id':data.id})">
+                                            <a class="h5 font-bold m-t">{{data.title}}</a>
+                                        </div>
+                                        <div class="col-xs-12 no-padder text-danger text-xs m-t-xs "
+                                            ng-class="{'m-b' : isMobile}">
+                                            By Name goes here</div>
+                                        <div class="col-xs-12  m-t-sm b-b b-2x m-b-sm"></div>
+                                        <div class="tags">
+                                            <a class="color_2 text-xs m-t" ui-sref="app.searchnews({'tag': tag})"
+                                                ng-repeat="(num,tag) in data.tags track by $index">{{tag}}
+                                                {{$last ? '' : ', '}} </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 m-b text-center m-t" ng-if="activetab == '' && newslist.data.length > 0 && marketTotal > 4">
+                                <h5 class="font-bold">MORE <i class="fa fa-angle-down m-l-xs"></i></h5>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 m-t-sm b-b b-2x m-b-sm" ng-if="activetab == ''  && marketTotal > 0"></div>
+
+                        <div class="row m-t" ng-if="activetab == '' && toyotaTotal > 0">
+                            <div class="col-sm-12 m-b">
+                                <h4 class="font-bold">TOYOTA LATEST NEWS</h4>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 b-b m-b-sm p-l-none p-r-none"
+                                ng-repeat="(key,data) in newslist.data" ng-if="data.category == 'Toyota Latest News'  && toyotaTotal > 0">
+                                <div class="col-xs-12 m-b wrapper bg-white r-3x m-p-n">
+
+                                    <div class="col-xs-12 col-lg-4 col-sm-4 col-md-4 sm-padder"
+                                        ng-class="{'m-p-l m-p-r  m-t' : isMobile}">
+                                        <div class="mbit-img box-shadow b r-3x"
+                                            background-image="{{IMGURL}}{{data.cover_image}}"
+                                            ui-sref="app.viewnews({'id':data.id})"></div>
+                                    </div>
+                                    <div class="col-xs-12 sm-padder col-lg-8 col-sm-8 col-md-8"
+                                        ng-class="{'m-p-l m-p-r m-b' : isMobile}">
+                                        <div class="col-xs-12 no-padder text-danger text-xs m-t-xs color_2"
+                                            ng-class="{'m-b' : isMobile}">
+                                            {{convertDate(data.created_at) | date:'MMM. dd, yyyy'}} </div>
+                                        <div class="col-xs-12 no-padder text-danger text-too-small m-t-xs"
+                                            ng-class="{'m-b' : isMobile}" ui-sref="app.viewnews({'id':data.id})">
+                                            <a class="h5 font-bold m-t">{{data.title}}</a>
+                                        </div>
+                                        <div class="col-xs-12 no-padder text-danger text-xs m-t-xs "
+                                            ng-class="{'m-b' : isMobile}">
+                                            By Name goes here</div>
+                                        <div class="col-xs-12  m-t-sm b-b b-2x m-b-sm"></div>
+                                        <div class="tags">
+                                            <a class="color_2 text-xs m-t" ui-sref="app.searchnews({'tag': tag})"
+                                                ng-repeat="(num,tag) in data.tags track by $index">{{tag}}
+                                                {{$last ? '' : ', '}} </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 m-b text-center m-t" ng-if="activetab == '' && newslist.data.length > 0 && toyotaTotal > 4>
+                                <h5 class="font-bold">MORE <i class="fa fa-angle-down m-l-xs"></i></h5>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12  m-t-sm b-b b-2x m-b-sm" ng-if="activetab == ''   && toyotaTotal > 0"></div>
+
+                        <div class="row m-t" ng-if="activetab == '' && videos.length > 0">
+                            <div class="col-sm-12 m-b">
+                                <h4 class="font-bold">VIDEOS</h4>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12 b-b m-b-sm p-l-none p-r-none"
+                                ng-repeat="(key,data) in videos | limitTo:4">
+                                <div class="col-xs-12 m-b wrapper bg-white r-3x m-p-n">
+                                    <div class="mbit-img box-shadow b pos-rlt cursor">
+                                        <video width="100%" height="100%" controls ng-if="data.type == 1">
+                                            <source ng-src="{{getVideoUrl(data.url)}}"
+                                                type="video/{{data.url.substr(data.url.length - 3)}}">
+                                        </video>
+                                        <anguvideo ng-model="data.url" width="100%" height="100%" hideControls
+                                            ng-if="data.type == 2"></anguvideo>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 m-b text-center m-t" ng-if="videos.length > 4">
+                                <h5 class="font-bold">MORE <i class="fa fa-angle-down m-l-xs"></i></h5>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 m-t-sm b-b b-2x m-b-sm" ng-if="activetab == '' && videos.length > 0"></div>
+
+                        <div class="row m-t" ng-if="activetab == '' && quarteryvideos.length > 0">
+                            <div class="col-sm-12 m-b">
+                                <h4 class="font-bold">TOYOTA QUARTERY VIDEOS</h4>
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12 b-b m-b-sm p-l-none p-r-none"
+                                ng-repeat="(key,data) in quarteryvideos | limitTo:4">
+                                <div class="col-xs-12 m-b wrapper bg-white r-3x m-p-n">
+                                    <div class="mbit-img box-shadow b pos-rlt cursor">
+                                        <video width="100%" height="100%" controls ng-if="data.type == 1">
+                                            <source ng-src="{{getVideoUrl(data.url)}}"
+                                                type="video/{{data.url.substr(data.url.length - 3)}}">
+                                        </video>
+                                        <anguvideo ng-model="data.url" width="100%" height="100%" hideControls
+                                            ng-if="data.type == 2"></anguvideo>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 m-b text-center m-t" ng-if="quarteryvideos.length > 4">
+                                <h5 class="font-bold">MORE <i class="fa fa-angle-down m-l-xs"></i></h5>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 m-t-sm b-b b-2x m-b-sm" ng-if="activetab == '' && quarteryvideos.length > 0"></div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="newslist.total  ==  0">
+                            <div class="w-full text-center bg-white wrapper-lg m-t-md margin_mid">
+                                <h4>No Results</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-b-md">
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="newslist.last_page > 0 && !loading">
+                            <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"
+                                class="pagination-ctrl"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-p-r-none">
+                <div class="panel panel-default r-3x">
+                    <div class="panel-heading r-3x r-b-none bg-black text-center font-bold">
+                        Our Picks
+                    </div>
+                    <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                        <div class="row m-t">
+                            <div class="col-xs-12 m-t-sm m-b-sm"
+                                dir-paginate="(key,data) in newslist.data | itemsPerPage: totalPerPage"
+                                total-items="newslist.total" current-page="pagination.current">
+                                <div class="col-xs-12 bg-white r-3x m-p-n " ui-sref="app.viewnews({'id':data.id})">
+
+                                    <div class="col-xs-12 sm-padder" ng-class="{'m-p-l m-p-r  m-t' : isMobile}">
+                                        <div class="mbit-img box-shadow b r-3x v-center"
+                                            background-image="{{IMGURL}}{{data.cover_image}}">
+                                            <div class="col-xs-12 no-padder text-center text-too-small m-t-xs text-white"
+                                                ng-class="{'m-b' : isMobile}">
+                                                <span>{{convertDate(data.created_at) | date:'MMM. dd, yyyy'}}</span>
+                                                <div class="clear"></div>
+                                                <a class="h5 font-bold m-t">{{data.title}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="newslist.total  ==  0">
+                            <div class="w-full text-center bg-white wrapper-lg m-t-md margin_mid">
+                                <h4>No Results</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-b-md">
+                        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="newslist.last_page > 0 && !loading">
+                            <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"
+                                class="pagination-ctrl"></dir-pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

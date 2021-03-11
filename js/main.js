@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-.controller('AppCtrl', ['$scope', '$window', '$timeout', '$rootScope', 'authServices', '$sessionStorage', '$state', 'toaster', 'webServices', '$location', 'isMobile', '$sce', 'Lightbox',
-    function($scope, $window, $timeout, $rootScope, authServices, $sessionStorage, $state, toaster, webServices, $location, isMobile, $sce, Lightbox) {
+.controller('AppCtrl', ['$scope', '$window', '$timeout', '$rootScope', 'authServices', '$sessionStorage', '$state', 'toaster', 'webServices', '$location', 'isMobile', '$sce', 'Lightbox', '$modal', '$filter',
+    function($scope, $window, $timeout, $rootScope, authServices, $sessionStorage, $state, toaster, webServices, $location, isMobile, $sce, Lightbox, $modal, $filter, $modalInstance) {
 
             // config
             $scope.app = {
@@ -108,11 +108,18 @@ angular.module('app')
             $rootScope.validfileextensions = angular.copy(app.validfileextensions);
             $rootScope.tbptypes = angular.copy(app.tbptypes);
             $rootScope.kaizentypes = angular.copy(app.kaizentypes);
+            $rootScope.maastypes = angular.copy(app.maastypes);
+            $rootScope.hydrogentypes = angular.copy(app.hydrogentypes);
+            $rootScope.sdgstypes = angular.copy(app.sdgstypes);
             $rootScope.tbp_upload_types = angular.copy(app.tbp_upload_types);
             $rootScope.pdca_upload_types = angular.copy(app.pdca_upload_types);
             $rootScope.organizationdocs = angular.copy(app.organizationdocs);
             $rootScope.eventtypes = angular.copy(app.eventtypes);
+            $rootScope.newstags = angular.copy(app.newstags);
+            $rootScope.newscategories = angular.copy(app.newscategories);
             $rootScope.dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            $rootScope.ismodalopen = false;
+            $rootScope.isEdititem = false;
 
             $rootScope.scrollconfig = {
                 autoHideScrollbar: true,
@@ -162,212 +169,34 @@ angular.module('app')
                 return files.filter((obj) => obj.filetype === type).length;
             }
 
-            $rootScope.openheaderaddModal = function(type){
-                $scope.headerinputchange();
-                $scope.headerFormData = {};
-                $scope.HeaderVideoData = {};
-                $scope.documentData = {};
-                $scope.headerFormData.type = type.toString();
-                $scope.headerFormData.kaizen_files = [];
-                $scope.headerFormData.video_links = [];
-                $scope.headerFormData.kaizen_documents = [];
-                $scope.headerFormData.document_links = [];
-                $('#HeaderModal').modal({
+            $rootScope.ModalOpen = function(modalname, controllername) {
+                $rootScope.ismodalopen = true;
+                $rootScope.openModalPopup(modalname, controllername);
+            }
+
+            $rootScope.openModalPopup = function(modalfile, modalcontroller) {
+                $rootScope.ismodalopen = true;
+                var dialogInst = $modal.open({
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
                     backdrop: 'static',
-                    keyboard: false
+                    keyboard: false,
+                    templateUrl: 'tpl/modals/' + modalfile + '.html',
+                    controller: modalcontroller,
+                    controllerAs: '$ctrl',
+                    size: 'lg',
+                    windowClass: modalfile + ' CommonModal',
                 });
             }
 
-            $scope.headerinputchange = function() {
-                $scope.headerErrorData = {};
-                $scope.setheadererrorMsg();
-            }
-
-            $scope.setheadererrorMsg = function(){
-                $scope.headerErrorData.title_errorMsg = 'Enter Title';
-                $scope.headerErrorData.description_errorMsg = 'Please add kaizen Study';
-            }
-
-            $scope.removeHeaderVideoLink = function(key){
-                $scope.headerFormData.video_links.splice(key,1);
-            }
-
-            $scope.uploadHeadervideo = function() {
-                if (($rootScope.validURL($scope.HeaderVideoData.link))&&($rootScope.validvideo($scope.HeaderVideoData.link))) {
-
-                    if($scope.headerFormData.video_links.some(videolink => videolink.link === $scope.HeaderVideoData.link)){
-                        $rootScope.$emit("showErrorMsg", 'Video already added');
-                    } else{
-                        var newobj = {};
-                        newobj.link = $scope.HeaderVideoData.link;
-                        newobj.title = 'video link' + ($scope.headerFormData.video_links.length + 1);
-                        newobj.info = '';
-                        $scope.headerFormData.video_links.push(newobj);
-                        $scope.HeaderVideoData = {};
-                    }
-                }else{
-                    $rootScope.$emit("showErrorMsg", 'Please upload valid video url.');
-                    $scope.HeaderVideoData.link = '';
-                }  
-            }
-
-            $scope.removeHeaderDocumentLink = function(key){
-                $scope.headerFormData.document_links.splice(key,1);
-            }
-
-            $scope.uploadHeaderdocumentlink = function() {
-                if ($rootScope.validURL($scope.documentData.link)) {
-                    if($scope.headerFormData.document_links.some(documentlink => documentlink.link === $scope.documentData.link)){
-                        $rootScope.$emit("showErrorMsg", 'Document already added');
-                    } else{
-                        var newobj = {};
-                        newobj.link = $scope.documentData.link;
-                        newobj.name = 'External link' + ($scope.headerFormData.document_links.length + 1);
-                        newobj.info = '';
-                        $scope.headerFormData.document_links.push(newobj);
-                        $scope.documentData = {};
-                    }
-                }else{
-                    $rootScope.$emit("showErrorMsg", 'Please enter a valid document link.');
-                    $scope.documentData.link = '';
-                }  
-            }
-
-            $scope.setHeaderservererrorMsg = function(errors){
-                $scope.headerErrorData = {};
-                angular.forEach(errors, function(error, no) {
-                    $scope.headerErrorData[no.replace('new','')+'_errorMsg'] = error[0];
-                    $scope.headerErrorData[no.replace('new','')+'_error'] = true;
+            
+            $rootScope.closeModalPopup = function() {
+                $rootScope.formData = {};
+                $rootScope.ismodalopen = false;
+                $rootScope.isEdititem = false;
+                $('.modal-content > .ng-scope').each(function() {
+                    $(this).scope().$dismiss();
                 });
-            }
-
-            $scope.uploadHeaderCover = function(files) {
-                $scope.errors = [];
-                if (files && files.length) {
-                    var extn = files[0].name.split(".").pop();
-                    if ($rootScope.imgextensions.includes(extn.toLowerCase())) {
-                        if (files[0].size <= $rootScope.maxUploadsize) {
-                            $scope.headerFormData.newcover = files[0];
-                        } else {
-                            $scope.errors.push(files[0].name + ' size exceeds 2MB.')
-                        }
-                    } else {
-                        $scope.errors.push(files[0].name + ' format unsupported.');
-                    }
-                }
-                if ($scope.errors.length > 0) {
-                    $rootScope.$emit("showErrors", $scope.errors);
-                }
-            }
-
-            $scope.addHeaderData = function(form) {
-                $scope.setheadererrorMsg();
-                if (form.$valid) {
-                    $rootScope.loading = true;
-                    webServices.upload('kaizen', $scope.headerFormData).then(function(getData) {
-                        $rootScope.loading = false;
-                        if (getData.status == 200) {
-                            $scope.closeHeaderModal();
-                            $rootScope.$emit("showSuccessMsg", getData.data.message);
-                        } else if (getData.status == 401) {
-                            $scope.setHeaderservererrorMsg(getData.data.message);
-                            $rootScope.loading = false;
-                        } else {
-                            $rootScope.$emit("showISError", getData);
-                        }
-                    });
-                } else {
-                    if (!form.title.$valid) {
-                        $scope.headerErrorData.title_error = true;
-                    }if (!form.description.$valid) {
-                        $scope.headerErrorData.description_error = true;
-                    }
-                    $rootScope.$emit("showErrors", $scope.errors);
-                }
-            }
-
-            $scope.addkaizenHeaderfiles = function(files) {
-                $scope.errors = [];
-                if ($scope.headerFormData.kaizen_files.length < $rootScope.maxUploadFiles) {
-                    if (files && files.length) {
-                        if (($rootScope.maxUploadFiles - $scope.headerFormData.kaizen_files.length) >= files.length) {
-                            for (var i = 0; i < files.length; i++) {
-                                var extn = files[i].name.split(".").pop();
-                                if ($rootScope.validextensions.includes(extn.toLowerCase())) {
-                                    if (files[i].size <= $rootScope.maxUploadsize) {
-                                        var newobj = {};
-                                        newobj.file = files[i];
-                                        newobj.filename = files[i].name;
-                                        newobj.filetype = files[i].type.split("/")[0];
-                                        newobj.isfile = 1;
-                                        $scope.headerFormData.kaizen_files.push(newobj);
-                                    } else {
-                                        $scope.errors.push(files[i].name + ' size exceeds 2MB.')
-                                    }
-                                } else {
-                                    $scope.errors.push(files[i].name + ' format unsupported.');
-                                }
-                            }
-                        } else {
-                            $scope.errors.push('You can now upload only ' + ($rootScope.maxUploadFiles - $scope.formData.kaizen_files.length) + ' files');
-                        }
-                    }
-                } else {
-                    $scope.errors.push('You can add only maximum of ' + $rootScope.maxUploadFiles + ' files only');
-                }
-                if ($scope.errors.length > 0) {
-                    $rootScope.$emit("showErrors", $scope.errors);
-                }
-            }
-
-            $scope.addkaizenHeaderDocuments = function(files) {
-                $scope.errors = [];
-                if ($scope.headerFormData.kaizen_documents.length < $rootScope.maxUploadFiles) {
-                    if (files && files.length) {
-                        if (($rootScope.maxUploadFiles - $scope.headerFormData.kaizen_documents.length) >= files.length) {
-                            for (var i = 0; i < files.length; i++) {
-                                var extn = files[i].name.split(".").pop();
-                                if ($rootScope.validfileextensions.includes(extn.toLowerCase())) {
-                                    if (files[i].size <= $rootScope.maxUploadsize) {
-                                        var newobj = {};
-                                        newobj.file = files[i];
-                                        newobj.name = files[i].name.split(".")[0];
-                                        newobj.info = '';
-                                        newobj.filetype = files[i].type.split("/")[0];
-                                        newobj.isfile = 1;
-                                        $scope.headerFormData.kaizen_documents.push(newobj);
-                                    } else {
-                                        $scope.errors.push(files[i].name + ' size exceeds 2MB.')
-                                    }
-                                } else {
-                                    $scope.errors.push(files[i].name + ' format unsupported.');
-                                }
-                            }
-                        } else {
-                            $scope.errors.push('You can now upload only ' + ($rootScope.maxUploadFiles - $scope.formData.kaizen_documents.length) + ' files');
-                        }
-                    }
-                } else {
-                    $scope.errors.push('You can add only maximum of ' + $rootScope.maxUploadFiles + ' files only');
-                }
-                if ($scope.errors.length > 0) {
-                    $rootScope.$emit("showErrors", $scope.errors);
-                }
-            }
-
-            $scope.closeHeaderModal = function() {
-                $scope.headerFormData = {};
-                $scope.isedit = false;
-                $('#HeaderModal').modal('hide');
-                $rootScope.modalerrors = [];
-            }
-
-            $scope.removeHeaderFile = function(key,data){
-                $scope.headerFormData.kaizen_files.splice(key,1);
-            }
-
-            $scope.removeHeaderDocuments = function(key,data){
-                $scope.headerFormData.kaizen_documents.splice(key,1);
             }
 
             $rootScope.getVideoUrl = function(url) {
@@ -387,7 +216,8 @@ angular.module('app')
             }
 
             $rootScope.convertDate = function(date) {
-                return Date.parse(date);
+                return new Date(moment(date));
+                //return Date.parse(date);
             }
 
             $timeout(tick, $scope.tickInterval);
@@ -410,6 +240,18 @@ angular.module('app')
 
             $rootScope.goback = function() {
                 history.back();
+            }
+
+            $rootScope.viewModuleItem = function(module,item){
+                var obj = {};
+                obj.module = module;
+                obj.item = item;
+                webServices.post('view',obj).then(function(getData) {
+                    if (getData.status == 200) {
+                    } else {
+                        $rootScope.$emit("showISError",getData);
+                    }
+                });
             }
 
             $rootScope.moveTop = function() {
@@ -526,6 +368,7 @@ angular.module('app')
                 $rootScope.errors = [];
                 webServices.get('getauthenticateduser').then(function(getData) {
                     if (getData.status == 200) {
+                        $rootScope.updateView();
                         $rootScope.user = $sessionStorage.user = getData.data;
                         localStorage.user = JSON.stringify($sessionStorage.user);
                     } else if (getData.status == 401) {
@@ -534,6 +377,16 @@ angular.module('app')
                         $rootScope.logout();
                     } else {
                         $rootScope.logout();
+                    }
+                });
+            }
+
+            $rootScope.updateView = function(){
+                var obj = {};
+                obj.date = $filter('date')(new Date(), 'yyyy-MM-dd');
+                webServices.post('viewer/info/update',obj).then(function(getData) {
+                    console.log(getData)
+                    if (getData.status == 200) {
                     }
                 });
             }

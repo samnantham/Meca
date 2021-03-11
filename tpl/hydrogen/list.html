@@ -1,0 +1,77 @@
+<div ng-controller="HydrogenController">
+   <div class="wrapper-md p-t-none p-b-none m-t">
+      <div class="panel panel-default r-3x">
+         <div class="panel-heading r-3x r-b-none bg-dark p-b-none">
+            <div class="btn-group dropdown mobile-visible">
+               <button type="button" class="btn no-shadow b-no  btn-default text-capt active" data-toggle="dropdown" aria-expanded="false">
+               {{activetab}}
+               <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu" ng-if="!loading">
+                  <li><a ng-click="changeActive(0)">All</a></li>
+                  <li ng-repeat="(num,hydrogen) in hydrogentypes"><a ng-click="changeActive(hydrogen.id)">{{hydrogen.type}}</a></li>
+               </ul>
+            </div>
+            <button class="btn no-shadow b-no  btn-default panel-tab web-visible" ng-class="{'active': activetab == 0}" ng-click="changeActive(0)">All</button>
+            <button class="btn no-shadow b-no  btn-default panel-tab web-visible" ng-class="{'active': activetab == hydrogen.id}" ng-click="changeActive(hydrogen.id)" ng-repeat="(num,hydrogen) in hydrogentypes">{{hydrogen.label}}</button>
+            <li class="dropdown pull-right list-none" dropdown>
+               <a href class="dropdown-toggle clear" dropdown-toggle ng-class="{'m-t-xs' : isMobile}">
+               <i class="fa fa-filter pull-right"></i>
+               </a>
+               <!-- dropdown -->
+               <ul class="dropdown-menu animated fadeInRight">
+                  <li ng-if="filterData.sortkey"><a ng-click="sortData('','')"><i class="fa fa-repeat m-r-sm"></i> <small>Reset</small></a></li>
+                  <li><a ng-click="sortData('title','asc')"><i class="fa fa-sort-alpha-asc m-r-sm"></i> <small>Event Name ASC</small></a></li>
+                  <li><a ng-click="sortData('title','desc')"><i class="fa fa-sort-alpha-desc m-r-sm"></i> <small>Event Name DSC</small></a></li>
+                  <li><a ng-click="sortData('start_date','asc')"><i class="fa fa-sort-alpha-asc m-r-sm"></i> <small>Date ASC</small></a></li>
+                  <li><a ng-click="sortData('start_date','desc')"><i class="fa fa-sort-alpha-desc m-r-sm"></i> <small>Date DSC</small></a></li>
+               </ul>
+               <!-- / dropdown -->
+            </li>
+         </div>
+         <div class="padder" ng-scrollbars ng-scrollbars-config="scrollconfig">
+            <div class="row m-t">
+               <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
+                  <div class="input-grou " ng-class="{'pull-left' : !isMobile}">
+                     <button class="btn btn-md btn-warning" ng-click="ModalOpen('hydrogenModal','HydrogenModalController');" ng-class="{'w-full' : isMobile}"> Create New</button>
+                  </div>
+               </div>
+               <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6 web-visible">
+               </div>
+               <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6 inner-addon right-addon">
+                  <i class="fa fa-search"></i>
+                  <input type="text" ng-model="filterData.keyword" class="form-control r-2x box-shadow" ng-change="getResults();" placeholder="Search" aria-invalid="false">
+               </div>
+            </div>
+            <div class="row m-t">
+               <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12" dir-paginate="(key,data) in hydrogens.data | itemsPerPage: totalPerPage" total-items="hydrogens.total" current-page="pagination.current">
+                  <div class="col-xs-12 m-b wrapper bg-white r-3x box-shadow b b-2x">
+                     <div class="col-xs-12 col-lg-4 col-sm-4 col-md-4 sm-padder">
+                        <div class="mbit-img box-shadow b r-3x" background-image="{{IMGURL}}{{data.cover_image}}"></div>
+                     </div>
+                     <div class="col-xs-12 sm-padder col-lg-8 col-sm-8 col-md-8">
+                        <div class="col-xs-12 no-padder text-right text-danger text-too-small" ng-class="{'m-t-xs' : isMobile}">{{convertDate(data.created_at) | date:'dd MMM yyyy HH:mm:ss'}} </div>
+                        <a href="" class="h6 font-bold m-t">{{data.title}}</a>
+                        <small class="block dist-desc m-t-xs text-justify"> {{data.description | cut:true:180:'....'}}</small>
+                        <div class="m-b m-t-xs">
+                           <button class="btn btn-default btn-xs w-xs btn-danger r-2x read_more pull-left text-u-c" ui-sref="app.viewhydrogen({'id':data.id})">Know More</button>
+                           <span class="pull-right text-danger text-xs font-bold" ng-class="{'m-t-xs' : isMobile}">{{data.writerinfo ? data.writerinfo.name : (data.is_admin ? data.ownerprofile.username + '(Admin)' : data.ownerprofile.first_name + ' ' + data.ownerprofile.last_name + ' - ' + data.ownerprofile.distributorinfo.name)}} </span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12" ng-if="hydrogens.total  ==  0">
+                  <div class="w-full text-center bg-white wrapper-lg m-t-md margin_mid">
+                     <h4>No Records Found</h4>
+                  </div>
+               </div>
+            </div>
+            <div class="row m-b-md">
+               <div class="col-lg-12 col-md-12 col-sm-12" ng-if="hydrogens.last_page > 0 && !loading">
+                  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="pagination-ctrl"></dir-pagination-controls>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -2,19 +2,19 @@
     <toaster-container toaster-options="{'position-class': 'toast-top-center','time-out':3000, 'close-button':true}"></toaster-container>
     <div class="auth-form w-xxl w-max-450 r-3x b b-2x m-auto v-mid-align box-shadow bdr-gray">
         <div class="wrapper text-center m-t-lg">
-            <img class="logo-img" src="img/logoLG.png">
+            <img class="logo-img" src="img/meca.png">
         </div>
         <div class="wrapper-lg m-b-sm">
             <form role="form" name="forgotForm" novalidate ng-submit="addData(forgotForm)">
                 <input type="hidden" name="passwordmatch" ng-model="formData.passwordmatch" ng-required="formData.newpassword != formData.confirmpassword">
                 <div class="form-group m-t-sm inner-addon right-addon">
                             <i class="fa p-event-auto right-none {{formData.shownewpassword ? 'fa-eye-slash':'fa-eye'}}" ng-click="showhidepassword('new');"></i>
-                            <input class="form-control" type="{{formData.newtype}}" placeholder="New Password" name="newpassword" ng-model='formData.newpassword' required>
+                            <input class="form-control" type="{{formData.newtype}}" placeholder="New Password" name="newpassword" ng-model='formData.password' required>
 
                         </div>
                         <div class="form-group m-t-sm inner-addon right-addon">
                             <i class="fa p-event-auto right-none {{formData.showconfirmpassword ? 'fa-eye-slash':'fa-eye'}}" ng-click="showhidepassword('confirm');"></i>
-                            <input class="form-control" type="{{formData.confirmtype}}" placeholder="Confirm Password" name="confirmpassword" ng-model='formData.confirmpassword' required ng-minlength="8">
+                            <input class="form-control" type="{{formData.confirmtype}}" placeholder="Confirm Password" name="confirmpassword" ng-model='formData.confirm_password' required ng-minlength="8">
                         </div>
                 <div class="form-group">
                     <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">

@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  preserveAspectRatio="xMinYMin meet" viewBox="0 0 622 420">
+  <defs>
+    <style>
+      .clsn-1 {
+        fill: #747474;
+      }
+
+      .clsn-2 {
+        fill: #fff;
+        font-size: 18px;
+        font-family: Lato-Medium, Lato;
+        font-weight: 500;
+      }
+
+      .clsn-3 {
+        fill: #f1592a;
+      }
+
+      .clsn-4 {
+        fill: #58585a;
+      }
+
+      .clsn-5 {
+        fill: #fa9f34;
+      }
+
+      .clsn-6 {
+        fill: #1d1d1d;
+      }
+
+      .clsn-7 {
+        fill: #3f51b5;
+      }
+
+      .clsn-8 {
+        filter: url(#Rectangle_2877);
+      }
+
+      .clsn-9 {
+        filter: url(#Rectangle_2876-3);
+      }
+
+      .clsn-10 {
+        filter: url(#Rectangle_2876-2);
+      }
+
+      .clsn-11 {
+        filter: url(#Rectangle_2876);
+      }
+
+      .clsn-12 {
+        filter: url(#Rectangle_2875-4);
+      }
+
+      .clsn-13 {
+        filter: url(#Rectangle_2875-3);
+      }
+
+      .clsn-14 {
+        filter: url(#Rectangle_2875-2);
+      }
+
+      .clsn-15 {
+        filter: url(#Rectangle_2875);
+      }
+    </style>
+    <filter id="Rectangle_2875" x="342" y="0" width="280" height="80" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2875-2" x="0" y="265" width="280" height="110" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-2"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2875-3" x="342" y="74" width="280" height="80" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-3"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2875-4" x="0" y="0" width="280" height="110" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-4"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2876" x="342" y="148" width="280" height="80" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-5"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2876-2" x="342" y="221" width="280" height="80" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-6"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-6"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2876-3" x="0" y="133" width="280" height="110" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-7"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-7"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_2877" x="342" y="295" width="280" height="80" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-8"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur-8"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="From_TMC-all" data-name="From TMC-all" transform="translate(-5339 -10575)">
+    <g id="Group_5249" data-name="Group 5249" transform="translate(4317 9539)" ng-click="openDoc('docs/What-is-MEBIT.pdf');">
+      <g class="clsn-15" transform="matrix(1, 0, 0, 1, 1022, 1036)">
+        <rect id="Rectangle_2875-5" data-name="Rectangle 2875" class="clsn-1" width="250" height="50" rx="10" transform="translate(360 12)"/>
+      </g>
+      <text id="What_is_MEBIT" data-name="What is MEBIT" class="clsn-2 cursor" transform="translate(1507 1080)"><tspan x="-60.008" y="0">What is MEBIT</tspan></text>
+    </g>
+    <g id="Group_5240" data-name="Group 5240" transform="translate(3975 9804)"  ui-sref="app.kaizens({type:'3',tmc:1})">
+      <g class="clsn-14" transform="matrix(1, 0, 0, 1, 1364, 771)">
+        <rect id="Rectangle_2875-6" data-name="Rectangle 2875" class="clsn-1" width="250" height="80" rx="10" transform="translate(18 277)"/>
+      </g>
+      <text id="Trade_In" data-name="Trade In" class="clsn-2 cursor" transform="translate(1507 1095)"><tspan x="-31.712" y="0">Trade In</tspan></text>
+    </g>
+    <g id="Group_5244" data-name="Group 5244" transform="translate(4317 9613)" ng-click="openDoc('docs/MEBIT-Total-Programs-Rough-schedule.pdf');">
+      <g class="clsn-13" transform="matrix(1, 0, 0, 1, 1022, 962)">
+        <rect id="Rectangle_2875-7" data-name="Rectangle 2875" class="clsn-3" width="250" height="50" rx="10" transform="translate(360 86)"/>
+      </g>
+      <text id="Overall_Schedule" data-name="Overall Schedule" class="clsn-2 cursor" transform="translate(1507 1080)"><tspan x="-66.794" y="0">Overall Schedule</tspan></text>
+    </g>
+    <g id="Group_5248" data-name="Group 5248" transform="translate(3975 9539)" ui-sref="app.kaizens({type:'1',tmc:1})">
+      <g class="clsn-12" transform="matrix(1, 0, 0, 1, 1364, 1036)">
+        <rect id="Rectangle_2875-8" data-name="Rectangle 2875" class="clsn-3" width="250" height="80" rx="10" transform="translate(18 12)"/>
+      </g>
+      <text id="New_Car_Sales" data-name="New Car Sales" class="clsn-2 cursor" transform="translate(1507 1095)"><tspan x="-56.691" y="0">New Car Sales</tspan></text>
+    </g>
+    <g id="Group_5245" data-name="Group 5245" transform="translate(4317 9587)" ui-sref="app.events({type:'0'})">
+      <g class="clsn-11" transform="matrix(1, 0, 0, 1, 1022, 988)">
+        <rect id="Rectangle_2876-4" data-name="Rectangle 2876" class="clsn-4" width="250" height="50" rx="10" transform="translate(360 160)"/>
+      </g>
+      <text id="MEBIT_Events" data-name="MEBIT Events" class="clsn-2 cursor" transform="translate(1507 1180)"><tspan x="-55.773" y="0">MEBIT Events</tspan></text>
+    </g>
+    <g id="Group_5246" data-name="Group 5246" transform="translate(4317 9660)" ui-sref="app.kaizens({type:'4',tmc:1})">
+      <g class="clsn-10" transform="matrix(1, 0, 0, 1, 1022, 915)">
+        <rect id="Rectangle_2876-5" data-name="Rectangle 2876" class="clsn-5" width="250" height="50" rx="10" transform="translate(360 233)"/>
+      </g>
+      <text id="BIT_Foundation" data-name="BIT Foundation" class="clsn-2 cursor" transform="translate(1507 1180)"><tspan x="-60.881" y="0">BIT Foundation</tspan></text>
+    </g>
+    <g id="Group_5241" data-name="Group 5241" transform="translate(3975 9572)" ui-sref="app.kaizens({type:'2',tmc:1})">
+      <g class="clsn-9" transform="matrix(1, 0, 0, 1, 1364, 1003)">
+        <rect id="Rectangle_2876-6" data-name="Rectangle 2876" class="clsn-5" width="250" height="80" rx="10" transform="translate(18 145)"/>
+      </g>
+      <text id="After_Sales" data-name="After Sales" class="clsn-2 cursor" transform="translate(1507 1195)"><tspan x="-42.422" y="0">After Sales</tspan></text>
+    </g>
+    <g id="Group_5247" data-name="Group 5247" transform="translate(4317 9634)">
+      <g class="clsn-8" transform="matrix(1, 0, 0, 1, 1022, 941)">
+        <rect id="Rectangle_2877-2" data-name="Rectangle 2877" class="clsn-6" width="250" height="50" rx="10" transform="translate(360 307)"/>
+      </g>
+      <text id="Organisation" class="clsn-2" transform="translate(1507 1280)"><tspan x="-50.877" y="0">Organisation</tspan></text>
+    </g>
+    <path id="Union_12" data-name="Union 12" class="clsn-7" d="M-4128-11297h36.767l-18.384,18.386Zm10.726,0v-16h16v16Z" transform="translate(9591 21989)"/>
+    <path id="Union_8" data-name="Union 8" class="clsn-7" d="M-4128-11297h36.767l-18.384,18.386Zm10.726,0v-16h16v16Z" transform="translate(9591 22122)"/>
+    <path id="Union_11" data-name="Union 11" class="clsn-7" d="M-4128-11297h36.768l-18.384,18.384Zm275.728,16v-32h-249v16h-16v-32h281v48Z" transform="translate(-5666.664 14736) rotate(90)"/>
+  </g>
+</svg>

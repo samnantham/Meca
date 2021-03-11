@@ -1,0 +1,192 @@
+<div ng-controller="HistorySubFolderController">
+   <div class="wrapper-md p-t-none p-b-none m-t">
+      <div class="panel panel-default r-3x">
+         <div class="panel-heading r-3x r-b-none bg-dark p-b-none text-center">
+            <h5 class="font-bold">{{folderinfo.folderInfo ? folderinfo.folderInfo.folder_name : 'Folder Name'}}</h5>
+         </div>
+         <div class="padder" ng-scrollbars ng-scrollbars-config="scrollconfig">
+            <div class="row m-t">
+               <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                  <div class="input-grou " ng-class="{'pull-left' : !isMobile}">
+                     <button class="btn btn-info btn-addon" ng-click="goback()"><i class="fa fa-arrow-left"></i>Go
+                        Back</button>
+                     <button class="btn btn-warning btn-addon" ng-click="openaddModal();"
+                        ng-if="folderinfo.folderInfo.is_editable">Add New <i class="fa fa-folder m-l-xs"></i></button>
+                     <button class="btn btn-danger btn-addon" ngf-select ngf-drop ngf-max-size="{{maxFilesize}}"
+                        ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="false"
+                        ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv,video/*,image/*,.doc,.docx'"
+                        ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid"
+                        ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="uploadDoc($files);"
+                        ng-if="folderinfo.folderInfo.is_editable">Upload <i class="fa fa-upload m-l-xs"></i></button>
+                  </div>
+               </div>6
+            </div>
+            <div class="row m-t">
+               <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12" ng-repeat="(key,data) in folderinfo.subfolders">
+                  <div class="col-xs-12 m-b  bg-white r-3x box-shadow b b-2x">
+                     <div class="wrapper-xl">
+                        <img class="img-full cursor" src="img/folder-icon.png" alt="{{data.folder_name}}"
+                           ui-sref="app.subfolders({'id':data.id})">
+                        <div class="text-center">
+                           <h5 class="font-bold cursor" ui-sref="app.subfolders({'id':data.id})">{{::data.folder_name}}
+                           </h5>
+                           <div class="pull-right pos-abt dist-ico"
+                              ng-if="data.is_editable && !data.is_admin && data.user == user.id">
+                              <img class="m-r-xs" src="img/view.png" ng-click="openParticipantModal(data);"
+                                 role="button" tabindex="0">
+                              <img class="m-r-xs" src="img/edit.png" ng-click="editData(data);" role="button"
+                                 tabindex="0">
+                              <img src="img/delete.png" ng-click="deleteFolder(data)" role="button" tabindex="0">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12" ng-repeat="(key,data) in folderinfo.files">
+                  <div class="col-xs-12 m-b  bg-white r-3x box-shadow b b-2x">
+                     <div class="wrapper-xl">
+                        <a target="_blank" ng-href="{{IMGURL}}{{data.file_link}}">
+                           <img class="img-full cursor" src="img/filetype/filetype-{{data.extension}}.png"
+                              alt="{{data.file_name}}"> </a>
+                        <div class="text-center">
+                           <h5 class="font-bold cursor" ui-sref="app.subfolders({'id':data.id})">{{::data.file_name}}
+                           </h5>
+                           <div class="pull-right pos-abt dist-ico" ng-if="!data.is_admin && data.user == user.id">
+                              <img src="img/delete.png" ng-click="deleteFile(data)" role="button" tabindex="0">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12 col-md-12 col-sm-12" ng-if="folderinfo.tmcfolders.length  ==  0">
+                  <div class="w-full text-center bg-white wrapper-lg m-t-md margin_mid">
+                     <h4>No Folders found</h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      data-backdrop="static" data-keyboard="false" data-modalFade="true">
+      <div class="modal-dialog" role="document" style="width: 50%;">
+         <div class="modal-content m-p-l m-p-r" ng-class="{'wrapper-xl' : !isMobile}">
+            <form class="form-horizontal" name="addForm" novalidate ng-submit="addData(addForm);">
+               <div class="modal-header b-no text-center">
+                  <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">{{isedit ? 'Edit ' : 'Add New'}} Folder</h4>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label class="font-bold">Folder Name <code>*</code></label>
+                     <small class="pull-right text-danger"
+                        ng-if="errorData.folder_name_error">{{errorData.folder_name_errorMsg}}</small>
+                     <input type="text" name="folder_name" class="form-control r-2x" ng-model="formData.folder_name"
+                        placeholder="Folder Name" required ng-change="inputchange()">
+                  </div>
+                  <div class="form-group">
+                     <div class="col-sm-4 p-l-none">
+                        <div class="checkbox">
+                           <label class="i-checks">
+                              <input type="checkbox" ng-model="formData.has_parent" ng-true-value="1" ng-false-value="0"
+                                 disabled>
+                              <i></i>
+                              This is a Sub Folder
+                           </label>
+                        </div>
+                     </div>
+                     <div class="col-sm-4">
+                        <div class="form-group">
+                           <select name="parent_id" class="form-control r-2x" ng-model="formData.parent_id"
+                              ng-options="folder.id.toString() as folder.folder_name for folder in folders" disabled>
+                              <option value="">Choose Parent Folder</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer text-center b-no">
+                  <div class="col-xs-12 text-center ">
+                     <button type="button" class="btn btn-primary no-border  m-auto bg-main2 w-xs"
+                        ng-click="closeModal()" ng-disabled="loading">Cancel</button>
+                     <button type="submit" class="btn btn-primary no-border  m-auto bg-main1 w-xs"
+                        button-spinner="loading" ng-disabled="loading">{{isedit ? 'Update ' : 'Add'}}</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="ParticipantModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      data-backdrop="static" data-keyboard="false" data-modalFade="true">
+      <div class="modal-dialog" role="document" style="width: 70%;">
+         <div class="modal-content">
+            <div class="modal-header b-no text-center">
+               <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                     aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title m-t-md" id="myModalLabel">Participants</h4>
+            </div>
+            <div class="modal-body" ng-scrollbars ng-scrollbars-config="scrollconfig">
+               <div class="form-group">
+                  <div class="col-sm-12 m-b-sm">
+                     <div class="col-sm-4">
+                     </div>
+                     <div class="col-sm-4 text-center">
+                        <div class="checkbox">
+                           <label class="i-checks i-checks-lg">
+                              <input type="checkbox" ng-model="addedData.is_public" ng-true-value="1" ng-false-value="0"
+                                 ng-change="clearParticipants();">
+                              <i></i> Public
+                           </label>
+                        </div>
+                     </div>
+                     <div class="col-sm-4  inner-addon right-addon">
+                        <i class="fa fa-search"></i>
+                        <input type="text" ng-model="filterData.keyword" class="form-control r-2x box-shadow"
+                           ng-change="getUsers();" placeholder="Search" aria-invalid="false"
+                           ng-disabled="addedData.is_public">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="form-group" ng-show="!addedData.is_public">
+                  <div class="row m-md">
+                     <label class="h5 font-bold m-t-md">List of Users you can assign</label>
+                     <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6" ng-repeat="(number,disuser) in users" ng-if="disuser.id != user.id">
+                           <div class="checkbox">
+                              <label class="i-checks">
+                                 <input type="checkbox" ng-model="disuser.is_added" ng-true-value="1" ng-false-value="0"
+                                    ng-change="addremoveMember(disuser.is_added,disuser.id)"
+                                    ng-disabled="addedData.is_public">
+                                 <i></i> {{ disuser.first_name + ' ' + disuser.last_name }}
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <div class="col-lg-12 col-md-12 col-sm-12 p-l-none" ng-if="users.length  ==  0">
+                           <div class="w-full text-center bg-white wrapper-lg b b-2x r-2x">
+                              <h4>No recent users</h4>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer text-center b-no">
+               <div class="col-xs-12 text-center" ng-class="{'m-t-lg':addedData.is_public}">
+                  <button type="button" class="btn btn-primary no-border  m-auto bg-dark w-xs" ng-disabled="loading"
+                     ng-click="closeModal();">Cancel</button>
+                  <button type="button" class="btn btn-primary no-border  m-auto bg-main1 w-xs" button-spinner="loading"
+                     ng-disabled="loading || (addedData.members.length == 0 && !addedData.is_public)"
+                     ng-click="updateParticipants()">Update</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

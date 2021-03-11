@@ -1,0 +1,83 @@
+<form class="form-horizontal" name="addForm" novalidate ng-submit="addData(addForm);">
+    <div class="modal-header b-no text-center">
+       <button type="button" class="close" ng-click="closeModalPopup();" aria-label="Close"><span
+             aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="myModalLabel">{{isEdititem ? 'Edit News' : 'Add News'}}</h4>
+    </div>
+    <div class="modal-body">
+       <div class="form-group">
+          <label class="font-bold">Title <code>*</code></label>
+          <small class="pull-right text-red"
+             ng-if="errorData.title_error">{{errorData.title_errorMsg}}</small>
+          <input type="text" name="title" class="form-control r-2x" ng-model="formData.title"
+             placeholder="News Title" required ng-change="inputchange()">
+       </div>
+       <div class="form-group">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-l-none m-b-md">
+            <label class="font-bold">Category <code>*</code></label>
+            <small class="pull-right text-red" ng-if="errorData.category_error">{{errorData.category_errorMsg}}</small>
+            <select name="category" class="form-control r-2x" required ng-model="formData.categoryData" ng-options="category as category.category for category in newscategories" ng-change="Changecategory(formData.categoryData);">
+               <option value="">Choose Category</option>
+            </select>
+         </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 p-r-none m-b-md" ng-if="subcategories.length > 0">
+            <label class="font-bold">SubCategory <code>*</code></label>
+            <small class="pull-right text-red" ng-if="errorData.subcategory_error">{{errorData.subcategory_errorMsg}}</small>
+            <select name="subcategory" class="form-control r-2x" ng-model="formData.subcategory" required ng-change="inputchange()">
+               <option value="">Choose SubCategory</option>
+               <option value="{{subcategory}}" ng-repeat="(num,subcategory) in subcategories"> {{subcategory}}</option>
+            </select>
+         </div>
+      </div>
+       <div class="form-group">
+          <label class="font-bold">News Content <code>*</code></label>
+          <small class="pull-right text-red"
+             ng-if="errorData.content_error">{{errorData.content_errorMsg}}</small>
+          <div text-angular name="content" ng-model="formData.content" data-ng-required="true"
+             class="btn-groups"
+             ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],['bold','italics'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent','html']]">
+          </div>
+       </div>
+       <div class="form-group">
+          <label class="font-bold">Tags <code>*</code></label>
+          <input type="hidden" name="tags" ng-model="formData.newstags" ng-required="formData.tags.length == 0">
+          <small class="pull-right text-red" ng-if="errorData.tags_error">{{errorData.tags_errorMsg}}</small>
+             <div>
+                <button class="btn btn-sm m-b-xs m-r-xs" type="button" ng-repeat="(num,tag) in newstags" ng-click="addremovetags(tag)" ng-class="formData.tags.includes(tag)  ? 'btn-warning' : 'btn-default'">{{tag}} <i class="fa m-l-xs" ng-class="formData.tags.includes(tag)  ? 'fa-times' : 'fa-plus'"></i></button>
+              </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-3 col-xs-6 p-l-none">
+             <label class="font-bold">Cover Image <code>*</code></label>
+             <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles"
+                ngf-model-options="modelOptionsObj" ngf-multiple="false" ngf-accept="'image/*'"
+                ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir"
+                ngf-drop-available="dropAvailable" ngf-change="uploadCover($files);">
+                Upload Image
+             </div>
+          </div>
+          <div class="col-sm-3 col-xs-6 p-l-none">
+             <label class="font-bold text-white">Cover Image</label>
+             <div class="mbit-img box-shadow b" ngf-background="formData.newcover" ng-if="formData.newcover"></div>
+             <div class="mbit-img box-shadow b" background-image="{{IMGURL}}{{formData.cover_image}}" ng-if="!formData.newcover && isEdititem"></div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 p-r-none">
+             <label class="font-bold">Upload Doc</label>
+             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 p-l-none">
+                 <button class="btn btn-warning r-2x btn-addon ellipsis-txt" ngf-select ngf-drop ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="false" ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv'"
+                     ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="uploadDoc($files);"><i class="fa fa-upload"></i> {{formData.newdocument ? formData.newdocument.name : (formData.doc_link ? formData.doc_link.split('/').pop() : 'Add File')}}</button>
+             </div>
+         </div>
+       </div>
+    </div>
+    <div class="modal-footer text-center b-no">
+       <div class="col-xs-12 text-center ">
+          <button type="button" class="btn btn-primary no-border  m-auto bg-main2 w-xs"
+             ng-click="closeModalPopup()" ng-disabled="loading">Cancel</button>
+          <button type="submit" class="btn btn-primary no-border  m-auto bg-main1 w-xs"
+             button-spinner="loading" ng-disabled="loading">{{ isEdititem ? 'Update' : 'Add' }}</button>
+       </div>
+    </div>
+</form>

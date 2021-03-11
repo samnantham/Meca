@@ -31,5 +31,6 @@ angular.module('app', [
     'firebase',
     'anguvideo',
     'vkEmojiPicker',
-    'videosharing-embed'
+    'videosharing-embed',
+    'textAngular'
 ]);

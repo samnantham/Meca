@@ -13,11 +13,14 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.event = getData.data;
-                $scope.mediafiles = $rootScope.splitFiles($scope.event.event_files); 
-                $scope.event.videocount = $rootScope.getfileCounts($scope.event.event_files,'video'); 
-                $scope.event.imagecount = $rootScope.getfileCounts($scope.event.event_files,'image'); 
-                $scope.getComments();
-                console.log($scope.event)
+                if(!$scope.event.has_access){
+                    $state.go('app.maas',{type:1});
+                }else{
+                    $scope.mediafiles = $rootScope.splitFiles($scope.event.event_files); 
+                    $scope.event.videocount = $rootScope.getfileCounts($scope.event.event_files,'video'); 
+                    $scope.event.imagecount = $rootScope.getfileCounts($scope.event.event_files,'image'); 
+                    $scope.getComments();
+                }
             } else {
                 $rootScope.$emit("showISError",getData);
             }
@@ -77,6 +80,7 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.comments = getData.data;
+                $rootScope.viewModuleItem($scope.module_id,$stateParams.id);
             } else {
                 $rootScope.$emit("showISError",getData);
             }

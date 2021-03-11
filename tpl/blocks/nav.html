@@ -1,53 +1,65 @@
 <ul class="nav">
-    <!-- <li ng-class="{active: $state.includes('app.home') }">
+    <li ng-class="{active: $state.includes('app.home') }">
         <a ui-sref="app.home" class="auto">
             <span class="icon-holder">
-                <img class="menu-icon" src="{{currentState == 'app.home' ? 'img/home.png' : 'img/home_active.png' }}" />
+                <img class="menu-icon" src="{{currentState == 'app.home' ? 'img/menu/Home-Active.png' : 'img/menu/Home.png' }}" />
                 <p>Home</p>
             </span>
         </a>
-    </li> -->
+    </li>
+
+    <li ng-class="{active: $state.includes('app.newsroom')  }">
+        <a class="auto" ui-sref="app.newsroom">
+            <span class="icon-holder">
+                <img class="menu-icon" ng-src="{{ (currentState == 'app.newsroom') ? 'img/menu/NewsRC-Active.png' : 'img/menu/NewsRC.png' }}"/>
+                <p>NEWS ROOM</p>
+            </span>
+        </a>
+    </li>
+
 
     <li ng-class="{active: ($state.includes('app.events')  || $state.includes('app.viewevent') || $state.includes('app.mebitdashboard')) }">
         <a ui-sref="app.mebitdashboard" class="auto">
             <span class="icon-holder">
-                <img class="menu-icon" ng-src="{{ ((currentState == 'app.events') || (currentState == 'app.viewevent') || (currentState == 'app.mebitdashboard')) ? 'img/menu/mebit-active.png' : 'img/menu/mebit.png' }}"/>
+                <img class="menu-icon" ng-src="{{ ((currentState == 'app.events') || (currentState == 'app.viewevent') || (currentState == 'app.mebitdashboard')) ? 'img/menu/MEBIT-Active.png' : 'img/menu/MEBIT.png' }}"/>
                 <p>MEBIT</p>
             </span>
         </a>
     </li>
 
-    <li>
-        <a class="auto">
+
+
+    <li ng-class="{active: $state.includes('app.maas') || $state.includes('app.viewmaas')}">
+        <a class="auto" ui-sref="app.maas({type:'0'})">
             <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/maas.png" />
-                <p>MAAS</p>
+                <img class="menu-icon" ng-src="{{ ((currentState == 'app.maas') || (currentState == 'app.viewmaas')) ? 'img/menu/MaaS-Active.png' : 'img/menu/MaaS.png' }}"/>
+                <p>MaaS</p>
             </span>
         </a>
     </li>
 
-    <li>
-        <a class="auto">
+    <li ng-class="{active: $state.includes('app.hydrogen') || $state.includes('app.viewhydrogen')}">
+        <a class="auto" ui-sref="app.hydrogen({type:'0'})">
             <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/hydrogen.png" />
+                <img class="menu-icon"  ng-src="{{ ((currentState == 'app.hydrogen') || (currentState == 'app.viewhydrogen')) ? 'img/menu/Hydrogen-Active.png' : 'img/menu/Hydrogen.png' }}"/>
                 <p>HYDROGEN</p>
             </span>
         </a>
     </li>
 
-    <li>
-        <a class="auto">
+    <li ng-class="{active: $state.includes('app.sdgsdashboard') || $state.includes('app.sdgs') || $state.includes('app.viewsdgs')}">
+        <a class="auto" ui-sref="app.sdgsdashboard">
             <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/sdgs.png" />
+                <img class="menu-icon" ng-src="{{ ((currentState == 'app.sdgsdashboard') || (currentState == 'app.sdgs') || (currentState == 'app.viewsdgs')) ? 'img/menu/SDGS-Active.png' : 'img/menu/SDGS.png' }}"/>
                 <p>SDGs</p>
             </span>
         </a>
     </li>
 
-    <li>
-        <a class="auto">
+    <li ng-class="{active: $state.includes('app.grdashboard') || $state.includes('app.viewgr')}">
+        <a class="auto" ui-sref="app.grdashboard">
             <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/gr.png" />
+                <img class="menu-icon" ng-src="{{ ((currentState == 'app.grdashboard') || (currentState == 'app.viewgr')) ? 'img/menu/GR-Active.png' : 'img/menu/GR.png' }}"/>
                 <p>GR</p>
             </span>
         </a>
@@ -56,7 +68,7 @@
     <li ng-class="{active: $state.includes('app.tbps') || $state.includes('app.viewtbp')}">
         <a ui-sref="app.tbps({type:'0'})" class="auto">
             <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/training.png" />
+                <img class="menu-icon" ng-src="{{ ((currentState == 'app.tbps') || (currentState == 'app.viewtbp')) ? 'img/menu/Training-Active.png' : 'img/menu/Training.png' }}"/>
                 <p>TRAINING</p>
             </span>
         </a>
@@ -80,19 +92,10 @@
         </a>
     </li> -->
 
-    <li ng-class="{active: $state.includes('app.newsroom')  }">
-        <a class="auto" ui-sref="app.newsroom">
+    <li class="m-b-xxl" ng-class="{active: $state.includes('app.folders')  || $state.includes('app.subfolders') }">
+        <a ui-sref="app.folders" class="auto">
             <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/news-room.png" />
-                <p>NEWS ROOM</p>
-            </span>
-        </a>
-    </li>
-
-    <li class="m-b-xxl">
-        <a class="auto">
-            <span class="icon-holder">
-                <img class="menu-icon" src="img/menu/history.png" />
+                <img class="menu-icon" ng-src="{{(currentState == 'app.folders') || (currentState == 'app.subfolders')  ? 'img/menu/History-Active.png' : 'img/menu/History.png' }}" />
                 <p>HISTORY RELATION</p>
             </span>
         </a>

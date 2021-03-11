@@ -26,7 +26,9 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
             $scope.activetab = tab;
             $scope.filterData.type = tab;
             if($scope.activetab == 4){
-                $scope.url = 'pdca/paginate/' + $scope.totalPerPage;
+                $scope.url = 'pdca/training/paginate/' + $scope.totalPerPage;
+            }else{
+                $scope.url = 'tbp/paginate/' + $scope.totalPerPage;
             }
             $scope.getResults();
         }
@@ -153,6 +155,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
 
     $scope.getResults = function() {
         $rootScope.loading = true;
+        console.log
         webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
             $rootScope.loading = false;
             console.log(getData)

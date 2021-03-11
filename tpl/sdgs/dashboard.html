@@ -1,0 +1,138 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="SDGsDashboardCtrl">
+   <!-- main -->
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none m-b">
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 m-t p-l-none">
+         <div class="panel panel-default r-3x m-l mebit-whatsnew">
+            <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold">
+               New SDGs
+            </div>
+            <div class="bg-white padder-v padder r-b-6x m-b" ng-scrollbars ng-scrollbars-config="scrollconfig">
+               <div class="col-xs-12 p-l-none p-r-none">
+                  <div class="m-t m-b">
+                     <div class="col-sm-3 p-l-none p-xs-l">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Category</div>
+                     </div>
+                     <div class="col-sm-2">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Time</div>
+                     </div>
+                     <div class="col-sm-5">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Title</div>
+                     </div>
+                     <div class="col-sm-2 p-r-none p-xs-r">
+                        <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Written by</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xs-12 p-l-none p-r-none border-bottom-1" ng-repeat="(key,sdgs) in homeData.sdgs | limitTo: 8">
+                  <div class="m-t-xs m-b-xs">
+                     <div class="col-sm-3 p-l-none">
+                        <div class="text-left h5 sm-padder-v sm-padder color_2">
+                           <strong>
+                           <!-- <img class="new-icon" src="img/new.png" ng-if="key < 3" /> -->
+                           <i class="fa fa-circle"></i>
+                           <span ng-class="{'m-l-sm': key < 3}" ng-repeat="(num,type) in sdgstypes" ng-if="type.id == sdgs.type">{{ type.type }}</span>
+                           </strong>
+                           <div class="clear"></div>
+                        </div>
+                     </div>
+                     <div class="col-sm-2">
+                        <div class="text-left h5 sm-padder-v sm-padder color_3 f-10 m-t-xs">
+                           {{convertDate(sdgs.created_at) | date:'dd-MMM-yy HH:mm'}}
+                        </div>
+                     </div>
+                     <div class="col-sm-5">
+                        <div class="text-left h5 font-bold sm-padder-v sm-padder cursor" ui-sref="app.viewsdgs({id:sdgs.id})">
+                           {{sdgs.title}}
+                        </div>
+                     </div>
+                     <div class="col-sm-2 p-r-none">
+                        <div class="text-left h5 sm-padder-v sm-padder color_2">
+                           <strong>
+                           <span ng-if="sdgs.is_admin">{{sdgs.ownerprofile.username}}</span>
+                           <span ng-if="!sdgs.is_admin">{{sdgs.writerinfo ? sdgs.writerinfo.name : (sdgs.is_admin ? sdgs.ownerprofile.username + '(Admin)' : sdgs.ownerprofile.first_name + ' ' + sdgs.ownerprofile.last_name + ' - ' + data.ownerprofile.distributorinfo.name)}}</span>
+                           </strong>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 m-t" ng-if="!loading">
+         <div class="panel panel-default r-3x sdgs-calendar">
+            <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold">
+               Calendar
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x ">
+               <div class="calendar " ng-model="eventSources" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t m-b">
+         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t m-b" ng-repeat="(num,sdgs) in sdgstypes">
+            <button class="btn btn-block text-white sdgs-btn" ui-sref="app.sdgs({type:sdgs.id})" ng-style="{'background':  sdgs.bgcolor }"><img class="pull-left" ng-src="img/SDGS-Icons/{{num+1}}.png"></i><a>{{sdgs.type}}</a><i class="fa fa-2x fa-arrow-circle-right pull-right"></i></button>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
+      <div class="modal-dialog" role="document" style="width: 50%;">
+         <div class="modal-content">
+            <div class="modal-header bg-main3 b-no text-center">
+               <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">{{formData.title}}</h4>
+            </div>
+            <div class="modal-body wrapper-lg">
+               <div class="row m-b-sm">
+                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                     <div class="mbit-img box-shadow b" background-image="{{IMGURL}}{{formData.cover_image}}"></div>
+                  </div>
+               </div>
+               <div class="row m-t-sm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                     <p>{{formData.description}}</p>
+                  </div>
+               </div>
+               <div class="row m-t-sm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                     <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor" ng-href="{{formData.doc_link}}" target="_blank">View Document</a>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer text-center b-no">
+               <div class="col-xs-12 text-center">
+                  <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs" ng-click="closeModal()" ng-disabled="loading">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="modal fade" id="EventInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header bg-main3 b-no text-center">
+               <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">{{formData.title}}</h4>
+            </div>
+            <div class="modal-body wrapper-lg">
+               <div class="row m-t-sm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                     <p>{{formData.info}}</p>
+                  </div>
+               </div>
+               <div class="row m-t-sm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="formData.caleventInfo.type < 4">
+                     <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor" ng-click="viewEvent()" target="_blank">
+                     Goto {{ (formData.caleventInfo.type == '1' ? 'Event' : formData.caleventInfo.type == '2' ? 'TBP' : (formData.caleventInfo.type == '3' ? 'Report' : formData.caleventInfo.type)) }}
+                     </a>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer text-center b-no">
+               <div class="col-xs-12 text-center">
+                  <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs" ng-click="closeModal()" ng-disabled="loading">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
