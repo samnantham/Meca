@@ -2015,3 +2015,23 @@ menu-icon {
     left: 0px;    
     width: 100%;
 }*/
+@media only screen and (min-width: 994px)
+{
+.nav-brand img {
+    max-width: 155px;
+}
+}
+@media only screen and (min-width: 768px) and (max-width: 1041px)
+{
+     .app-aside-folded .navbar-collapse
+     {
+      margin-left: 0px;    
+     }
+     .nav > li > a {
+       padding: 10px .45em !important;
+     }
+     .nav-brand img {
+    max-width: 100%;
+}
+
+}

@@ -19,15 +19,21 @@
 
 <!-- navbar collapse -->
 <div class="collapse pos-rlt navbar-collapse  {{app.settings.navbarCollapseColor}} p-l-none">
-    <a class="text-lt pull-left nav-brand w-xl" ui-sref="app.home">
-        <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" width="155px;" />
+	<div class="row">
+		<div class="col-sm-2">
+    <a class="text-lt pull-left nav-brand " ui-sref="app.home">
+        <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" />
     </a>
+    </div>
+    <div class="col-sm-3">
     <ul class="nav navbar-nav navbar-center cursor-no">
-        <li class="text-center w-xxl cursor-no">
-            <a class="cursor-no text-md font-bold color_2 pad-515">Total Visitors - <span class="color_2">{{user.totalViews}}</span></a>
-            <a class="cursor-no text-md font-bold color_2 pad-515">Today's Visitors - <span class="color_2">{{user.todayViews}}</span></a>
+        <li class="text-center cursor-no">
+            <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2">{{user.totalViews}}</span></a>
+            <a class="cursor-no  font-bold color_2 pad-515">Today's Visitors - <span class="color_2">{{user.todayViews}}</span></a>
         </li>
     </ul>
+	</div>
+    <div class="col-sm-7">
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
             <a class="nav-button dropdown-toggle"  dropdown-toggle>
@@ -116,6 +122,8 @@
         </li>
     </ul>
     <!-- / navbar right -->
+    </div>
+    </div>
 </div>
 <!-- / navbar collapse -->
 <div class="loader" ng-if="loading">
