@@ -2033,5 +2033,7 @@ menu-icon {
      .nav-brand img {
     max-width: 100%;
 }
-
+.nav > li > a {
+     font-size: .8em;
+}
 }
