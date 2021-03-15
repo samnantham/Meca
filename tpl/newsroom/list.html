@@ -219,9 +219,8 @@
                     <div class="panel-body">
                         <div class="bg-white padder r-b-6x">
                             <div class="row">
-                                <div ng-controller="CarouselDemoCtrl" class="panel b-a" set-ng-animate="true">
-
-                                    <carousel interval="myInterval">
+                                <div class="panel b-a" set-ng-animate="true">
+                                    <carousel interval="2000">
                                         <slide ng-repeat="slide in slides" active="slide.active">
                                             <img ng-src="{{slide.image}}" class="img-full">
                                             <div class="carousel-caption">

@@ -15,6 +15,7 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
     $scope.activetab = '';
     $scope.activesubcategory = '';
     $scope.subcategorylist = [];
+    $scope.slides = [{image:'img/c1.jpg'},{image:'img/c2.jpg'},{image:'img/c3.jpg'},{image:'img/c4.jpg'}];
     
 
     $scope.sortData = function(key,order) {
