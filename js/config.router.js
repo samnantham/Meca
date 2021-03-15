@@ -180,6 +180,18 @@ angular.module('app')
                         resolve: load(['js/controllers/newsroom/view.js'])
                     })
 
+                    .state('app.viewvideo', {
+                        url: 'news/video/view/:id',
+                        templateUrl: 'tpl/newsroom/viewvideo.html',
+                        resolve: load(['js/controllers/newsroom/viewvideo.js'])
+                    })
+
+                    .state('app.viewcrisis', {
+                        url: 'news/crisis/view/:id',
+                        templateUrl: 'tpl/newsroom/viewcrisis.html',
+                        resolve: load(['js/controllers/newsroom/viewcrisis.js'])
+                    })
+
                     .state('app.searchnews', {
                         url: 'news/search/:tag',
                         templateUrl: 'tpl/newsroom/search.html',

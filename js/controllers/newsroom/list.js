@@ -66,7 +66,6 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
 
     $scope.getResults = function() {
         webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
-            console.log(getData)
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pagination = {
@@ -108,8 +107,10 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
 
     $scope.getVideos = function(month,year) {
         webServices.get('news/video/list').then(function(getData) {
+            console.log(getData)
             if (getData.status == 200) {
                 $scope.quarteryvideos = getData.data.quarteryVideos;
+                $scope.crisislist = getData.data.crisis;
                 $scope.videos = getData.data.Videos;
                 $scope.getDatas();
             } else {

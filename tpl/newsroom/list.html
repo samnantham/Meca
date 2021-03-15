@@ -175,7 +175,7 @@
                                         ng-class="{'m-b' : isMobile}">
                                         {{convertDate(data.created_at) | date:'MMM. dd, yyyy'}} </div>
                                     <div class="col-xs-12 no-padder text-danger text-too-small m-t-xs title_list color_blck"
-                                        ng-class="{'m-b' : isMobile}" ui-sref="app.viewnews({'id':data.id})">
+                                        ng-class="{'m-b' : isMobile}" ui-sref="app.viewvideo({'id':data.id})">
                                         <a class="h5 font-bold m-t">{{data.title}}</a>
                                     </div>
                                     <div class="col-xs-12 no-padder text-danger m-t-xxs text-bold color_blck"
@@ -212,7 +212,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-p-r-none">
-                <div class="panel panel-default r-3x">
+                <div class="panel panel-default r-3x" ng-if="crisislist.length > 0">
                     <div class="panel-heading r-3x r-b-none bg-black text-center font-bold">
                         Crisis Management
                     </div>
@@ -221,10 +221,10 @@
                             <div class="row">
                                 <div class="panel b-a" set-ng-animate="true">
                                     <carousel interval="4000">
-                                        <slide ng-repeat="slide in newslist.data" active="slide.active">
+                                        <slide ng-repeat="slide in crisislist" active="slide.active">
                                             <img ng-src="{{IMGURL}}{{slide.cover_image}}" class="img-full">
                                             <div class="carousel-caption">
-                                                <h5 class="font-bold">{{slide.title}}</h5>
+                                                <h5 class="font-bold" ui-sref="app.viewcrisis({'id':slide.id})">{{slide.title}}</h5>
                                             </div>
                                         </slide>
                                     </carousel>
@@ -234,7 +234,7 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default r-3x m-t-md">
+                <div class="panel panel-default r-3x" ng-class="{'m-t-md' : crisislist.length > 0}">
                     <div class="panel-heading r-3x r-b-none bg-black text-center font-bold">
                         Our Picks
                     </div>

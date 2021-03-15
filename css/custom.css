@@ -2082,6 +2082,7 @@ menu-icon {
      left: 5%!important;
      right: 5%!important;
      background: #110f0f4a!important;
+     cursor: pointer;
 }
 
 .new_custom_scroll {
