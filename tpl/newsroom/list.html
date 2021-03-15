@@ -212,21 +212,31 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-p-r-none">
-                <div ng-controller="CarouselDemoCtrl" class="panel b-a" set-ng-animate="false">
-                    <div class="panel-heading">
-                      Carousel
-                    </div>
-                    <carousel interval="myInterval">
-                      <slide ng-repeat="slide in slides" active="slide.active">
-                        <img ng-src="{{slide.image}}" class="img-full">
-                        <div class="carousel-caption">
-                          <h4>Slide {{$index}}</h4>
-                          <p>{{slide.text}}</p>
-                        </div>
-                      </slide>
-                    </carousel>
-                  </div>
                 <div class="panel panel-default r-3x">
+                    <div class="panel-heading r-3x r-b-none bg-black text-center font-bold">
+                        Crisis Management
+                    </div>
+                    <div class="panel-body">
+                        <div class="bg-white padder r-b-6x">
+                            <div class="row">
+                                <div ng-controller="CarouselDemoCtrl" class="panel b-a" set-ng-animate="true">
+
+                                    <carousel interval="myInterval">
+                                        <slide ng-repeat="slide in slides" active="slide.active">
+                                            <img ng-src="{{slide.image}}" class="img-full">
+                                            <div class="carousel-caption">
+                                                <h4>Slide {{$index}}</h4>
+                                                <p>{{slide.text}}</p>
+                                            </div>
+                                        </slide>
+                                    </carousel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default r-3x m-t-md">
                     <div class="panel-heading r-3x r-b-none bg-black text-center font-bold">
                         Our Picks
                     </div>
