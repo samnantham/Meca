@@ -2074,10 +2074,16 @@ menu-icon {
      height: 200px;
 }
 
-.carousel-control{
+.carousel-control {
      display: none;
 }
-.new_custom_scroll
-{
-    height: calc(100vh - -47px) !important;
+
+.carousel-caption {
+     left: 5%!important;
+     right: 5%!important;
+     background: #110f0f4a!important;
+}
+
+.new_custom_scroll {
+     height: calc(100vh - -47px) !important;
 }

@@ -270,7 +270,9 @@ var app =
             typename: 'step1_3_revised'
           }];
 
-          app.newstags = ['Case', 'Innovation', 'News Release', 'Shared', 'Management', 'Autonomous/Automated', 'Region', 'Smart Mobility Society', 'Electric', 'Other Products and Services', 'U.S', 'Events', 'Olympics and Paralympics', 'Models', 'Presentation', 'Toyota', 'Safety Technology'];
+          app.newstags = ['AI','Automotive','Autonomous','Autonomous/Automated','Aviation','BEV','Battery','Battery EV','Brand','CASE','CarSharing','Case','China','ConceptCar','Connected','Connected City','Connectivity','Consulting','Cutting Edge Technology','Design','Dubai Electricity & Water Authority','Electric','Electrification','Energy','Environment','Equality','Events','Expo','Fuel Cell','Hydrogen','Incentives','Influencer','Infrastructure','Innovation','Investment','JV','Japan','MaaS','Management','Mobility','Mobility for All','Models','News Release','Olympics-Paralympics','Other Products and Services','Portugal','Practical','Presentation','President','Promoter','ProspectPartner','ProspectPartners','Recycle','Region','Regulation','RegulationBody','Robotics','SDGs','SYI','Safety','Safety Technology','Semiconductors','Service','Shared','Singapore','Sky','Slogan','Smart City','Smart Mobility Society','Society','Software','Space','Start Up','Start Your Impossible','StartYourImpossible','Strategic Partner','Sustainability','TPS','TRI-AD','TRI-P4','Team mate','Tokyo2020','Toyota','Toyota Way','ToyotaGroup','Transformation','Tsinghua','U.S','USA','Vehicledevelopment','Vision','Walking','WovenCity','Zero Casuality','Zero Emission'];
+
+          //app.newstags = ['Case', 'Innovation', 'News Release', 'Shared', 'Management', 'Autonomous/Automated', 'Region', 'Smart Mobility Society', 'Electric', 'Other Products and Services', 'U.S', 'Events', 'Olympics and Paralympics', 'Models', 'Presentation', 'Toyota', 'Safety Technology'];
 
           app.organizationdocs = [{
             name: 'Bahrain EKK MEBIT Organization Structure (2020)_ver2',
