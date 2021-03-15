@@ -160,7 +160,7 @@
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 b-b m-b-sm p-l-none p-r-none"
                                 ng-repeat="(key,data) in videos">
-                                <div class="col-xs-12 m-b wrapper bg-white r-3x m-p-n">
+                                <div class="col-xs-12 wrapper bg-white r-3x m-p-n p-t-none p-b-none">
                                     <div class=" box-shadow b pos-rlt cursor">
                                         <video width="100%" height="100%" controls ng-if="data.type == 1">
                                             <source ng-src="{{getVideoUrl(data.url)}}"
@@ -185,11 +185,7 @@
                                         data.ownerprofile.last_name + ' - ' +
                                         data.ownerprofile.distributorinfo.name}}</div>
                                     <div class="col-xs-12  m-t-sm b-b b-2x m-b-xs bdr_color"></div>
-                                    <div class="tags">
-                                        <a class="color_2 text-xs" ui-sref="app.searchnews({'tag': tag})"
-                                            ng-repeat="(num,tag) in data.tags track by $index">{{tag}}
-                                            {{$last ? '' : ', '}} </a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="col-sm-12 m-b text-center m-t" ng-if="videos.length > 12">
