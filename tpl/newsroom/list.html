@@ -47,7 +47,7 @@
                             ng-click="ModalOpen('newsModal','NewsModalController');">Create New</a>
                     </div>
 
-                    <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                    <div class="bg-white padder r-b-6x new_custom_scroll" ng-scrollbars ng-scrollbars-config="scrollconfig">
                         <!-- <div class="row m-t">
                             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
                                <div class="input-grou " ng-class="{'pull-left' : !isMobile}">
@@ -185,7 +185,11 @@
                                         data.ownerprofile.last_name + ' - ' +
                                         data.ownerprofile.distributorinfo.name}}</div>
                                     <div class="col-xs-12  m-t-sm b-b b-2x m-b-xs bdr_color"></div>
-                                    
+                                    <div class="tags col-xs-12">
+                                        <a class="color_2 text-xs" ui-sref="app.searchnews({'tag': tag})"
+                                            ng-repeat="(num,tag) in data.tags track by $index">{{tag}}
+                                            {{$last ? '' : ', '}} </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12 m-b text-center m-t" ng-if="videos.length > 12">
