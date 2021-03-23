@@ -36,6 +36,12 @@ angular.module('app')
                         resolve: load(['moment', 'fullcalendar', 'ui.calendar', 'js/controllers/home.js'])
                     })
 
+                    .state('app.awards', {
+                        url: 'awards',
+                        templateUrl: 'tpl/awards.html',
+                        resolve: load(['js/controllers/home.js'])
+                    })
+
                     //MEBIT Events
 
                     .state('app.mebitdashboard', {
