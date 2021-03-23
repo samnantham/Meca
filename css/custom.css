@@ -1886,7 +1886,7 @@ menu-icon {
 }
 
 .mebit-ad .dis-img {
-     height: 15vh!important;
+     height: 18vh!important;
 }
 
 .sdgs-btn {
@@ -2087,4 +2087,65 @@ menu-icon {
 
 .new_custom_scroll {
      height: calc(100vh - -47px) !important;
+}
+.new_box
+{
+     max-width: 850px;
+     margin: auto;
+     border: 0px;
+}
+.max-80
+{
+     max-width: 80%;
+}
+.d-block
+{
+     display: block;
+}
+.new_bax_shadow
+{
+        box-shadow: 1px 3px 11px #0d0d0d26;
+}
+.winner
+{
+     background: #00A1CD;
+      color: #fff !important;
+}
+.winner_bg_1
+{
+     background: #DB6629 !important;
+     color: #fff !important;
+}
+.winner_bg_2
+{
+     background: #155294 !important;
+     color: #fff !important;
+}
+.winner_bg_3
+{
+     background: #DB3F38 !important;
+     color: #fff !important;
+}
+.winner_bg_4
+{
+     background: #84BF42 !important;
+     color: #fff !important;
+}
+.newb_t
+{
+     border-top: 2px solid #61C5E0;
+}
+.newb
+{
+     border: 1px solid #61C5E0;
+     padding: 20px;
+     margin-top: 10vh;
+}
+.newp
+{
+     padding: 10px;
+}
+.max50p
+{
+     max-width: 45px;
 }
