@@ -31,12 +31,11 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize,
                 eventMouseover: $scope.alertOnMouseOver,
-                dayClick: function( date, allDay, jsEvent, view ) {
-
-                },eventClick: function (event) {
+                eventClick: function (event) {
                     $rootScope.formData = event;
-                    $rootScope.openeventModal();
-                    console.log(event)
+                    $scope.activeDate = event.start._d;
+                    $scope.calenderevents = [];
+                    $scope.getCalenderEvents(event.start._d.getTime());
                 },viewRender: function(view, element) {
                     var monthyear = view.title.split(' ');
                     var month = $rootScope.getMonthFromString(view.title.split(' ')[0]);
@@ -48,18 +47,34 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             }
         };
 
-        $scope.goToitem = function(item){
-            if(item.whatsnew_type == 2){
-                $state.go('app.viewevent', {
-                    id: item.id
-                });
+        $scope.getCalenderEvents = function(date){
+            webServices.get('calendar/daily/events/'+ date).then(function(getData) {
+                if (getData.status == 200) {
+                    $scope.calenderevents = getData.data;
+                    $scope.openModal();
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
+        }
 
-            }else if(item.whatsnew_type == 3){
-                $state.go('app.viewkaizen', {
-                    id: item.id
-                });    
+        $scope.gotoItem = function(type,item){
+            $scope.closeModal();
+            if(type == 'kaizen'){
+                $state.go('app.viewkaizen',{'id':item});
+            }else if(type == 'tbp'){
+                $state.go('app.viewtbp',{'id':item});
+            }else if(type == 'event'){
+                $state.go('app.viewevent',{'id':item});
+            }else if(type == 'gr'){
+                $state.go('app.viewgr',{'id':item});
+            }else if(type == 'hydrogen'){
+                $state.go('app.viewhydrogen',{'id':item});
+            }else if(type == 'maas'){
+                $state.go('app.viewmaas',{'id':item});
+            }else if(type == 'sdgs'){
+                $state.go('app.viewsdgs',{'id':item});
             }
-            console.log(item)
         }
 
         $scope.viewEvent = function(){
@@ -102,7 +117,6 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
 
         $scope.getMonthevents = function(month,year){
             webServices.get('calendar/info/'+month+'/'+year).then(function(getData) {
-                console.log(getData)
                 if (getData.status == 200) {
                     $rootScope.loading = false;
                     $scope.calendarevents = getData.data;
@@ -142,21 +156,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             });
         }
 
-        $scope.viewItem = function(data) {
-            $rootScope.formData = {};
-            $rootScope.formData = data;
-            if (data.type == 2) {
-                $state.go('app.viewevent', {
-                    id: data.id
-                });
-            } else if (data.type == 3) {
-                $state.go('app.viewkaizen', {
-                    id: data.id
-                });
-            } else {
-                $rootScope.openModal();
-            }
-        }
+        
 
         $rootScope.openModal = function() {
             $('#PopupModal').modal({

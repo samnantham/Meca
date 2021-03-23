@@ -26,7 +26,7 @@ var app =
           app.maxFilesize = '1024MB';
           app.maxUploadFiles = 15;
           app.validextensions = ['jpeg', 'png', 'jpg', 'gif', '3gp', 'mp4'];
-          app.validfileextensions = ['pdf', 'xls', 'pdf', 'csv', 'doc', 'docx'];
+          app.validfileextensions = ['pdf', 'xlsx', 'xls', 'pdf', 'csv', 'doc', 'docx'];
 
           app.eventtypes = [{
             id: 1,
@@ -269,6 +269,8 @@ var app =
             type: 'Step 1-3 Revised',
             typename: 'step1_3_revised'
           }];
+
+          app.newsvideotypes = ['Bahrain','Central Asia (Turkmenistan/ Tajikisan/ Uzbekistan)','India','Iraq','Jordan','Kuwait','Lebanon','Oman','Others','Qatar','Saudi Arabia','UAE','Yemen'];
 
           app.newstags = ['AI','Automotive','Autonomous','Autonomous/Automated','Aviation','BEV','Battery','Battery EV','Brand','CASE','CarSharing','Case','China','ConceptCar','Connected','Connected City','Connectivity','Consulting','Cutting Edge Technology','Design','Dubai Electricity & Water Authority','Electric','Electrification','Energy','Environment','Equality','Events','Expo','Fuel Cell','Hydrogen','Incentives','Influencer','Infrastructure','Innovation','Investment','JV','Japan','MaaS','Management','Mobility','Mobility for All','Models','News Release','Olympics-Paralympics','Other Products and Services','Portugal','Practical','Presentation','President','Promoter','ProspectPartner','ProspectPartners','Recycle','Region','Regulation','RegulationBody','Robotics','SDGs','SYI','Safety','Safety Technology','Semiconductors','Service','Shared','Singapore','Sky','Slogan','Smart City','Smart Mobility Society','Society','Software','Space','Start Up','Start Your Impossible','StartYourImpossible','Strategic Partner','Sustainability','TPS','TRI-AD','TRI-P4','Team mate','Tokyo2020','Toyota','Toyota Way','ToyotaGroup','Transformation','Tsinghua','U.S','USA','Vehicledevelopment','Vision','Walking','WovenCity','Zero Casuality','Zero Emission'];
 

@@ -117,6 +117,7 @@ angular.module('app')
             $rootScope.eventtypes = angular.copy(app.eventtypes);
             $rootScope.newstags = angular.copy(app.newstags);
             $rootScope.newscategories = angular.copy(app.newscategories);
+            $rootScope.newsvideotypes = angular.copy(app.newsvideotypes);
             $rootScope.dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;

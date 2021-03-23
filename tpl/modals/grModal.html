@@ -133,7 +133,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-p-n">
                <div class="form-group">
                   <label class="font-bold">Upload Documents</label>
-                  <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-max-files="6" ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv'"
+                  <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop ngf-max-size="{{maxUploadFiles}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-max-files="{{maxUploadFiles}}" ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv'"
                      ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="addgrDocuments($files);">
                      Upload Documents
                   </div>

@@ -112,6 +112,10 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
                 $scope.quarteryvideos = getData.data.quarteryVideos;
                 $scope.crisislist = getData.data.crisis;
                 $scope.videos = getData.data.Videos;
+                $scope.videoCategories = [];
+                angular.forEach($scope.videos, function(data, no) {
+                    console.log(data)
+                });
                 $scope.getDatas();
             } else {
                 $rootScope.$emit("showerror", getData);

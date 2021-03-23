@@ -1,4 +1,4 @@
-app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$filter', function($timeout, $state, $stateParams, webServices, utility, $rootScope, $filter) {
+app.controller('CrisisModalController', [ '$timeout', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$filter', function($timeout, $state, $stateParams, webServices, utility, $rootScope, $filter) {
     
     if(!$rootScope.isEdititem)
     {
@@ -6,8 +6,6 @@ app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'w
         $rootScope.formData.tags = [];
         $rootScope.formData.documents = [];
     }else{
-        $rootScope.formData.category = '';
-        $rootScope.subcategories = [];
         $rootScope.formData.date_posted = new Date($rootScope.formData.created_at);
     }
     $rootScope.errorData = {};
@@ -27,27 +25,16 @@ app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'w
     }
 
     $rootScope.seterrorMsg = function(){
-        $rootScope.errorData.title_errorMsg = 'Enter News Title';
-        $rootScope.errorData.content_errorMsg = 'Please enter News content';
-        $rootScope.errorData.tags_errorMsg = 'Please select News tags';
-        $rootScope.errorData.cover_errorMsg = 'Please select News cover image';
-        $rootScope.errorData.category_errorMsg = 'Please select News Category';
-        $rootScope.errorData.subcategory_errorMsg = 'Please select Sub Category';
-    }
-
-    $rootScope.Changecategory = function(category){
-        $rootScope.inputchange();
-        $rootScope.subcategories = [];
-        $rootScope.formData.category = category.category;
-        $rootScope.subcategories = category.subcategories;
+        $rootScope.errorData.title_errorMsg = 'Enter Crisis Title';
+        $rootScope.errorData.content_errorMsg = 'Please enter Crisis content';
+        $rootScope.errorData.tags_errorMsg = 'Please select Crisis tags';
+        $rootScope.errorData.cover_errorMsg = 'Please select Crisis cover image';
     }
 
     $rootScope.addDocuments = function (files) {
         $rootScope.errors = [];
         if ($rootScope.formData.documents.length < $rootScope.maxUploadFiles) {
             if (files && files.length) {
-                console.log(files)
-                console.log($rootScope.formData.documents.length)
                 if (($rootScope.maxUploadFiles - $rootScope.formData.documents.length) >= files.length) {
                     for (var i = 0; i < files.length; i++) {
                         var extn = files[i].name.split(".").pop();
@@ -117,7 +104,7 @@ app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'w
         if (form.$valid) {
             $rootScope.loading = true;
             if($rootScope.isEdititem){
-                webServices.putupload('news/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
+                webServices.putupload('news/crisis/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -134,7 +121,7 @@ app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'w
                 if($rootScope.formData.date_posted){
                     $rootScope.formData.posted_date = $filter('date')($rootScope.formData.date_posted, 'yyyy-MM-dd hh:mm:ss');
                 }
-                webServices.upload('news', $rootScope.formData).then(function(getData) {
+                webServices.upload('news/crisis', $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -155,12 +142,6 @@ app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'w
                 $rootScope.errorData.content_error = true;
             }if (!form.tags.$valid) {
                 $rootScope.errorData.tags_error = true;
-            }if (!form.category.$valid) {
-                $rootScope.errorData.category_error = true;
-            }if($rootScope.subcategories.length > 0){
-                if (!form.subcategory.$valid) {
-                    $rootScope.errorData.subcategory_error = true;
-                }
             }
             $rootScope.$emit("showErrors", $rootScope.errors);
         }

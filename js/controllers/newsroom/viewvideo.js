@@ -2,7 +2,7 @@
 
 app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
-    $scope.crisis = {};
+    $scope.video = {};
     $scope.filterData = {};
 
     $scope.getData = function () {
@@ -19,10 +19,10 @@ app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webS
     $scope.editVideo = function(){
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.video;
-        $rootScope.ModalOpen('crisisModal','NewsModalController');
+        $rootScope.ModalOpen('videoModal','videoModalController');
     }
 
-    $scope.removeCrisis = function() {
+    $scope.removeVideo = function() {
         $ngConfirm({
             title: 'Are you sure want to remove?',
             content: '',
@@ -33,7 +33,7 @@ app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webS
                     text: 'Yes',
                     btnClass: 'btn-red',
                     action: function() {
-                        $scope.deleteCrisis();
+                        $scope.deleteVideo();
                     }
                 },
                 cancel: {
@@ -45,7 +45,7 @@ app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webS
         });
     }
 
-    $scope.deleteCrisis = function(id){
+    $scope.deleteVideo = function(id){
         webServices.delete('news/video/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);

@@ -19,7 +19,7 @@ app.controller('CrisisInfoController', ['$scope', '$state', '$stateParams', 'web
     $scope.editCrisis = function(){
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.news;
-        $rootScope.ModalOpen('crisisModal','NewsModalController');
+        $rootScope.ModalOpen('crisisModal','CrisisModalController');
     }
 
     $scope.removeCrisis = function() {
