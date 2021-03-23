@@ -1096,7 +1096,7 @@ input:read-only {
 
 .slick-next, .slick-prev {
      width: 20px !important;
-     height: 50px !important;
+     height: 30px !important;
      z-index: 100;
 }
 
