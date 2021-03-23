@@ -1097,6 +1097,7 @@ input:read-only {
 .slick-next, .slick-prev {
      width: 20px !important;
      height: 50px !important;
+     z-index: 100;
 }
 
 .slick-next {
@@ -1839,7 +1840,7 @@ menu-icon {
 
 .whatsnew .mCustomScrollbar, .mebit-whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
-     height: 56vh !important;
+     height: 59vh !important;
 }
 
 .reminder-section .mCustomScrollbar {
