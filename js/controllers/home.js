@@ -1,22 +1,28 @@
 'use strict';
-app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope', 'authServices', '$timeout', '$sessionStorage', 'NgMap', '$http', '$filter','$sce',
-    function($scope, $state, webServices, $rootScope, authServices, $timeout, $sessionStorage, NgMap, $http, $filter, $sce) {
+app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope', 'authServices', '$timeout', '$sessionStorage', 'NgMap', '$http', '$filter','$sce','$window',
+    function($scope, $state, webServices, $rootScope, authServices, $timeout, $sessionStorage, NgMap, $http, $filter, $sce, $window) {
 
         $rootScope.$emit("setSliderConfig", {});
         $scope.firstloadingdone = false;
-
         $scope.doclink = '';
 
+        $scope.clickTMC = function(data){
+            if(data.type == 'link'){
+                $window.open(data.doc_link, '_blank');
+            }else if( data.type == 'document' ){
+                $scope.openPDF($rootScope.IMGURL + data.doc_link);
+            }
+        }
+        
         $scope.openPDF = function(link){
             console.log(link)
             $scope.doclink = $sce.trustAsResourceUrl(link);
-
             $('#PDFModal').modal({
                 backdrop: 'static',
                 keyboard: false
             });
         }
-        
+
         $scope.uiConfig = {
             calendar: {
                 height: 'auto',
@@ -132,11 +138,21 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.getData = function() {
+            var obj ={};
+            obj.title = 'We set up the "Regional Awards of Toyota Dream Car Art Contest" from 2021';
+            obj.cover_image = 'public/upload/fromTMC/60596a1a68321.png';
+            obj.doc_link = 'https://mecacampus.com/awards';
+            obj.type = 'link';
             webServices.get('home/info').then(function(getData) {
                 $rootScope.loading = false;
                 $scope.firstloadingdone = true;
                 if (getData.status == 200) {
                     $scope.homeData = getData.data;
+                    $scope.homeData.tmcs = [];
+                    $scope.homeData.fromTMC.type = 'document';
+                    $scope.homeData.tmcs.push($scope.homeData.fromTMC);
+                    $scope.homeData.tmcs.push(obj)
+                    console.log($scope.homeData.tmcs);
                     $scope.calendarevents = getData.data.caldata;
                     angular.forEach($scope.calendarevents, function(data, no) {
                         data.start = new Date(data.start);

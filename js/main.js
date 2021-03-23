@@ -353,7 +353,7 @@ angular.module('app')
 
                 $rootScope.slickConfig = {
                     enabled: true,
-                    autoplay: false,
+                    autoplay: true,
                     draggable: true,
                     slidesToShow: $rootScope.slidecount,
                     slidesToScroll: $rootScope.scrollslides,
