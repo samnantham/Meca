@@ -42,7 +42,7 @@
                            </div>
                        </div>
                        <div class="col-sm-4">
-                           <div class="text-left f12 font-bold sm-padder-v sm-padder cursor text-ov" ng-click="goToitem(whatsnew)">
+                           <div class="text-left f12 font-bold sm-padder-v sm-padder cursor text-ov" ng-click="viewItem(whatsnew)">
                                {{whatsnew.title}}
                            </div>
                        </div>
@@ -91,7 +91,7 @@
                                <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder" ng-repeat="(key,data) in homeData.tmcs">
                                    <div class="col-xs-12 no-padder padder-v bg-white">
                                        <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
-                                           <div class="m-b">
+                                           <div class="m-b-xs">
                                                <a class="h5 font-bold"> {{data.title}} </a>
                                            </div>
                                            <div class="dis-img box-shadow b r-3x" background-image="{{IMGURL}}{{data.cover_image}}"></div>

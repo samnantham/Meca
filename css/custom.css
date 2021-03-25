@@ -552,6 +552,10 @@ textarea {
      object-fit: cover;
 }
 
+.mbit-img {
+     height: 140px;
+}
+
 .mbite-img {
      height: 168px;
      width: 180px;
@@ -1095,8 +1099,8 @@ input:read-only {
 }
 
 .slick-next, .slick-prev {
-     width: 20px !important;
-     height: 30px !important;
+     width: 10px !important;
+     height: 40px !important;
      z-index: 100;
 }
 
