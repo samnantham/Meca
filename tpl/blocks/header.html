@@ -25,15 +25,18 @@
         <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" />
     </a>
     </div>
-    <div class="col-sm-3">
-    <ul class="nav navbar-nav navbar-center cursor-no">
+    <div class="col-sm-4">
+    <ul class="nav navbar-nav navbar-center cursor-no m-t-sm navbar-right">
         <li class="text-center cursor-no">
-            <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2">{{user.totalViews}}</span></a>
-            <a class="cursor-no  font-bold color_2 pad-515">Today's Visitors - <span class="color_2">{{user.todayViews}}</span></a>
+            <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2 text-2x" count-to="{{user.totalViews}}" value="0" duration="4"></span></a>
         </li>
+        <li class="text-center cursor-no">
+            <a class="cursor-no  font-bold color_2 pad-515">Today's Visitors - <span class="color_2 text-2x" count-to="{{user.todayViews}}" value="0" duration="2"></span></a>
+         </li>
+   
     </ul>
 	</div>
-    <div class="col-sm-7">
+    <div class="col-sm-6">
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
             <a class="nav-button dropdown-toggle"  dropdown-toggle>
@@ -91,11 +94,11 @@
                 Support
             </a>
         </li>
-        <li class="dropdown">
+        <!-- <li class="dropdown">
             <a class="dropdown-toggle" ui-sref="app.calendar">
                 <i class="fa-calendar fa text-lg"></i>
             </a>
-        </li>
+        </li> -->
 
         <li class="dropdown">
             <a class="dropdown-toggle" ui-sref="app.notification">

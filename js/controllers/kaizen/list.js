@@ -11,7 +11,7 @@ app.controller('KaizenController', ['$scope', '$http', '$state', 'authServices',
     $scope.filterData = {};
     $scope.filterData.sortorder = '';
     $scope.activetab = $stateParams.type;
-    $scope.filterData.status = $stateParams.type;
+    $scope.filterData.type = $stateParams.type;
     $scope.filterData.is_admin = $stateParams.tmc;
     $scope.errorData = {};
 

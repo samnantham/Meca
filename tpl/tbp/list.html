@@ -35,12 +35,12 @@
                         <button class="btn btn-default btn-xs bg-main2 pull-right b-no" ui-sref="app.pdcainfo({'id':data.id})" ng-if="activetab == 4">View More</button>
                      </div>
                      <div class="bg-white sm-padder-v sm-padder col-md-12 col-lg-12 col-sm-12  col-xs-12 b b-2x r-3x tbp-b-t">
-                        <div class="col-md-12 col-lg-12 col-sm-12 padder-v bg-white b-light b b-2x r-3x tbp-container">
+                        <div class="col-md-12 col-lg-12 col-sm-12 padder-v bg-white b-light b b-2x r-3x tbp-container" ng-scrollbars ng-scrollbars-config="scrollconfig">
                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 b-b b-dark p-r-none p-l-none sm-padder-v font-bold"> {{ activetab < 4 ? 'Invitation': 'Session'}} </div>
                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 b-light p-r-none p-l-none sm-padder-v" ng-if="activetab < 4" ng-repeat="(no,invitation) in data.invitations track by $index | limitTo:3" ng-class="{'b-b': ($index < 3 && !$last)}"><a ng-href="{{IMGURL}}{{invitation.file}}" target="_blank">{{invitation.name}}</a> <a class="btn btn-default btn-xs bdrc-bg2 pull-right b-no" ng-href="{{IMGURL}}{{invitation.file}}" download="{{invitation.file.split('/').pop()}}"
                               target="_blank">Download</a>
                            </div>
-                           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 b-light p-r-none p-l-none sm-padder-v" ng-if="activetab == 4" ng-repeat="(no,session) in data.sessions track by $index | limitTo:3" ng-class="{'b-b': ($index < 3 && !$last)}"><a>{{session.session_name}}</a> <a class="btn btn-default btn-xs bdrc-bg2 pull-right b-no" >View</a>
+                           <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 b-light p-r-none p-l-none sm-padder-v" ng-if="activetab == 4" ng-repeat="(no,session) in data.sessions track by $index | limitTo:3" ng-class="{'b-b': ($index < 3 && !$last)}"><a>{{session.session_name}}</a> <a class="btn btn-default btn-xs bdrc-bg2 pull-right b-no"  ui-sref="app.pdcainfo({'id':data.id})">View</a>
                            </div>
                         </div>
                      </div>

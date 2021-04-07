@@ -27,7 +27,8 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', 'authServic
                     localStorage.user = JSON.stringify($sessionStorage.user);
                     $state.go('app.home');
                 } else {
-                    $scope.errors = utility.getError(getData.data.message);
+                    console.log(getData.data.message.message)
+                    $scope.errors = getData.data.message.message;
                     $rootScope.$emit("showErrors", $scope.errors);
                 }
             });

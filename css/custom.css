@@ -238,6 +238,10 @@ textarea {
      transition: transform 0.8s ease-in-out;
 }
 
+.lh-2rem{
+     line-height: 2rem!important;
+}
+
 /* .menu-icon:hover {
      -webkit-transform: rotate(360deg);
      transform: rotate(360deg);
@@ -1842,9 +1846,14 @@ menu-icon {
      height: auto !important;
 }
 
-.whatsnew .mCustomScrollbar, .mebit-whatsnew .mCustomScrollbar {
+.whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
      height: 59vh !important;
+}
+
+.mebit-whatsnew .mCustomScrollbar {
+     /*height: 71vh !important;*/
+     height: 40vh !important;
 }
 
 .reminder-section .mCustomScrollbar {
@@ -2036,8 +2045,8 @@ menu-icon {
           margin-left: 0px;
      }
      .navbar-collapse .navbar-right.nav>li>a {
-          padding-left: .45em !important;
-          padding-right: .45em !important;
+          padding-left: 1.5em !important;
+          padding-right: 1.5em !important;
      }
      .nav-brand img {
           max-width: 100%;
@@ -2094,8 +2103,9 @@ menu-icon {
      height: calc(100vh - -47px) !important;
 }
 
-.mbit-img:hover, .mbit-img:focus {
+.mbit-img:hover {
      transform: scale(1.2);
+     transition: all .5s;
 }
 
 .mbit-img {
@@ -2161,4 +2171,30 @@ menu-icon {
 
 .max50p {
      max-width: 45px;
+}
+
+.video-overlay{
+     width: 96%;
+     background: transparent;
+     /* background: #f1eaea52; */
+     height: 100%;
+     position: absolute;
+     z-index: 99;
+     cursor: pointer;
+     transition: all .5s;
+}
+
+/* .video-overlay:hover {
+     opacity: 1;
+     background: transparent;
+} */
+
+.video-overlay .icon-overlay .fa-play{
+     font-size: 1em!important;
+     transition: all .5s;
+}
+
+.video-overlay .icon-overlay .fa-play:hover{
+     font-size: 1.5em!important;
+     transition: all .5s;
 }

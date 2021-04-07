@@ -7,10 +7,13 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         $scope.doclink = '';
 
         $scope.clickTMC = function (data) {
-            if (data.type == 'link') {
-                // $window.open(data.doc_link, '_blank');
-            } else if (data.type == 'document') {
-                $scope.openPDF($rootScope.IMGURL + data.doc_link);
+            if (data.type == 1) {
+                $window.open(data.doc_link, '_blank');
+            } else if (data.type == 2) {
+                $scope.openPDF(data.doc_link);
+            } else if (data.type == 3) {
+                $scope.images = [{type: 'video' ,url : data.doc_link }];
+                $rootScope.openLightbox($scope.images,0);
             }
         }
 
@@ -136,6 +139,11 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             });
         }
 
+        $scope.openVideo = function(){
+            $scope.images = [{type: 'video' ,url : 'https://mecacampus.com/media/video/Award-Ceremony.mp4'}];
+            $rootScope.openLightbox($scope.images,0);
+        }
+
         $scope.getMonthevents = function (month, year) {
             webServices.get('calendar/info/' + month + '/' + year).then(function (getData) {
                 if (getData.status == 200) {
@@ -163,10 +171,6 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 $scope.firstloadingdone = true;
                 if (getData.status == 200) {
                     $scope.homeData = getData.data;
-                    $scope.homeData.tmcs = [];
-                    $scope.homeData.fromTMC.type = 'document';
-                    $scope.homeData.tmcs.push($scope.homeData.fromTMC);
-                    //$scope.homeData.tmcs.push(obj)
                     console.log($scope.homeData.tmcs);
                     $scope.calendarevents = getData.data.caldata;
                     angular.forEach($scope.calendarevents, function (data, no) {

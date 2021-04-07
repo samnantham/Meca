@@ -26,7 +26,7 @@ var app =
           app.maxFilesize = '1024MB';
           app.maxUploadFiles = 15;
           app.validextensions = ['jpeg', 'png', 'jpg', 'gif', '3gp', 'mp4'];
-          app.validfileextensions = ['pdf', 'xlsx', 'xls', 'pdf', 'csv', 'doc', 'docx'];
+          app.validfileextensions = ['pdf', 'xlsx', 'xls', 'pdf', 'csv', 'doc', 'docx', 'ppt', 'pptx'];
 
           app.eventtypes = [{
             id: 1,
