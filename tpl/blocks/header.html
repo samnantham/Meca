@@ -25,7 +25,7 @@
         <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" />
     </a>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
     <ul class="nav navbar-nav navbar-center cursor-no m-t-sm navbar-right">
         <li class="text-center cursor-no">
             <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2 text-2x" count-to="{{user.totalViews}}" value="0" duration="4"></span></a>
@@ -36,7 +36,7 @@
    
     </ul>
 	</div>
-    <div class="col-sm-6">
+    <div class="col-sm-7">
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
             <a class="nav-button dropdown-toggle"  dropdown-toggle>
@@ -109,13 +109,19 @@
                 Support
             </a>
         </li>
-        <!-- <li class="dropdown">
-            <a class="dropdown-toggle" ui-sref="app.calendar">
-                <i class="fa-calendar fa text-lg"></i>
+        <li class="dropdown">
+            <a class="nav-button" ui-sref="app.calendar">
+                Calendar
             </a>
         </li> 
 
-        <li class="dropdown">
+        <li>
+            <a class="nav-button" ui-sref="app.reminders">
+                Reminder
+            </a>
+        </li>
+
+        <!-- <li class="dropdown">
             <a class="dropdown-toggle" ui-sref="app.notification">
                 <i class="icon-bell fa-fw text-lg"></i>
                 <span class="visible-xs-inline">Notifications</span>

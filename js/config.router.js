@@ -42,6 +42,12 @@ angular.module('app')
                         resolve: load(['moment', 'fullcalendar', 'ui.calendar', 'js/controllers/home.js'])
                     })
 
+                    .state('app.reminders', {
+                        url: 'reminders',
+                        templateUrl: 'tpl/reminders.html',
+                        resolve: load(['moment', 'fullcalendar', 'ui.calendar', 'js/controllers/home.js'])
+                    })
+
                     .state('app.awards', {
                         url: 'awards',
                         templateUrl: 'tpl/awards.html',

@@ -1871,10 +1871,10 @@ menu-icon {
      height: 55vh !important;
 }
 
-.reminder-section .mCustomScrollbar {
+/* .reminder-section .mCustomScrollbar {
      height: 57vh !important;
      margin-bottom: 1vh;
-}
+} */
 
 .newcalendar .fc-view-container, .sdgs-calendar .fc-view-container {
      margin-bottom: 12px!important;
