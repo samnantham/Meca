@@ -1866,6 +1866,11 @@ menu-icon {
      height: 78vh !important;
 }
 
+.new-home .whatsnew .mCustomScrollbar {
+     /*height: 71vh !important;*/
+     height: 132vh !important;
+}
+
 .mebit-whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
      height: 55vh !important;
@@ -2238,5 +2243,5 @@ menu-icon {
 }
 
 .m-b-2vh-imp{
-     margin-bottom: 4vh!important;
+     margin-bottom: 3vh!important;
 }
