@@ -91,7 +91,13 @@ angular.module('app')
                 Lightbox.openModal(files, key);
             }
 
-            console.log(window.location.href.split('#'))
+            $rootScope.openPDF = function (link) {
+                $rootScope.doclink = $sce.trustAsResourceUrl(link);
+                $('#PDFModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }
 
             $rootScope.height_to_reduce = 100;
             $rootScope.loadingMsg = 'Loading please Wait....';
@@ -290,6 +296,7 @@ angular.module('app')
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
                 $rootScope.loading = true;
                 $rootScope.currentState = toState.name;
+                console.log($rootScope.currentState)
                 $rootScope.previousState = fromState.name;
                 $rootScope.screenWidth = window.innerWidth * window.devicePixelRatio;
                 $rootScope.screenHeight = window.innerHeight;

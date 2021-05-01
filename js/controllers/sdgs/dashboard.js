@@ -23,8 +23,9 @@ app.controller('SDGsDashboardCtrl', ['$scope', '$state', 'webServices', '$rootSc
 
                 },eventClick: function (event) {
                     $rootScope.formData = event;
-                    $rootScope.openeventModal();
-                    console.log(event)
+                    $scope.activeDate = event.start._d;
+                    $scope.calenderevents = [];
+                    $scope.getCalenderEvents(event.start._d.getTime());
                 },viewRender: function(view, element) {
                     var monthyear = view.title.split(' ');
                     var month = $rootScope.getMonthFromString(view.title.split(' ')[0]);
@@ -36,16 +37,21 @@ app.controller('SDGsDashboardCtrl', ['$scope', '$state', 'webServices', '$rootSc
             }
         };
 
-        $scope.goToitem = function(item){
-            if(item.whatsnew_type == 2){
-                $state.go('app.viewevent', {
-                    id: item.id
-                });
+        $scope.getCalenderEvents = function (date) {
+            webServices.get('calendar/daily/events/' + date + '/sdgs').then(function (getData) {
+                if (getData.status == 200) {
+                    $scope.calenderevents = getData.data;
+                    $scope.openModal();
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
+        }
 
-            }else if(item.whatsnew_type == 3){
-                $state.go('app.viewkaizen', {
-                    id: item.id
-                });    
+        $scope.gotoSDGS = function(type, item){
+            $scope.closeModal();
+            if (type == 'SDGs') {
+                $state.go('app.viewsdgs', { 'id': item });
             }
         }
 
@@ -68,7 +74,7 @@ app.controller('SDGsDashboardCtrl', ['$scope', '$state', 'webServices', '$rootSc
         }
 
         $scope.getMonthevents = function(month,year){
-            webServices.get('calendar/info/'+month+'/'+year).then(function(getData) {
+            webServices.get('calendar/info/'+month+'/'+year+'/sdgs').then(function(getData) {
                 if (getData.status == 200) {
                     $rootScope.loading = false;
                     $scope.calendarevents = getData.data;
@@ -124,6 +130,13 @@ app.controller('SDGsDashboardCtrl', ['$scope', '$state', 'webServices', '$rootSc
             }
         }
 
+        $rootScope.openModal = function () {
+            $('#PopupModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+
 
         $rootScope.openeventModal = function() {
             $('#EventInfoModal').modal({
@@ -135,6 +148,7 @@ app.controller('SDGsDashboardCtrl', ['$scope', '$state', 'webServices', '$rootSc
         $rootScope.closeModal = function() {
             $rootScope.formData = {};
             $('#EventInfoModal').modal('hide');
+            $('#PopupModal').modal('hide');
         }
 
         $scope.getData();

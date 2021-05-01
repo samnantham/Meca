@@ -11,7 +11,7 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
     $scope.filterData = {};
     $scope.filterData.sortorder = '';
     $scope.activetab = $stateParams.type;
-    $scope.filterData.status = $stateParams.type;
+    $scope.filterData.type = $stateParams.type;
     $scope.errorData = {};
 
     $scope.changeActive = function(tab){

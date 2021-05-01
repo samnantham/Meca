@@ -221,10 +221,10 @@ textarea {
 
 .icon-holder {
      position: relative;
-     float: left;
-     width: 50px;
+     /* float: left; */
+     width: auto;
      margin: -10px -10px;
-     margin-right: 5px;
+     /* margin-right: 5px; */
      overflow: hidden;
      line-height: 35px;
      text-align: center;
@@ -238,7 +238,7 @@ textarea {
      transition: transform 0.8s ease-in-out;
 }
 
-.lh-2rem{
+.lh-2rem {
      line-height: 2rem!important;
 }
 
@@ -437,7 +437,7 @@ textarea {
 }
 
 .app-aside-folded .aside-wrap .nav li {
-     padding: 15px 20px;
+     padding: 14px 0px;
      /*border-bottom: 1px solid #6475d79e;*/
      border-bottom: 1px solid #ffffff;
 }
@@ -1008,7 +1008,11 @@ input:read-only {
 }
 
 .fc-view-container {
-     margin-bottom: 30px;
+     margin-bottom: 10px;
+}
+
+.calendar .fc-basic-view tbody .fc-row {
+     min-height: 6em!important;
 }
 
 .dis-img {
@@ -1059,7 +1063,8 @@ input:read-only {
 }
 
 .bg-chat-active {
-     background-color: #e4dede52;
+     /* background-color: #e4dede52; */
+     background-color: #3f51b526;
 }
 
 /*.dash-2-div {
@@ -1656,8 +1661,9 @@ menu-icon {
 .top-caption {
      position: absolute;
      background: #3f51b5;
-     top: -13px;
-     right: 10%;
+     top: -30px;
+     right: 5%;
+     left: 5%;
      border-radius: 6px;
      padding: 2px 15px;
      color: #fff;
@@ -1848,17 +1854,17 @@ menu-icon {
 
 .whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
-     height: 59vh !important;
+     height: 78vh !important;
 }
 
 .mebit-whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
-     height: 40vh !important;
+     height: 55vh !important;
 }
 
 .reminder-section .mCustomScrollbar {
-     height: 55vh !important;
-     margin-bottom: 3vh;
+     height: 57vh !important;
+     margin-bottom: 1vh;
 }
 
 .newcalendar .fc-view-container, .sdgs-calendar .fc-view-container {
@@ -2173,7 +2179,7 @@ menu-icon {
      max-width: 45px;
 }
 
-.video-overlay{
+.video-overlay {
      width: 96%;
      background: transparent;
      /* background: #f1eaea52; */
@@ -2189,12 +2195,35 @@ menu-icon {
      background: transparent;
 } */
 
-.video-overlay .icon-overlay .fa-play{
+.video-overlay .icon-overlay .fa-play {
      font-size: 1em!important;
      transition: all .5s;
 }
 
-.video-overlay .icon-overlay .fa-play:hover{
+.video-overlay .icon-overlay .fa-play:hover {
      font-size: 1.5em!important;
      transition: all .5s;
+}
+
+@media (min-width:1025px) {
+     @keyframes marquee {
+          0% {
+               left: 0;
+          }
+          100% {
+               left: -100%;
+          }
+     }
+}
+
+.app-aside-folded .navi>ul>li>a span p:hover {
+     animation: marquee 7s linear infinite;
+}
+
+#PDFModal .modal-dialog {
+     width: 80%;
+}
+
+#PDFModal iframe {
+     height: 80vh;
 }

@@ -13,6 +13,7 @@ app.controller('ChatController', ['$scope', '$http', '$state', 'authServices', '
     $scope.userslist = {};
     $scope.RoomData = {};
     $scope.RoomData.show_tooltip = true;
+    $scope.userslist = [];
 
     $scope.createFirebaseauth = function() {
         firebase.auth().createUserWithEmailAndPassword($rootScope.user.email, $rootScope.user.firebasepassword).then(function() {
@@ -437,7 +438,6 @@ app.controller('ChatController', ['$scope', '$http', '$state', 'authServices', '
     }
 
     $scope.getusers = function() {
-        $scope.userslist = {};
         webServices.post('users/' + $scope.totalPerPage + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -458,6 +458,11 @@ app.controller('ChatController', ['$scope', '$http', '$state', 'authServices', '
         }, 2000);
     }
 
-    $scope.getusers();
+    $scope.checkChatUsers = function () {
+        $scope.getusers(); 
+        $timeout($scope.checkChatUsers, 3000);
+    }
+
+    $scope.checkChatUsers();
 
 }]);

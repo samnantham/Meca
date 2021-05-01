@@ -10,20 +10,11 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             if (data.type == 1) {
                 $window.open(data.doc_link, '_blank');
             } else if (data.type == 2) {
-                $scope.openPDF(data.doc_link);
+                $rootScope.openPDF(data.doc_link);
             } else if (data.type == 3) {
                 $scope.images = [{type: 'video' ,url : data.doc_link }];
                 $rootScope.openLightbox($scope.images,0);
             }
-        }
-
-        $scope.openPDF = function (link) {
-            console.log(link)
-            $scope.doclink = $sce.trustAsResourceUrl(link);
-            $('#PDFModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            });
         }
 
         $scope.uiConfig = {
@@ -115,6 +106,9 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                     id: item.id
                 });
             }
+            else if (item.whatsnew_type == 4) {
+                $scope.clickTMC(item);
+            }
             console.log(item)
         }
 
@@ -145,7 +139,11 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.getMonthevents = function (month, year) {
-            webServices.get('calendar/info/' + month + '/' + year).then(function (getData) {
+            var type = '';
+            if($rootScope.currentState == 'app.mebitdashboard'){
+                type = '/event';
+            }
+            webServices.get('calendar/info/' + month + '/' + year + type).then(function (getData) {
                 if (getData.status == 200) {
                     $rootScope.loading = false;
                     $scope.calendarevents = getData.data;

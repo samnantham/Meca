@@ -12,7 +12,7 @@
         <a class="auto" ui-sref="app.newsroom">
             <span class="icon-holder">
                 <img class="menu-icon" ng-src="{{ (currentState == 'app.newsroom') ? 'img/menu/NewsRC-Active.png' : 'img/menu/NewsRC.png' }}"/>
-                <p>NEWS ROOM</p>
+                <p class="pos-rlt">NEWS ROOM</p>
             </span>
         </a>
     </li>
@@ -42,7 +42,7 @@
         <a class="auto" ui-sref="app.hydrogen({type:'0'})">
             <span class="icon-holder">
                 <img class="menu-icon"  ng-src="{{ ((currentState == 'app.hydrogen') || (currentState == 'app.viewhydrogen')) ? 'img/menu/Hydrogen-Active.png' : 'img/menu/Hydrogen.png' }}"/>
-                <p>HYDROGEN</p>
+                <p class="pos-rlt">HYDROGEN</p>
             </span>
         </a>
     </li>
@@ -69,7 +69,7 @@
         <a ui-sref="app.tbps({type:'0'})" class="auto">
             <span class="icon-holder">
                 <img class="menu-icon" ng-src="{{ ((currentState == 'app.tbps') || (currentState == 'app.viewtbp')) ? 'img/menu/Training-Active.png' : 'img/menu/Training.png' }}"/>
-                <p>TRAINING</p>
+                <p class="pos-rlt">TRAINING</p>
             </span>
         </a>
     </li>
@@ -96,7 +96,7 @@
         <a ui-sref="app.folders" class="auto">
             <span class="icon-holder">
                 <img class="menu-icon" ng-src="{{(currentState == 'app.folders') || (currentState == 'app.subfolders')  ? 'img/menu/History-Active.png' : 'img/menu/History.png' }}" />
-                <p>HISTORY RELATION</p>
+                <p class="pos-rlt">HISTORY RELATION</p>
             </span>
         </a>
     </li>

@@ -74,38 +74,67 @@
          </div>
       </div>
    </div>
-   <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
-      <div class="modal-dialog" role="document" style="width: 50%;">
-         <div class="modal-content">
-            <div class="modal-header bg-main3 b-no text-center">
-               <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-               <h4 class="modal-title" id="myModalLabel">{{formData.title}}</h4>
+   
+   <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        data-backdrop="static" data-keyboard="false" data-modalFade="true">
+        <div class="modal-dialog" role="document" style="width: 70%;">
+            <div class="modal-content m-p-r m-p-l" ng-class="{'wrapper-xl' : !isMobile}">
+                <div class="modal-header b-no text-center">
+                    <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" ng-if="showList">Event List ({{activeDate | date:'dd MMMM
+                        yyyy'}})</h4>
+                </div>
+                <div class="modal-body" ng-scrollbars ng-scrollbars-config="scrollconfig"
+                    ng-scrollbars-update="updateScrollbar">
+                    <div class="table-Data">
+                        <div class="panel panel-default">
+                            <div class="table-responsive overx-visible">
+                                <table class="table table-striped b-t">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">#</th>
+                                            <th class="text-center">Title</th>
+                                            <th class="text-left">Description</th>
+                                            <th class="text-left">Start Date</th>
+                                            <th class="text-left">End Date</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(key,data) in calenderevents">
+                                            <td class="text-left">{{ key + 1}}</td>
+                                            <td class="text-center">{{::data.title}}</td>
+                                            <td class="text-left">{{ data.description | cut:true:50:'' }}</td>
+                                            <td class="text-center">{{ convertDate(data.start_date) | date:'dd-MM-yy' }}
+                                            </td>
+                                            <td class="text-center">{{ data.end_date ? (convertDate(data.end_date) |
+                                                date:'dd-MM-yy') : ' - ' }}</td>
+                                            <td class="text-center">
+                                                <button class="btn m-b-xs btn-sm btn-info btn-addon text-capt"
+                                                    ng-click="gotoSDGS(data.event_type,data.id)"><i
+                                                        class="fa fa-chevron-right"></i>Goto
+                                                    {{data.event_type}}</button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="calenderevents.length == 0 && !loading">
+                                            <td colspan="5" class="text-center">Sorry No Records</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center b-no">
+                    <div class="col-xs-12 text-center">
+                        <button type="button" ng-click="closeModal();"
+                            class="btn btn-primary no-border m-auto bg-main1 w-xs">Close</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body wrapper-lg">
-               <div class="row m-b-sm">
-                  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                     <div class="mbit-img box-shadow b" background-image="{{IMGURL}}{{formData.cover_image}}"></div>
-                  </div>
-               </div>
-               <div class="row m-t-sm">
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                     <p>{{formData.description}}</p>
-                  </div>
-               </div>
-               <div class="row m-t-sm">
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                     <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor" ng-href="{{formData.doc_link}}" target="_blank">View Document</a>
-                  </div>
-               </div>
-            </div>
-            <div class="modal-footer text-center b-no">
-               <div class="col-xs-12 text-center">
-                  <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs" ng-click="closeModal()" ng-disabled="loading">Close</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
    <div class="modal fade" id="EventInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
