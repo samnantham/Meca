@@ -1,7 +1,7 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="DashboardCtrl">
     <!-- main -->
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none">
             <div class="panel panel-default r-3x m-l whatsnew">
                 <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold m-b-sm">
                     What's New
@@ -71,71 +71,91 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none">
-            <div class="promotion-area m-b">
-                <div class="panel panel-default r-3x m-t-lg">
-                    <div class="bg-white r-3x pos-rlt bdr-2px">
-                        <div class="top-caption">Promotion: The advertising revenue of this space will be used for
-                            contribution activities to the SDGs.
-                        </div>
-                        <div class="panel-body">
-                            <div class="bg-white r-b-6x">
-                                <div class="col-xs-12 no-padder">
-                                    <div class="m-b-xs">
-                                        <a class="h5 font-bold">
-                                            <iframe width="100%" style="height:180px;"
-                                                src="https://www.youtube.com/embed/c_qmnzScE6g?autoplay=1&mute=1&loop=1&playlist=c_qmnzScE6g"
-                                                title="YouTube video player" frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen></iframe>
-                                        </a>
-                                        <a target="_blank" href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/Home.aspx
-                                        ">What is the KAIZEN TOOLBOX? Do you think it might be useful? Maybe you’d like
-                                            to try
-                                            using it. Start by watching this video. If you have recently commenced
-                                            Kaizen and Small Group Activities, this video is a must-see! After watching
-                                            the video, you should have a clearer understanding of what the KAIZEN
-                                            TOOLBOX includes.
-                                        </a>
-                                    </div>
+            <div class="panel panel-default r-3x m-b-2vh-imp">
+                <div class="bg-white r-3x pos-rlt">
+                    <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+                        Promotion: The advertising revenue of this space will be used for
+                        contribution activities to the SDGs.
+                    </div>
+                    <div class="panel-body">
+                        <div class="bg-white r-b-6x">
+                            <div class="col-xs-12 no-padder">
+                                <div class="m-b-xs">
+                                    <a class="h5 font-bold">
+                                        <iframe width="100%" style="height:180px;"
+                                            src="https://www.youtube.com/embed/c_qmnzScE6g?autoplay=1&mute=1&loop=1&playlist=c_qmnzScE6g"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                    </a>
+                                    <a target="_blank" href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/Home.aspx
+                                    ">What is the KAIZEN TOOLBOX? Do you think it might be useful? Maybe you’d like
+                                        to try
+                                        using it. Start by watching this video. If you have recently commenced
+                                        Kaizen and Small Group Activities, this video is a must-see! After watching
+                                        the video, you should have a clearer understanding of what the KAIZEN
+                                        TOOLBOX includes.
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="promotion-area">
-                <div class="panel panel-default r-3x">
-                    <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
-                        From TMC
-                    </div>
-                    <div class="panel-body">
-                        <div class="bg-white r-b-6x">
-                            <slick ng-if="!loading" init-onload="false" data="homeData.tmcs" settings="slickConfig">
-                                <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder"
-                                    ng-repeat="(key,data) in homeData.tmcs">
-                                    <div class="col-xs-12 no-padder padder-v bg-white">
-                                        <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
-                                            <div class="m-b-xs">
-                                                <a class="h5 font-bold"> {{data.title}} </a>
-                                            </div>
-                                            <div class="dis-img box-shadow b r-3x"
-                                                background-image="{{IMGURL}}{{data.cover_image}}"></div>
+            <div class="panel panel-default r-3x m-b-2vh-imp">
+                <div class="bg-white padder-v padder r-3x pos-rlt">
+                    <div class="top-caption">One and Only Day</div>
+                    <slick ng-if="!loading" init-onload="false" data="homeData.blogs" settings="slickConfig">
+                        <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder" ng-repeat="(key,data) in homeData.blogs">
+                            
+                            <div class="col-xs-12 no-padder padder-v bg-white">
+                                
+                                <div class="col-xs-12 no-padder" ng-click="viewItem(data)">
+                                    <div class="m-b" ng-click="viewItem(data)">
+                                        
+                                        <a class="h5 font-bold"> Grab customer and visitor behavior through their phone</a>
+                                </div>
+                                    <div class="dis-img box-shadow b r-3x" background-image="img/1.jpg"></div>
+                                </div>
+                                <div class="col-xs-12 no-padder">
+                                    <small class="block mebit-desc m-t text-justify">Introduction of New Technology named LAMP (Location Audience Measurement Platform). Using this devise, we can grab not only accurate number of customers and their behavior, but also customers’ profile.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </slick>
+                </div>
+            </div>
+            <div class="panel panel-default r-3x">
+                <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+                    From TMC
+                </div>
+                <div class="panel-body">
+                    <div class="bg-white r-b-6x">
+                        <slick ng-if="!loading" init-onload="false" data="homeData.tmcs" settings="slickConfig">
+                            <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder"
+                                ng-repeat="(key,data) in homeData.tmcs">
+                                <div class="col-xs-12 no-padder padder-v bg-white">
+                                    <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
+                                        <div class="m-b-xs">
+                                            <a class="h5 font-bold"> {{data.title}} </a>
                                         </div>
+                                        <div class="dis-img box-shadow b r-3x"
+                                            background-image="{{IMGURL}}{{data.cover_image}}"></div>
                                     </div>
                                 </div>
-                            </slick>
-                            <!-- <div class="col-xs-12 no-padder">
-                              <div class="m-b-xs" >
-                                  <a class="h5 font-bold" ui-sref="app.awards">
-                                      {{homeData.fromTMC.title}}
-                              </div>
-                              <div class="dis-img box-shadow b r-3x" background-image="{{IMGURL}}{{homeData.fromTMC.cover_image}}"
-                                  style="background-position: bottom;" ui-sref="app.awards"></div> -->
+                            </div>
+                        </slick>
+                        <!-- <div class="col-xs-12 no-padder">
+                          <div class="m-b-xs" >
+                              <a class="h5 font-bold" ui-sref="app.awards">
+                                  {{homeData.fromTMC.title}}
+                          </div>
+                          <div class="dis-img box-shadow b r-3x" background-image="{{IMGURL}}{{homeData.fromTMC.cover_image}}"
+                              style="background-position: bottom;" ui-sref="app.awards"></div> -->
 
-                            <!-- ng-click="openPDF(IMGURL + homeData.fromTMC.doc_link);" -->
-                            <!-- </a>
-                          </div> -->
-                        </div>
+                        <!-- ng-click="openPDF(IMGURL + homeData.fromTMC.doc_link);" -->
+                        <!-- </a>
+                      </div> -->
                     </div>
                 </div>
             </div>

@@ -74,7 +74,7 @@
                                             {{convertDate(data.created_at) | date:'MMM. dd, yyyy'}} </div>
                                         <div class="col-xs-12 no-padder text-danger text-too-small m-t-xs title_list color_blck"
                                             ng-class="{'m-b' : isMobile}" ui-sref="app.viewnews({'id':data.id})">
-                                            <a class="h5 font-bold m-t">{{data.title}}</a>
+                                            <a class="h5 font-bold m-t text-ellipsis">{{data.title}}</a>
                                         </div>
                                         <div class="col-xs-12 no-padder text-danger m-t-xxs text-bold color_blck"
                                             ng-class="{'m-b' : isMobile}">
