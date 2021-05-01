@@ -38,7 +38,7 @@ angular.module('app')
 
                     .state('app.homenew', {
                         url: 'home/new',
-                        templateUrl: 'tpl/new-home.html',
+                        templateUrl: 'tpl/home-new.html',
                         resolve: load(['moment', 'fullcalendar', 'ui.calendar', 'js/controllers/home.js'])
                     })
 
