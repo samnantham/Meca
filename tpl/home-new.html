@@ -1,0 +1,279 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="DashboardCtrl">
+    <!-- main -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none">
+            <div class="panel panel-default r-3x m-l whatsnew">
+                <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold m-b-sm">
+                    What's New
+                </div>
+                <div class="col-xs-12 bg-white padder-v padder r-b-6x m-b d_i_b" ng-scrollbars
+                    ng-scrollbars-config="scrollconfig">
+                    <div class="col-xs-12 bg-main1 text-center sm-padder-v sm-padder">MECA CAMPUS</div>
+                    <div class="col-xs-12 p-l-none p-r-none">
+                        <div class="m-t m-b">
+                            <div class="col-sm-3 p-l-none p-xs-l">
+                                <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Category</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Time</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Title</div>
+                            </div>
+                            <div class="col-sm-3 p-r-none p-xs-r">
+                                <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Written by</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-t-xs m-b-xs"
+                        ng-repeat="(key,whatsnew) in homeData.whatsnew">
+                        <div class="col-sm-3 p-l-none m-p-r-none">
+                            <div class="text-left f12 sm-padder-v sm-padder color_2">
+                                <strong>
+                                    <img class="new-icon" src="img/new.png" ng-if="key < 3" />
+                                    <span ng-class="{'pad-left-30px':key < 3}"
+                                        ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type < 5">
+                                        {{whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?
+                                        'Kaizen - ' + whatsnew.typeData.type : whatsnew.whatsnew_type == 4 ?
+                                        'From TMC' : whatsnew.whatsnew_type}}
+                                    </span>
+                                </strong>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="text-left h5 sm-padder-v sm-padder color_3 f-10 m-t-xs">
+                                {{convertDate(whatsnew.created_at) | date:'dd MMM yyyy HH:mm'}}
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-left f12 font-bold sm-padder-v sm-padder cursor text-ov"
+                                ng-click="viewItem(whatsnew)">
+                                {{whatsnew.title}}
+                            </div>
+                        </div>
+                        <div class="col-sm-3 p-r-none">
+                            <div class="text-left f12 sm-padder-v sm-padder color_2 text-ov">
+                                <strong>
+                                    <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
+                                    <span ng-if="whatsnew.whatsnew_type == 3">
+                                        {{whatsnew.writerinfo ? whatsnew.writerinfo.name : (whatsnew.is_admin ?
+                                        whatsnew.ownerprofile.username + '(Admin)' : whatsnew.ownerprofile.first_name +
+                                        ' ' + whatsnew.ownerprofile.last_name + ' - ' +
+                                        whatsnew.ownerprofile.distributorinfo.name)}} 
+                                    </span>
+                                    <span ng-if="whatsnew.whatsnew_type == 4"> Admin </span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none">
+            <div class="promotion-area m-b">
+                <div class="panel panel-default r-3x m-t-lg">
+                    <div class="bg-white r-3x pos-rlt bdr-2px">
+                        <div class="top-caption">Promotion: The advertising revenue of this space will be used for
+                            contribution activities to the SDGs.
+                        </div>
+                        <div class="panel-body">
+                            <div class="bg-white r-b-6x">
+                                <div class="col-xs-12 no-padder">
+                                    <div class="m-b-xs">
+                                        <a class="h5 font-bold">
+                                            <iframe width="100%" style="height:180px;"
+                                                src="https://www.youtube.com/embed/c_qmnzScE6g?autoplay=1&mute=1&loop=1&playlist=c_qmnzScE6g"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
+                                        </a>
+                                        <a target="_blank" href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/Home.aspx
+                                        ">What is the KAIZEN TOOLBOX? Do you think it might be useful? Maybe you’d like
+                                            to try
+                                            using it. Start by watching this video. If you have recently commenced
+                                            Kaizen and Small Group Activities, this video is a must-see! After watching
+                                            the video, you should have a clearer understanding of what the KAIZEN
+                                            TOOLBOX includes.
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="promotion-area">
+                <div class="panel panel-default r-3x">
+                    <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+                        From TMC
+                    </div>
+                    <div class="panel-body">
+                        <div class="bg-white r-b-6x">
+                            <slick ng-if="!loading" init-onload="false" data="homeData.tmcs" settings="slickConfig">
+                                <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder"
+                                    ng-repeat="(key,data) in homeData.tmcs">
+                                    <div class="col-xs-12 no-padder padder-v bg-white">
+                                        <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
+                                            <div class="m-b-xs">
+                                                <a class="h5 font-bold"> {{data.title}} </a>
+                                            </div>
+                                            <div class="dis-img box-shadow b r-3x"
+                                                background-image="{{IMGURL}}{{data.cover_image}}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </slick>
+                            <!-- <div class="col-xs-12 no-padder">
+                              <div class="m-b-xs" >
+                                  <a class="h5 font-bold" ui-sref="app.awards">
+                                      {{homeData.fromTMC.title}}
+                              </div>
+                              <div class="dis-img box-shadow b r-3x" background-image="{{IMGURL}}{{homeData.fromTMC.cover_image}}"
+                                  style="background-position: bottom;" ui-sref="app.awards"></div> -->
+
+                            <!-- ng-click="openPDF(IMGURL + homeData.fromTMC.doc_link);" -->
+                            <!-- </a>
+                          </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 m-b" ng-if="!loading">
+        <div class="panel panel-default r-3x">
+            <div class="panel-heading r-3x r-b-none bg-main2">
+                Calendar
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x">
+                <div class="calendar" ng-model="eventSources" config="uiConfig.calendar"
+                    ui-calendar="uiConfig.calendar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 m-b">
+        <div class="panel panel-default r-3x reminder-section">
+            <div class="panel-heading r-3x r-b-none bg-main2">
+                Reminder
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white dash-2-div r-b-6x m-p-n" ng-scrollbars
+                ng-scrollbars-config="scrollconfig">
+                <div class="background-3 col-xs-12 m-t padder">
+                    <div class="col-xs-2 text-center">Done?</div>
+                    <div class="col-xs-7 text-center">Task</div>
+                    <div class="col-xs-3 text-center">Due</div>
+                </div>
+                <div class="col-xs-12 m-t" ng-repeat="(key,reminder) in homeData.reminders">
+                    <div class="col-xs-2 text-center">
+                        <input type="checkbox" ng-model="reminder.status" ng-true-value="1" ng-false-value="0"
+                            ng-change="updateReminder(reminder)" />
+                    </div>
+                    <div class="col-xs-7 text-left h6">{{reminder.title}}</div>
+                    <div class="col-xs-3 text-center h6">{{convertDate(reminder.due_date) | date:'dd-MMM-yy'}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        data-backdrop="static" data-keyboard="false" data-modalFade="true">
+        <div class="modal-dialog" role="document" style="width: 70%;">
+            <div class="modal-content m-p-r m-p-l" ng-class="{'wrapper-xl' : !isMobile}">
+                <div class="modal-header b-no text-center">
+                    <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" ng-if="showList">Event List ({{activeDate | date:'dd MMMM
+                        yyyy'}})</h4>
+                </div>
+                <div class="modal-body" ng-scrollbars ng-scrollbars-config="scrollconfig"
+                    ng-scrollbars-update="updateScrollbar">
+                    <div class="table-Data">
+                        <div class="panel panel-default">
+                            <div class="table-responsive overx-visible">
+                                <table class="table table-striped b-t">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">#</th>
+                                            <th class="text-center">Title</th>
+                                            <th class="text-left">Description</th>
+                                            <th class="text-left">Start Date</th>
+                                            <th class="text-left">End Date</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="(key,data) in calenderevents">
+                                            <td class="text-left">{{ key + 1}}</td>
+                                            <td class="text-center">{{::data.title}}</td>
+                                            <td class="text-left">{{ data.description | cut:true:50:'' }}</td>
+                                            <td class="text-center">{{ convertDate(data.start_date) | date:'dd-MM-yy' }}
+                                            </td>
+                                            <td class="text-center">{{ data.end_date ? (convertDate(data.end_date) |
+                                                date:'dd-MM-yy') : ' - ' }}</td>
+                                            <td class="text-center">
+                                                <button class="btn m-b-xs btn-sm btn-info btn-addon text-capt"
+                                                    ng-click="gotoItem(data.event_type,data.id)"><i
+                                                        class="fa fa-chevron-right"></i>Goto
+                                                    {{data.event_type}}</button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="calenderevents.length == 0 && !loading">
+                                            <td colspan="5" class="text-center">Sorry No Records</td>
+                                        </tr>
+                                        <tr ng-if="loading">
+                                            <td colspan="5" class="loadingcss" ng-if="executives.length==0"
+                                                button-spinner="loading">{{loadingMsg}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center b-no">
+                    <div class="col-xs-12 text-center">
+                        <button type="button" ng-click="closeModal();"
+                            class="btn btn-primary no-border m-auto bg-main1 w-xs">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EventInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        data-backdrop="static" data-keyboard="false" data-modalFade="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-main1 b-no text-center">
+                    <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{formData.title}}</h4>
+                </div>
+                <div class="modal-body wrapper-lg">
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <p>{{formData.info}}</p>
+                        </div>
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="formData.caleventInfo.type < 4">
+                            <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor"
+                                ng-click="viewEvent()" target="_blank">
+                                Goto {{ (formData.caleventInfo.type == '1' ? 'Event' : formData.caleventInfo.type == '2'
+                                ? 'TBP' : (formData.caleventInfo.type == '3' ? 'Report' : formData.caleventInfo.type))
+                                }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center b-no">
+                    <div class="col-xs-12 text-center">
+                        <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs"
+                            ng-click="closeModal()" ng-disabled="loading">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
