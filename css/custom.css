@@ -1671,7 +1671,7 @@ menu-icon {
 
      position: absolute;
      background: #3f51b5;
-     top: -14px;
+     top: -22px;
      right: 5%;
      border-radius: 6px;
      padding: 5px 15px;
@@ -1682,7 +1682,9 @@ menu-icon {
 .bdr-2px {
      border: 2px solid #3f51b5;
 }
-
+.bdr-1px {
+     border: 1px solid #3f51b5;
+}
 .pad-left-30px {
      padding-left: 30px;
 }
@@ -1887,6 +1889,10 @@ menu-icon {
 
 .f12, .h5 {
      font-size: 1.8vh;
+}
+.f8
+{
+     font-size: 1.2vh
 }
 
 .d_i_b {
@@ -2102,7 +2108,10 @@ menu-icon {
      border-width: 2px;
      border-color: #928d8d;
 }
-
+.bdr_1p {
+     border-width: 1px;
+     border-color: #928d8d;
+}
 .anguvideo {
      min-width: 100%;
      height: 200px;
@@ -2244,4 +2253,73 @@ menu-icon {
 
 .m-b-2vh-imp{
      margin-bottom: 3vh!important;
+}
+.feed-img
+{
+    width: 40px;
+    border-radius: 50%;
+    height: 40px;
+}
+.feed-img-holder
+{
+     float: left;
+     margin-right: 10px
+}
+.comment-img-holder
+{
+     float: left;
+}
+.comment-img
+{
+  width: 40px;
+    border-radius: 50%;
+    height: 40px;   
+}
+.feed-info,.comment-info
+{
+     float: left;
+}
+.like_comment_holder
+{
+     border-top:1px solid #eee; 
+     border-bottom:1px solid #eee;  
+     padding: 6px 0px;
+     display: block;
+}
+.like_holder
+{
+     float: left;
+}
+.like_holder i,.comment_holder i
+{
+     margin-right: 10px;
+}
+.comment_holder
+{
+     float: right;
+}
+.clear_both
+{
+     clear: both;
+}
+.comment_field {
+    background-color: #eee;
+    border-radius: 20px;
+    width: 100%;
+    border: 0px;
+    padding: 6px;
+    padding-left: 20px;
+}
+.comment-info-hold
+{
+
+    float: left;
+    width: 80%;
+    
+}
+.comment-info-hold .info
+{ 
+    background: #eee;
+    padding: 5px;
+    border-radius: 5px;
 }
