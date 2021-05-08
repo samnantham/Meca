@@ -34,6 +34,8 @@
                                  Event</span>
                               <span ng-class="{'pad-left-30px': key < 3}"
                                  ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.typeData.type }}</span>
+                              <span ng-class="{'pad-left-30px': key < 3}"
+                                 ng-if="whatsnew.whatsnew_type == 4">From TMC</span>
                            </strong>
                            <div class="clear"></div>
                         </div>
@@ -54,7 +56,8 @@
                               <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
                               <span
                                  ng-if="whatsnew.whatsnew_type == 3">{{whatsnew.writerinfo ? whatsnew.writerinfo.name : (whatsnew.is_admin ? whatsnew.ownerprofile.username + '(Admin)' : whatsnew.ownerprofile.first_name + ' ' + whatsnew.ownerprofile.last_name + ' - ' + whatsnew.ownerprofile.distributorinfo.name)}}</span>
-                           </strong>
+                                 <span ng-if="whatsnew.whatsnew_type == 4">Admin</span>
+                              </strong>
                         </div>
                      </div>
                   </div>
