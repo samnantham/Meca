@@ -1,0 +1,40 @@
+<form class="form-horizontal" name="addForm" novalidate ng-submit="addData(addForm);">
+    <div class="modal-header b-no text-center">
+        <button type="button" class="close" ng-click="closeModalPopup();" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{isEdititem ? 'Edit ' : 'Add '}} Feed</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="font-bold">Content <code>*</code></label>
+            <small class="pull-right text-red" ng-if="errorData.content_error">{{errorData.content_errorMsg}}</small>
+            <textarea name="content" class="form-control r-2x" placeholder="Enter content here...." rows="8" ng-model="formData.content" required></textarea>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-3 col-xs-6 p-l-none">
+               <label class="font-bold">Cover Image <code>*</code></label>
+               <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                  ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                  ngf-multiple="false" ngf-accept="'image/*'" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                  ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable"
+                  ngf-change="uploadCover($files);">
+                  Upload Image
+               </div>
+            </div>
+            <div class="col-sm-3 col-xs-6 p-l-none">
+               <label class="font-bold text-white">Cover Image</label>
+               <div class="mbit-img box-shadow b h-100" ngf-background="formData.newcover" ng-if="formData.newcover"></div>
+               <div class="mbit-img box-shadow b h-100" background-image="{{IMGURL}}{{formData.cover_image}}"
+                  ng-if="!formData.newcover && isEdititem"></div>
+            </div>
+         </div>
+    </div>
+    <div class="modal-footer text-center b-no">
+        <div class="col-xs-12 text-center ">
+            <button type="button" class="btn btn-primary no-border  m-auto bg-main2 w-xs" ng-click="closeModalPopup()"
+                ng-disabled="loading">Cancel</button>
+            <button type="submit" class="btn btn-primary no-border  m-auto bg-main1 w-xs" button-spinner="loading"
+                ng-disabled="loading">{{ isEdititem ? 'Update' : 'Add' }}</button>
+        </div>
+    </div>
+</form>
