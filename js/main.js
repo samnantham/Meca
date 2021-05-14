@@ -368,7 +368,7 @@ angular.module('app')
                     prevArrow: "<img class='slick-prev slick-arrow' src='img/sliderL.png'>",
                     nextArrow: "<img class='slick-next slick-arrow' src='img/sliderR.png'>",
                     method: {},
-                    dots: true,
+                    dots: false,
                     infinite: true
                 };
             });

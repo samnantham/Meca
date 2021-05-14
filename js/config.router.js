@@ -278,6 +278,19 @@ angular.module('app')
                         resolve: load(['js/controllers/history/subfolder/list.js'])
                     })
 
+                    //One and Only day
+                    .state('app.oneandonly', {
+                        url: 'oneandonlyday/list',
+                        templateUrl: 'tpl/oneandonly/list.html',
+                        resolve: load(['js/controllers/oneandonly/list.js'])
+                    })
+
+                    .state('app.viewoneandonly', {
+                        url: 'oneandonlyday/view/:id',
+                        templateUrl: 'tpl/oneandonly/view.html',
+                        resolve: load(['js/controllers/oneandonly/view.js'])
+                    })
+
                     // others
                     .state('access', {
                         url: '/',

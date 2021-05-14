@@ -1868,9 +1868,9 @@ menu-icon {
      height: 78vh !important;
 }
 
-.new-home .whatsnew .mCustomScrollbar {
+.new-home .whatsnew .mCustomScrollbar,.feed-area .mCustomScrollbar{
      /*height: 71vh !important;*/
-     height: 132vh !important;
+     height: 103vh !important;
 }
 
 .mebit-whatsnew .mCustomScrollbar {
@@ -2323,3 +2323,19 @@ menu-icon {
     padding: 5px;
     border-radius: 5px;
 }
+
+.feed-item
+   {
+      display: table;   
+      width: 100%;
+      padding:10px 0px 5px 0px; 
+      margin-bottom: 10px;  
+   }
+
+   .feed-item-data{
+     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 0%), 0 6px 20px 0 rgb(0 0 0 / 11%); 
+   }
+   .feed-area .mCSB_inside>.mCSB_container
+   {
+      margin-right: 0px;
+   }

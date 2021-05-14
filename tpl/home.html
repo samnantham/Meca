@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="DashboardCtrl">
+<div class="hbox hbox-auto-xs hbox-auto-sm new-home" ng-controller="DashboardCtrl">
 <!-- main -->
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none">
@@ -102,14 +102,14 @@
             </div>
          </div>
       </div>
-      <div class="promotion-area m-t-lg m-b">
+      <div class="promotion-area m-t-lg m-b" ng-if="homeData.onlyDays.length > 0">
          <div class="panel panel-default r-3x">
             <div class="panel-body pos-rlt">
-               <div class="top-caption">One and Only Day</div>
+               <div class="top-caption cursor" ui-sref="app.oneandonly">One and Only Day</div>
                <div class="bg-white r-b-6x">
-                  <slick ng-if="!loading" init-onload="false" data="homeData.tmcs" settings="slickConfig">
+                  <slick ng-if="!loading" init-onload="false" data="homeData.onlyDays" settings="slickConfig">
                      <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder"
-                        ng-repeat="(key,data) in homeData.tmcs">
+                        ng-repeat="(key,data) in homeData.onlyDays">
                         <div class="col-xs-12 no-padder padder-v bg-white">
                            <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
                               <div class="m-b-xs">
@@ -118,19 +118,13 @@
                               <div class="dis-img box-shadow b r-3x"
                                  background-image="{{IMGURL}}{{data.cover_image}}"></div>
                            </div>
+                           <div class="col-xs-12 no-padder">
+                              <small class="block mebit-desc m-t text-justify">{{data.plain_description}}</small>
+                          </div>
                         </div>
                      </div>
                   </slick>
-                  <!-- <div class="col-xs-12 no-padder">
-                     <div class="m-b-xs" >
-                         <a class="h5 font-bold" ui-sref="app.awards">
-                             {{homeData.fromTMC.title}}
-                     </div>
-                     <div class="dis-img box-shadow b r-3x" background-image="{{IMGURL}}{{homeData.fromTMC.cover_image}}"
-                         style="background-position: bottom;" ui-sref="app.awards"></div> -->
-                  <!-- ng-click="openPDF(IMGURL + homeData.fromTMC.doc_link);" -->
-                  <!-- </a>
-                     </div> -->
+
                </div>
             </div>
          </div>
@@ -172,49 +166,47 @@
       </div>
    </div>
    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none">
-      <div class="promotion-area m-b">
+      <div class="promotion-area m-b feed-area">
          <div class="panel panel-default r-3x">
             <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
                Feeds
             </div>
-            <div class="panel-body bdr-1px p-l-none p-r-none">
+            <div class="panel-body bdr-1px p-l-none p-r-none"  ng-scrollbars
+            ng-scrollbars-config="scrollconfig">
+            <div class="feed-item" ng-class="{'feed-item-data': !$last }" ng-repeat="(key,feed) in homeData.feeds">
                <div class="col-sm-12 m-b-xs">
                   <div class="feed-img-holder p-l">  
-                     <img class="feed-img" src="https://mecacampus.com/API/public/upload/gr/links/60460002e3336.JPG">
+                     <img class="feed-img" ng-src="{{IMGURL + feed.ownerprofile.avatar}}">
                   </div>
                   <div class="feed-info">
-                     <div class="f12"><strong>test user</strong></div>
-                     <div class="f8">07:10 a.m</div>
+                     <div class="f12"><strong>{{ feed.is_admin ?
+                        feed.ownerprofile.username + '(Admin)' : feed.ownerprofile.first_name +
+                        ' ' + feed.ownerprofile.last_name + ' - ' +
+                        feed.ownerprofile.distributorinfo.name }}</strong></div>
+                     <div class="f8">{{convertDate(feed.created_at) | date:'shortTime' }}</div>
                   </div>
                </div>
                <div class="bg-white r-b-6x">
-                  <div class="col-xs-12 no-padder">
-                     <div class="m-b-xs">
-                        <a class="h5 font-bold">
-                        <iframe width="100%" style="height:180px;"
-                           src="https://www.youtube.com/embed/c_qmnzScE6g?autoplay=1&mute=1&loop=1&playlist=c_qmnzScE6g"
-                           title="YouTube video player" frameborder="0"
-                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                           allowfullscreen></iframe>
-                        </a>
+                  <div class="col-xs-12 wrapper">
+                     <div class="dis-img box-shadow b"
+                     background-image="{{IMGURL}}{{feed.cover_image}}"></div>
                      </div>
                   </div>
                   <div class="col-xs-12">
-                     <div class="m-b-xs">
-                        <a target="_blank" href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/Home.aspx
-                           ">What is the KAIZEN TOOLBOX? Do you think it might be useful? Maybe you’d like to try using it. Start by watching this video. If you have recently commenced Kaizen and Small Group Activities, this video is a must-see! After watching the video, you should have a clearer understanding of what the KAIZEN TOOLBOX includes.
-                        </a>
+                     <div class="m-b-xs m-t-xs">
+                        <span>{{feed.content}}
+                        </span>
                      </div>
                      <div class="like_comment_holder">
-                        <div class="like_holder color_2">
-                           <i class="fa fa-thumbs-o-up f12" aria-hidden="true"></i><span> 23 likes</span>
+                        <div class="like_holder color_2 cursor">
+                           <i class="fa fa-thumbs-o-up f12" ng-class="feed.isLiked ? 'fa-thumbs-up':'fa-thumbs-o-up'" aria-hidden="true"></i><span> {{feed.likes}} likes</span>
                         </div>
-                        <div class="comment_holder color_2">
+                        <div class="comment_holder color_2 cursor">
                            <i class="fa fa-comment-o f12" aria-hidden="true"></i><span > 9 Comments</span>
                         </div>
                         <div class="clear_both"></div>
                      </div>
-                     <div class="comment_display">
+                     <!-- <div class="comment_display">
                         <div class="comment_hold m-t m-b">
                            <div class="comment-img-holder p-l">  
                               <img class="comment-img" src="https://mecacampus.com/API/public/upload/gr/links/60460002e3336.JPG">
@@ -264,8 +256,8 @@
                            <div class="clear_both"></div>
                         </div>
 
-                     </div>
-                     <div class="comment_form m-t-xs">
+                     </div> -->
+                     <div class="comment_form m-t-xs m-b-xs ">
                         <form>
                            <input class="comment_field" type="text" name="" placeholder="Write your comment...">
                         </form>
@@ -273,78 +265,12 @@
                   </div>
                </div>
             </div>
-         </div>
-         <div class="promotion-area">
-            <div class="panel panel-default r-3x">
-               <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
-                  From TMC
-               </div>
-               <div class="panel-body">
-                  <div class="bg-white r-b-6x">
-                     <slick ng-if="!loading" init-onload="false" data="homeData.tmcs" settings="slickConfig">
-                        <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder"
-                           ng-repeat="(key,data) in homeData.tmcs">
-                           <div class="col-xs-12 no-padder padder-v bg-white">
-                              <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
-                                 <div class="m-b-xs">
-                                    <a class="h5 font-bold"> {{data.title}} </a>
-                                 </div>
-                                 <div class="dis-img box-shadow b r-3x"
-                                    background-image="{{IMGURL}}{{data.cover_image}}"></div>
-                              </div>
-                           </div>
-                        </div>
-                     </slick>
-                     <!-- <div class="col-xs-12 no-padder">
-                        <div class="m-b-xs" >
-                            <a class="h5 font-bold" ui-sref="app.awards">
-                                {{homeData.fromTMC.title}}
-                        </div>
-                        <div class="dis-img box-shadow b r-3x" background-image="{{IMGURL}}{{homeData.fromTMC.cover_image}}"
-                            style="background-position: bottom;" ui-sref="app.awards"></div> -->
-                     <!-- ng-click="openPDF(IMGURL + homeData.fromTMC.doc_link);" -->
-                     <!-- </a>
-                        </div> -->
-                  </div>
-               </div>
             </div>
          </div>
       </div>
    </div>
-   <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 m-b" ng-if="!loading">
-      <div class="panel panel-default r-3x">
-         <div class="panel-heading r-3x r-b-none bg-main2">
-            Calendar
-         </div>
-         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white r-b-6x">
-            <div class="calendar" ng-model="eventSources" config="uiConfig.calendar"
-               ui-calendar="uiConfig.calendar"></div>
-         </div>
-      </div>
    </div>
-   <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 m-b">
-      <div class="panel panel-default r-3x reminder-section">
-         <div class="panel-heading r-3x r-b-none bg-main2">
-            Reminder
-         </div>
-         <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white dash-2-div r-b-6x m-p-n" ng-scrollbars
-            ng-scrollbars-config="scrollconfig">
-            <div class="background-3 col-xs-12 m-t padder">
-               <div class="col-xs-2 text-center">Done?</div>
-               <div class="col-xs-7 text-center">Task</div>
-               <div class="col-xs-3 text-center">Due</div>
-            </div>
-            <div class="col-xs-12 m-t" ng-repeat="(key,reminder) in homeData.reminders">
-               <div class="col-xs-2 text-center">
-                  <input type="checkbox" ng-model="reminder.status" ng-true-value="1" ng-false-value="0"
-                     ng-change="updateReminder(reminder)" />
-               </div>
-               <div class="col-xs-7 text-left h6">{{reminder.title}}</div>
-               <div class="col-xs-3 text-center h6">{{convertDate(reminder.due_date) | date:'dd-MMM-yy'}}</div>
-            </div>
-         </div>
-      </div>
-   </div>
+ 
    <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
       data-backdrop="static" data-keyboard="false" data-modalFade="true">
       <div class="modal-dialog" role="document" style="width: 70%;">
