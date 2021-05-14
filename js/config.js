@@ -57,6 +57,9 @@ var app =
           }, {
             id: 4,
             type: 'PDCA'
+          }, {
+            id: 5,
+            type: 'Wall Of Plate'
           }];
 
           app.kaizentypes = [{

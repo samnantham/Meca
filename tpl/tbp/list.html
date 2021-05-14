@@ -13,9 +13,9 @@
                </ul>
             </div>
             <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{'active': activetab == 0}" ng-click="changeActive(0)">All</button>
-            <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{'active': activetab == tbp.id, 'bg-main4' : tbp.id == 4}" ng-click="changeActive(tbp.id)" ng-repeat="(num,tbp) in tbptypes">{{tbp.type}}</button>
+            <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{'active': activetab == tbp.id, 'bg-main4' : tbp.id == 4, 'bg-white' : tbp.id == 5, 'btn_color_2 font-bold': $last}" ng-click="changeActive(tbp.id)" ng-repeat="(num,tbp) in tbptypes">{{tbp.type}}</button>
          </div>
-         <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
+         <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig" ng-if="activetab < 4">
             <div class="row m-t">
                <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 inner-addon right-addon">
                   <i class="fa fa-search"></i>
@@ -56,6 +56,12 @@
                <div class="col-lg-12 col-md-12 col-sm-12" ng-if="tbps.last_page > 0 && !loading">
                   <dir-pagination-controls on-page-change="pageChanged(newPageNumber)" class="pagination-ctrl"></dir-pagination-controls>
                </div>
+            </div>
+         </div>
+
+         <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig" ng-if="activetab == 5">
+            <div class="row">
+               gfbdhttrn fherherhe errrre
             </div>
          </div>
       </div>
