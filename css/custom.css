@@ -2408,11 +2408,12 @@ top: 48%;
     z-index: 1000;
     cursor: pointer;
 }
-#newpopup .modal-title {
+#newpopup .modal-title ,#detailedpopup .modal-title{
     border-bottom: 1px solid #000;
     padding-bottom: 10px;
+    color: #000;
 }
-#newpopup .modal-body
+#newpopup .modal-body,#detailedpopup .modal-body
 {
     padding-top: 0px; 
 }
@@ -2447,4 +2448,139 @@ background-image: url('../img/userbg/Bronze.png');
 ._white
 {
 background-image: url('../img/userbg/White.png');
+}
+@media only screen and (min-width: 1250px) and (max-width: 1800px)   {
+     #detailedpopup_hold {
+          width:70%;
+          max-width: 1200px;
+     }
+}
+@media only screen and (min-width: 1050px) and (max-width: 1249px)   {
+     #detailedpopup_hold {
+          width:70%;
+          max-width: 1000px;
+     }
+}
+@media only screen and (min-width: 950px) and (max-width: 1049px)  {
+     #detailedpopup_hold {
+          width:70%;
+          max-width: 900px;
+     }
+}
+@media only screen and (max-width: 768px)  {
+     #detailedpopup_hold {
+          width:100%;
+          max-width: 100%;
+     }
+}
+.image-frame {
+   
+    max-width: 274px;
+    max-height: 238px;
+    margin: auto;
+    padding: 25px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.gold_frame
+{
+      background-image: url(../img/Frame/Frame-Gold.png);
+}
+.silver_frame
+{
+      background-image: url(../img/Frame/Frame-Silver.png);
+}
+.bronze_frame
+{
+      background-image: url(../img/Frame/Frame-Bronze.png);
+}
+.white_frame
+{
+      background-image: url(../img/Frame/Frame-Whiite.png);
+}
+.inner_image {
+        height: 193px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.inner_style
+{
+     padding: 0px 10px;
+}
+.badger {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -5%;
+    background-size: 100%;
+    display: block !important;
+    left: 12%;
+}
+.gold_bdg
+{
+  background-image: url(../img/Badge/Badge-Gold.png);   
+}
+.silver_bdg
+{
+  background-image: url(../img/Badge/Badge-Silver.png);   
+}
+.bronze_bdg
+{
+  background-image: url(../img/Badge/Badge-Bronze.png);   
+}
+.white_bdg
+{
+  background-image: url(../img/Badge/Badge-White.png);   
+}
+.info_holder {
+    background-image: url(../img/Nameboard.png);
+    padding: 25px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    box-shadow: 10px 10px 5px grey;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.5em;
+    color: #000;
+    border-radius: 8px;
+    font-weight: 600;
+}
+.box-dec
+{
+    background: #ebefef;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+.status_in
+{
+     width: 35px;
+}
+.status_txt
+{
+     font-size: 1.2em;
+     color: #000;
+     margin-top: 5px;
+     font-weight: 600;
+}
+.status_tit
+{
+       font-size: 1.3em;
+     color: #000;
+     font-weight: bold;
+     margin-bottom:5px;   
+}
+.doc_holder
+{
+     border: 1px solid #eee;
+     padding: 10px;
+     border-radius: 5px;
+     max-width: 300px;
+}
+.down_in {
+    width: 24px;
 }
