@@ -5,6 +5,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         $rootScope.$emit("setSliderConfig", {});
         $scope.firstloadingdone = false;
         $scope.doclink = '';
+        $scope.commentData = {};
 
         $scope.clickTMC = function (data) {
             if (data.type == 1) {
@@ -54,6 +55,29 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                     $scope.openModal();
                 } else {
                     $rootScope.$emit("showISError", getData);
+                }
+            });
+        }
+
+        $scope.addComment = function(key,feed){
+            if(feed.comment){
+                $scope.commentData.feed = feed.id;
+                $scope.commentData.isfile = 0;
+                $scope.commentData.comment = feed.comment;
+                $scope.sendComment(key,$scope.commentData);
+            }
+        }
+    
+        $scope.sendComment = function(key,comment){
+            console.log(comment);
+             webServices.upload('feed/comment',comment).then(function(getData) {
+                $rootScope.loading = false;
+                if (getData.status == 200) {
+                    $scope.commentData = {};
+                    $scope.homeData.feeds[key].comment = '';
+                    $scope.homeData.feeds[key].comments = getData.data.data;
+                } else {
+                    $rootScope.$emit("showISError",getData);
                 }
             });
         }
@@ -155,6 +179,53 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
+            });
+        }
+
+        $scope.showHideComments = function(key, feed){
+            feed.showComment = !feed.showComment;
+        }
+
+        $scope.changeFeedLike = function(key, feed, like_type){
+            var obj = {};
+            obj.feed = feed.id;
+            obj.user = $rootScope.user.id;
+            obj.is_admin = 0;
+            if(!feed.isLiked){
+                feed.likes ++;
+                feed.isLiked = 1;
+            }else{
+                feed.likes --;
+                feed.isLiked = 0;
+            }
+            obj.status = feed.isLiked;
+            obj.like_type = like_type;
+            $scope.updateLike(obj);
+            console.log(obj)
+        }
+
+        $scope.changeCommentLike = function(key, comment, like_type){
+            var obj = {};
+            obj.feed = comment.id;
+            obj.user = $rootScope.user.id;
+            obj.is_admin = 0;
+            if(!comment.isLiked){
+                comment.likes ++;
+                comment.isLiked = 1;
+            }else{
+                comment.likes --;
+                comment.isLiked = 0;
+            }
+            obj.status = comment.isLiked;
+            obj.like_type = like_type;
+            $scope.updateLike(obj);
+            console.log(key, comment, like_type)
+        }
+
+        $scope.updateLike = function(obj){
+            webServices.post('feed/like/update', obj).then(function (getData) {
+                console.log(getData)
+                
             });
         }
 
