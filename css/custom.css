@@ -2425,16 +2425,15 @@ top: 48%;
     padding-left: 0px;
     padding-right: 0px; 
 }
-.user
-{
-     padding:8px 10px;
-     font-size: 14px;
-     font-weight: bold;
-     background-size: 100% 100%; 
-     background-position: top center;
-     margin-bottom: 10px;
-     color: #000;
-
+.user {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    background-size: 100% 100%;
+    background-position: top center;
+    margin-bottom: 0px;
+    color: #000;
+    padding-bottom: 26px;
 }
 ._gold
 {
@@ -2586,4 +2585,39 @@ background-image: url('../img/userbg/White.png');
 }
 .down_in {
     width: 24px;
+}
+.user_list_img
+{
+     background-image: url('../img/Background_with_Badge.png');
+     background-size: 100% 100%;
+     min-height: 600px;
+}
+.user_name_text
+{
+     font-size: 1.2em;
+     color: #000;
+     font-weight: 600;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     width: 100%;
+}
+.user_position_text
+{
+     font-size: .7em;
+     color: #000;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     width: 100%;
+}
+.user_role_text
+{
+     font-size: 1em;
+     color: #000;
+     font-weight: 600;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     width: 100%;
 }
