@@ -3,7 +3,7 @@
 app.controller('MaasInfoController', ['$scope', '$http', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $http, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.maas = {};
-    $scope.module_id = 4;
+    $scope.module_id = 5;
     $scope.commentData = {};
     $scope.commentData.isfile = 0;
     
@@ -90,7 +90,7 @@ app.controller('MaasInfoController', ['$scope', '$http', '$state', '$stateParams
     }
 
     $scope.getComments = function() {
-        webServices.get('comments/4/' + $stateParams.id).then(function(getData) {
+        webServices.get('comments/'+$scope.module_id+'/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.comments = getData.data;
