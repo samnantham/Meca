@@ -2334,6 +2334,7 @@ menu-icon {
      width: 100%;
      padding: 10px 0px 5px 0px;
      margin-bottom: 10px;
+     position: relative;
 }
 
 .feed-item-data {
@@ -2352,6 +2353,22 @@ menu-icon {
      z-index: 10;
      position: absolute;
      top: 0px;
+}
+.delete_feed
+{
+    position: absolute;
+    right: 3%;
+    z-index: 1000;
+    cursor: pointer;
+    visibility: hidden;
+}
+.delete_feed img
+{
+     width: 15px;
+}
+.feed-item:hover .delete_feed
+{
+     visibility: visible;
 }
 .lbn
 {

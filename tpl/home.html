@@ -179,6 +179,7 @@
                <div class="panel-body bdr-1px p-l-none p-r-none" ng-scrollbars ng-scrollbars-config="scrollconfig">
                   <div class="feed-item" ng-class="{'feed-item-data': !$last }"
                      ng-repeat="(key,feed) in homeData.feeds">
+                     <span class="delete_feed"><img src="img/feed/delete.png"></span>
                      <div class="col-sm-12 m-b-xs">
                         <div class="feed-img-holder p-l">
                            <img class="feed-img" ng-src="{{IMGURL + feed.ownerprofile.avatar}}">
