@@ -97,7 +97,7 @@
                               TOOLBOX includes.
                            </a>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center m-sm">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center m-t-sm m-b-sm">
                            <a class="btn btn-xs btn-success text-u-c cursor" download="KTB_M6 Order Form_ver20210401 (002).xlsx" href="docs/KTB_M6 Order Form_ver20210401 (002).xlsx" target="_blank">
                                Order Form
                            </a>
@@ -199,9 +199,9 @@
                            <div class="dis-img box-shadow b" background-image="{{IMGURL}}{{feed.cover_image}}"></div>
                         </div>
                      </div>
-                      <div class="pos-rlt col-sm-12">
-                           <span class="delete_feed"><img src="img/feed/delete.png"></span>
-                           <span class="edit_feed"><img src="img/feed/edit.png"></span>
+                      <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">
+                           <span class="delete_feed" ng-click="deleteFeed(key,feed.id)"><img src="img/feed/delete.png"></span>
+                           <span class="edit_feed" ng-click="editFeed(key,feed)"><img src="img/feed/edit.png"></span>
                         </div>
                      <div class="col-xs-12">
                         <div class="m-b-xs m-t-xs">
@@ -221,33 +221,38 @@
                            <div class="clear_both"></div>
                         </div>
                         <div class="comment_display animationIf" ng-if="feed.showComment">
-                           <div class="comment_hold m-t m-b" ng-repeat="(key,comment) in feed.comments">
+                           <div class="comment_hold m-t m-b" ng-repeat="(no,comment) in feed.comments">
                               <div class="comment-img-holder p-l">
                                  <img class="comment-img" ng-src="{{IMGURL + comment.ownerprofile.avatar}}">
                               </div>
                               <div class="comment-info-hold">
-                                 <div class="info">{{comment.comment}}</div>
+                                 <div class="info"><b ng-if="comment.parentcomment"> @ {{ comment.parentcomment ? comment.parentcomment.ownerprofile.first_name + ' ' +  comment.parentcomment.ownerprofile.last_name : '' }}</b> {{comment.comment}}</div>
                                  <div class="m-t-xs">
                                     <div class="row color_2">
-                                       <div class="col-sm-3 cursor" ng-click="changeCommentLike(key,comment,2)">
+                                       <div class="col-sm-3 cursor" ng-click="changeCommentLike(no,comment,2)">
                                           {{comment.isLiked ? 'Un ' : ''}} Like</div>
-                                       <div class="col-sm-2">Reply</div>
-                                       <div class="col-sm-2">Delete</div>
-                                       <div class="col-sm-5 text-right"><i class="fa fa-thumbs-o-up f12"
-                                             aria-hidden="true"></i><span> {{comment.likes}} likes</span></div>
+                                       <div class="col-sm-3 cursor" ng-click="replyComment(key,comment)">Reply</div>
+                                       <div class="col-sm-3 cursor" ng-click="deleteComment(key,no,comment)">Delete</div>
+                                       <div class="col-sm-3 text-right"><i class="fa fa-thumbs-o-up f12"
+                                             aria-hidden="true"></i><span> {{comment.likes}}</span></div>
                                     </div>
                                  </div>
                               </div>
                               <div class="clear_both"></div>
                            </div>
                         </div>
-                        <div class="replytext">Replying to <b>Username</b> .<a>cancel</a> </div>
+                        <div class="replytext m-sm" ng-if="commentData.is_reply && feed.showReply">Replying to <b>{{ commentData.ownerprofile.first_name + ' ' + commentData.ownerprofile.last_name }}</b> .<a ng-click="cancelReply(key)">cancel</a> </div>
                         <div class="comment_form m-t-xs m-b-xs ">
                            <form>
                               <input class="comment_field" type="text" name="" placeholder="Write your comment..."
                                  ng-model="feed.comment" my-enter="addComment(key,feed)">
                            </form>
                         </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12" ng-if="homeData.feeds.length  ==  0">
+                     <div class="w-full text-center bg-white wrapper-lg m-t-md margin_mid">
+                        <h4>Currently no Feeds</h4>
                      </div>
                   </div>
                </div>

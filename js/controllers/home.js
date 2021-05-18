@@ -1,6 +1,6 @@
 'use strict';
-app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope', 'authServices', '$timeout', '$sessionStorage', 'NgMap', '$http', '$filter', '$sce', '$window',
-    function ($scope, $state, webServices, $rootScope, authServices, $timeout, $sessionStorage, NgMap, $http, $filter, $sce, $window) {
+app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope', 'authServices', '$timeout', '$sessionStorage', 'NgMap', '$http', '$filter', '$sce', '$window', '$ngConfirm',
+    function ($scope, $state, webServices, $rootScope, authServices, $timeout, $sessionStorage, NgMap, $http, $filter, $sce, $window, $ngConfirm) {
 
         $rootScope.$emit("setSliderConfig", {});
         $scope.firstloadingdone = false;
@@ -60,16 +60,30 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.addComment = function(key,feed){
-            if(feed.comment){
-                $scope.commentData.feed = feed.id;
-                $scope.commentData.isfile = 0;
-                $scope.commentData.comment = feed.comment;
-                $scope.sendComment(key,$scope.commentData);
+            if(!$scope.commentData.is_reply){
+                if(feed.comment){
+                    $scope.commentData.is_reply = 0;
+                    $scope.commentData.feed = feed.id;
+                    $scope.commentData.isfile = 0;
+                    $scope.commentData.comment = feed.comment;
+                    $scope.sendComment(key,$scope.commentData);
+                }
+            }else{
+                if(feed.comment){
+                    $scope.commentData.comment = feed.comment;
+                    $scope.sendComment(key,$scope.commentData);
+                }
             }
+            
+        }
+
+        $scope.cancelReply = function(key){
+            $scope.homeData.feeds[key].showReply = 0;
+            $scope.commentData.is_reply = 0;
+            $scope.commentData.ownerprofile = {};
         }
     
         $scope.sendComment = function(key,comment){
-            console.log(comment);
              webServices.upload('feed/comment',comment).then(function(getData) {
                 $rootScope.loading = false;
                 if (getData.status == 200) {
@@ -162,6 +176,22 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             $rootScope.openLightbox($scope.images,0);
         }
 
+        $scope.editFeed = function(key,feed){
+            $rootScope.isEdititem = true;
+            $rootScope.formData = feed;
+            $rootScope.ModalOpen('feedModal','FeedModalController');
+        }
+
+        $scope.replyComment = function(key, comment){
+            $scope.homeData.feeds[key].showReply = 1;
+            $scope.commentData.is_reply = 1;
+            $scope.commentData.parent = comment.id;
+            $scope.commentData.isfile = 0;
+            $scope.commentData.feed = comment.feed;
+            $scope.commentData.is_reply = 1;
+            $scope.commentData.ownerprofile = comment.ownerprofile;
+        }
+
         $scope.getMonthevents = function (month, year) {
             var type = '';
             if($rootScope.currentState == 'app.mebitdashboard'){
@@ -201,7 +231,72 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             obj.status = feed.isLiked;
             obj.like_type = like_type;
             $scope.updateLike(obj);
-            console.log(obj)
+        }
+
+        $scope.deleteComment = function(key, commentkey, comment){
+            $ngConfirm({
+                title: 'Are you sure want to remove?',
+                content: '',
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        text: 'Yes',
+                        btnClass: 'btn-red',
+                        action: function() {
+                            $scope.removeComment(key, commentkey, comment.id);
+                        }
+                    },
+                    cancel: {
+                        text: 'No',
+                        action: function () {
+                        }
+                    }
+                }
+            }); 
+        }
+
+        $scope.removeComment = function(key, commentkey, comment) {
+            webServices.delete('feed/comment/delete/' + comment).then(function(getData) {
+                if (getData.status == 200) {
+                    $scope.homeData.feeds[key].comments.splice(commentkey,1);
+                } else {
+                    $rootScope.$emit("showISError",getData);
+                }
+            });
+        }
+
+        $scope.deleteFeed = function(key, feed){
+            $ngConfirm({
+                title: 'Are you sure want to remove?',
+                content: '',
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        text: 'Yes',
+                        btnClass: 'btn-red',
+                        action: function() {
+                            $scope.removeFeed(key, feed);
+                        }
+                    },
+                    cancel: {
+                        text: 'No',
+                        action: function () {
+                        }
+                    }
+                }
+            }); 
+        }
+
+        $scope.removeFeed = function(key, id) {
+            webServices.delete('feed/' + id).then(function(getData) {
+                if (getData.status == 200) {
+                    $scope.homeData.feeds.splice(key,1);
+                } else {
+                    $rootScope.$emit("showISError",getData);
+                }
+            });
         }
 
         $scope.changeCommentLike = function(key, comment, like_type){

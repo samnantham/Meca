@@ -1869,14 +1869,16 @@ menu-icon {
      height: 78vh !important;
 }
 
-.new-home .whatsnew .mCustomScrollbar{
+.new-home .whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
      height: 122vh !important;
 }
+
 .feed-area .mCustomScrollbar {
      /*height: 71vh !important;*/
      height: 123vh !important;
 }
+
 .mebit-whatsnew .mCustomScrollbar {
      /*height: 71vh !important;*/
      height: 55vh !important;
@@ -2345,293 +2347,317 @@ menu-icon {
      margin-right: 0px;
 }
 
-.btn_color_2{
+.btn_color_2 {
      color: #1b4ea9 !important;
 }
-.img-overlay
-{
+
+.img-overlay {
      z-index: 10;
      position: absolute;
      top: 0px;
 }
-.delete_feed
-{
-    position: absolute;
-    right: 3%;
-    z-index: 1000;
-    cursor: pointer;
-    visibility: hidden;
-}
-.edit_feed
-{
-    position: absolute;
-    right: 10%;
-    z-index: 1000;
-    cursor: pointer;
-    visibility: hidden;
-}
-.delete_feed img,.edit_feed img
-{
-     width: 15px;
-}
-.feed-item:hover .delete_feed,.feed-item:hover .edit_feed
-{
-     visibility: visible;
-}
-.lbn
-{
-left: 32.5%;
-top: 48%;
-}
-.irq {
-    left: 42.5%;
-    top: 53%;
-}
-.jor {
-    left: 33%;
-    top: 57%;
-}
-.kwt {
-    left: 48.6%;
-    top: 60%;
-}
-.bhr {
-    left: 47.6%;
-    top: 65%;
-}
-.qat {
-    left: 52.6%;
-    top: 67%;
-}
-.sau {
-    left: 43.6%;
-    top: 72%;
-}
-.are {
-    left: 50.5%;
-    top: 74%;
-}
-.omn {
-    left: 57.5%;
-    top: 78%;
-}
-.yem {
-    left: 47.6%;
-    top: 91.2%;
-}
-.uzb {
-    left: 61.5%;
-    top: 29.5%;
-}
-.afg {
-       left: 65.2%;
-    top: 50.5%;
+
+.delete_feed {
+     position: absolute;
+     right: 3%;
+     z-index: 1000;
+     cursor: pointer;
+     visibility: hidden;
 }
 
-.pointer_img
-{
-    position: absolute;
-    height: 4vh;
-    width: 4vw;
-    z-index: 1000;
-    cursor: pointer;
+.edit_feed {
+     position: absolute;
+     right: 10%;
+     z-index: 1000;
+     cursor: pointer;
+     visibility: hidden;
 }
-#newpopup .modal-title ,#detailedpopup .modal-title{
-    border-bottom: 1px solid #000;
-    padding-bottom: 10px;
-    color: #000;
+
+.delete_feed img, .edit_feed img {
+     width: 15px;
 }
-#newpopup .modal-body,#detailedpopup .modal-body
-{
-    padding-top: 0px; 
+
+.feed-item:hover .delete_feed, .feed-item:hover .edit_feed {
+     visibility: visible;
 }
-#newpopup .modal-header
-{
-    padding-left: 0px;
-    padding-right: 0px; 
+
+.lbn {
+     left: 32.5%;
+     top: 48%;
 }
+
+.irq {
+     left: 42.5%;
+     top: 53%;
+}
+
+.jor {
+     left: 33%;
+     top: 57%;
+}
+
+.kwt {
+     left: 48.6%;
+     top: 60%;
+}
+
+.bhr {
+     left: 47.6%;
+     top: 65%;
+}
+
+.qat {
+     left: 52.6%;
+     top: 67%;
+}
+
+.sau {
+     left: 43.6%;
+     top: 72%;
+}
+
+.are {
+     left: 50.5%;
+     top: 74%;
+}
+
+.omn {
+     left: 57.5%;
+     top: 78%;
+}
+
+.yem {
+     left: 47.6%;
+     top: 91.2%;
+}
+
+.uzb {
+     left: 61.5%;
+     top: 29.5%;
+}
+
+.afg {
+     left: 65.2%;
+     top: 50.5%;
+}
+
+.pointer_img {
+     position: absolute;
+     height: 4vh;
+     width: 4vw;
+     z-index: 1000;
+     cursor: pointer;
+}
+
+#newpopup .modal-title, #detailedpopup .modal-title {
+     border-bottom: 1px solid #000;
+     padding-bottom: 10px;
+     color: #000;
+}
+
+#newpopup .modal-body, #detailedpopup .modal-body {
+     padding-top: 0px;
+}
+
+#newpopup .modal-header {
+     padding-left: 0px;
+     padding-right: 0px;
+}
+
 .user {
-    padding: 8px 15px;
-    font-size: 14px;
-    font-weight: bold;
-    background-size: 110% 100%;
-    background-position: top center;
-    margin-bottom: 0px;
-    color: #000;
-    padding-bottom: 26px;
-    cursor: pointer;
+     padding: 8px 15px;
+     font-size: 14px;
+     font-weight: bold;
+     background-size: 110% 100%;
+     background-position: top center;
+     margin-bottom: 0px;
+     color: #000;
+     padding-bottom: 26px;
+     cursor: pointer;
 }
-._gold
-{
-background-image: url('../img/userbg/Gold.png');
+
+._gold {
+     background-image: url('../img/userbg/Gold.png');
 }
-._silver
-{
-background-image: url('../img/userbg/Silver.png');
+
+._silver {
+     background-image: url('../img/userbg/Silver.png');
 }
-._bronze
-{
-background-image: url('../img/userbg/Bronze.png');
+
+._bronze {
+     background-image: url('../img/userbg/Bronze.png');
 }
-._white
-{
-background-image: url('../img/userbg/White.png');
+
+._white {
+     background-image: url('../img/userbg/White.png');
 }
-@media only screen and (min-width: 1250px) and (max-width: 1800px)   {
+
+@media only screen and (min-width: 1250px) and (max-width: 1800px) {
      #detailedpopup_hold {
-          width:70%;
+          width: 70%;
           max-width: 1200px;
      }
 }
-@media only screen and (min-width: 1050px) and (max-width: 1249px)   {
+
+@media only screen and (min-width: 1050px) and (max-width: 1249px) {
      #detailedpopup_hold {
-          width:70%;
+          width: 70%;
           max-width: 1000px;
      }
 }
-@media only screen and (min-width: 950px) and (max-width: 1049px)  {
+
+@media only screen and (min-width: 950px) and (max-width: 1049px) {
      #detailedpopup_hold {
-          width:70%;
+          width: 70%;
           max-width: 900px;
      }
 }
-@media only screen and (max-width: 768px)  {
+
+@media only screen and (max-width: 768px) {
      #detailedpopup_hold {
-          width:100%;
+          width: 100%;
           max-width: 100%;
      }
 }
+
 .image-frame {
-   
-    max-width: 274px;
-    max-height: 238px;
-    margin: auto;
-    padding: 25px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    position: relative;
+     max-width: 274px;
+     max-height: 238px;
+     margin: auto;
+     padding: 25px;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     position: relative;
 }
-.gold_frame
-{
-      background-image: url(../img/Frame/Frame-Gold.png);
+
+.gold_frame {
+     background-image: url(../img/Frame/Frame-Gold.png);
 }
-.silver_frame
-{
-      background-image: url(../img/Frame/Frame-Silver.png);
+
+.silver_frame {
+     background-image: url(../img/Frame/Frame-Silver.png);
 }
-.bronze_frame
-{
-      background-image: url(../img/Frame/Frame-Bronze.png);
+
+.bronze_frame {
+     background-image: url(../img/Frame/Frame-Bronze.png);
 }
-.white_frame
-{
-      background-image: url(../img/Frame/Frame-Whiite.png);
+
+.white_frame {
+     background-image: url(../img/Frame/Frame-White.png);
 }
+
 .inner_image {
-        height: 193px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+     height: 193px;
+     background-size: contain;
+     background-position: center;
+     background-repeat: no-repeat;
 }
-.inner_style
-{
+
+.inner_style {
      padding: 0px 10px;
 }
+
 .badger {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: -5%;
-    background-size: 100%;
-    display: block !important;
-    left: 12%;
+     position: absolute;
+     width: 80px;
+     height: 80px;
+     top: -16%;
+     background-size: 100% auto;
+     display: block !important;
+     left: 9%;
 }
-.gold_bdg
-{
-  background-image: url(../img/Badge/Badge-Gold.png);   
+
+.gold_bdg {
+     background-image: url(../img/Badge/Badge-Gold.png);
 }
-.silver_bdg
-{
-  background-image: url(../img/Badge/Badge-Silver.png);   
+
+.silver_bdg {
+     background-image: url(../img/Badge/Badge-Silver.png);
 }
-.bronze_bdg
-{
-  background-image: url(../img/Badge/Badge-Bronze.png);   
+
+.bronze_bdg {
+     background-image: url(../img/Badge/Badge-Bronze.png);
 }
-.white_bdg
-{
-  background-image: url(../img/Badge/Badge-White.png);   
+
+.white_bdg {
+     background-image: url(../img/Badge/Badge-White.png);
 }
+
 .info_holder {
-    padding: 25px;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width: 100%;
-    box-shadow: 10px 10px 5px grey;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 1.5em;
-    color: #000;
-    border-radius: 8px;
-    font-weight: 600;
+     padding: 25px;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     width: 100%;
+     box-shadow: 10px 10px 5px grey;
+     margin-top: 50px;
+     margin-bottom: 30px;
+     text-align: center;
+     font-size: 1.5em;
+     color: #000;
+     border-radius: 8px;
+     font-weight: 600;
 }
-.gold_plate{
+
+.gold_plate {
      background-image: url(../img/Nameboard_gold.png);
 }
-.silver_plate{
+
+.silver_plate {
      background-image: url(../img/Nameboard_silver.png);
 }
-.bronze_plate{
+
+.bronze_plate {
      background-image: url(../img/Nameboard_bronze.png);
 }
-.white_plate{
+
+.white_plate {
      background-image: url(../img/Nameboard_white.png);
 }
-.box-dec
-{
-    background: #ebefef;
-    padding: 20px;
-    text-align: center;
-    border-radius: 5px;
-    min-height: 120px;
+
+.box-dec {
+     background: #ebefef;
+     padding: 20px;
+     text-align: center;
+     border-radius: 5px;
+     min-height: 120px;
 }
-.status_in
-{
+
+.status_in {
      width: 35px;
 }
-.status_txt
-{
+
+.status_txt {
      font-size: 1.2em;
      color: #000;
      margin-top: 5px;
      font-weight: 600;
 }
-.status_tit
-{
-       font-size: 1.3em;
+
+.status_tit {
+     font-size: 1.3em;
      color: #000;
      font-weight: bold;
-     margin-bottom:5px;   
+     margin-bottom: 5px;
 }
-.doc_holder
-{
+
+.doc_holder {
      border: 1px solid #eee;
      padding: 10px;
      border-radius: 5px;
      max-width: 300px;
 }
+
 .down_in {
-    width: 24px;
+     width: 24px;
 }
-.user_list_img
-{
+
+.user_list_img {
      background-image: url('../img/Background_with_Badge.png');
      background-size: 100% 100%;
      min-height: 600px;
 }
-.user_name_text
-{
+
+.user_name_text {
      font-size: 1.2em;
      color: #000;
      font-weight: 600;
@@ -2640,8 +2666,8 @@ background-image: url('../img/userbg/White.png');
      text-overflow: ellipsis;
      width: 100%;
 }
-.user_position_text
-{
+
+.user_position_text {
      font-size: .7em;
      color: #000;
      white-space: nowrap;
@@ -2649,8 +2675,8 @@ background-image: url('../img/userbg/White.png');
      text-overflow: ellipsis;
      width: 100%;
 }
-.user_role_text
-{
+
+.user_role_text {
      font-size: 1em;
      color: #000;
      font-weight: 600;
@@ -2659,21 +2685,22 @@ background-image: url('../img/userbg/White.png');
      text-overflow: ellipsis;
      width: 100%;
 }
+
 @media (min-width: 1000px) and (max-width: 1536px) {
-.text-2x {
-    font-size: 1.2em;
-}
+     .text-2x {
+          font-size: 1.2em;
      }
-.back_btn
-{
+}
+
+.back_btn {
      position: absolute;
      top: 0%;
      right: 3%;
      cursor: pointer;
      background-color: #3f4a8e !important;
-    color: #fff !important;
-    font-size: 1.5em;
-    margin: 8px 5px;
-    padding: 5px 15px !important;
-    box-shadow: -5px 3px 6px #0d0d0d87;
+     color: #fff !important;
+     font-size: 1.5em;
+     margin: 8px 5px;
+     padding: 5px 15px !important;
+     box-shadow: -5px 3px 6px #0d0d0d87;
 }
