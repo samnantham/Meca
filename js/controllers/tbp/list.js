@@ -43,9 +43,33 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
     }
 
     $scope.getCountryTrainees = function(country){
+        $scope.trainees = {};
+        $rootScope.loading = true;
         $scope.showMap = 0;
         $scope.showListing = 1;
-        
+        webServices.get('trainees/'+country).then(function(getData) {
+            $rootScope.loading = false;
+            if (getData.status == 200) {
+                $scope.trainees = getData.data;
+                console.log($scope.trainees)
+            } else {
+               // $rootScope.logout();
+            }
+        });
+    }
+
+    $scope.viewTrainee = function(traineeInfo){
+        $scope.traineeInfo = {};
+        $scope.traineeInfo = traineeInfo;
+        $('#TraineeInfopopup').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+    $scope.gobacktoMap = function(){
+        $scope.showMap = 1;
+        $scope.showListing = 0;
     }
 
     $scope.setservererrorMsg = function(errors){

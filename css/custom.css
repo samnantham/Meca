@@ -2459,6 +2459,7 @@ top: 48%;
     margin-bottom: 0px;
     color: #000;
     padding-bottom: 26px;
+    cursor: pointer;
 }
 ._gold
 {
@@ -2562,13 +2563,12 @@ background-image: url('../img/userbg/White.png');
   background-image: url(../img/Badge/Badge-White.png);   
 }
 .info_holder {
-    background-image: url(../img/Nameboard.png);
     padding: 25px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: 100%;
     box-shadow: 10px 10px 5px grey;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 30px;
     text-align: center;
     font-size: 1.5em;
@@ -2576,12 +2576,25 @@ background-image: url('../img/userbg/White.png');
     border-radius: 8px;
     font-weight: 600;
 }
+.gold_plate{
+     background-image: url(../img/Nameboard_gold.png);
+}
+.silver_plate{
+     background-image: url(../img/Nameboard_silver.png);
+}
+.bronze_plate{
+     background-image: url(../img/Nameboard_bronze.png);
+}
+.white_plate{
+     background-image: url(../img/Nameboard_white.png);
+}
 .box-dec
 {
     background: #ebefef;
     padding: 20px;
     text-align: center;
     border-radius: 5px;
+    min-height: 120px;
 }
 .status_in
 {
