@@ -2362,11 +2362,19 @@ menu-icon {
     cursor: pointer;
     visibility: hidden;
 }
-.delete_feed img
+.edit_feed
+{
+    position: absolute;
+    right: 10%;
+    z-index: 1000;
+    cursor: pointer;
+    visibility: hidden;
+}
+.delete_feed img,.edit_feed img
 {
      width: 15px;
 }
-.feed-item:hover .delete_feed
+.feed-item:hover .delete_feed,.feed-item:hover .edit_feed
 {
      visibility: visible;
 }

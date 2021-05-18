@@ -179,11 +179,13 @@
                <div class="panel-body bdr-1px p-l-none p-r-none" ng-scrollbars ng-scrollbars-config="scrollconfig">
                   <div class="feed-item" ng-class="{'feed-item-data': !$last }"
                      ng-repeat="(key,feed) in homeData.feeds">
-                     <span class="delete_feed"><img src="img/feed/delete.png"></span>
+                     
                      <div class="col-sm-12 m-b-xs">
                         <div class="feed-img-holder p-l">
                            <img class="feed-img" ng-src="{{IMGURL + feed.ownerprofile.avatar}}">
                         </div>
+                       
+                        
                         <div class="feed-info">
                            <div class="f12"><strong>{{ feed.is_admin ?
                                  feed.ownerprofile.username + '(Admin)' : feed.ownerprofile.first_name +
@@ -197,6 +199,10 @@
                            <div class="dis-img box-shadow b" background-image="{{IMGURL}}{{feed.cover_image}}"></div>
                         </div>
                      </div>
+                      <div class="pos-rlt col-sm-12">
+                           <span class="delete_feed"><img src="img/feed/delete.png"></span>
+                           <span class="edit_feed"><img src="img/feed/edit.png"></span>
+                        </div>
                      <div class="col-xs-12">
                         <div class="m-b-xs m-t-xs">
                            <span>{{feed.content}}
@@ -225,8 +231,9 @@
                                     <div class="row color_2">
                                        <div class="col-sm-3 cursor" ng-click="changeCommentLike(key,comment,2)">
                                           {{comment.isLiked ? 'Un ' : ''}} Like</div>
-                                       <div class="col-sm-3">Reply</div>
-                                       <div class="col-sm-6 text-right"><i class="fa fa-thumbs-o-up f12"
+                                       <div class="col-sm-2">Reply</div>
+                                       <div class="col-sm-2">Delete</div>
+                                       <div class="col-sm-5 text-right"><i class="fa fa-thumbs-o-up f12"
                                              aria-hidden="true"></i><span> {{comment.likes}} likes</span></div>
                                     </div>
                                  </div>
