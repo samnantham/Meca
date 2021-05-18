@@ -212,7 +212,7 @@ textarea {
 }
 
 .nav {
-     padding: 0px 20px;
+     padding: 0px 0px;
 }
 
 .sml-pd {
@@ -1638,7 +1638,7 @@ menu-icon {
      background-color: #3f4a8e !important;
      color: #fff !important;
      margin: 8px 5px;
-     padding: 5px 15px !important;
+     padding: 5px 10px !important;
      box-shadow: -5px 3px 6px #0d0d0d87;
 }
 
@@ -1646,7 +1646,7 @@ menu-icon {
      background-color: #3f4a8e !important;
      color: #fff !important;
      margin: 5px 5px;
-     padding: 5px 15px !important;
+     padding: 5px 10px !important;
      box-shadow: -5px 3px 6px #0d0d0d87;
 }
 
@@ -2621,3 +2621,8 @@ background-image: url('../img/userbg/White.png');
      text-overflow: ellipsis;
      width: 100%;
 }
+@media (min-width: 1000px) and (max-width: 1536px) {
+.text-2x {
+    font-size: 1.2em;
+}
+     }
