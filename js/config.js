@@ -313,6 +313,10 @@ var app =
             name: 'Yemen AMTC _ MEBIT Organization Structure Template v2',
             link: 'docs/Organization/Yemen AMTC _ MEBIT Organization Structure Template v2.pdf'
           }];
+
+          app.mentor_experience_years = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th','13th','14th','15th'];
+          app.mentor_batch_medals = ['GOLD（Passed with above 90% score）','GOLD（Passed with above 90% score）- Upgraded','GOLD（Passed with above 90% score）- Renewed','SILVER（Passed with above 80% score）','SILVER（Passed with above 80% score）- Upgraded','SILVER（Passed with above 80% score）- Renewed','Not yet passed the mentor course',];
+          app.mentor_countries = [{lable:'lbn', country:'Lebanon'},{lable:'irq', country:'Iraq'},{lable:'jor', country:'Jordan'},{lable:'kwt', country:'Kuwait'},{lable:'bhr', country:'Bahrain' },{lable:'qat', country:'Qatar' },{lable:'sau',country:'Saudi Arabia' },{lable:'are',country:'United Arab Emirates' },{lable:'omn',country: 'Oman' },{lable:'yem',country: 'Yemen'},{lable:'uzb',country: 'Uzbekistan'},{lable:'afg', country: 'Afghanistan'}];
         }
 
       ]).config(function (ScrollBarsProvider) {

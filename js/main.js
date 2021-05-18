@@ -125,6 +125,9 @@ angular.module('app')
             $rootScope.newscategories = angular.copy(app.newscategories);
             $rootScope.newsvideotypes = angular.copy(app.newsvideotypes);
             $rootScope.dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            $rootScope.mentor_experience_years = angular.copy(app.mentor_experience_years);
+            $rootScope.mentor_batch_medals = angular.copy(app.mentor_batch_medals);
+            $rootScope.mentor_countries = angular.copy(app.mentor_countries);
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;
 

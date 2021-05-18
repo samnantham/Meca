@@ -60,9 +60,14 @@
          </div>
 
          <div class="bg-white  r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig" ng-if="activetab == 5">
-            <div class="row user_list_img">
+            <div class="row" ng-if="showMap">
+               <div class="pos-rlt">                             
+               <img src="img/wall.png" class="img-full">
+               <span class="{{country.lable}} pointer_img" ng-repeat="(key,country) in mentor_countries" ng-click="getCountryTrainees(country.lable)"></span>
+               </div>
+            </div>
+            <div class="row user_list_img" ng-if="showListing">
                <div class="col-sm-9">
-                
                      <div class="col-sm-3 user _gold">
                         <div class="user_name_text">Mr. Hayman Al Bebany</div>
                         <div class="user_position_text">Alufftaim Motor / Sales Manager</div>
@@ -106,23 +111,7 @@
                </div>
                <div class="col-sm-3"></div>
             </div>
-           <!--  <div class="row">
-               <div class="pos-rlt">                             
-               <img src="img/wall.png" class="img-full " >
-               <span class="lbn pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="irq pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="jor pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="kwt pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="bhr pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="qat pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="sau pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="are pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="omn pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="yem pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="uzb pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               <span class="afg pointer_img" data-toggle="modal" data-target="#newpopup"></span>
-               </div>
-            </div> -->
+            
          </div>
       </div>
    </div>

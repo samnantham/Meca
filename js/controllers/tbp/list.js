@@ -13,6 +13,8 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
     $scope.filterData.type = $stateParams.type;
     $scope.filterData.sortorder = '';
     $scope.errorData = {};
+    $scope.showMap = 0;
+    $scope.showListing = 0;
 
     $scope.seterrorMsg = function(){
         $scope.errorData.title_errorMsg = 'Enter Title';
@@ -27,11 +29,23 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
             $scope.filterData.type = tab;
             if($scope.activetab == 4){
                 $scope.url = 'pdca/training/paginate/' + $scope.totalPerPage;
-            }else{
-                $scope.url = 'tbp/paginate/' + $scope.totalPerPage;
+                $scope.getResults();
+            }else if($scope.activetab == 5){
+                $rootScope.loading = false;
+                $scope.showMap = 1;
+                $scope.showListing = 0;
             }
-            $scope.getResults();
+            else{
+                $scope.url = 'tbp/paginate/' + $scope.totalPerPage;
+                $scope.getResults();
+            }
         }
+    }
+
+    $scope.getCountryTrainees = function(country){
+        $scope.showMap = 0;
+        $scope.showListing = 1;
+        
     }
 
     $scope.setservererrorMsg = function(errors){
