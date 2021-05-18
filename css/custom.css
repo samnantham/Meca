@@ -2429,7 +2429,7 @@ top: 48%;
     padding: 8px 15px;
     font-size: 14px;
     font-weight: bold;
-    background-size: 100% 100%;
+    background-size: 110% 100%;
     background-position: top center;
     margin-bottom: 0px;
     color: #000;
@@ -2626,3 +2626,16 @@ background-image: url('../img/userbg/White.png');
     font-size: 1.2em;
 }
      }
+.back_btn
+{
+     position: absolute;
+     top: 0%;
+     right: 3%;
+     cursor: pointer;
+     background-color: #3f4a8e !important;
+    color: #fff !important;
+    font-size: 1.5em;
+    margin: 8px 5px;
+    padding: 5px 10px !important;
+    box-shadow: -5px 3px 6px #0d0d0d87;
+}
