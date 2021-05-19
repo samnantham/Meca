@@ -200,7 +200,14 @@
                                  feed.ownerprofile.distributorinfo.name }}</strong></div>
                            <div class="f8">{{convertDate(feed.created_at) | date:'shortTime' }}</div>
                         </div>
-                        <div class="feed_more">&nbsp;</div>
+                        <div class="btn-group dropdown">
+                           <button class="btn btn-success" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
+                           <ul class="dropdown-menu">
+                             <li><a href="">Action</a></li>
+                             <li><a href="">Another action</a></li>
+                             <li><a href="">Something else here</a></li>
+                           </ul>
+                         </div>
                      </div>
                      <div class="bg-white r-b-6x">
                         <div class="col-xs-12 wrapper">
@@ -236,8 +243,7 @@
                               </div>
                               <div class="comment-info-hold">
 
-                                 <div class="info"><div class="color_2"><strong>test{{
-                              commentData.ownerprofile.first_name + ' ' + commentData.ownerprofile.last_name }}</strong> </div>
+                                 <div class="info"><div class="color_2"><strong>{{ comment.is_admin ? comment.ownerprofile.username : (comment.ownerprofile.first_name + ' ' + comment.ownerprofile.last_name) }}</strong> </div>
                               <b ng-if="comment.parentcomment"> @ {{ comment.parentcomment ?
                                        comment.parentcomment.ownerprofile.first_name + ' ' +
                                        comment.parentcomment.ownerprofile.last_name : '' }}</b> {{comment.comment}}
