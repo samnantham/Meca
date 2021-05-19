@@ -200,6 +200,7 @@
                                  feed.ownerprofile.distributorinfo.name }}</strong></div>
                            <div class="f8">{{convertDate(feed.created_at) | date:'shortTime' }}</div>
                         </div>
+                        <div class="feed_more">&nbsp;</div>
                      </div>
                      <div class="bg-white r-b-6x">
                         <div class="col-xs-12 wrapper">
@@ -234,7 +235,10 @@
                                  <img class="comment-img" ng-src="{{IMGURL + comment.ownerprofile.avatar}}">
                               </div>
                               <div class="comment-info-hold">
-                                 <div class="info"><b ng-if="comment.parentcomment"> @ {{ comment.parentcomment ?
+
+                                 <div class="info"><div class="color_2"><strong>test{{
+                              commentData.ownerprofile.first_name + ' ' + commentData.ownerprofile.last_name }}</strong> </div>
+                              <b ng-if="comment.parentcomment"> @ {{ comment.parentcomment ?
                                        comment.parentcomment.ownerprofile.first_name + ' ' +
                                        comment.parentcomment.ownerprofile.last_name : '' }}</b> {{comment.comment}}
                                  </div>

@@ -2267,11 +2267,12 @@ menu-icon {
      width: 40px;
      border-radius: 50%;
      height: 40px;
+   
 }
 
 .feed-img-holder {
      float: left;
-     margin-right: 10px
+     width:45px;
 }
 
 .comment-img-holder {
@@ -2287,7 +2288,19 @@ menu-icon {
 .feed-info, .comment-info {
      float: left;
 }
-
+.feed-info
+{
+     width:calc(100% - 85px);
+}
+.feed_more {
+    float: left;
+    width: 40px;
+    background-image: url(../img/feed/more.png);
+    background-size: 65%;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+    background-position: right;
+}
 .like_comment_holder {
      border-top: 1px solid #eee;
      border-bottom: 1px solid #eee;
@@ -2360,6 +2373,7 @@ menu-icon {
 .delete_feed {
      position: absolute;
      right: 3%;
+     top: -10px;
      z-index: 1000;
      cursor: pointer;
      visibility: hidden;
@@ -2368,6 +2382,7 @@ menu-icon {
 .edit_feed {
      position: absolute;
      right: 10%;
+     top: -10px;
      z-index: 1000;
      cursor: pointer;
      visibility: hidden;
