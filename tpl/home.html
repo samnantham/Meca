@@ -98,19 +98,25 @@
                            </a>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center m-t-sm m-b-sm">
-                           <a class="btn btn-xs btn-success text-u-c cursor" download="KTB_M6 Order Form_ver20210401 (002).xlsx" href="docs/KTB_M6 Order Form_ver20210401 (002).xlsx" target="_blank">
-                               Order Form
+                           <a class="btn btn-xs btn-success text-u-c cursor"
+                              download="KTB_M6 Order Form_ver20210401 (002).xlsx"
+                              href="docs/KTB_M6 Order Form_ver20210401 (002).xlsx" target="_blank">
+                              Order Form
                            </a>
-                       </div>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-         <div class="promotion-area m-t-lg m-b" ng-if="homeData.onlyDays.length > 0">
+
+         <div class="promotion-area m-t m-b" ng-if="homeData.onlyDays.length > 0">
             <div class="panel panel-default r-3x">
+               <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+                  <span class="cursor" ui-sref="app.oneandonly">One and Only Day</span>
+               </div>
                <div class="panel-body pos-rlt">
-                  <div class="top-caption cursor" ui-sref="app.oneandonly">One and Only Day</div>
+                  <!-- <div class="top-caption cursor" ui-sref="app.oneandonly">One and Only Day</div> -->
                   <div class="bg-white r-b-6x">
                      <slick ng-if="!loading" init-onload="false" data="homeData.onlyDays" settings="slickConfig">
                         <div class="col-md-3 col-lg-2 col-sm-3 col-xs-6 no-padder"
@@ -174,18 +180,19 @@
          <div class="promotion-area m-b feed-area">
             <div class="panel panel-default r-3x">
                <div class="panel-heading r-3x r-b-none bg-main1 text-left">
-                  <span class="font-bold"> Feeds </span>  <a class="btn btn-default btn-xs bg-main2 pull-right b-no f-10" ng-click="ModalOpen('feedModal','FeedModalController');">Add New</a>
+                  <span class="font-bold"> Feeds </span> <a class="btn btn-default btn-xs bg-main2 pull-right b-no f-10"
+                     ng-click="ModalOpen('feedModal','FeedModalController');">Add New</a>
                </div>
                <div class="panel-body bdr-1px p-l-none p-r-none" ng-scrollbars ng-scrollbars-config="scrollconfig">
                   <div class="feed-item" ng-class="{'feed-item-data': !$last }"
                      ng-repeat="(key,feed) in homeData.feeds">
-                     
+
                      <div class="col-sm-12 m-b-xs">
                         <div class="feed-img-holder p-l">
                            <img class="feed-img" ng-src="{{IMGURL + feed.ownerprofile.avatar}}">
                         </div>
-                       
-                        
+
+
                         <div class="feed-info">
                            <div class="f12"><strong>{{ feed.is_admin ?
                                  feed.ownerprofile.username + '(Admin)' : feed.ownerprofile.first_name +
@@ -199,10 +206,11 @@
                            <div class="dis-img box-shadow b" background-image="{{IMGURL}}{{feed.cover_image}}"></div>
                         </div>
                      </div>
-                      <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">
-                           <span class="delete_feed" ng-click="deleteFeed(key,feed.id)"><img src="img/feed/delete.png"></span>
-                           <span class="edit_feed" ng-click="editFeed(key,feed)"><img src="img/feed/edit.png"></span>
-                        </div>
+                     <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">
+                        <span class="delete_feed" ng-click="deleteFeed(key,feed.id)"><img
+                              src="img/feed/delete.png"></span>
+                        <span class="edit_feed" ng-click="editFeed(key,feed)"><img src="img/feed/edit.png"></span>
+                     </div>
                      <div class="col-xs-12">
                         <div class="m-b-xs m-t-xs">
                            <span>{{feed.content}}
@@ -226,13 +234,17 @@
                                  <img class="comment-img" ng-src="{{IMGURL + comment.ownerprofile.avatar}}">
                               </div>
                               <div class="comment-info-hold">
-                                 <div class="info"><b ng-if="comment.parentcomment"> @ {{ comment.parentcomment ? comment.parentcomment.ownerprofile.first_name + ' ' +  comment.parentcomment.ownerprofile.last_name : '' }}</b> {{comment.comment}}</div>
+                                 <div class="info"><b ng-if="comment.parentcomment"> @ {{ comment.parentcomment ?
+                                       comment.parentcomment.ownerprofile.first_name + ' ' +
+                                       comment.parentcomment.ownerprofile.last_name : '' }}</b> {{comment.comment}}
+                                 </div>
                                  <div class="m-t-xs">
                                     <div class="row color_2">
                                        <div class="col-sm-3 cursor" ng-click="changeCommentLike(no,comment,2)">
                                           {{comment.isLiked ? 'Un ' : ''}} Like</div>
                                        <div class="col-sm-3 cursor" ng-click="replyComment(key,comment)">Reply</div>
-                                       <div class="col-sm-3 cursor" ng-click="deleteComment(key,no,comment)">Delete</div>
+                                       <div class="col-sm-3 cursor" ng-click="deleteComment(key,no,comment)">Delete
+                                       </div>
                                        <div class="col-sm-3 text-right"><i class="fa fa-thumbs-o-up f12"
                                              aria-hidden="true"></i><span> {{comment.likes}}</span></div>
                                     </div>
@@ -241,7 +253,9 @@
                               <div class="clear_both"></div>
                            </div>
                         </div>
-                        <div class="replytext m-sm" ng-if="commentData.is_reply && feed.showReply">Replying to <b>{{ commentData.ownerprofile.first_name + ' ' + commentData.ownerprofile.last_name }}</b> .<a ng-click="cancelReply(key)">cancel</a> </div>
+                        <div class="replytext m-sm" ng-if="commentData.is_reply && feed.showReply">Replying to <b>{{
+                              commentData.ownerprofile.first_name + ' ' + commentData.ownerprofile.last_name }}</b> .<a
+                              ng-click="cancelReply(key)">cancel</a> </div>
                         <div class="comment_form m-t-xs m-b-xs ">
                            <form>
                               <input class="comment_field" type="text" name="" placeholder="Write your comment..."
