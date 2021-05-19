@@ -16,10 +16,10 @@
             <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{'active': activetab == 0}"
                ng-click="changeActive(0)">All</button>
             <button class="btn no-shadow b-no btn-default panel-tab web-visible"
-               ng-class="{'active': activetab == tbp.id, 'bg-main4' : tbp.id == 4, 'bg-white' : tbp.id == 5, 'btn_color_2 font-bold': $last}"
+               ng-class="{'active': activetab == tbp.id, 'bg-main4' : tbp.id == 4, 'bg-white' : tbp.id == 5, 'btn_color_2 font-bold m-l-sm': $last}"
                ng-click="changeActive(tbp.id)" ng-repeat="(num,tbp) in tbptypes">{{tbp.type}}</button>
          </div>
-         <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig" ng-if="activetab < 4">
+         <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig" ng-if="activetab <= 4">
             <div class="row m-t">
                <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 inner-addon right-addon">
                   <i class="fa fa-search"></i>
@@ -95,39 +95,43 @@
                   </div>
                </div>
                <div class="row user_list_img pos-rlt" ng-if="showListing">
-                  <div class="back_btn" ng-click="gobacktoMap()">BACK</div>
+                  <!-- <div class="back_btn" ng-click="gobacktoMap()">BACK</div> -->
                   <div class="col-sm-9">
                      <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
                         <div class="user _gold" ng-click="viewTrainee(user)"
                            ng-repeat="(key,user) in trainees.goldUsers">
-                           <div class="user_name_text">{{user.first_name + ' ' + user.last_name}}</div>
-                           <div class="user_position_text">{{user.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.divisioninformation.division_name}}</div>
+                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
+                           </div>
+                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
+                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
 
                      <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
                         <div class="user _silver" ng-click="viewTrainee(user)"
                            ng-repeat="(key,user) in trainees.silverUsers">
-                           <div class="user_name_text">{{user.first_name + ' ' + user.last_name}}</div>
-                           <div class="user_position_text">{{user.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.divisioninformation.division_name}}</div>
+                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
+                           </div>
+                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
+                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
                      <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
                         <div class="user _bronze" ng-click="viewTrainee(user)"
                            ng-repeat="(key,user) in trainees.bronzeUsers">
-                           <div class="user_name_text">{{user.first_name + ' ' + user.last_name}}</div>
-                           <div class="user_position_text">{{user.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.divisioninformation.division_name}}</div>
+                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
+                           </div>
+                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
+                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
                      <div class="col-sm-3">
                         <div class="user _white" ng-click="viewTrainee(user)"
                            ng-repeat="(key,user) in trainees.whiteUsers">
-                           <div class="user_name_text">{{user.first_name + ' ' + user.last_name}}</div>
-                           <div class="user_position_text">{{user.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.divisioninformation.division_name}}</div>
+                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
+                           </div>
+                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
+                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
                   </div>
@@ -274,18 +278,22 @@
                         <div class="col-sm-5">
                            <div class="pos-rlt">
                               <div class="image-frame"
-                                 ng-class="{'gold_frame' :traineeInfo.traineeinfo.frame == 1,'silver_frame' :traineeInfo.traineeinfo.frame == 2,'bronze_frame' :traineeInfo.traineeinfo.frame == 3,'white_frame' :traineeInfo.traineeinfo.frame == 4}">
+                                 ng-class="{'gold_frame' :traineeInfo.frame == 1,'silver_frame' :traineeInfo.frame == 2,'bronze_frame' :traineeInfo.frame == 3,'white_frame' :traineeInfo.frame == 4}">
                                  <div class="inner_style">
-                                    <div background-image="{{IMGURL}}{{traineeInfo.avatar}}" class="inner_image">&nbsp;
+                                    <div background-image="{{IMGURL}}{{traineeInfo.userinfo.avatar}}"
+                                       class="inner_image">&nbsp;
                                     </div>
                                  </div>
                               </div>
-                              <div class="badger" ng-class="{'gold_bdg' :traineeInfo.traineeinfo.frame == 1,'silver_bdg' :traineeInfo.traineeinfo.frame == 2,'bronze_bdg' :traineeInfo.traineeinfo.frame == 3,'white_bdg' :traineeInfo.traineeinfo.frame == 4}"></div>
+                              <div class="badger"
+                                 ng-class="{'gold_bdg' :traineeInfo.frame == 1,'silver_bdg' :traineeInfo.frame == 2,'bronze_bdg' :traineeInfo.frame == 3,'white_bdg' :traineeInfo.frame == 4}">
+                              </div>
                            </div>
-                           <div class="info_holder" ng-class="{'gold_plate' :traineeInfo.traineeinfo.frame == 1,'silver_plate' :traineeInfo.traineeinfo.frame == 2,'bronze_plate' :traineeInfo.traineeinfo.frame == 3,'white_plate' :traineeInfo.traineeinfo.frame == 4}">
-                              {{traineeInfo.first_name + ' ' + user.last_name}}<br>
-                              {{traineeInfo.distributorinformation.name}}<br>
-                              {{traineeInfo.divisioninformation.division_name}}
+                           <div class="info_holder"
+                              ng-class="{'gold_plate' :traineeInfo.frame == 1,'silver_plate' :traineeInfo.frame == 2,'bronze_plate' :traineeInfo.frame == 3,'white_plate' :traineeInfo.frame == 4}">
+                              {{traineeInfo.userinfo.first_name + ' ' + user.last_name}}<br>
+                              {{traineeInfo.userinfo.distributorinformation.name}}<br>
+                              {{traineeInfo.userinfo.divisioninformation.division_name}}
                            </div>
                         </div>
                         <div class="col-sm-7">
@@ -293,11 +301,11 @@
                               <div class="col-sm-3 m-t-md">
                                  <label class="status_tit color_2">DMDP</label>
                                  <div class="box-dec">
-                                    <img
-                                       ng-src="{{traineeInfo.traineeinfo.is_dmdp ? 'img/Tick.png' : 'img/Untick.png'}}"
+                                    <img ng-src="{{traineeInfo.is_dmdp ? 'img/Tick.png' : 'img/Untick.png'}}"
                                        class="status_in">
-                                       <div class="status_txt">Course</div>
-                                       <div class="status_txt font-1em" ng-if="traineeInfo.traineeinfo.dmdp_date">{{convertDate(traineeInfo.traineeinfo.dmdp_date) | date:'dd MMM yyyy'}}</div>
+                                    <div class="status_txt">Course</div>
+                                    <div class="status_txt font-1em" ng-if="traineeInfo.dmdp_date">
+                                       {{convertDate(traineeInfo.dmdp_date) | date:'dd MMM yyyy'}}</div>
                                  </div>
                               </div>
                               <div class="col-sm-9 m-t-md">
@@ -305,31 +313,33 @@
                                  <div class="box-dec">
                                     <div class="row">
                                        <div class="col-sm-3">
-                                          <img
-                                             ng-src="{{traineeInfo.traineeinfo.is_step_1 ? 'img/Tick.png' : 'img/Untick.png'}}"
+                                          <img ng-src="{{traineeInfo.is_step_1 ? 'img/Tick.png' : 'img/Untick.png'}}"
                                              class="status_in">
                                           <div class="status_txt">Step 1</div>
-                                          <div class="status_txt font-1em" ng-if="traineeInfo.traineeinfo.step_1_date">{{convertDate(traineeInfo.traineeinfo.step_1_date) | date:'dd MMM yyyy'}}</div>
+                                          <div class="status_txt font-1em" ng-if="traineeInfo.step_1_date">
+                                             {{convertDate(traineeInfo.step_1_date) | date:'dd MMM yyyy'}}</div>
                                        </div>
                                        <div class="col-sm-3">
-                                          <img
-                                             ng-src="{{traineeInfo.traineeinfo.is_step_1_3 ? 'img/Tick.png' : 'img/Untick.png'}}"
+                                          <img ng-src="{{traineeInfo.is_step_1_3 ? 'img/Tick.png' : 'img/Untick.png'}}"
                                              class="status_in">
                                           <div class="status_txt">Step 1-3 </div>
-                                          <div class="status_txt font-1em" ng-if="traineeInfo.traineeinfo.step_1_3_date">{{convertDate(traineeInfo.traineeinfo.step_1_3_date) | date:'dd MMM yyyy'}}</div>
+                                          <div class="status_txt font-1em" ng-if="traineeInfo.step_1_3_date">
+                                             {{convertDate(traineeInfo.step_1_3_date) | date:'dd MMM yyyy'}}</div>
                                        </div>
                                        <div class="col-sm-3">
-                                          <img ng-src="{{traineeInfo.traineeinfo.is_step_1_5 ? 'img/Tick.png' : 'img/Untick.png'}}"
+                                          <img ng-src="{{traineeInfo.is_step_1_5 ? 'img/Tick.png' : 'img/Untick.png'}}"
                                              class="status_in">
                                           <div class="status_txt">Step 1-5</div>
-                                          <div class="status_txt font-1em" ng-if="traineeInfo.traineeinfo.step_1_5_date">{{convertDate(traineeInfo.traineeinfo.step_1_5_date) | date:'dd MMM yyyy'}}</div>
+                                          <div class="status_txt font-1em" ng-if="traineeInfo.step_1_5_date">
+                                             {{convertDate(traineeInfo.step_1_5_date) | date:'dd MMM yyyy'}}</div>
                                        </div>
                                        <div class="col-sm-3">
                                           <img
-                                             ng-src="{{traineeInfo.traineeinfo.is_final_report ? 'img/Tick.png' : 'img/Untick.png'}}"
+                                             ng-src="{{traineeInfo.is_final_report ? 'img/Tick.png' : 'img/Untick.png'}}"
                                              class="status_in">
                                           <div class="status_txt">Final Report</div>
-                                          <div class="status_txt font-1em" ng-if="traineeInfo.traineeinfo.final_report_date">{{convertDate(traineeInfo.traineeinfo.final_report_date) | date:'dd MMM yyyy'}}</div>
+                                          <div class="status_txt font-1em" ng-if="traineeInfo.final_report_date">
+                                             {{convertDate(traineeInfo.final_report_date) | date:'dd MMM yyyy'}}</div>
                                        </div>
                                     </div>
 
@@ -339,28 +349,34 @@
                               <div class="col-sm-3 m-t-md">
                                  <label class="status_tit color_2">MENTOR</label>
                                  <div class="box-dec">
-                                    <img
-                                       ng-src="{{traineeInfo.traineeinfo.is_mentor ? 'img/Tick.png' : 'img/Untick.png'}}"
+                                    <img ng-src="{{traineeInfo.is_mentor ? 'img/Tick.png' : 'img/Untick.png'}}"
                                        class="status_in">
-                                       <div class="status_txt">PASSED</div>
-                                       <div class="status_txt font-1em" ng-if="traineeInfo.traineeinfo.mentor_date">{{convertDate(traineeInfo.traineeinfo.mentor_date) | date:'dd MMM yyyy'}}</div>
+                                    <div class="status_txt">PASSED</div>
+                                    <div class="status_txt font-1em" ng-if="traineeInfo.mentor_date">
+                                       {{convertDate(traineeInfo.mentor_date) | date:'dd MMM yyyy'}}</div>
                                  </div>
                               </div>
-                              <div class="col-sm-9 m-t-md" ng-if="traineeInfo.traineeinfo.mentor_experience && traineeInfo.traineeinfo.mentor_batch">
+                              <div class="col-sm-9 m-t-md"
+                                 ng-if="traineeInfo.mentor_experience && traineeInfo.mentor_batch">
                                  <label class="status_tit text-white">MENTOR</label>
                                  <div class="box-dec align-center">
                                     <div class="text-center status_txt w-full">
-                                       <span ng-if="traineeInfo.traineeinfo.mentor_experience">Mentor Experience: {{traineeInfo.traineeinfo.mentor_experience}} Year{{traineeInfo.traineeinfo.mentor_experience != '1st' ? 's': ''}}</span>
-                                          <br>
-                                          <span ng-if="traineeInfo.traineeinfo.mentor_batch">{{traineeInfo.traineeinfo.mentor_batch}} in {{traineeInfo.traineeinfo.passed_year}}</span>
+                                       <span ng-if="traineeInfo.mentor_experience">Mentor Experience:
+                                          {{traineeInfo.mentor_experience}} Year{{traineeInfo.mentor_experience != '1st'
+                                          ? 's': ''}}</span>
+                                       <br>
+                                       <span ng-if="traineeInfo.mentor_batch">{{traineeInfo.mentor_batch}} in
+                                          {{traineeInfo.passed_year}}</span>
                                     </div>
 
                                  </div>
                               </div>
-                              <div class="col-sm-12 m-t-md" ng-if="traineeInfo.traineeinfo.document_link">
+                              <div class="col-sm-12 m-t-md" ng-if="traineeInfo.document_link">
                                  <label class="status_tit color_2">DOCUMENTS</label>
                                  <div class="doc_holder status_txt">
-                                    {{traineeInfo.traineeinfo.document_link.split('/').pop()}} <a ng-href="{{IMGURL}}{{traineeInfo.traineeinfo.document_link}}" target="_blank" href=""><img src="img/Download button" class="down_in comment_holder"></a>
+                                    {{traineeInfo.document_link.split('/').pop()}} <a
+                                       ng-href="{{IMGURL}}{{traineeInfo.document_link}}" target="_blank" href=""><img
+                                          src="img/Download button" class="down_in comment_holder"></a>
                                  </div>
                               </div>
                            </div>
@@ -374,7 +390,7 @@
    </div>
 
    <style>
-      .font-1em{
-         font-size: 1em!important;
+      .font-1em {
+         font-size: 1em !important;
       }
    </style>

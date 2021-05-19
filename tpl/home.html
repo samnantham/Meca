@@ -191,8 +191,6 @@
                         <div class="feed-img-holder p-l">
                            <img class="feed-img" ng-src="{{IMGURL + feed.ownerprofile.avatar}}">
                         </div>
-
-
                         <div class="feed-info">
                            <div class="f12"><strong>{{ feed.is_admin ?
                                  feed.ownerprofile.username + '(Admin)' : feed.ownerprofile.first_name +
@@ -200,12 +198,12 @@
                                  feed.ownerprofile.distributorinfo.name }}</strong></div>
                            <div class="f8">{{convertDate(feed.created_at) | date:'shortTime' }}</div>
                         </div>
-                        <div class="btn-group dropdown feed_more">
-                           <span  data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h f13" aria-hidden="true"></i></span>
+                        <div class="btn-group dropdown feed_more" ng-if="(!feed.is_admin && (feed.user == user.id) )|| feed.document_link">
+                           <span data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h f13 cursor" aria-hidden="true"></i></span>
                            <ul class="dropdown-menu">
-                             <li class="b_be"><a href=""><i class="fa fa-download m-r color_2 f13" aria-hidden="true"></i>Download</a></li>
-                             <li class="b_be"><a href=""><i class="fa fa-pencil m-r color_2 f13" aria-hidden="true"></i>Edit post</a></li>
-                             <li><a href=""><i class="fa fa-trash m-r color_2 f13" aria-hidden="true"></i>Delete post</a></li>
+                              <li class="b_be" ng-if="feed.document_link"><a ><i class="fa fa-download m-r color_2 f13" aria-hidden="true"></i>Download</a></li>
+                              <li ng-class="{'b_be' : (!feed.is_admin && (feed.user == user.id)) }" ng-if="(!feed.is_admin && (feed.user == user.id))"><a ng-click="deleteFeed(key,feed.id)"><i class="fa fa-trash m-r color_2 f13" aria-hidden="true"></i>Delete post</a></li>
+                              <li ng-if="(!feed.is_admin && (feed.user == user.id))"><a ng-click="editFeed(key,feed)"><i class="fa fa-pencil m-r color_2 f13" aria-hidden="true"></i>Edit post</a></li>
                            </ul>
                          </div>
                      </div>
@@ -215,11 +213,11 @@
                            <img src="{{IMGURL}}{{feed.cover_image}}" class="feeder_img">
                         </div>
                      </div>
-                     <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">
+                     <!-- <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">
                         <span class="delete_feed" ng-click="deleteFeed(key,feed.id)"><img
                               src="img/feed/delete.png"></span>
                         <span class="edit_feed" ng-click="editFeed(key,feed)"><img src="img/feed/edit.png"></span>
-                     </div>
+                     </div> -->
                      <div class="col-xs-12">
                         <div class="m-b-xs m-t-xs">
                            <span>{{feed.content}}
