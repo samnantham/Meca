@@ -158,6 +158,19 @@ angular.module('app')
                 return files.filter((obj) => obj.filetype === type).length;
             }
 
+            $rootScope.closeLikeModal = function (module){
+                $('#ModuleLikeMembersModal').modal('hide');
+            }
+
+            $rootScope.showLikedMembers = function(members){
+                $rootScope.likers = [];
+                $rootScope.likers = members;
+                $('#ModuleLikeMembersModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            }
+
             $rootScope.openDoc = function(URL){
                 var base = window.location.origin + '/';
                 window.open(base + URL, '_blank');

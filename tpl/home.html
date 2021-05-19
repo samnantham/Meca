@@ -201,7 +201,8 @@
                         <div class="btn-group dropdown feed_more" ng-if="(!feed.is_admin && (feed.user == user.id) )|| feed.document_link">
                            <span data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h f13 cursor" aria-hidden="true"></i></span>
                            <ul class="dropdown-menu">
-                              <li class="b_be" ng-if="feed.document_link"><a ><i class="fa fa-download m-r color_2 f13" aria-hidden="true"></i>Download</a></li>
+                              <li ng-class="{'b_be' : (!feed.is_admin && (feed.user == user.id)) }" ng-if="feed.document_link"><a ng-href="{{IMGURL}}{{feed.document_link}}"
+                                 download="{{feed.document_link.split('/').pop()}}" target="_blank"><i class="fa fa-download m-r color_2 f13" aria-hidden="true"></i>Download</a></li>
                               <li ng-class="{'b_be' : (!feed.is_admin && (feed.user == user.id)) }" ng-if="(!feed.is_admin && (feed.user == user.id))"><a ng-click="deleteFeed(key,feed.id)"><i class="fa fa-trash m-r color_2 f13" aria-hidden="true"></i>Delete post</a></li>
                               <li ng-if="(!feed.is_admin && (feed.user == user.id))"><a ng-click="editFeed(key,feed)"><i class="fa fa-pencil m-r color_2 f13" aria-hidden="true"></i>Edit post</a></li>
                            </ul>
@@ -210,7 +211,9 @@
                      <div class="bg-white r-b-6x">
                         <div class="col-xs-12 wrapper">
                            <!-- <div class="dis-img box-shadow b" background-image="{{IMGURL}}{{feed.cover_image}}"></div> -->
-                           <img src="{{IMGURL}}{{feed.cover_image}}" class="feeder_img">
+                           <img src="{{IMGURL}}{{feed.cover_image}}" class="feeder_img" ng-if="feed.type == 1">
+                           <anguvideo ng-model="feed.video_link" width="100%" height="100%" ng-if="feed.type == 2"></anguvideo>
+
                         </div>
                      </div>
                      <!-- <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">
@@ -220,13 +223,16 @@
                      </div> -->
                      <div class="col-xs-12">
                         <div class="m-b-xs m-t-xs">
-                           <span>{{feed.content}}
+                           <span read-more="feed.content"
+                           read-more-limit="150"
+                           read-more-label-expand="... See More"
+                           read-more-label-collapse="... See Less">{{feed.content}}
                            </span>
                         </div>
                         <div class="like_comment_holder">
                            <div class="like_holder color_2 cursor">
                               <i class="fa fa-2x" ng-class="feed.isLiked ? 'fa-thumbs-up':'fa-thumbs-o-up'"
-                                 aria-hidden="true" ng-click="changeFeedLike(key,feed,1)"></i><span> {{feed.likes}}
+                                 aria-hidden="true" ng-click="changeFeedLike(key,feed,1)"></i><span class="cursor" ng-click="showlikeInfo(feed.likemembers)"> {{feed.likes}}
                                  likes</span>
                            </div>
                            <div class="comment_holder color_2 cursor" ng-click="showHideComments(key,feed)">
@@ -254,7 +260,7 @@
                                        <div class="col-sm-3 cursor" ng-click="replyComment(key,comment)">Reply</div>
                                        <div class="col-sm-3 cursor" ng-click="deleteComment(key,no,comment)">Delete
                                        </div>
-                                       <div class="col-sm-3 text-right"><i class="fa fa-thumbs-o-up f12"
+                                       <div class="col-sm-3 text-right cursor" ng-click="showlikeInfo(comment.likemembers)"><i class="fa fa-thumbs-o-up f12"
                                              aria-hidden="true"></i><span> {{comment.likes}}</span></div>
                                     </div>
                                  </div>
@@ -386,24 +392,3 @@
    </div>
 </div>
 </div>
-
-<style>
-   .animationIf.ng-enter,
-   .animationIf.ng-leave {
-      -webkit-transition: opacity ease-in-out 1s;
-      -moz-transition: opacity ease-in-out 1s;
-      -ms-transition: opacity ease-in-out 1s;
-      -o-transition: opacity ease-in-out 1s;
-      transition: opacity ease-in-out 1s;
-   }
-
-   .animationIf.ng-enter,
-   .animationIf.ng-leave.ng-leave-active {
-      opacity: 0;
-   }
-
-   .animationIf.ng-leave,
-   .animationIf.ng-enter.ng-enter-active {
-      opacity: 1;
-   }
-</style>

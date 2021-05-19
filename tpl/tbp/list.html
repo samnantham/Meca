@@ -116,6 +116,7 @@
                            <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
+
                      <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
                         <div class="user _bronze" ng-click="viewTrainee(user)"
                            ng-repeat="(key,user) in trainees.bronzeUsers">
@@ -125,7 +126,8 @@
                            <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
-                     <div class="col-sm-3">
+                     
+                     <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
                         <div class="user _white" ng-click="viewTrainee(user)"
                            ng-repeat="(key,user) in trainees.whiteUsers">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
@@ -291,7 +293,7 @@
                            </div>
                            <div class="info_holder"
                               ng-class="{'gold_plate' :traineeInfo.frame == 1,'silver_plate' :traineeInfo.frame == 2,'bronze_plate' :traineeInfo.frame == 3,'white_plate' :traineeInfo.frame == 4}">
-                              {{traineeInfo.userinfo.first_name + ' ' + user.last_name}}<br>
+                              {{traineeInfo.userinfo.first_name + ' ' + traineeInfo.userinfo.last_name}}<br>
                               {{traineeInfo.userinfo.distributorinformation.name}}<br>
                               {{traineeInfo.userinfo.divisioninformation.division_name}}
                            </div>
@@ -388,9 +390,3 @@
          </div>
       </div>
    </div>
-
-   <style>
-      .font-1em {
-         font-size: 1em !important;
-      }
-   </style>

@@ -6,28 +6,67 @@
     </div>
     <div class="modal-body">
         <div class="form-group">
+            <label class="font-bold">Feed Type <code>*</code></label>
+            <div class="col-sm-12 no-padder">
+                <div class="col-sm-3 no-padder">
+                    <label class="radio-inline i-checks i-checks-lg">
+                        <input type="radio" value="1" name="type" ng-model="formData.type"><i></i> Image </label>
+                </div>
+                <div class="col-sm-3 no-padder">
+                    <label class="radio-inline i-checks i-checks-lg">
+                        <input type="radio" value="2" name="typec" ng-model="formData.type"><i></i> Video </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="font-bold">Content <code>*</code></label>
             <small class="pull-right text-red" ng-if="errorData.content_error">{{errorData.content_errorMsg}}</small>
-            <textarea name="content" class="form-control r-2x" placeholder="Enter content here...." rows="8" ng-model="formData.content" required></textarea>
+            <textarea name="content" class="form-control r-2x" placeholder="Enter content here...." rows="8"
+                ng-model="formData.content" required></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="formData.type == 1">
             <div class="col-sm-3 col-xs-6 p-l-none">
-               <label class="font-bold">Cover Image <code>*</code></label>
-               <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
-                  ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
-                  ngf-multiple="false" ngf-accept="'image/*'" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
-                  ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable"
-                  ngf-change="uploadCover($files);">
-                  Upload Image
-               </div>
+                <label class="font-bold">Cover Image <code>*</code></label>
+                <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                    ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                    ngf-multiple="false" ngf-accept="'image/*'" ngf-capture="capture"
+                    ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir"
+                    ngf-drop-available="dropAvailable" ngf-change="uploadCover($files);">
+                    Upload Image
+                </div>
             </div>
             <div class="col-sm-3 col-xs-6 p-l-none">
-               <label class="font-bold text-white">Cover Image</label>
-               <div class="mbit-img box-shadow b h-100" ngf-background="formData.newcover" ng-if="formData.newcover"></div>
-               <div class="mbit-img box-shadow b h-100" background-image="{{IMGURL}}{{formData.cover_image}}"
-                  ng-if="!formData.newcover && isEdititem"></div>
+                <label class="font-bold text-white">Cover Image</label>
+                <div class="mbit-img box-shadow b h-100" ngf-background="formData.newcover" ng-if="formData.newcover">
+                </div>
+                <div class="mbit-img box-shadow b h-100" background-image="{{IMGURL}}{{formData.cover_image}}"
+                    ng-if="!formData.newcover && isEdititem"></div>
             </div>
-         </div>
+        </div>
+
+        <div class="form-group" ng-if="formData.type == 2">
+            <label class="font-bold">Video Link <code>*</code></label>
+            <small class="pull-right text-danger"
+                ng-if="errorData.video_link_error">{{errorData.video_link_errorMsg}}</small>
+            <input type="url" name="video_link" class="form-control" ng-model="formData.video_link"
+                ng-required="formData.type == 2" ng-change="inputchange()">
+        </div>
+
+        <div class="form-group ">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padder">
+                <label class="font-bold">Document Upload</label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 p-l-none">
+                    <button class="btn btn-warning r-2x btn-addon ellipsis-txt" ngf-select ngf-drop
+                        ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles"
+                        ngf-model-options="modelOptionsObj" ngf-multiple="false" ngf-accept="'application/pdf'"
+                        ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid"
+                        ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="uploadDoc($files);"><i
+                            class="fa fa-upload"></i> {{formData.newdocument ? formData.newdocument.name :
+                        (formData.document_link ? formData.document_link.split('/').pop() : 'Add File')}}</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer text-center b-no">
         <div class="col-xs-12 text-center ">

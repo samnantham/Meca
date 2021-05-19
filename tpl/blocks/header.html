@@ -1,5 +1,6 @@
 <!-- navbar header -->
-<toaster-container toaster-options="{'position-class': 'toast-top-center','time-out':3000, 'close-button':true}"></toaster-container>
+<toaster-container toaster-options="{'position-class': 'toast-top-center','time-out':3000, 'close-button':true}">
+</toaster-container>
 
 <div class="navbar-header t-c {{!isMobile ? app.settings.navbarHeaderColor : ''}} ">
     <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
@@ -19,78 +20,89 @@
 
 <!-- navbar collapse -->
 <div class="collapse pos-rlt navbar-collapse  {{app.settings.navbarCollapseColor}} p-l-none">
-	<div class="row">
-		<div class="col-sm-2">
-    <a class="text-lt pull-left nav-brand " ui-sref="app.home">
-        <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" />
-    </a>
-    </div>
-    <div class="col-sm-3">
-    <ul class="nav navbar-nav navbar-center cursor-no m-t-sm navbar-right">
-        <li class="text-center cursor-no">
-            <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2 text-2x" count-to="{{user.totalViews}}" value="0" duration="4"></span></a>
-        </li>
-        <li class="text-center cursor-no">
-            <a class="cursor-no  font-bold color_2 pad-515">Today's Visitors - <span class="color_2 text-2x" count-to="{{user.todayViews}}" value="0" duration="2"></span></a>
-         </li>
-   
-    </ul>
-	</div>
-    <div class="col-sm-7">
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" dropdown>
-            <a class="nav-button dropdown-toggle"  dropdown-toggle>
-                User Manual <b class="caret"></b>
+    <div class="row">
+        <div class="col-sm-2">
+            <a class="text-lt pull-left nav-brand " ui-sref="app.home">
+                <img class="header-logo" src="img/meca.png" ng-if="app.settings.asideFolded" />
             </a>
-            <ul class="dropdown-menu animated fadeInRight chat_buble">
-                <li>
-                    <a class="text-muted text-white" ng-click="openPDF('docs/UserManual.pdf');">View</a>
+        </div>
+        <div class="col-sm-3">
+            <ul class="nav navbar-nav navbar-center cursor-no m-t-sm navbar-right">
+                <li class="text-center cursor-no">
+                    <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2 text-2x"
+                            count-to="{{user.totalViews}}" value="0" duration="4"></span></a>
                 </li>
-                <li>
-                    <a class="text-muted text-white" href="docs/UserManual.pdf"
-                    download="userManual.pdf" target="_blank"> Download</a>
+                <li class="text-center cursor-no">
+                    <a class="cursor-no  font-bold color_2 pad-515">Today's Visitors - <span class="color_2 text-2x"
+                            count-to="{{user.todayViews}}" value="0" duration="2"></span></a>
                 </li>
+
             </ul>
-        </li>
-        <li class="dropdown" dropdown>
-            <a class="nav-button dropdown-toggle"  dropdown-toggle>
-                Create New  <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu animated fadeInRight chat_buble">
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('newsModal','NewsModalController');">News</a>
+        </div>
+        <div class="col-sm-7">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" dropdown>
+                    <a class="nav-button dropdown-toggle" dropdown-toggle>
+                        User Manual <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight chat_buble">
+                        <li>
+                            <a class="text-muted text-white" ng-click="openPDF('docs/UserManual.pdf');">View</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white" href="docs/UserManual.pdf" download="userManual.pdf"
+                                target="_blank"> Download</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('kaizenModal','KaizenModalController');"> MEBIT</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('maasModal','MaasModalController');">MaaS</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('hydrogenModal','HydrogenModalController');">Hydrogen</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('sdgsModal','SDGsModalController');"> SDGs</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('grModal','GRModalController');"> GR</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('videoModal','VideoModalController');">Video</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('crisisModal','CrisisModalController');">Crisis</a>
-                </li>
+                <li class="dropdown" dropdown>
+                    <a class="nav-button dropdown-toggle" dropdown-toggle>
+                        Create New <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight chat_buble">
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('newsModal','NewsModalController');">News</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('kaizenModal','KaizenModalController');"> MEBIT</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('maasModal','MaasModalController');">MaaS</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('hydrogenModal','HydrogenModalController');">Hydrogen</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white" ng-click="ModalOpen('sdgsModal','SDGsModalController');">
+                                SDGs</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white" ng-click="ModalOpen('grModal','GRModalController');">
+                                GR</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('videoModal','VideoModalController');">Video</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('crisisModal','CrisisModalController');">Crisis</a>
+                        </li>
 
-                <li>
-                    <a class="text-muted text-white" ng-click="ModalOpen('onlydayModal','OnlyDayModalController');">One and Only Day</a>
-                </li>
+                        <li>
+                            <a class="text-muted text-white"
+                                ng-click="ModalOpen('onlydayModal','OnlyDayModalController');">One and Only Day</a>
+                        </li>
 
-                <!-- <li>
+                        <!-- <li>
                     <a class="text-muted text-white" ng-click="ModalOpen('feedModal','FeedModalController');">Feed</a>
                 </li> -->
-                
-                <!-- <li>
+
+                        <!-- <li>
                     <a class="text-muted text-white" ng-click="openheaderaddModal(1)">Mebit</a>
                 </li>
                 <li>
@@ -103,33 +115,33 @@
                     <a class="text-muted text-white">MaaS</a>
                 </li>
                  -->
-                
-            </ul>
-        </li>
-        
-        <li>
-            <a class="nav-button" ui-sref="app.chats">
-                Chat
-            </a>
-        </li>
-        <li>
-            <a class="nav-button" ui-sref="app.contactus">
-                Support
-            </a>
-        </li>
-        <li class="dropdown">
-            <a class="nav-button" ui-sref="app.calendar">
-                Calendar
-            </a>
-        </li> 
 
-        <li>
-            <a class="nav-button" ui-sref="app.reminders">
-                Reminder
-            </a>
-        </li>
+                    </ul>
+                </li>
 
-        <!-- <li class="dropdown">
+                <li>
+                    <a class="nav-button" ui-sref="app.chats">
+                        Chat
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-button" ui-sref="app.contactus">
+                        Support
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-button" ui-sref="app.calendar">
+                        Calendar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="nav-button" ui-sref="app.reminders">
+                        Reminder
+                    </a>
+                </li>
+
+                <!-- <li class="dropdown">
             <a class="dropdown-toggle" ui-sref="app.notification">
                 <i class="icon-bell fa-fw text-lg"></i>
                 <span class="visible-xs-inline">Notifications</span>
@@ -137,30 +149,30 @@
             </a>
         </li> -->
 
-        <li class="dropdown" dropdown>
-            <a href class="dropdown-toggle clear" dropdown-toggle>
-                <span class="hidden-sm hidden-md pull-right">{{user.first_name}} <b class="caret"></b> </span>
-                <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                    <div class="chat-info-img" background-image="{{IMGURL}}{{user.avatar}}"></div>
-                </span>
-            </a>
-            <!-- dropdown -->
-            <ul class="dropdown-menu animated fadeInRight chat_buble">
-                <li>
-                    <a class="text-muted text-white" ui-sref="app.profile"> Account</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ui-sref="app.changepassword"> Change Password</a>
-                </li>
-                <li>
-                    <a class="text-muted text-white" ng-click="logout();"> Logout</a>
+                <li class="dropdown" dropdown>
+                    <a href class="dropdown-toggle clear" dropdown-toggle>
+                        <span class="hidden-sm hidden-md pull-right">{{user.first_name}} <b class="caret"></b> </span>
+                        <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                            <div class="chat-info-img" background-image="{{IMGURL}}{{user.avatar}}"></div>
+                        </span>
+                    </a>
+                    <!-- dropdown -->
+                    <ul class="dropdown-menu animated fadeInRight chat_buble">
+                        <li>
+                            <a class="text-muted text-white" ui-sref="app.profile"> Account</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white" ui-sref="app.changepassword"> Change Password</a>
+                        </li>
+                        <li>
+                            <a class="text-muted text-white" ng-click="logout();"> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- / dropdown -->
                 </li>
             </ul>
-            <!-- / dropdown -->
-        </li>
-    </ul>
-    <!-- / navbar right -->
-    </div>
+            <!-- / navbar right -->
+        </div>
     </div>
 </div>
 <!-- / navbar collapse -->
@@ -168,38 +180,48 @@
     <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
 </div>
 
-<div class="modal fade" id="HeaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" data-modalFade="true">
+<div class="modal fade" id="HeaderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" data-modalFade="true">
     <div class="modal-dialog" role="document" style="width: 70%;">
         <div class="modal-content m-p-l m-p-r" ng-class="{'wrapper-xl' : !isMobile}">
             <form class="form-horizontal" name="addForm" novalidate ng-submit="addHeaderData(addForm);">
                 <div class="modal-header b-no text-center">
-                    <button type="button" class="close" ng-click="closeHeaderModal();" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" ng-click="closeHeaderModal();" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Add New</h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-class="{'wrapper' : !isMobile}">
                         <div class="form-group">
                             <label class="font-bold">Title</label>
-                            <small class="pull-right text-danger" ng-if="headerErrorData.title_error">{{headerErrorData.title_errorMsg}}</small>
-                            <input type="text" name="title" class="form-control r-2x" ng-model="headerFormData.title" placeholder="Name of Kaizen" required ng-change="headerinputchange()" />
+                            <small class="pull-right text-danger"
+                                ng-if="headerErrorData.title_error">{{headerErrorData.title_errorMsg}}</small>
+                            <input type="text" name="title" class="form-control r-2x" ng-model="headerFormData.title"
+                                placeholder="Name of Kaizen" required ng-change="headerinputchange()" />
                         </div>
                         <div class="form-group">
                             <label class="font-bold">Type</label>
                             <select name="type" class="form-control r-2x" ng-model="headerFormData.type">
-                                <option value="{{kaizen.id}}" ng-repeat="(num,kaizen) in kaizentypes"> {{kaizen.type}}</option>
+                                <option value="{{kaizen.id}}" ng-repeat="(num,kaizen) in kaizentypes"> {{kaizen.type}}
+                                </option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="font-bold">Kaizen Study </label>
-                            <small class="pull-right text-danger" ng-if="headerErrorData.description_error">{{headerErrorData.description_errorMsg}}</small>
-                            <textarea name="description" class="form-control r-2x" placeholder="Enter Enter text here...." rows="8" ng-model="headerFormData.description" required></textarea>
+                            <small class="pull-right text-danger"
+                                ng-if="headerErrorData.description_error">{{headerErrorData.description_errorMsg}}</small>
+                            <textarea name="description" class="form-control r-2x"
+                                placeholder="Enter Enter text here...." rows="8" ng-model="headerFormData.description"
+                                required></textarea>
                         </div>
                         <div class="form-group">
                             <label class="font-bold">External links</label>
                             <div class="input-group">
-                                <input type="text" name="link" class="form-control r-3x b-2x" ng-model="documentData.link" ng-required="documentData.link" />
+                                <input type="text" name="link" class="form-control r-3x b-2x"
+                                    ng-model="documentData.link" ng-required="documentData.link" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary r-3x" type="button" ng-disabled="!documentData.link" ng-click="uploadHeaderdocumentlink();">Add</button>
+                                    <button class="btn btn-primary r-3x" type="button" ng-disabled="!documentData.link"
+                                        ng-click="uploadHeaderdocumentlink();">Add</button>
                                 </span>
                             </div>
                             <div class="panel panel-default m-t-sm" ng-if="headerFormData.document_links.length > 0">
@@ -216,12 +238,15 @@
                                         <tbody>
                                             <tr ng-repeat="(key,data) in headerFormData.document_links">
                                                 <td><input type="text" class="form-control" ng-model="data.name" /></td>
-                                                <td><textarea class="form-control" rows="2" ng-model="data.info"></textarea></td>
+                                                <td><textarea class="form-control" rows="2"
+                                                        ng-model="data.info"></textarea></td>
                                                 <td>
-                                                    <a ng-href="{{data.link}}" target="_blank"><span class="text-info font-normal text-xs">Link</span></a>
+                                                    <a ng-href="{{data.link}}" target="_blank"><span
+                                                            class="text-info font-normal text-xs">Link</span></a>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a ng-click="removeHeaderDocumentLink(key)"><i class="fa fa-trash-o text-danger text"></i></a>
+                                                    <a ng-click="removeHeaderDocumentLink(key)"><i
+                                                            class="fa fa-trash-o text-danger text"></i></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -235,22 +260,12 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 m-p-n">
                                 <div class="form-group">
                                     <label class="font-bold">Cover Image</label>
-                                    <div
-                                        class="b-a r-3x b-2x b wrapper-xl bg-white text-center"
-                                        ngf-select
-                                        ngf-drop
-                                        ngf-max-size="{{maxFilesize}}"
-                                        ngf-model-invalid="invalidFiles"
-                                        ngf-model-options="modelOptionsObj"
-                                        ngf-multiple="false"
-                                        ngf-accept="'image/*'"
-                                        ngf-capture="capture"
-                                        ngf-drag-over-class="dragOverClassObj"
-                                        ngf-ignore-invalid="ignoreInvalid"
-                                        ngf-allow-dir="allowDir"
-                                        ngf-drop-available="dropAvailable"
-                                        ngf-change="uploadHeaderCover($files);"
-                                    >
+                                    <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                                        ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles"
+                                        ngf-model-options="modelOptionsObj" ngf-multiple="false" ngf-accept="'image/*'"
+                                        ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                        ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir"
+                                        ngf-drop-available="dropAvailable" ngf-change="uploadHeaderCover($files);">
                                         Upload Image
                                     </div>
                                 </div>
@@ -264,37 +279,41 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-p-n">
                                 <div class="form-group">
                                     <label class="font-bold">Images and Videos</label>
-                                    <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center"
-                                        ngf-select
-                                        ngf-drop
-                                        ngf-max-size="{{maxFilesize}}"
-                                        ngf-model-invalid="invalidFiles"
-                                        ngf-model-options="modelOptionsObj"
-                                        ngf-multiple="true"
-                                        ngf-accept="'image/*,video/*'"
-                                        ngf-capture="capture"
-                                        ngf-drag-over-class="dragOverClassObj"
-                                        ngf-ignore-invalid="ignoreInvalid"
-                                        ngf-allow-dir="allowDir"
-                                        ngf-drop-available="dropAvailable"
-                                        ngf-change="addkaizenHeaderfiles($files);"
-                                        ngf-maxfiles="6">
+                                    <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                                        ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles"
+                                        ngf-model-options="modelOptionsObj" ngf-multiple="true"
+                                        ngf-accept="'image/*,video/*'" ngf-capture="capture"
+                                        ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid"
+                                        ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable"
+                                        ngf-change="addkaizenHeaderfiles($files);" ngf-maxfiles="6">
                                         Upload Files
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 m-p-n" ng-repeat="(key,data) in headerFormData.kaizen_files" ng-class-odd="'p-l-none'" ng-class-even="'p-r-none'">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 m-p-n"
+                                    ng-repeat="(key,data) in headerFormData.kaizen_files" ng-class-odd="'p-l-none'"
+                                    ng-class-even="'p-r-none'">
                                     <div class="form-group">
-                                        <div class="mbit-img box-shadow b pos-rlt" ng-if="data.filetype == 'video'" ng-class-even="'m-l-sm'">
-                                            <video width="100%" height="100%" controls ng-if="!data.hasOwnProperty('isfile');">
-                                                <source ng-src="{{getVideoUrl(data.file)}}" type="video/{{data.file.substr(data.file.length - 3)}}" />
+                                        <div class="mbit-img box-shadow b pos-rlt" ng-if="data.filetype == 'video'"
+                                            ng-class-even="'m-l-sm'">
+                                            <video width="100%" height="100%" controls
+                                                ng-if="!data.hasOwnProperty('isfile');">
+                                                <source ng-src="{{getVideoUrl(data.file)}}"
+                                                    type="video/{{data.file.substr(data.file.length - 3)}}" />
                                             </video>
-                                            <video width="100%" height="100%" controls ng-if="data.hasOwnProperty('isfile');" ngf-src="data.file"></video>
-                                            <img class="item-img-delete" src="img/delete.png" ng-click="removeHeaderFile(key,data)" />
+                                            <video width="100%" height="100%" controls
+                                                ng-if="data.hasOwnProperty('isfile');" ngf-src="data.file"></video>
+                                            <img class="item-img-delete" src="img/delete.png"
+                                                ng-click="removeHeaderFile(key,data)" />
                                         </div>
-                                        <div class="mbit-img box-shadow b pos-rlt" ng-if="data.filetype == 'image'" ng-class-even="'m-l-sm'">
-                                            <div class="w-full h-full mbit-img" background-image="{{IMGURL}}{{data.file}}" ng-if="!data.hasOwnProperty('isfile');"></div>
-                                            <div class="w-full h-full mbit-img" ngf-background="data.file" ng-if="data.hasOwnProperty('isfile');"></div>
-                                            <img class="item-img-delete cursor" src="img/delete.png" ng-click="removeHeaderFile(key,data)" />
+                                        <div class="mbit-img box-shadow b pos-rlt" ng-if="data.filetype == 'image'"
+                                            ng-class-even="'m-l-sm'">
+                                            <div class="w-full h-full mbit-img"
+                                                background-image="{{IMGURL}}{{data.file}}"
+                                                ng-if="!data.hasOwnProperty('isfile');"></div>
+                                            <div class="w-full h-full mbit-img" ngf-background="data.file"
+                                                ng-if="data.hasOwnProperty('isfile');"></div>
+                                            <img class="item-img-delete cursor" src="img/delete.png"
+                                                ng-click="removeHeaderFile(key,data)" />
                                         </div>
                                     </div>
                                 </div>
@@ -304,19 +323,12 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-p-n">
                                 <div class="form-group">
                                     <label class="font-bold">Upload Documents</label>
-                                    <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center"
-                                        ngf-select
-                                        ngf-drop
-                                        ngf-max-size="{{maxFilesize}}"
-                                        ngf-model-invalid="invalidFiles"
-                                        ngf-model-options="modelOptionsObj"
-                                        ngf-multiple="true"
-                                        ngf-max-files="6"
+                                    <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                                        ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles"
+                                        ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-max-files="6"
                                         ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv'"
-                                        ngf-capture="capture"
-                                        ngf-drag-over-class="dragOverClassObj"
-                                        ngf-ignore-invalid="ignoreInvalid"
-                                        ngf-allow-dir="allowDir"
+                                        ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                        ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir"
                                         ngf-drop-available="dropAvailable"
                                         ngf-change="addkaizenHeaderDocuments($files);">
                                         Upload Documents
@@ -334,10 +346,13 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr ng-repeat="(key,data) in headerFormData.kaizen_documents">
-                                                            <td><input type="text" class="form-control" ng-model="data.name" /></td>
-                                                            <td><textarea class="form-control" rows="2" ng-model="data.info"></textarea></td>
+                                                            <td><input type="text" class="form-control"
+                                                                    ng-model="data.name" /></td>
+                                                            <td><textarea class="form-control" rows="2"
+                                                                    ng-model="data.info"></textarea></td>
                                                             <td class="text-center">
-                                                                <a ng-click="removeHeaderDocuments(key,data)"><i class="fa fa-trash-o text-danger text"></i></a>
+                                                                <a ng-click="removeHeaderDocuments(key,data)"><i
+                                                                        class="fa fa-trash-o text-danger text"></i></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -353,28 +368,35 @@
                                 <div class="form-group">
                                     <label class="font-bold">Video Links</label>
                                     <div class="input-group">
-                                        <input type="text" name="link" class="form-control r-3x b-2x" ng-model="HeaderVideoData.link" ng-required="HeaderVideoData.link" />
+                                        <input type="text" name="link" class="form-control r-3x b-2x"
+                                            ng-model="HeaderVideoData.link" ng-required="HeaderVideoData.link" />
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary r-3x" type="button" ng-disabled="!HeaderVideoData.link" ng-click="uploadHeadervideo();">Add</button>
+                                            <button class="btn btn-primary r-3x" type="button"
+                                                ng-disabled="!HeaderVideoData.link"
+                                                ng-click="uploadHeadervideo();">Add</button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-sm m-b-sm" ng-repeat="(key,data) in headerFormData.video_links">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-sm m-b-sm"
+                                ng-repeat="(key,data) in headerFormData.video_links">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="mbit-img box-shadow b pos-rlt">
                                         <anguvideo ng-model="data.link" width="100%" height="100%"></anguvideo>
-                                        <img class="item-img-delete cursor" src="img/delete.png" ng-click="removeHeaderVideoLink(key)" />
+                                        <img class="item-img-delete cursor" src="img/delete.png"
+                                            ng-click="removeHeaderVideoLink(key)" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <input type="text" name="title" class="form-control r-2x" placeholder="Video Title" ng-model="data.title" />
+                                        <input type="text" name="title" class="form-control r-2x"
+                                            placeholder="Video Title" ng-model="data.title" />
                                     </div>
                                     <div class="form-group">
-                                        <textarea name="info" class="form-control r-2x" placeholder="Video Info" ng-model="data.info" rows="3"></textarea>
+                                        <textarea name="info" class="form-control r-2x" placeholder="Video Info"
+                                            ng-model="data.info" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -383,8 +405,10 @@
                 </div>
                 <div class="modal-footer text-center b-no">
                     <div class="col-xs-12 text-center">
-                        <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs" ng-click="closeHeaderModal()" ng-disabled="loading">Cancel</button>
-                        <button type="submit" class="btn btn-primary no-border m-auto bg-main1 w-xs" button-spinner="loading" ng-disabled="loading">Add</button>
+                        <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs"
+                            ng-click="closeHeaderModal()" ng-disabled="loading">Cancel</button>
+                        <button type="submit" class="btn btn-primary no-border m-auto bg-main1 w-xs"
+                            button-spinner="loading" ng-disabled="loading">Add</button>
                     </div>
                 </div>
             </form>
@@ -392,20 +416,54 @@
     </div>
 </div>
 
-<div class="modal fade" id="PDFModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        data-backdrop="static" data-keyboard="false" data-modalFade="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="border-bottom: none !important;">
-                    <button type="button" class="close m-r-md" ng-click="closeModal();" aria-label="Close"><span
-                            aria-hidden="true" class="text-2x">&times;</span></button>
-                    <h4 class="modal-title text-center" id="myModalLabel">&nbsp</h4>
+<div class="modal fade" id="PDFModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+    data-keyboard="false" data-modalFade="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none !important;">
+                <button type="button" class="close m-r-md" ng-click="closeModal();" aria-label="Close"><span
+                        aria-hidden="true" class="text-2x">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">&nbsp</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row m-t-sm">
+                    <iframe ng-src="{{doclink}}" width="100%"></iframe>
                 </div>
-                <div class="modal-body">
-                    <div class="row m-t-sm">
-                        <iframe ng-src="{{doclink}}" width="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModuleLikeMembersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    data-backdrop="static" data-keyboard="false" data-modalFade="true">
+    <div class="modal-dialog" role="document" style="width: 35%;">
+        <div class="modal-content wrapper-md">
+            <div class="modal-header b-no text-center">
+                <button type="button" class="close" ng-click="closeLikeModal();" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Members Who Liked</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12 sm-padder-v" style="height: 200px !important;" ng-scrollbars
+                    ng-scrollbars-config="scrollconfig">
+                    <div class="col-xs-12 p-l-none sm-padder-v m-p-n" ng-repeat="(key,data) in likers track by $index"
+                        ng-class="{ 'box-shadow' : !$last }">
+                        <div class="chat-info-img  pull-left m-r-lg m-t-xs"
+                            background-image="{{IMGURL}}{{data.ownerprofile.avatar}}"></div>
+                        <div class="col-xs-6 p-l-none padder-v font-bold text-danger"> {{data.ownerprofile.first_name +
+                            ' ' + data.ownerprofile.last_name}}</div>
+                    </div>
+                </div>
+                <div class="w-full text-center bg-white wrapper-lg" ng-if="likers.length == 0">
+                    <h5>No Data Found</h5>
+                </div>
+                <div class="modal-footer text-center b-no">
+                    <div class="col-xs-12 text-center m-p-n">
+                        <button type="button" class="btn btn-primary no-border  m-auto bg-dark w-xs"
+                            ng-click="closeLikeModal()" ng-disabled="loading">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -2,6 +2,7 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
     
     if(!$rootScope.isEdititem){
         $rootScope.formData = {};
+        $rootScope.formData.type = 1;
     }
     $rootScope.errorData = {};
 
@@ -41,6 +42,10 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         }
     }
 
+    $rootScope.uploadDoc = function (files) {
+        $rootScope.formData.newdocument = files[0];
+    }
+
     $rootScope.addData = function(form) {
         $rootScope.seterrorMsg();
         if (form.$valid) {
@@ -77,7 +82,9 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         } else {
             if (!form.content.$valid) {
                 $rootScope.errorData.content_error = true;
-            }
+            } if (!form.video_link.$valid) {
+                $rootScope.errorData.video_link_error = true;
+            } 
             $rootScope.$emit("showErrors", $rootScope.errors);
         }
     }

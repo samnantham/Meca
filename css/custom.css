@@ -1896,10 +1896,11 @@ menu-icon {
 .f12, .h5 {
      font-size: 1.8vh;
 }
-.f13
-{
-   font-size: 2.8vh !important;   
+
+.f13 {
+     font-size: 2.8vh !important;
 }
+
 .f8 {
      font-size: 1.2vh
 }
@@ -2270,12 +2271,11 @@ menu-icon {
      width: 40px;
      border-radius: 50%;
      height: 40px;
-   
 }
 
 .feed-img-holder {
      float: left;
-     width:45px;
+     width: 45px;
 }
 
 .comment-img-holder {
@@ -2291,19 +2291,21 @@ menu-icon {
 .feed-info, .comment-info {
      float: left;
 }
-.feed-info
-{
-     width:calc(100% - 62px);
+
+.feed-info {
+     width: calc(100% - 62px);
 }
+
 .feed_more {
-    float: left;
-    width: 16px;
+     float: left;
+     width: 16px;
 }
-.feed_more .dropdown-menu 
-{
- right: 0px;
-    left: auto;    
+
+.feed_more .dropdown-menu {
+     right: 0px;
+     left: auto;
 }
+
 .like_comment_holder {
      border-top: 1px solid #eee;
      border-bottom: 1px solid #eee;
@@ -2722,11 +2724,37 @@ menu-icon {
      padding: 5px 15px !important;
      box-shadow: -5px 3px 6px #0d0d0d87;
 }
-.b_be
-{
-border-bottom: 1px solid #bfbdbd; 
+
+.b_be {
+     border-bottom: 1px solid #bfbdbd;
 }
-.feeder_img
-{
+
+.feeder_img {
      max-width: 100%;
+}
+
+.animationIf.ng-enter, .animationIf.ng-leave {
+     -webkit-transition: opacity ease-in-out 1s;
+     -moz-transition: opacity ease-in-out 1s;
+     -ms-transition: opacity ease-in-out 1s;
+     -o-transition: opacity ease-in-out 1s;
+     transition: opacity ease-in-out 1s;
+}
+
+.animationIf.ng-enter, .animationIf.ng-leave.ng-leave-active {
+     opacity: 0;
+}
+
+.animationIf.ng-leave, .animationIf.ng-enter.ng-enter-active {
+     opacity: 1;
+}
+
+.font-1em {
+     font-size: 1em !important;
+}
+
+.feed-item iframe{
+     position: relative;
+     left: auto;
+     right: auto;
 }

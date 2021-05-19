@@ -233,6 +233,10 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             $scope.updateLike(obj);
         }
 
+        $scope.showlikeInfo = function(likemembers){
+            $rootScope.showLikedMembers(likemembers);
+        }
+
         $scope.deleteComment = function(key, commentkey, comment){
             $ngConfirm({
                 title: 'Are you sure want to remove?',
