@@ -1896,7 +1896,10 @@ menu-icon {
 .f12, .h5 {
      font-size: 1.8vh;
 }
-
+.f13
+{
+   font-size: 2.8vh !important;   
+}
 .f8 {
      font-size: 1.2vh
 }
@@ -2290,16 +2293,16 @@ menu-icon {
 }
 .feed-info
 {
-     width:calc(100% - 85px);
+     width:calc(100% - 62px);
 }
 .feed_more {
     float: left;
-    width: 40px;
-    background-image: url(../img/feed/more.png);
-    background-size: 65%;
-    background-repeat: no-repeat;
-    margin-top: 5px;
-    background-position: right;
+    width: 16px;
+}
+.feed_more .dropdown-menu 
+{
+ right: 0px;
+    left: auto;    
 }
 .like_comment_holder {
      border-top: 1px solid #eee;
@@ -2718,4 +2721,8 @@ menu-icon {
      margin: 8px 5px;
      padding: 5px 15px !important;
      box-shadow: -5px 3px 6px #0d0d0d87;
+}
+.b_be
+{
+border-bottom: 1px solid #bfbdbd; 
 }
