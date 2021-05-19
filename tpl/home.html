@@ -211,7 +211,8 @@
                      </div>
                      <div class="bg-white r-b-6x">
                         <div class="col-xs-12 wrapper">
-                           <div class="dis-img box-shadow b" background-image="{{IMGURL}}{{feed.cover_image}}"></div>
+                           <!-- <div class="dis-img box-shadow b" background-image="{{IMGURL}}{{feed.cover_image}}"></div> -->
+                           <img src="{{IMGURL}}{{feed.cover_image}}" class="feeder_img">
                         </div>
                      </div>
                      <div class="pos-rlt col-sm-12" ng-if="!feed.is_admin && (feed.user == user.id)">

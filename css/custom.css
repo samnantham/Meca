@@ -2726,3 +2726,7 @@ menu-icon {
 {
 border-bottom: 1px solid #bfbdbd; 
 }
+.feeder_img
+{
+     max-width: 100%;
+}
