@@ -252,7 +252,7 @@
                               <div class="image-frame"
                                  ng-class="{'gold_frame' :traineeInfo.frame == 1,'silver_frame' :traineeInfo.frame == 2,'bronze_frame' :traineeInfo.frame == 3,'white_frame' :traineeInfo.frame == 4}">
                                  <div class="inner_style">
-                                    <div background-image="{{IMGURL}}{{traineeInfo.userinfo.avatar}}"
+                                    <div background-image="{{IMGURL}}{{traineeInfo.avatar ? traineeInfo.avatar : traineeInfo.userinfo.avatar}}"
                                        class="inner_image">&nbsp;
                                     </div>
                                  </div>
