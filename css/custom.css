@@ -2758,3 +2758,7 @@ menu-icon {
      left: auto;
      right: auto;
 }
+
+.b-b-no{
+     border-bottom: transparent!important;
+}
