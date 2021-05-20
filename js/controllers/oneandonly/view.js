@@ -11,6 +11,9 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
         webServices.get('oneandonlyday/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.oneandonly = getData.data;
+                $scope.mediafiles = $rootScope.splitFiles($scope.oneandonly.item_files); 
+                $scope.oneandonly.videocount = $rootScope.getfileCounts($scope.oneandonly.item_files,'video'); 
+                $scope.oneandonly.imagecount = $rootScope.getfileCounts($scope.oneandonly.item_files,'image'); 
                 $scope.getComments();
             } else {
                 $rootScope.$emit("showISError",getData);

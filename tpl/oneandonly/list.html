@@ -44,7 +44,7 @@
                                 <div class="col-xs-12 no-padder text-right text-danger text-too-small m-t-xs" ng-class="{'m-b' : isMobile}">{{convertDate(data.created_at) | date:'dd MMM yyyy HH:mm:ss'}} </div>
                                 <a href="" class="h6 font-bold m-t">{{data.title}}</a>
 
-                                <small class="block dist-desc m-t-xs text-justify"> {{data.description | cut:true:180:'....'}}</small>
+                                <small class="block dist-desc m-t-xs text-justify"> {{data.plain_description | cut:true:180:'....'}}</small>
                                 <div class="m-b m-t-xs">
 
                                     <button class="btn btn-default btn-xs w-xs btn-danger r-2x read_more pull-left text-u-c" ui-sref="app.viewoneandonly({'id':data.id})">Know More</button>

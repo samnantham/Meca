@@ -97,9 +97,8 @@
                <div class="row user_list_img pos-rlt" ng-if="showListing">
                   <!-- <div class="back_btn" ng-click="gobacktoMap()">BACK</div> -->
                   <div class="col-sm-9">
-                     <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
-                        <div class="user _gold" ng-click="viewTrainee(user)"
-                           ng-repeat="(key,user) in trainees.goldUsers">
+                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.goldUsers">
+                        <div class="user _gold" ng-click="viewTrainee(user)">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
                            </div>
                            <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
@@ -107,9 +106,8 @@
                         </div>
                      </div>
 
-                     <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
-                        <div class="user _silver" ng-click="viewTrainee(user)"
-                           ng-repeat="(key,user) in trainees.silverUsers">
+                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.silverUsers">
+                        <div class="user _silver" ng-click="viewTrainee(user)">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
                            </div>
                            <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
@@ -117,9 +115,8 @@
                         </div>
                      </div>
 
-                     <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
-                        <div class="user _bronze" ng-click="viewTrainee(user)"
-                           ng-repeat="(key,user) in trainees.bronzeUsers">
+                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.bronzeUsers">
+                        <div class="user _bronze" ng-click="viewTrainee(user)">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
                            </div>
                            <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
@@ -127,9 +124,8 @@
                         </div>
                      </div>
                      
-                     <div class="col-sm-3" ng-scrollbars ng-scrollbars-config="scrollconfig">
-                        <div class="user _white" ng-click="viewTrainee(user)"
-                           ng-repeat="(key,user) in trainees.whiteUsers">
+                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.whiteUsers">
+                        <div class="user _white" ng-click="viewTrainee(user)">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
                            </div>
                            <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
@@ -364,8 +360,7 @@
                                  <div class="box-dec align-center">
                                     <div class="text-center status_txt w-full">
                                        <span ng-if="traineeInfo.mentor_experience">Mentor Experience:
-                                          {{traineeInfo.mentor_experience}} Year{{traineeInfo.mentor_experience != '1st'
-                                          ? 's': ''}}</span>
+                                          {{traineeInfo.mentor_experience}} Year </span>
                                        <br>
                                        <span ng-if="traineeInfo.mentor_batch">{{traineeInfo.mentor_batch}} in
                                           {{traineeInfo.passed_year}}</span>

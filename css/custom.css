@@ -2145,7 +2145,7 @@ menu-icon {
 }
 
 .mbit-img:hover {
-     transform: scale(1.2);
+     transform: scale(1.05);
      transition: all .5s;
 }
 
