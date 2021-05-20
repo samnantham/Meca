@@ -124,11 +124,10 @@
                            ng-repeat="(key,data) in homeData.onlyDays">
                            <div class="col-xs-12 no-padder padder-v bg-white">
                               <div class="col-xs-12 no-padder" ng-click="clickTMC(data)">
-                                 <div class="m-b-xs">
+                                 <div class="m-b-xs" ui-sref="app.viewoneandonly({'id':data.id})">
                                     <a class="h5 font-bold"> {{data.title}} </a>
                                  </div>
-                                 <div class="dis-img box-shadow b r-3x"
-                                    background-image="{{IMGURL}}{{data.cover_image}}"></div>
+                                 <div class="dis-img box-shadow b r-3x cursor" ui-sref="app.viewoneandonly({'id':data.id})" background-image="{{IMGURL}}{{data.cover_image}}"></div>
                               </div>
                               <div class="col-xs-12 no-padder">
                                  <small class="block mebit-desc m-t text-justify">{{data.plain_description}}</small>

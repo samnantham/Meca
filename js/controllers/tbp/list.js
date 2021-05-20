@@ -48,7 +48,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         $rootScope.loading = true;
         $scope.showMap = 0;
         $scope.showListing = 1;
-        webServices.get('trainees/'+country).then(function(getData) {
+        webServices.get('trainees').then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.trainees = getData.data;

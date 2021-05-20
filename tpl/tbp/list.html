@@ -97,39 +97,13 @@
                <div class="row user_list_img pos-rlt" ng-if="showListing">
                   <!-- <div class="back_btn" ng-click="gobacktoMap()">BACK</div> -->
                   <div class="col-sm-9">
-                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.goldUsers">
-                        <div class="user _gold" ng-click="viewTrainee(user)">
+                     <div class="row m-t"></div>
+                     <div class="col-sm-3" ng-repeat="(key,user) in trainees">
+                        <div class="user" ng-click="viewTrainee(user)" ng-class="{'_gold' : user.frame == 1,'_silver' : user.frame == 2,'_bronze' : user.frame == 3,'_white' : user.frame == 4}">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
                            </div>
                            <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
-                        </div>
-                     </div>
-
-                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.silverUsers">
-                        <div class="user _silver" ng-click="viewTrainee(user)">
-                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
-                           </div>
-                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
-                        </div>
-                     </div>
-
-                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.bronzeUsers">
-                        <div class="user _bronze" ng-click="viewTrainee(user)">
-                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
-                           </div>
-                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
-                        </div>
-                     </div>
-                     
-                     <div class="col-sm-3" ng-repeat="(key,user) in trainees.whiteUsers">
-                        <div class="user _white" ng-click="viewTrainee(user)">
-                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
-                           </div>
-                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
-                           <div class="user_role_text">{{user.userinfo.divisioninformation.division_name}}</div>
+                           <div class="user_position_text">{{user.userinfo.divisioninformation.division_name}}</div>
                         </div>
                      </div>
                   </div>
