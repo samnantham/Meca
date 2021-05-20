@@ -1301,7 +1301,7 @@ input:read-only {
 }
 
 .mCustomScrollbar {
-     height: calc(100vh - 187px) !important;
+     height: calc(100vh - 174px) !important;
 }
 
 .mebit-whatsnew .mCustomScrollbar {
