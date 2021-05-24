@@ -2706,11 +2706,11 @@ menu-icon {
      width: 100%;
 }
 
-@media (min-width: 1000px) and (max-width: 1536px) {
+/*@media (min-width: 1000px) and (max-width: 1536px) {
      .text-2x {
           font-size: 1.2em;
      }
-}
+}*/
 
 .back_btn {
      position: absolute;
@@ -2761,4 +2761,30 @@ menu-icon {
 
 .b-b-no{
      border-bottom: transparent!important;
+}
+@media only screen and (max-width: 768px)
+{
+.navbar-brand
+{
+     float: left !important;
+}
+.navbar-brand img {
+    display: block;
+}
+.collapse .header-logo
+{
+     display: none;
+} 
+.navbar-collapse
+{
+     padding: 0px 15px !important;
+}
+}
+@media only screen and (min-width: 768px)
+{
+.number-ticker
+{
+margin-left: -30px;
+
+}
 }
