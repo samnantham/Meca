@@ -59,7 +59,7 @@ var app =
             type: 'PDCA'
           }, {
             id: 5,
-            type: 'Wall Of Plate'
+            type: 'Wall Of Fame'
           }];
 
           app.kaizentypes = [{
