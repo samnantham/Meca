@@ -96,9 +96,9 @@
                </div>
                <div class="row user_list_img pos-rlt" ng-if="showListing">
                   <!-- <div class="back_btn" ng-click="gobacktoMap()">BACK</div> -->
-                  <div class="col-sm-9">
+                  <div class=" col-lg-9 col-md-12 col-sm-12">
                      <div class="row m-t"></div>
-                     <div class="col-sm-3" ng-repeat="(key,user) in trainees">
+                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="(key,user) in trainees">
                         <div class="user" ng-click="viewTrainee(user)" ng-class="{'_gold' : user.frame == 1,'_silver' : user.frame == 2,'_bronze' : user.frame == 3,'_white' : user.frame == 4}">
                            <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
                            </div>

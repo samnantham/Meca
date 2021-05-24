@@ -2081,14 +2081,14 @@ menu-icon {
           margin-left: 0px;
      }
      .navbar-collapse .navbar-right.nav>li>a {
-          padding-left: 1.5em !important;
-          padding-right: 1.5em !important;
+          padding-left: 1vw !important;
+          padding-right: 1vw !important;
      }
      .nav-brand img {
           max-width: 100%;
      }
      .navbar-collapse .nav>li>a {
-          font-size: .65em;
+          font-size: 1vw;
      }
 }
 
@@ -2673,7 +2673,7 @@ menu-icon {
 
 .user_list_img {
      background-image: url('../img/Background_with_Badge.png');
-     background-size: 100% 100%;
+     background-size: contain;
      min-height: 600px;
 }
 
@@ -2762,8 +2762,15 @@ menu-icon {
 .b-b-no{
      border-bottom: transparent!important;
 }
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: 767px)
 {
+     .user_list_img {
+     background-image: url('../img/Background_with_Badge.png');
+     background-size:cover;
+     min-height: 600px;
+     background-attachment: fixed;
+}
+
 .navbar-brand
 {
      float: left !important;
@@ -2785,6 +2792,12 @@ menu-icon {
 .number-ticker
 {
 margin-left: -30px;
+font-size: 1vw !important;
 
 }
+.navbar-collapse.collapse
+{
+     margin-left: 0px !important;
+}
+
 }
