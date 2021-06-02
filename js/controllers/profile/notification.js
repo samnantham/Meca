@@ -35,7 +35,7 @@ app.controller('NotificationController', ['$scope', '$http', '$state', 'authServ
     }
 
     $scope.readNotification = function(key,notification){
-        webServices.put('notification/read/' + notification.id).then(function(getData) {
+        webServices.post('notification/read/' + notification.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.notifications.data[key].status = 1;

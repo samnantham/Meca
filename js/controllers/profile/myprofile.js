@@ -39,7 +39,7 @@ app.controller('ProfileController', ['$scope', '$http', '$state', 'authServices'
         $scope.errors = [];
         if (form.$valid) {
             $rootScope.loading = true;
-            webServices.putupload('profile/update', $scope.formData).then(function(getData) {
+            webServices.upload('profile/update', $scope.formData).then(function(getData) {
                 $rootScope.loading = false;
                 if (getData.status == 200) {
                     $rootScope.$emit("showSuccessMsg", getData.data.message);

@@ -78,7 +78,7 @@ app.controller('ChatController', ['$scope', '$http', '$state', 'authServices', '
         var obj = {
             firebaseid: firebaseid
         };
-        webServices.put('profile/update/firebaseid', obj).then(function(getData) {
+        webServices.post('profile/update/firebaseid', obj).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.getUserInfo();
                 if(Object.keys($scope.RoomData).length > 1){
@@ -266,7 +266,7 @@ app.controller('ChatController', ['$scope', '$http', '$state', 'authServices', '
                     }
                 });
             }else{
-                webServices.putupload('group/chat/'+$scope.groupData.id, $scope.groupData).then(function(getData) {
+                webServices.upload('group/chat/'+$scope.groupData.id, $scope.groupData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -360,7 +360,7 @@ app.controller('ChatController', ['$scope', '$http', '$state', 'authServices', '
     }
     
     $scope.updateroom = function() {
-        webServices.put('chat/room/'+ $scope.RoomData.chatroom_id + '/' + $scope.RoomData.chat_type).then(function(getData) {
+        webServices.post('chat/room/'+ $scope.RoomData.chatroom_id + '/' + $scope.RoomData.chat_type).then(function(getData) {
             if (getData.status == 200) {
             } else {
 

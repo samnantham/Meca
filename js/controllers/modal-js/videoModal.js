@@ -33,7 +33,7 @@ app.controller('VideoModalController', [ '$timeout', '$state', '$stateParams', '
         if (form.$valid) {
             $rootScope.loading = true;
             if($rootScope.isEdititem){
-                webServices.putupload('news/video/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
+                webServices.upload('news/video/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);

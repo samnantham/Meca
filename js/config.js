@@ -314,6 +314,56 @@ var app =
             link: 'docs/Organization/Yemen AMTC _ MEBIT Organization Structure Template v2.pdf'
           }];
 
+          app.organizationList = [{
+            country: 'Saudi Arabia',
+            distributor: '[ALJ] Abdul Latif Jameel Co.',
+            linktoOpen: 'docs/OrganizationChartPDF/(ALJ) 2021  MEBIT Organization Structure.pdf'
+          },{
+            country: 'UAE',
+            distributor: '[AFM] Al-Futtaim Motor Co.',
+            linktoOpen: ''
+          },{
+            country: 'Kuwait',
+            distributor: '[MNSS] Mohamed Naser Al-Sayer & Sons Est Co.',
+            linktoOpen: 'docs/OrganizationChartPDF/(MNSS) 2021 MEBIT Organization Structure.pdf'
+          },{
+            country: 'Iraq',
+            distributor: '[TIQ] Toyota Al Iraq Company for Trading and services of Vehicles Ltd.',
+            linktoOpen: 'docs/OrganizationChartPDF/(TIQ) 2021 MEBIT Organization Chart.pdf'
+          },{
+            country: 'Jordan',
+            distributor: '[CTA] Central Trade & Auto Co.',
+            linktoOpen: 'docs/OrganizationChartPDF/(CTA) MEBIT Organization Structure.pdf'
+          },{
+            country: 'Oman',
+            distributor: '[SBA] Saud Bahwan Automotive LLC.',
+            linktoOpen: 'docs/OrganizationChartPDF/(SBA) 2021 MEBIT Org Structure .pdf'
+          },{
+            country: 'Qatar',
+            distributor: '[AAB] Abdullah Abdulghani & Bros. Co.',
+            linktoOpen: 'docs/OrganizationChartPDF/(AAB) 2021 MEBIT Organization Chart.pdf'
+          },{
+            country: 'Bahrain',
+            distributor: '[EKK]Ebrahim K. Kanoo B.S.C',
+            linktoOpen: 'docs/OrganizationChartPDF/(EKK) 2021 MEBIT Organization Structure.pdf'
+          },{
+            country: 'Lebanon',
+            distributor: '[BUMC] Boustany United Machineries Company s.a.l',
+            linktoOpen: 'docs/OrganizationChartPDF/(BUMC)  - MEBIT Organization Structure.pdf'
+          },{
+            country: 'Yemen',
+            distributor: '[AMTC] Automotive & Machinery Trading Center',
+            linktoOpen: 'docs/OrganizationChartPDF/(AMTC) 2021 MEBIT Organization Structure.pdf'
+          },{
+            country: 'Central Asia',
+            distributor: '[TCA] Toyota Central Asia FZE',
+            linktoOpen: 'docs/OrganizationChartPDF/(TCA)2021 MEBIT-TCA Organization Chart.pdf'
+          },{
+            country: 'Afghanistan',
+            distributor: '[HGML] Habib Gulzar Motors Ltd.',
+            linktoOpen: 'docs/OrganizationChartPDF/(HGML) 2021 MEBIT Organization Chart.pdf'
+          }];
+
           app.mentor_experience_years = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th','13th','14th','15th'];
           app.mentor_batch_medals = ['GOLD（Passed with above 90% score）','GOLD（Passed with above 90% score）- Upgraded','GOLD（Passed with above 90% score）- Renewed','SILVER（Passed with above 80% score）','SILVER（Passed with above 80% score）- Upgraded','SILVER（Passed with above 80% score）- Renewed','Not yet passed the mentor course',];
           app.mentor_countries = [{lable:'lbn', country:'Lebanon'},{lable:'irq', country:'Iraq'},{lable:'jor', country:'Jordan'},{lable:'kwt', country:'Kuwait'},{lable:'bhr', country:'Bahrain' },{lable:'qat', country:'Qatar' },{lable:'sau',country:'Saudi Arabia' },{lable:'are',country:'United Arab Emirates' },{lable:'omn',country: 'Oman' },{lable:'yem',country: 'Yemen'},{lable:'uzb',country: 'Uzbekistan'},{lable:'afg', country: 'Afghanistan'}];

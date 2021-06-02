@@ -145,17 +145,24 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 });
             }
             else if (item.whatsnew_type == 4) {
+                if(!item.viewinfo){
+                    $rootScope.viewModuleItem(13,item.id);
+                    item.viewinfo = 1;
+                }
                 $scope.clickTMC(item);
             }
-            console.log(item)
+            else if (item.whatsnew_type == 6) {
+                $state.go('app.viewoneandonly', {
+                    id: item.id
+                });
+            }
         }
-
 
         $scope.updateReminder = function (reminder) {
             var obj = {};
             obj.item = reminder.item;
             obj.module = reminder.module;
-            webServices.put('reminder/update', obj).then(function (getData) {
+            webServices.post('reminder/update', obj).then(function (getData) {
                 console.log(getData)
                 /*if (getData.status == 200) {
                     $rootScope.loading = false;

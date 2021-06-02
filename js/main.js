@@ -128,6 +128,7 @@ angular.module('app')
             $rootScope.mentor_experience_years = angular.copy(app.mentor_experience_years);
             $rootScope.mentor_batch_medals = angular.copy(app.mentor_batch_medals);
             $rootScope.mentor_countries = angular.copy(app.mentor_countries);
+            $rootScope.organizationList = angular.copy(app.organizationList);
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;
 
@@ -160,6 +161,10 @@ angular.module('app')
 
             $rootScope.closeLikeModal = function (module){
                 $('#ModuleLikeMembersModal').modal('hide');
+            }
+
+            $rootScope.closePDFModal = function (module){
+                $('#PDFModal').modal('hide');
             }
 
             $rootScope.showLikedMembers = function(members){

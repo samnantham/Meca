@@ -100,10 +100,10 @@
                      <div class="row m-t"></div>
                      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="(key,user) in trainees">
                         <div class="user" ng-click="viewTrainee(user)" ng-class="{'_gold' : user.frame == 1,'_silver' : user.frame == 2,'_bronze' : user.frame == 3,'_white' : user.frame == 4}">
-                           <div class="user_name_text">{{user.userinfo.first_name + ' ' + user.userinfo.last_name}}
+                           <div class="user_name_text">{{user.is_distributor ? (user.userinfo.first_name + ' ' + user.userinfo.last_name) : (user.traineeinfo.first_name + ' ' + user.traineeinfo.last_name)}}
                            </div>
-                           <div class="user_position_text">{{user.userinfo.distributorinformation.name}}</div>
-                           <div class="user_position_text">{{user.userinfo.divisioninformation.division_name}}</div>
+                           <div class="user_position_text">{{user.is_distributor ? user.userinfo.distributorinformation.name : user.traineeinfo.company_name}}</div>
+                           <div class="user_position_text" ng-class="{'text-transparent' : !user.is_distributor && !user.traineeinfo.profession}">{{user.is_distributor ? user.userinfo.divisioninformation.division_name : (user.traineeinfo.profession ? user.traineeinfo.profession : 'Dummy Text') }}</div>
                         </div>
                      </div>
                   </div>
@@ -262,11 +262,11 @@
                               </div>
                            </div>
                            <div class="info_holder"
-                              ng-class="{'gold_plate' :traineeInfo.frame == 1,'silver_plate' :traineeInfo.frame == 2,'bronze_plate' :traineeInfo.frame == 3,'white_plate' :traineeInfo.frame == 4}">
-                              {{traineeInfo.userinfo.first_name + ' ' + traineeInfo.userinfo.last_name}}<br>
-                              {{traineeInfo.userinfo.distributorinformation.name}}<br>
-                              {{traineeInfo.userinfo.divisioninformation.division_name}}
-                           </div>
+                               ng-class="{'gold_plate' :traineeInfo.frame == 1,'silver_plate' :traineeInfo.frame == 2,'bronze_plate' :traineeInfo.frame == 3,'white_plate' :traineeInfo.frame == 4}">
+                               {{traineeInfo.is_distributor ? (traineeInfo.userinfo.first_name + ' ' + traineeInfo.userinfo.last_name) :  (traineeInfo.traineeinfo.first_name + ' ' + traineeInfo.traineeinfo.last_name)}}<br>
+                               {{traineeInfo.is_distributor ? (traineeInfo.userinfo.distributorinformation.name) : (traineeInfo.traineeinfo.company_name)}}<br>
+                               {{traineeInfo.is_distributor ? (traineeInfo.userinfo.divisioninformation.division_name) : (traineeInfo.traineeinfo.profession)}}
+                            </div>
                         </div>
                         <div class="col-sm-7">
                            <div class="row m-b">

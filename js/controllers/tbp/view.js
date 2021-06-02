@@ -11,23 +11,32 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.tbp = getData.data;
-                if (!$scope.sdgs.has_access) {
+                if (!$scope.tbp.has_access) {
                     $state.go('app.tbp', { type: 0 });
                 } else {
                     $scope.mediafiles = $rootScope.splitFiles($scope.tbp.tbp_files);
                     if (Object.keys($scope.tbp).length > 0) {
                         $scope.tbp.videocount = $rootScope.getfileCounts($scope.tbp.tbp_files, 'video');
                         $scope.tbp.imagecount = $rootScope.getfileCounts($scope.tbp.tbp_files, 'image');
+                        console.log($scope.tbp.uploads)
                         if ($scope.tbp.uploads) {
                             angular.forEach($scope.tbp_uploads, function (upload, no) {
                                 upload.fileurl = $scope.tbp.uploads[upload.typename];
                                 upload.item_class = '';
                                 if ((no + 1) % 2 == 0) {
-                                    //upload.item_class = 'disabled';
-                                    upload.fileurl = $scope.tbp.uploads[upload.typename];
-                                    if (($scope.tbp_uploads[no - 1].is_approved) || (!$scope.tbp_uploads[no - 1].is_approved && $scope.tbp_uploads[no - 1].admin_upload)) {
-                                        upload.item_class = '';
+                                    var previous_step_status = $scope.tbp_uploads[no-1].typename + '_approved';
+                                    if($scope.tbp.uploads[previous_step_status]){
+                                        //upload.item_class = 'disabled';
+                                    }else{
+
                                     }
+                                    //console.log($scope.tbp.uploads[previousitem + '_approved'])
+                                    // console.log($scope.tbp_uploads[no-1]);
+                                    // console.log($scope.tbp.uploads[no-1][upload.typename]);
+                                    upload.fileurl = $scope.tbp.uploads[upload.typename];
+                                    // if (($scope.tbp_uploads[no - 1].is_approved) || (!$scope.tbp_uploads[no - 1].is_approved && $scope.tbp_uploads[no - 1].admin_upload)) {
+                                    //     upload.item_class = '';
+                                    // }
                                 } else {
                                     var approved = upload.typename + '_approved';
                                     var is_admin_upload = upload.typename + '_is_admin_upload';
@@ -37,13 +46,15 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
                                     upload[is_admin_upload] = $scope.tbp.uploads[is_admin_upload];
                                     upload.admin_file = $scope.tbp.uploads[admin_file];
                                     upload.admin_upload = $scope.tbp.uploads[is_admin_upload];
+                                    //console.log(upload)
                                     if (no > 0) {
                                         if (($scope.tbp.uploads[$scope.tbp_uploads[no - 1].typename] === undefined) || ($scope.tbp.uploads[$scope.tbp_uploads[no - 1].typename] === null) || ($scope.tbp.uploads[$scope.tbp_uploads[no - 1].typename] === '')) {
-                                            //upload.item_class = 'disabled';
+                                            upload.item_class = 'disabled';
                                         }
                                     } else {
+                                        console.log($scope.tbp.uploads[approved])
                                         if ($scope.tbp.uploads[approved]) {
-                                            //upload.item_class = 'disabled';
+                                            upload.item_class = 'disabled';
                                         }
                                     }
                                 }

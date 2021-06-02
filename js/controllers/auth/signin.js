@@ -4,10 +4,22 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', 'authServic
     $scope.formData = {};
     $rootScope.loading = false;
 
+    console.log(localStorage.userData)
     if (localStorage.userData && localStorage.userData != 'undefined') {
         var userData = JSON.parse(localStorage.userData);
         if(userData.rememberme == 1){
             $scope.formData = JSON.parse(localStorage.userData);
+        }
+    }
+
+    $scope.changeRemember = function(status){
+        console.log(status)
+        if(status){
+            if($scope.formData.email && $scope.formData.password){
+                localStorage.userData = JSON.stringify($scope.formData);
+            }
+        }else{
+            localStorage.userData = '';
         }
     }
     
@@ -27,7 +39,6 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', 'authServic
                     localStorage.user = JSON.stringify($sessionStorage.user);
                     $state.go('app.home');
                 } else {
-                    console.log(getData.data.message.message)
                     $scope.errors = getData.data.message.message;
                     $rootScope.$emit("showErrors", $scope.errors);
                 }

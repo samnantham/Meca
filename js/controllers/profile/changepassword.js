@@ -15,7 +15,7 @@ app.controller('ChangePasswordController', ['$scope', '$http', '$state', 'authSe
         $scope.errors = [];
         if (form.$valid) {
             $scope.loading = true;
-            webServices.put('password/update', $scope.formData).then(function(getData) {
+            webServices.post('password/update', $scope.formData).then(function(getData) {
                 if (getData.status == 200) {
                     $rootScope.$emit("showSuccessMsg", getData.data.message);
                     $timeout(function() {

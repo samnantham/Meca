@@ -29,8 +29,8 @@
         <div class="col-sm-3">
             <ul class="nav navbar-nav number-ticker navbar-center cursor-no m-t-sm navbar-right">
                 <li class="text-center cursor-no ">
-                    <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2 text-2x"
-                            count-to="{{user.totalViews}}" value="0" duration="4"></span> <span class="m-r">&nbsp;</span>Today's Visitors - <span class="color_2 text-2x"
+                    <a class="cursor-no  font-bold color_2 pad-515">Total Visitors - <span class="color_2   number"
+                            count-to="{{user.totalViews}}" value="0" duration="4"></span> <span class="m-r">&nbsp;</span>Today's Visitors - <span class="color_2 number "
                             count-to="{{user.todayViews}}" value="0" duration="2"></span></a> 
                 </li>
               <!--   <li class="text-center cursor-no">
@@ -421,13 +421,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: none !important;">
-                <button type="button" class="close m-r-md" ng-click="closeModal();" aria-label="Close"><span
+                <button type="button" class="close m-r-md" ng-click="closePDFModal();" aria-label="Close"><span
                         aria-hidden="true" class="text-2x">&times;</span></button>
                 <h4 class="modal-title text-center" id="myModalLabel">&nbsp</h4>
             </div>
             <div class="modal-body">
                 <div class="row m-t-sm">
-                    <iframe ng-src="{{doclink}}" width="100%"></iframe>
+                    <embed ng-src="{{doclink}}" width="100%"></embed>
+                    <!-- <iframe ng-src="{{doclink}}" width="100%"></iframe> -->
                 </div>
             </div>
         </div>

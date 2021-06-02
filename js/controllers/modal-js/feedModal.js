@@ -51,7 +51,7 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         if (form.$valid) {
             $rootScope.loading = true;
             if($rootScope.isEdititem){
-                webServices.putupload('feed/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
+                webServices.upload('feed/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);

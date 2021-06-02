@@ -182,7 +182,7 @@ app.controller('OnlyDayModalController', [ '$timeout', '$state', '$stateParams',
         if (form.$valid) {
             $rootScope.loading = true;
             if($rootScope.isEdititem){
-                webServices.putupload('oneandonlyday/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
+                webServices.upload('oneandonlyday/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);

@@ -23,19 +23,13 @@
                      </div>
                   </div>
                </div>
-               <div class="col-xs-12 p-l-none p-r-none border-bottom-1"
-                  ng-repeat="(key,whatsnew) in homeData.whatsnew | limitTo: 8">
-                  <div class="m-t-xs m-b-xs">
+               <div class="col-xs-12 p-l-none p-r-none" ng-repeat="(key,whatsnew) in homeData.whatsnew" ng-class="{'border-bottom-1' : whatsnew.whatsnew_type < 4}" ng-if="whatsnew.whatsnew_type < 4">
+                  <div class="m-t-xs m-b-xs" ng-if="whatsnew.whatsnew_type < 4">
                      <div class="col-sm-3 p-l-none">
                         <div class="text-left h5 sm-padder-v sm-padder color_4">
                            <strong>
-                              <img class="new-icon" src="img/new.png" ng-if="key < 3" />
-                              <span ng-class="{'pad-left-30px': key < 3}" ng-if="whatsnew.whatsnew_type == 2">MEBIT
-                                 Event</span>
-                              <span ng-class="{'pad-left-30px': key < 3}"
-                                 ng-if="whatsnew.whatsnew_type == 3">{{ whatsnew.typeData.type }}</span>
-                              <span ng-class="{'pad-left-30px': key < 3}"
-                                 ng-if="whatsnew.whatsnew_type == 4">From TMC</span>
+                              <img class="new-icon" src="img/new.png" ng-if="!whatsnew.viewinfo"/>
+                              <span ng-class="{'pad-left-30px': !whatsnew.viewinfo}">{{ whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?  whatsnew.typeData.type :  whatsnew.whatsnew_type }}</span>
                            </strong>
                            <div class="clear"></div>
                         </div>
@@ -46,12 +40,12 @@
                         </div>
                      </div>
                      <div class="col-sm-5">
-                        <div class="text-left h5 font-bold sm-padder-v sm-padder cursor" ng-click="viewItem(whatsnew)">
+                        <div class="text-left h5 font-bold sm-padder-v sm-padder w-full text-ellipsis cursor" ng-click="viewItem(whatsnew)">
                            {{whatsnew.title}}
                         </div>
                      </div>
                      <div class="col-sm-2 p-r-none">
-                        <div class="text-left h5 sm-padder-v sm-padder color_4">
+                        <div class="text-left h5 sm-padder-v sm-padder color_4 w-full text-ellipsis">
                            <strong>
                               <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
                               <span

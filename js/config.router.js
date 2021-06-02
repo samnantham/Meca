@@ -100,7 +100,7 @@ angular.module('app')
                     })
 
                     .state('app.pdcainfo', {
-                        url: 'pdca/view/:id',
+                        url: 'pdca/info/:id',
                         templateUrl: 'tpl/pdca/view.html',
                         resolve: load(['js/controllers/pdca/view.js'])
                     })
@@ -113,7 +113,7 @@ angular.module('app')
                     })
 
                     .state('app.viewkaizen', {
-                        url: 'kaizen/view/:id',
+                        url: 'kaizen/info/:id',
                         templateUrl: 'tpl/kaizen/view.html',
                         resolve: load(['js/controllers/kaizen/view.js'])
                     })
@@ -126,7 +126,7 @@ angular.module('app')
                     })
 
                     .state('app.viewmaas', {
-                        url: 'maas/view/:id',
+                        url: 'maas/info/:id',
                         templateUrl: 'tpl/maas/view.html',
                         resolve: load(['js/controllers/maas/view.js'])
                     })
@@ -147,7 +147,7 @@ angular.module('app')
                     })
 
                     .state('app.viewsdgs', {
-                        url: 'sdgs/view/:id',
+                        url: 'sdgs/info/:id',
                         templateUrl: 'tpl/sdgs/view.html',
                         resolve: load(['js/controllers/sdgs/view.js'])
                     })
@@ -161,7 +161,7 @@ angular.module('app')
 
 
                     .state('app.viewgr', {
-                        url: 'gr/view/:id',
+                        url: 'gr/info/:id',
                         templateUrl: 'tpl/gr/view.html',
                         resolve: load(['js/controllers/gr/view.js'])
                     })
@@ -180,7 +180,7 @@ angular.module('app')
                     })
 
                     .state('app.viewhydrogen', {
-                        url: 'hydrogen/view/:id',
+                        url: 'hydrogen/info/:id',
                         templateUrl: 'tpl/hydrogen/view.html',
                         resolve: load(['js/controllers/hydrogen/view.js'])
                     })
@@ -193,19 +193,19 @@ angular.module('app')
                     })
 
                     .state('app.viewnews', {
-                        url: 'news/view/:id',
+                        url: 'news/info/:id',
                         templateUrl: 'tpl/newsroom/view.html',
                         resolve: load(['js/controllers/newsroom/view.js'])
                     })
 
                     .state('app.viewvideo', {
-                        url: 'news/video/view/:id',
+                        url: 'news/video/info/:id',
                         templateUrl: 'tpl/newsroom/viewvideo.html',
                         resolve: load(['js/controllers/newsroom/viewvideo.js'])
                     })
 
                     .state('app.viewcrisis', {
-                        url: 'news/crisis/view/:id',
+                        url: 'news/crisis/info/:id',
                         templateUrl: 'tpl/newsroom/viewcrisis.html',
                         resolve: load(['js/controllers/newsroom/viewcrisis.js'])
                     })
@@ -253,6 +253,12 @@ angular.module('app')
                         resolve: load(['js/controllers/contactus.js'])
                     })
 
+                    .state('app.organization', {
+                        url: 'organization/list',
+                        templateUrl: 'tpl/organization.html',
+                        resolve: load(['js/controllers/contactus.js'])
+                    })
+
                     .state('app.orgdocs', {
                         url: 'mebit/organization/documents',
                         templateUrl: 'tpl/organizationdocs.html',
@@ -286,7 +292,7 @@ angular.module('app')
                     })
 
                     .state('app.viewoneandonly', {
-                        url: 'oneandonlyday/view/:id',
+                        url: 'oneandonlyday/info/:id',
                         templateUrl: 'tpl/oneandonly/view.html',
                         resolve: load(['js/controllers/oneandonly/view.js'])
                     })

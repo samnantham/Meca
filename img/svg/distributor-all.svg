@@ -7578,7 +7578,7 @@
       <g class="cls-1269" transform="matrix(1, 0, 0, 1, 84.36, 1105)">
         <rect id="Rectangle_2873-2" data-name="Rectangle 2873" class="cls-4" width="250" height="100" rx="10" transform="translate(544.64 203)"/>
       </g>
-      <text id="Organization-2" data-name="Organization" class="cls-3" transform="translate(702 1365)"><tspan x="0" y="0">Organization</tspan></text>
+      <text id="Organization-2" data-name="Organization" class="cls-3" transform="translate(702 1365)"><tspan x="0" y="0" ui-sref="app.organization">Organization</tspan></text>
     </g>
     <g id="New_car_sales" data-name="New car sales">
       <g id="Group_5243" data-name="Group 5243" transform="translate(4097 9279)" ui-sref="app.kaizens({type:'1',tmc:0})">

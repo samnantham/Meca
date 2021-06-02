@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-xs-12 sm-padder col-lg-8 col-sm-8 col-md-8" ng-class="{'m-p-l m-p-r m-b' : isMobile}">
                                 <div class="col-xs-12 no-padder text-right text-danger text-too-small m-t-xs" ng-class="{'m-b' : isMobile}">{{convertDate(data.created_at) | date:'dd MMM yyyy HH:mm:ss'}} </div>
-                                <a href="" class="h6 font-bold m-t">{{data.title}}</a>
+                                <a href="" class="h6 font-bold m-t w-full text-ellipsis">{{data.title}}</a>
 
                                 <small class="block dist-desc m-t-xs text-justify"> {{data.plain_description | cut:true:180:'....'}}</small>
                                 <div class="m-b m-t-xs">

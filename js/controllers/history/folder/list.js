@@ -25,7 +25,7 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
         if (form.$valid) {
             $rootScope.loading = true;
             if($scope.isedit){
-                webServices.put('history/folder/'+ $scope.formData.id, $scope.formData).then(function(getData) {
+                webServices.post('history/folder/'+ $scope.formData.id, $scope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $scope.closeModal();

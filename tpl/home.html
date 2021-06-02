@@ -14,34 +14,34 @@
                      <div class="col-sm-3 p-l-none p-xs-l">
                         <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Category</div>
                      </div>
-                     <div class="col-sm-2">
+                     <div class="col-sm-3">
                         <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Time</div>
                      </div>
                      <div class="col-sm-4">
                         <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Title</div>
                      </div>
-                     <div class="col-sm-3 p-r-none p-xs-r">
+                     <div class="col-sm-2 p-r-none p-xs-r">
                         <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Written by</div>
                      </div>
                   </div>
                </div>
-               <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-t-xs m-b-xs"
+               <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
                   ng-repeat="(key,whatsnew) in homeData.whatsnew">
                   <div class="col-sm-3 p-l-none m-p-r-none">
                      <div class="text-left f12 sm-padder-v sm-padder color_2">
                         <strong>
-                           <img class="new-icon" src="img/new.png" ng-if="key < 3" />
-                           <span ng-class="{'pad-left-30px':key < 3}"
-                              ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type < 5">
-                              {{whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?
+                           <img class="new-icon" src="img/new.png" ng-if="!whatsnew.viewinfo" />
+                           <span ng-class="{'pad-left-30px': !whatsnew.viewinfo}"
+                              ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type <= 6">
+                              {{ whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?
                               'Kaizen - ' + whatsnew.typeData.type : whatsnew.whatsnew_type == 4 ?
-                              'From TMC' : whatsnew.whatsnew_type}}
+                              'From TMC' :  whatsnew.whatsnew_type == 6 ? 'One & Only Day' : whatsnew.whatsnew_type }}
                            </span>
                         </strong>
                         <div class="clear"></div>
                      </div>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
                      <div class="text-left h5 sm-padder-v sm-padder color_3 f-10 m-t-xs">
                         {{convertDate(whatsnew.created_at) | date:'dd MMM yyyy HH:mm'}}
                      </div>
@@ -52,11 +52,11 @@
                         {{whatsnew.title}}
                      </div>
                   </div>
-                  <div class="col-sm-3 p-r-none">
+                  <div class="col-sm-2 p-r-none">
                      <div class="text-left f12 sm-padder-v sm-padder color_2 text-ov">
                         <strong>
                            <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
-                           <span ng-if="whatsnew.whatsnew_type == 3">
+                           <span ng-if="whatsnew.whatsnew_type == 3 || whatsnew.whatsnew_type == 6">
                               {{whatsnew.writerinfo ? whatsnew.writerinfo.name : (whatsnew.is_admin ?
                               whatsnew.ownerprofile.username + '(Admin)' : whatsnew.ownerprofile.first_name +
                               ' ' + whatsnew.ownerprofile.last_name + ' - ' +
@@ -70,8 +70,9 @@
             </div>
          </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none">
-         <div class="promotion-area m-b">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none promtearea" >
+         <div  ng-scrollbars ng-scrollbars-config="scrollconfig">
+         <div class="promotion-area m-b" >
             <div class="panel panel-default r-3x ">
                <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold text-left">
                   Promotion: The advertising revenue of this space will be used for
@@ -109,7 +110,6 @@
                </div>
             </div>
          </div>
-
          <div class="promotion-area m-t m-b" ng-if="homeData.onlyDays.length > 0">
             <div class="panel panel-default r-3x">
                <div class="panel-heading r-3x r-b-none bg-main1 text-left font-bold cursor">
@@ -176,14 +176,15 @@
             </div>
          </div>
       </div>
+      </div>
       <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none">
-         <div class="promotion-area m-b feed-area">
+         <div class="promotion-area m-b feed-area" ng-scrollbars ng-scrollbars-config="scrollconfig">
             <div class="panel panel-default r-3x">
                <div class="panel-heading r-3x r-b-none bg-main1 text-left">
                   <span class="font-bold"> MECA Post </span> <a class="btn btn-default btn-xs bg-main2 pull-right b-no f-10"
                      ng-click="ModalOpen('feedModal','FeedModalController');">Add New</a>
                </div>
-               <div class="panel-body bdr-1px p-l-none p-r-none" ng-scrollbars ng-scrollbars-config="scrollconfig">
+               <div class="panel-body p-l-none p-r-none"> <!-- bdr-1px  -->
                   <div class="feed-item" ng-class="{'feed-item-data': !$last }"
                      ng-repeat="(key,feed) in homeData.feeds">
 
@@ -226,13 +227,15 @@
                            <span read-more="feed.content"
                            read-more-limit="150"
                            read-more-label-expand="... See More"
-                           read-more-label-collapse="... See Less">{{feed.content}}
+                           read-more-label-collapse="... See Less" ng-if="feed.content.length > 150">{{feed.content}}
+                           </span>
+                           <span ng-if="feed.content.length <= 150">{{feed.content}}
                            </span>
                         </div>
                         <div class="like_comment_holder">
-                           <div class="like_holder color_2 cursor">
-                              <i class="fa fa-2x" ng-class="feed.isLiked ? 'fa-thumbs-up':'fa-thumbs-o-up'"
-                                 aria-hidden="true" ng-click="changeFeedLike(key,feed,1)"></i><span class="cursor" ng-click="showlikeInfo(feed.likemembers)"> {{feed.likes}}
+                           <div class="like_holder color_2"> <!-- ng-click="showlikeInfo(feed.likemembers)" -->
+                              <i class="fa fa-2x cursor" ng-class="feed.isLiked ? 'fa-thumbs-up':'fa-thumbs-o-up'"
+                                 aria-hidden="true" ng-click="changeFeedLike(key,feed,1)"></i><span> {{feed.likes}} 
                                  likes</span>
                            </div>
                            <div class="comment_holder color_2 cursor" ng-click="showHideComments(key,feed)">

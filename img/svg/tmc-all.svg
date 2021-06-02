@@ -168,7 +168,7 @@
       <g class="clsn-8" transform="matrix(1, 0, 0, 1, 1022, 941)">
         <rect id="Rectangle_2877-2" data-name="Rectangle 2877" class="clsn-6" width="250" height="50" rx="10" transform="translate(360 307)"/>
       </g>
-      <text id="Organization" class="clsn-2" transform="translate(1507 1280)"><tspan x="-50.877" y="0">Organization</tspan></text>
+      <text id="Organization" class="clsn-2" transform="translate(1507 1280)" ng-click="openPDF('docs/OrganizationChartPDF/[iMECAD] Org chart as of Apr 21.pdf')"><tspan x="-50.877" y="0">Organization</tspan></text>
     </g>
     <path id="Union_12" data-name="Union 12" class="clsn-7" d="M-4128-11297h36.767l-18.384,18.386Zm10.726,0v-16h16v16Z" transform="translate(9591 21989)"/>
     <path id="Union_8" data-name="Union 8" class="clsn-7" d="M-4128-11297h36.767l-18.384,18.386Zm10.726,0v-16h16v16Z" transform="translate(9591 22122)"/>

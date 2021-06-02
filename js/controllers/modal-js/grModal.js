@@ -107,7 +107,7 @@ app.controller('GRModalController', ['$timeout', '$state', '$stateParams', 'webS
                 $rootScope.formData.end_date = $filter('date')($rootScope.formData.gr_end_date, 'yyyy-MM-dd');
             }
             if($rootScope.isEdititem){
-                webServices.putupload('gr/'+$rootScope.formData.id, $rootScope.formData).then(function (getData) {
+                webServices.upload('gr/'+$rootScope.formData.id, $rootScope.formData).then(function (getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.closeModalPopup();

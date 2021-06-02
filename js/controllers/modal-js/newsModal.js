@@ -117,7 +117,7 @@ app.controller('NewsModalController', [ '$timeout', '$state', '$stateParams', 'w
         if (form.$valid) {
             $rootScope.loading = true;
             if($rootScope.isEdititem){
-                webServices.putupload('news/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
+                webServices.upload('news/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);
