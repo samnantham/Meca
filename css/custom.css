@@ -2863,6 +2863,10 @@ menu-icon {
 	.navbar-collapse {
 		padding: 0px 15px !important;
 	}
+	.status_txt
+	{
+		margin-bottom: 15px;
+	}
 }
 
 @media only screen and (min-width: 768px) {
@@ -2882,6 +2886,12 @@ menu-icon {
 		overflow: hidden;
 		display: block;	
 	}
+	#detailedpopup_hold
+	{
+		width: 80%;
+		max-width: 1000px;
+	}
+	
 }
 
 .text-transparent {
@@ -2897,4 +2907,10 @@ menu-icon {
 {
 	color: #fff !important;
 	background: #213ad4 !important;
+}
+
+.reminder-page .btn-default:hover, .btn-default:focus{
+	outline: 0!important;
+	background: #fff!important;
+	color: #58666e !important;
 }

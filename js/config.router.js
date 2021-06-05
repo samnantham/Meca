@@ -45,7 +45,7 @@ angular.module('app')
                     .state('app.reminders', {
                         url: 'reminders',
                         templateUrl: 'tpl/reminders.html',
-                        resolve: load(['moment', 'fullcalendar', 'ui.calendar', 'js/controllers/home.js'])
+                        resolve: load(['moment', 'fullcalendar', 'ui.calendar', 'js/controllers/reminders.js'])
                     })
 
                     .state('app.awards', {
@@ -93,11 +93,11 @@ angular.module('app')
                         resolve: load(['js/controllers/tbp/view.js'])
                     })
 
-                    .state('app.viewpdca', {
-                        url: 'pdca/info/:id',
-                        templateUrl: 'tpl/tbp/viewpdca.html',
-                        resolve: load(['js/controllers/tbp/viewpdca.js'])
-                    })
+                    // .state('app.viewpdca', {
+                    //     url: 'pdca/info/:id',
+                    //     templateUrl: 'tpl/tbp/viewpdca.html',
+                    //     resolve: load(['js/controllers/tbp/viewpdca.js'])
+                    // })
 
                     .state('app.pdcainfo', {
                         url: 'pdca/info/:id',
