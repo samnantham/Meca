@@ -53,6 +53,10 @@
                             <a class="text-muted text-white" href="docs/UserManual.pdf" download="userManual.pdf"
                                 target="_blank"> Download</a>
                         </li>
+                        <li>
+                            <a class="text-muted text-white" ng-click="opendemoVideo('media/video/MECA-Demo.mp4');">Demonstration Video</a>
+                        </li>
+                        
                     </ul>
                 </li>
                 <li class="dropdown" dropdown>
@@ -426,9 +430,11 @@
                 <h4 class="modal-title text-center" id="myModalLabel">&nbsp</h4>
             </div>
             <div class="modal-body">
-                <div class="row m-t-sm">
+                <div class="row m-t-sm" ng-if="browser == 'Firefox'">
                     <embed ng-src="{{doclink}}" width="100%"></embed>
-                    <!-- <iframe ng-src="{{doclink}}" width="100%"></iframe> -->
+                </div>
+                <div class="row m-t-sm" ng-if="browser != 'Firefox'">
+                    <iframe ng-src="{{doclink}}" width="100%"></iframe>
                 </div>
             </div>
         </div>

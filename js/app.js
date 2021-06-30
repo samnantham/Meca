@@ -24,6 +24,7 @@ angular.module('app', [
     'angularUtils.directives.dirPagination',
     'cp.ngConfirm',
     'angular-button-spinner',
+    'jlareau.bowser',
     'ismobile',
     'ui.calendar',
     'slickCarousel',

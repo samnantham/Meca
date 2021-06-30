@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
             <label class="font-bold">Video Link <code>*</code></label>
-            <small class="pull-right text-danger"
+            <small class="pull-right text-red"
                ng-if="errorData.video_link_error">{{errorData.video_link_errorMsg}}</small>
             <input type="url" name="video_link" class="form-control" ng-model="formData.video_link" required
                ng-change="inputchange()">

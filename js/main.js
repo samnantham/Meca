@@ -87,6 +87,16 @@ angular.module('app')
                 $rootScope.openLightbox($rootScope.images,key);
             };
 
+            $rootScope.opendemoVideo = function(url) {
+                var files = [];
+                var obj = {};
+                obj.type = 'video';
+                obj.url = url;
+                console.log(obj)
+                files.push(obj);
+                $rootScope.openLightbox(files,0);
+            };
+
             $rootScope.openLightbox = function(files,key){
                 Lightbox.openModal(files, key);
             }

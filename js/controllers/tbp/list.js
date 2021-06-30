@@ -35,8 +35,10 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
                 $scope.showMap = 0;
                 $scope.showListing = 1;
                 $scope.getCountryTrainees('lbn');
-            }
-            else{
+            }else if($scope.activetab == 6){
+                $scope.url = 'trainer/training/paginate/' + $scope.totalPerPage;
+                $scope.getResults();
+            }else{
                 $scope.url = 'tbp/paginate/' + $scope.totalPerPage;
                 $scope.getResults();
             }

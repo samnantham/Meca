@@ -105,6 +105,12 @@ angular.module('app')
                         resolve: load(['js/controllers/pdca/view.js'])
                     })
 
+                    .state('app.trainerinfo', {
+                        url: 'training/info/:id',
+                        templateUrl: 'tpl/trainer/view.html',
+                        resolve: load(['js/controllers/trainer/view.js'])
+                    })
+
                     //Kaizen
                     .state('app.kaizens', {
                         url: 'kaizen/list/:type/:tmc?',

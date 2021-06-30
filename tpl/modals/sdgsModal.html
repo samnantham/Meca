@@ -14,7 +14,7 @@
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 " ng-class="{'wrapper' : !isMobile}">
                <div class="form-group">
                   <label class="font-bold">Start Date <code>*</code></label>
-                  <small class="pull-right text-danger"
+                  <small class="pull-right text-red"
                      ng-if="errorData.start_date_error">{{errorData.start_date_errorMsg}}</small>
                   <div class="input-group" ng-controller="DatepickerDemoCtrl">
                      <input type="text" class="form-control" datepicker-popup="{{format}}"

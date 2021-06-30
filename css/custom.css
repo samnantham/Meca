@@ -132,12 +132,15 @@ textarea {
 	.w-max-450 {
 		width: 450px;
 	}
+
 	.t-c {
 		text-align: center;
 	}
+
 	.navbar-brand img {
 		display: none;
 	}
+
 	.nav-brand img {
 		display: block;
 	}
@@ -147,12 +150,15 @@ textarea {
 	.navbar-header button i {
 		color: #1b4ea9;
 	}
+
 	.navi {
 		margin-top: 50px;
 	}
+
 	.navbar-brand img {
 		display: block;
 	}
+
 	.nav-brand img {
 		display: none;
 	}
@@ -1384,6 +1390,7 @@ input:read-only {
 	.app-aside-fixed .aside-wrap .navi-wrap {
 		width: 280px;
 	}
+
 	.mobile-visible {
 		display: none;
 	}
@@ -1437,43 +1444,56 @@ menu-icon {
 	.mCSB_scrollTools a+.mCSB_draggerContainer {
 		margin-left: 28px !important;
 	}
+
 	.m-p-r {
 		padding-right: 15px !important;
 	}
+
 	.m-p-l {
 		padding-left: 15px !important;
 	}
+
 	.m-p-n {
 		padding: 0px !important;
 	}
+
 	.m-f-n {
 		float: none !important;
 	}
+
 	.mCSB_inside>.mCSB_container {
 		margin-right: 0px !important;
 	}
+
 	.chat-wrap {
 		height: auto !important;
 	}
+
 	.m-n-b {
 		border: 0px none !important;
 	}
+
 	.web-visible {
 		display: none;
 	}
+
 	.logo-area {
 		margin: auto;
 	}
+
 	.comment .msg-text .small-btn i {
 		font-size: 20px;
 	}
+
 	.modal-dialog {
 		width: 92% !important;
 		margin: 4%;
 	}
+
 	.event-info-b .btn-sm {
 		font-size: 8px;
 	}
+
 	.gpm.mCustomScrollbar {
 		height: 200px !important;
 	}
@@ -1734,6 +1754,7 @@ menu-icon {
 	.p-xs-l {
 		padding-left: 15px !important;
 	}
+
 	.p-xs-r {
 		padding-right: 15px !important;
 	}
@@ -1920,16 +1941,18 @@ menu-icon {
 	/*height: 71vh !important;*/
 	height: 74.15vh !important;
 }
+
 .mebit-ad .mCustomScrollbar {
 	/*height: 71vh !important;*/
 	height: 80.5vh !important;
-}	
+}
+
 .feed-area .mCustomScrollbar {
 	/*height: 71vh !important;*/
 	height: 74vh !important;
 }
-.mebit-ad .mCSB_container
-{
+
+.mebit-ad .mCSB_container {
 	margin-right: 0px !important;
 }
 
@@ -1959,7 +1982,7 @@ menu-icon {
 }
 
 .f8 {
-	font-size: 1.2vh
+	font-size: 1.2vh;
 }
 
 .d_i_b {
@@ -2150,13 +2173,16 @@ menu-icon {
 	.app-aside-folded .navbar-collapse {
 		margin-left: 0px;
 	}
+
 	.navbar-collapse .navbar-right.nav>li>a {
 		padding-left: 1vw !important;
 		padding-right: 1vw !important;
 	}
+
 	.nav-brand img {
 		max-width: 100%;
 	}
+
 	.navbar-collapse .nav>li>a {
 		font-size: 1vw;
 	}
@@ -2312,14 +2338,15 @@ menu-icon {
 }
 
 @media (min-width:1025px) {
-	@keyframes marquee {
+	@	keyframes marquee {
 		0% {
 			left: 0;
-		}
-		100% {
-			left: -100%;
-		}
 	}
+
+	100% {
+		left: -100%;
+	}
+}
 }
 
 .app-aside-folded .navi>ul>li>a span p:hover {
@@ -2330,7 +2357,8 @@ menu-icon {
 	width: 80%;
 }
 
-#PDFModal iframe, #PDFModal embed {
+#PDFModal iframe,
+#PDFModal embed {
 	height: 80vh;
 }
 
@@ -2851,20 +2879,24 @@ menu-icon {
 		min-height: 600px;
 		background-attachment: fixed;
 	}
+
 	.navbar-brand {
 		float: left !important;
 	}
+
 	.navbar-brand img {
 		display: block;
 	}
+
 	.collapse .header-logo {
 		display: none;
 	}
+
 	.navbar-collapse {
 		padding: 0px 15px !important;
 	}
-	.status_txt
-	{
+
+	.status_txt {
 		margin-bottom: 15px;
 	}
 }
@@ -2874,43 +2906,99 @@ menu-icon {
 		margin-left: -30px;
 		font-size: 1vw !important;
 	}
-	.number-ticker .number{
+
+	.number-ticker .number {
 		font-size: 1.5vw !important;
 	}
+
 	.navbar-collapse.collapse {
 		margin-left: 0px !important;
 	}
-	.new-home	
-	{
+
+	.new-home {
 		height: 85vh;
 		overflow: hidden;
-		display: block;	
+		display: block;
 	}
-	#detailedpopup_hold
-	{
+
+	#detailedpopup_hold {
 		width: 80%;
 		max-width: 1000px;
 	}
-	
 }
 
 .text-transparent {
 	color: transparent!important;
 }
-.btn a:hover
-{
-	font-weight:100 !important;
-	color: #fff !important;
-	background: #213ad4 !important;
-}
-.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default
-{
+
+.organization-page .btn a:hover {
+	font-weight: 100 !important;
 	color: #fff !important;
 	background: #213ad4 !important;
 }
 
-.reminder-page .btn-default:hover, .btn-default:focus{
+.organization-page .btn-default:hover,
+.organization-page .btn-default:focus,
+.organization-page .btn-default:active,
+.organization-page .btn-default.active,
+.open .dropdown-toggle.organization-page .btn-default {
+	color: #fff !important;
+	background: #213ad4 !important;
+}
+
+.reminder-page .btn-default:hover,
+.btn-default:focus {
 	outline: 0!important;
 	background: #fff!important;
 	color: #58666e !important;
+}
+
+.feed-area .carousel-indicators li {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin: 1px;
+	text-indent: -999px;
+	cursor: pointer;
+	background-color: aliceblue;
+	background-color: rgb(176, 172, 172);
+	border: 0px solid #0c0c0c;
+	border-radius: 10px;
+}
+
+.feed-area .carousel-indicators .active {
+	width: 8px;
+	height: 8px;
+	margin: 0px;
+	background-color: #213ad4;
+}
+
+.feed-area .carousel-indicators {
+	bottom: -30px;
+}
+
+.feed-area .carousel-inner>.item>img {
+	width: 100%;
+	height: auto;
+}
+
+.cauros_holder {
+	height: 250px;
+	display: inline-block;
+}
+
+.caurosbase_holder {
+	background-color: #22212112;
+}
+
+.cauros_holder img {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
 }

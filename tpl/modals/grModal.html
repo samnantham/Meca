@@ -106,7 +106,7 @@
                <div class="form-group">
                   <label class="font-bold">Images and Videos</label>
                   <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-accept="'image/*,video/*'" ngf-capture="capture"
-                     ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="addgrfiles($files);" ngf-maxfiles="6">
+                     ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="addgrfiles($files);" ngf-maxfiles="{{maxUploadFiles}}">
                      Upload Files
                   </div>
                </div>

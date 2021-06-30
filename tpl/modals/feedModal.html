@@ -5,6 +5,7 @@
         <h4 class="modal-title" id="myModalLabel">{{isEdititem ? 'Edit ' : 'Add '}} Feed</h4>
     </div>
     <div class="modal-body">
+        <input type="hidden" name="image" ng-model="formData.image" ng-required="formData.type == 1 && formData.newImages.length == 0">
         <div class="form-group">
             <label class="font-bold">Feed Type <code>*</code></label>
             <div class="col-sm-12 no-padder">
@@ -26,7 +27,33 @@
                 ng-model="formData.content" required></textarea>
         </div>
         <div class="form-group" ng-if="formData.type == 1">
-            <div class="col-sm-3 col-xs-6 p-l-none">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 m-p-n">
+                <div class="form-group">
+                   <label class="font-bold">Feed Images <code>*</code></label><small class="pull-right text-red"
+                   ng-if="errorData.image_error">{{errorData.image_errorMsg}}</small>
+                   <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-accept="'image/*'" ngf-capture="capture"
+                      ngf-drag-over-class="dragOverClassObj" ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" ngf-change="addfeedImages($files);" ngf-maxfiles="{{maxUploadFiles}}">
+                      Upload Files
+                   </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-p-n">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 m-p-n m-b-sm" ng-repeat="(key,data) in formData.images">
+                    <div class="mbit-img box-shadow b pos-rlt" ng-class-even="'m-l-sm'">
+                        <div class="w-full h-full mbit-img" background-image="{{IMGURL}}{{data}}"></div>
+                          <img class="item-img-delete cursor" src="img/delete.png" ng-click="removeFileImage(key,data)">
+                       </div>
+                 </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 m-p-n m-b-sm" ng-repeat="(key,data) in formData.newImages">
+                      <div class="mbit-img box-shadow b pos-rlt" ng-class-even="'m-l-sm'">
+                         <div class="w-full h-full mbit-img" ngf-background="data"></div>
+                         <img class="item-img-delete cursor" src="img/delete.png" ng-click="removeFile(key)">
+                      </div>
+                </div>
+            </div>
+             </div>
+            <!-- <div class="col-sm-3 col-xs-6 p-l-none">
                 <label class="font-bold">Cover Image <code>*</code></label>
                 <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
                     ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
@@ -42,12 +69,12 @@
                 </div>
                 <div class="mbit-img box-shadow b h-100" background-image="{{IMGURL}}{{formData.cover_image}}"
                     ng-if="!formData.newcover && isEdititem"></div>
-            </div>
+            </div> -->
         </div>
 
         <div class="form-group" ng-if="formData.type == 2">
             <label class="font-bold">Video Link <code>*</code></label>
-            <small class="pull-right text-danger"
+            <small class="pull-right text-red"
                 ng-if="errorData.video_link_error">{{errorData.video_link_errorMsg}}</small>
             <input type="url" name="video_link" class="form-control" ng-model="formData.video_link"
                 ng-required="formData.type == 2" ng-change="inputchange()">

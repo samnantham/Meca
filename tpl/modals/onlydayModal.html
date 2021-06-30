@@ -56,7 +56,7 @@
        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " ng-class="{'wrapper' : !isMobile}">
           <div class="form-group">
              <label class="font-bold">Title</label>
-             <small class="pull-right text-danger"
+             <small class="pull-right text-red"
                 ng-if="errorData.title_error">{{errorData.title_errorMsg}}</small>
              <input type="text" name="title" class="form-control r-2x" ng-model="formData.title"
                 placeholder="Title" required ng-change="inputchange()">
@@ -64,7 +64,7 @@
 
           <div class="form-group">
              <label class="font-bold">Content </label>
-             <small class="pull-right text-danger"
+             <small class="pull-right text-red"
                 ng-if="errorData.description_error">{{errorData.description_errorMsg}}</small>
              <textarea name="description" class="form-control r-2x" placeholder="Enter text here...."
                 rows="8" ng-model="formData.description" required></textarea>
@@ -137,7 +137,7 @@
                       ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-accept="'image/*,video/*'"
                       ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
                       ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir"
-                      ngf-drop-available="dropAvailable" ngf-change="additemFiles($files);" ngf-maxfiles="6">
+                      ngf-drop-available="dropAvailable" ngf-change="additemFiles($files);" ngf-maxfiles="{{maxUploadFiles}}">
                       Upload Files
                    </div>
                 </div>

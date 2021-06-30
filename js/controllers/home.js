@@ -6,6 +6,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         $scope.firstloadingdone = false;
         $scope.doclink = '';
         $scope.commentData = {};
+        $scope.feeds = [];
 
         $scope.clickTMC = function (data) {
             if (data.type == 1) {
@@ -78,18 +79,18 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.cancelReply = function(key){
-            $scope.homeData.feeds[key].showReply = 0;
+            $scope.feeds[key].showReply = 0;
             $scope.commentData.is_reply = 0;
             $scope.commentData.ownerprofile = {};
         }
     
         $scope.sendComment = function(key,comment){
-             webServices.upload('feed/comment',comment).then(function(getData) {
+             webServices.upload('feed/new/comment',comment).then(function(getData) {
                 $rootScope.loading = false;
                 if (getData.status == 200) {
                     $scope.commentData = {};
-                    $scope.homeData.feeds[key].comment = '';
-                    $scope.homeData.feeds[key].comments = getData.data.data;
+                    $scope.feeds[key].comment = '';
+                    $scope.feeds[key].comments = getData.data.data;
                 } else {
                     $rootScope.$emit("showISError",getData);
                 }
@@ -143,16 +144,18 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 $state.go('app.viewkaizen', {
                     id: item.id
                 });
-            }
-            else if (item.whatsnew_type == 4) {
+            } else if (item.whatsnew_type == 4) {
                 if(!item.viewinfo){
                     $rootScope.viewModuleItem(13,item.id);
                     item.viewinfo = 1;
                 }
                 $scope.clickTMC(item);
-            }
-            else if (item.whatsnew_type == 6) {
+            } else if (item.whatsnew_type == 6) {
                 $state.go('app.viewoneandonly', {
+                    id: item.id
+                });
+            } else if (item.whatsnew_type == 7) {
+                $state.go('app.trainerinfo', {
                     id: item.id
                 });
             }
@@ -164,17 +167,6 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             obj.module = reminder.module;
             webServices.post('reminder/update', obj).then(function (getData) {
                 console.log(getData)
-                /*if (getData.status == 200) {
-                    $rootScope.loading = false;
-                    $scope.calendarevents = getData.data;
-                    angular.forEach($scope.calendarevents, function(data, no) {
-                        data.start = new Date(data.start);
-                    });
-                    $scope.eventSources.splice(0,1);
-                    $scope.eventSources.push($scope.calendarevents);
-                } else {
-                    $rootScope.$emit("showerror", getData);
-                }*/
             });
         }
 
@@ -190,7 +182,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.replyComment = function(key, comment){
-            $scope.homeData.feeds[key].showReply = 1;
+            $scope.feeds[key].showReply = 1;
             $scope.commentData.is_reply = 1;
             $scope.commentData.parent = comment.id;
             $scope.commentData.isfile = 0;
@@ -270,9 +262,19 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         $scope.removeComment = function(key, commentkey, comment) {
             webServices.delete('feed/comment/delete/' + comment).then(function(getData) {
                 if (getData.status == 200) {
-                    $scope.homeData.feeds[key].comments.splice(commentkey,1);
+                    $scope.feeds[key].comments.splice(commentkey,1);
                 } else {
                     $rootScope.$emit("showISError",getData);
+                }
+            });
+        }
+
+        $rootScope.getFeeds = function(){
+            webServices.get('feed/list/all').then(function (getData) {
+                if (getData.status == 200) {
+                    $scope.feeds = getData.data;
+                } else {
+                    $rootScope.$emit("showerror", getData);
                 }
             });
         }
@@ -303,7 +305,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         $scope.removeFeed = function(key, id) {
             webServices.delete('feed/' + id).then(function(getData) {
                 if (getData.status == 200) {
-                    $scope.homeData.feeds.splice(key,1);
+                    $scope.feeds.splice(key,1);
                 } else {
                     $rootScope.$emit("showISError",getData);
                 }
@@ -346,7 +348,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 $scope.firstloadingdone = true;
                 if (getData.status == 200) {
                     $scope.homeData = getData.data;
-                    console.log($scope.homeData.tmcs);
+                    $scope.feeds = getData.data.feeds;
                     $scope.calendarevents = getData.data.caldata;
                     angular.forEach($scope.calendarevents, function (data, no) {
                         data.start = new Date(data.start);
