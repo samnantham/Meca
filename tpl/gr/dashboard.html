@@ -1,14 +1,17 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="GRDashboardCtrl">
+<div class="hbox hbox-auto-xs hbox-auto-sm grdashboard" ng-controller="GRDashboardCtrl">
    <!-- main -->
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t p-l-none m-b">
       <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 m-t p-l-none">
-         <div class="panel panel-default r-3x m-l mebit-whatsnew m-b-sm">
-            <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
-               What's New
-               <a class="btn btn-default btn-xs bg-main2 pull-right b-no" ng-click="ModalOpen('grModal','GRModalController');">Create New</a>
-            </div>
-            <div class="bg-white padder-v padder r-b-6x m-b" ng-scrollbars ng-scrollbars-config="scrollconfig">
+         <div class="panel panel-default r-3x m-l  m-b-sm">
+            <div class="panel-heading no-panel-head r-3x r-b-none bg-main1 text-center font-bold">
                <div class="col-xs-12 p-l-none p-r-none">
+              <div class="col-xs-6 whatsnew">What's New</div> 
+               <div class="col-xs-6 notactive">Activity Report</div> 
+            </div>
+            </div>
+            <div class="bg-white padder-v padder r-b-6x m-b " ng-scrollbars ng-scrollbars-config="scrollconfig">
+               <div class="col-xs-12 p-l-none p-r-none">
+                  <a class="btn btn-default btn-xs bgbutton1 b-no" ng-click="ModalOpen('grModal','GRModalController');">Create New</a>
                   <div class="m-t m-b">
                      <div class="col-sm-3 p-l-none p-xs-l">
                         <div class="bg-main2 text-center h5 sm-padder-v sm-padder">Title</div>
@@ -77,7 +80,7 @@
       <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 p-l-none">
          <div class="panel panel-default r-3x m-l mebit-whatsnew">
             <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
-               Activity Report
+               Special Sites
             </div>
             <div class="bg-white padder-v padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
                <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-t-xs m-b-xs allign-center"
@@ -90,7 +93,7 @@
                   <div class="col-sm-3">
                      <div class="text-left h5 sm-padder-v sm-padder color_2">
                         <strong class="cursor" ui-sref="app.viewgr({id:gr.id})">{{gr.title}} </strong>
-                        <div class="clear"></div>
+                        <div class="clear"></div>s
                      </div>
                   </div>
 
@@ -110,10 +113,72 @@
                      </div>
                   </div>
                </div>
-               <div class="col-lg-12 col-md-12 col-sm-12" ng-if="grData.ars.length  ==  0">
-                  <div class="w-full text-center bg-white wrapper-lg m-t-xxl">
+               <div class="col-lg-12 col-md-12 col-sm-12 p-r-none p-l-none" ng-if="grData.ars.length  ==  0">
+                  <div class="row">
+                     <div class="col-xs-4">
+                        <img src="img/mena.png" class="img-responsive">
+                     </div>
+                     <div class="col-xs-4">
+                        <img src="img/granturismo.png" class="img-responsive">
+                     </div>
+                     <div class="col-xs-4">
+                        <img src="img/gtcup.png" class="img-responsive">
+                     </div>
+                   </div>
+                   <div class="row">
+                      
+                      <div class="col-sm-6 m-t">
+                        <div class="colorholder r-3x m-t m-b">MECAD information</div>
+                        <div class="infholder r-3x m-t m-b">
+                           <div class="col-xs-5 p-l-none"><img src="img/granturismo.png" class="img-responsive"></div>
+                           <div class="col-xs-7 p-r-none">
+                              <div class="color_red f8">02-Jul-21 16:03</div>
+                              <div class="color_black f8 font-bold">Mount Panorama - Australia Visual data is up</div>
+                           </div>
+                        </div>
+                        <div class="infholder r-3x m-t m-b">
+                           <div class="col-xs-5 p-l-none"><img src="img/granturismo.png" class="img-responsive"></div>
+                           <div class="col-xs-7 p-r-none">
+                              <div class="color_red f8">02-Jul-21 16:03</div>
+                              <div class="color_black f8 font-bold">Mount Panorama - Australia Visual data is up</div>
+                           </div>
+                        </div>
+                        <div class="infholder r-3x m-t m-b">
+                           <div class="col-xs-5 p-l-none"><img src="img/granturismo.png" class="img-responsive"></div>
+                           <div class="col-xs-7 p-r-none">
+                              <div class="color_red f8">02-Jul-21 16:03</div>
+                              <div class="color_black f8 font-bold">Mount Panorama - Australia Visual data is up</div>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 m-t">
+                         <div class="colorholder r-3x m-t m-b">Distributor information</div>
+                        <div class="infholder r-3x m-t m-b">
+                           <div class="col-xs-5 p-l-none"><img src="img/granturismo.png" class="img-responsive"></div>
+                           <div class="col-xs-7 p-r-none">
+                              <div class="color_red f8">02-Jul-21 16:03</div>
+                              <div class="color_black f8 font-bold">Mount Panorama - Australia Visual data is up</div>
+                           </div>
+                        </div>
+                        <div class="infholder r-3x m-t m-b">
+                           <div class="col-xs-5 p-l-none"><img src="img/granturismo.png" class="img-responsive"></div>
+                           <div class="col-xs-7 p-r-none">
+                              <div class="color_red f8">02-Jul-21 16:03</div>
+                              <div class="color_black f8 font-bold">Mount Panorama - Australia Visual data is up</div>
+                           </div>
+                        </div>
+                        <div class="infholder r-3x m-t m-b">
+                           <div class="col-xs-5 p-l-none"><img src="img/granturismo.png" class="img-responsive"></div>
+                           <div class="col-xs-7 p-r-none">
+                              <div class="color_red f8">02-Jul-21 16:03</div>
+                              <div class="color_black f8 font-bold">Mount Panorama - Australia Visual data is up</div>
+                           </div>
+                        </div>
+                      </div>
+                   </div>
+                  <!-- <div class="w-full text-center bg-white wrapper-lg m-t-xxl">
                       <h4>No Reports Found</h4>
-                  </div>
+                  </div> -->
               </div>
             </div>
          </div>
@@ -122,7 +187,7 @@
          <div class="panel panel-default r-3x mebit-whatsnew">
              <div class="panel-heading r-3x r-b-none bg-main1 text-center">
                 <b>Links</b> 
-                <a class="btn btn-default btn-xs bg-main2 pull-right b-no" ui-sref="app.grcontacts">Contact</a>
+                <a class="btn btn-default btn-xs bg-main2 pull-right b-no newbtn" ui-sref="app.grcontacts">Contact</a>
              </div>
              <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 bg-white  dash-2-div r-b-6x m-p-n" ng-scrollbars ng-scrollbars-config="scrollconfig">
                  <div class="col-xs-12 border-bottom-1 m-t-xs m-b-xs text-center allign-center" ng-repeat="(key,link) in grData.links">
@@ -131,7 +196,7 @@
                         background-image="{{IMGURL}}{{link.icon}}"></div>
                   </div>
                      <div class="col-xs-4 text-center h6"><b>{{link.title}}</b></div>
-                     <div class="col-xs-5 text-center h6"><a class="text-info"
+                     <div class="col-xs-5 text-center h6"><a class="text-info color_red"
                         ng-href="{{link.href}}" target="_blank">{{link.href}}</a></div>
                  </div>
              </div>

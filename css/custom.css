@@ -3002,3 +3002,96 @@ menu-icon {
 	right: 0;
 	margin: auto;
 }
+.grdashboard .panel-heading {
+    background: url(../img/panelhead.png);
+    background-size: 100% 100%;
+    background-color: #EFF2F3 !important;
+    background-repeat: no-repeat;
+    border: 0px;
+    border-radius:0px; 
+}
+.no-panel-head
+{
+	background: transparent !important; 
+	background-color: transparent !important;  
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	height: 35px;
+}
+.whatsnew
+{
+	background: url(../img/whatsnew.png);
+    background-size: 100% 100%;
+    background-color: transparent !important;
+    background-repeat: no-repeat;
+    padding: 10px;
+}
+.notactive
+{
+	background: url(../img/notactive.png);
+    background-size: 100% 100%;
+    background-color: transparent !important;
+    background-repeat: no-repeat;
+    padding: 10px;
+}
+.grdashboard .panel {
+    border: 0px;
+}
+.grdashboard .panel .bg-white
+{
+	width: 98.4%;
+}
+
+.grdashboard .bg-main2
+{
+	background-color: #000 !important;
+}
+.bgbutton1,.bgbutton1:hover
+{
+	background: #F60404;
+	color: #fff !important;
+	padding:2px 15px;
+}
+.grdashboard .fc-prev-button,.grdashboard .fc-next-button,.grdashboard .fc-state-active
+{
+	background: #F60404 !important;
+	border: 1px solid #F60404 !important;
+}
+.grdashboard .fc-toolbar h2
+{
+color:#F60404 !important;	
+}
+.grdashboard .bg-dark
+{
+	background: #F60404 !important;
+}
+.grdashboard  .newbtn
+{
+	background-color: #fff !important;
+	color: #F60404 !important;
+	padding:0px 15px;
+}
+.grdashboard .colorholder
+{
+	background:#F60404 !important;
+	padding: 5px;
+	width: 100%;
+	text-align:center; 
+	color: #fff;
+	font-size: 14px;
+}
+.color_red
+{
+color: #F60404 !important;
+}
+.color_black
+{
+	color: #000 !important;
+}
+.infholder {
+    box-shadow: 1px 1px 5px #8080804a;
+    display: inline-block;
+    padding: 10px;
+    margin: 2px;
+}
