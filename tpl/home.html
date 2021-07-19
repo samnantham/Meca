@@ -32,11 +32,12 @@
                         <strong>
                            <img class="new-icon" src="img/new.png" ng-if="!whatsnew.viewinfo" />
                            <span ng-class="{'pad-left-30px': !whatsnew.viewinfo}"
-                              ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type <= 7">
+                              ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type <= 8">
                               {{ whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?
                               'Kaizen - ' + whatsnew.typeData.type : whatsnew.whatsnew_type == 4 ?
                               'From TMC' : whatsnew.whatsnew_type == 6 ? 'One & Only Day' : whatsnew.whatsnew_type == 7
-                              ? 'Training' : whatsnew.whatsnew_type }}
+                              ? 'Training' : whatsnew.whatsnew_type == 8
+                              ? 'GR' : whatsnew.whatsnew_type }}
                            </span>
                         </strong>
                         <div class="clear"></div>
@@ -57,7 +58,7 @@
                      <div class="text-left f12 sm-padder-v sm-padder color_2 text-ov">
                         <strong>
                            <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
-                           <span ng-if="whatsnew.whatsnew_type == 3 || whatsnew.whatsnew_type == 6">
+                           <span ng-if="whatsnew.whatsnew_type == 3 || whatsnew.whatsnew_type == 6 || whatsnew.whatsnew_type == 8">
                               {{whatsnew.writerinfo ? whatsnew.writerinfo.name : (whatsnew.is_admin ?
                               whatsnew.ownerprofile.username + '(Admin)' : whatsnew.ownerprofile.first_name +
                               ' ' + whatsnew.ownerprofile.last_name + ' - ' +

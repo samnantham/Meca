@@ -303,6 +303,12 @@ angular.module('app')
                         resolve: load(['js/controllers/oneandonly/view.js'])
                     })
 
+                    .state('app.sga', {
+                        url: 'sga',
+                        templateUrl: 'tpl/sga.html',
+                        resolve: load(['js/controllers/sga.js'])
+                    })
+
                     // others
                     .state('access', {
                         url: '/',

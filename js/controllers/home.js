@@ -158,6 +158,10 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 $state.go('app.trainerinfo', {
                     id: item.id
                 });
+            } else if (item.whatsnew_type == 8) {
+                $state.go('app.viewgr', {
+                    id: item.id
+                });
             }
         }
 
@@ -355,6 +359,10 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                     });
                     angular.forEach($scope.homeData.whatsnew, function (data, no) {
                         if (data.whatsnew_type == 3) {
+                            data.typeData = $rootScope.kaizentypes.filter(function (kaizen) {
+                                return kaizen.id == data.type;
+                            })[0];
+                        }else if (data.whatsnew_type == 8) {
                             data.typeData = $rootScope.kaizentypes.filter(function (kaizen) {
                                 return kaizen.id == data.type;
                             })[0];

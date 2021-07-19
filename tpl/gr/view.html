@@ -1,10 +1,6 @@
-<div ng-controller="GRInfoController">
+<div ng-controller="GRInfoController" class="grview">
    <div class="wrapper-md p-t-none p-b-none m-t">
       <div class="panel panel-default r-3x">
-         <div class="panel-heading r-3x r-b-none bg-main2 text-center">
-            <span class="font-normal">GR Preview</span>
-         </div>
-
          <div class="bg-white padder r-b-6x" ng-scrollbars ng-scrollbars-config="scrollconfig">
             <div class="row m-t m-b">
                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 m-b" ng-if="(gr.user == user.id) && !gr.is_admin">
@@ -15,18 +11,18 @@
                </div>
                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 wrapper-md p-t-none m-t-sm  m-p-n">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 p-l-none p-r-none">
-                        <div class="m-b-sm">
-                           <a class="h5 font-bold text-black">{{::gr.title}}</a>
-                        </div>
-                        <div class="mbit-img box-shadow b cursor cover-img"
-                           background-image="{{IMGURL}}{{::gr.cover_image}}" ng-click="showCover(gr.cover_image)">
-                           <div class="overlay">
-                              <a class="icon-overlay">
-                                 <i class="fa fa-eye"></i>
-                              </a>
+                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 p-l-none p-r-none">
+                        <div class="blog-post wrapper p-l-none">
+                           <div class="panel">
+                              <div class="col-xs-12 p-l-none">
+                                 <a class="h5 font-bold text-black">{{::gr.title}}</a>
+                              </div>
+                               <div class="m-t-sm">
+                                   <img src="{{IMGURL}}{{gr.cover_image}}" class="img-full">
+                               </div>
+                               
                            </div>
-                        </div>
+                       </div>
                      </div>
                   </div>
 
@@ -134,10 +130,18 @@
                   <div class="m-t">
                      <div class="col-sm-2 color-main-1 p-l-none" ng-class="{'text-danger':gr.isliked}">
                         <i class="fa m-r-xs cursor" ng-click="changeLike();"
-                           ng-class=" gr.isliked ? 'fa-thumbs-up' : 'fa-thumbs-o-up'"></i> {{gr.likes}} Likes
+                           ng-class=" gr.isliked ? 'fa-thumbs-up' : 'fa-thumbs-o-up'"></i> Like
                      </div>
-                     <div class="col-sm-3 color-main-1 p-l-none">
-                        <i class="fa fa-comment m-r-xs"></i> {{comments.length}} Comments
+                     <div class="col-sm-2 color-main-1 p-l-none">
+                        <i class="fa fa-comment m-r-xs"></i> Comment
+                     </div>
+                     <div class="col-sm-6 color-main-1 p-l-none" ng-class="{'text-danger':gr.isliked}">
+                         
+                     </div>
+                     <div class="col-sm-2 color-main-1 p-l-none">
+                        <div class="row">
+                       <div class="col-sm-6">{{gr.likes}} Likes</div> <div class="col-sm-6">{{comments.length}} Comments</div>  
+                     </div>
                      </div>
                   </div>
                   <div class="m-t">

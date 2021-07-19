@@ -1,4 +1,4 @@
-app.controller('GRModalController', ['$timeout', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$filter', function ($timeout, $state, $stateParams, webServices, utility, $rootScope, $filter) {
+app.controller('DistGRModalController', ['$timeout', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$filter', function ($timeout, $state, $stateParams, webServices, utility, $rootScope, $filter) {
     $rootScope.videoData = {};
     $rootScope.documentData = {};
     if (!$rootScope.isEdititem) {
@@ -7,7 +7,7 @@ app.controller('GRModalController', ['$timeout', '$state', '$stateParams', 'webS
         $rootScope.formData.video_links = [];
         $rootScope.formData.gr_documents = [];
         $rootScope.formData.document_links = [];
-        $rootScope.formData.type = 0;
+        $rootScope.formData.type = 1;
     } else {
         $rootScope.formData.deleted_gr_files = [];
         $rootScope.formData.deleted_gr_documents = [];

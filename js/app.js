@@ -34,5 +34,6 @@ angular.module('app', [
     'vkEmojiPicker',
     'videosharing-embed',
     'textAngular',
-    'countTo'
+    'countTo',
+    'chart.js'
 ]);

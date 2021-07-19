@@ -4,7 +4,15 @@ app.controller('GRDashboardCtrl', ['$scope', '$state', 'webServices', '$rootScop
 
         $rootScope.$emit("setSliderConfig", {});
         $scope.firstloadingdone = false;
+        $scope.activeTab = 1;
+        $scope.gr_specialSites = [{'link':'https://toyotagazooracing.com/e-motorsports/','img':'img/gtcup.png'},{'link':'https://www.gran-turismo.com/gb/gtsport/sportmode/championship/archives','img':'img/granturismo.png'},{'link':'https://www.instagram.com/menadigitalmotorsports/','img':'img/mena.png'}];
 
+        $scope.changeActive = function(activeTab){
+            if(activeTab != $scope.activeTab){
+                $scope.activeTab = activeTab;
+            }
+        }
+        
         $scope.uiConfig = {
             calendar: {
                 height: 'auto',
@@ -70,7 +78,7 @@ app.controller('GRDashboardCtrl', ['$scope', '$state', 'webServices', '$rootScop
                     //     data.start = new Date(data.start);
                     // });
                     $scope.eventSources = [$scope.calendarevents];
-                    console.log($scope.eventSources)
+                    console.log($scope.grData)
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
