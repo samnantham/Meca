@@ -3042,3 +3042,11 @@ menu-icon {
 {
 	max-height: 250px !important;
 }
+.SGACtrl .whatsup .mCustomScrollbar
+{
+	max-height: 46.5vh !important;
+}
+.sga_img
+{
+	width: 100%;
+}

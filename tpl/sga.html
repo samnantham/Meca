@@ -1,57 +1,30 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="SGACtrl">
+<div class="hbox hbox-auto-xs hbox-auto-sm SGACtrl" ng-controller="SGACtrl">
     <!-- main -->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none ">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none whatsup">
             <div class="panel panel-default r-3x m-l">
                 <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold">
-                    What's New
+                    What's New <a class="btn btn-default btn-xs color_2 pull-right b-no newbtn"
+                        ng-click="ModalOpen('postModal','PostModalController');">New Post</a>
                 </div>
                 <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b" ng-scrollbars
                     ng-scrollbars-config="scrollconfig">
                     <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
-                        ng-repeat="(key,whatsnew) in homeData.whatsnew">
+                        ng-repeat="(key,whatsnew) in SGAData.whats_new">
                         <div class="col-sm-3 p-l-none m-p-r-none">
                             <div class="text-left f12 sm-padder-v sm-padder color_2">
-                                <strong>
-                                    <img class="new-icon" src="img/new.png" ng-if="!whatsnew.viewinfo" />
-                                    <span ng-class="{'pad-left-30px': !whatsnew.viewinfo}"
-                                        ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type <= 8">
-                                        {{ whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?
-                                        'Kaizen - ' + whatsnew.typeData.type : whatsnew.whatsnew_type == 4 ?
-                                        'From TMC' : whatsnew.whatsnew_type == 6 ? 'One & Only Day' :
-                                        whatsnew.whatsnew_type == 7
-                                        ? 'Training' : whatsnew.whatsnew_type == 8
-                                        ? 'GR' : whatsnew.whatsnew_type }}
-                                    </span>
-                                </strong>
-                                <div class="clear"></div>
+                                {{ whatsnew.distributorinfo.name | cut:true:5:' ' }}
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="text-left h5 sm-padder-v sm-padder color_3 f-10 m-t-xs">
-                                {{convertDate(whatsnew.created_at) | date:'dd MMM yyyy HH:mm'}}
+                                {{convertDate(whatsnew.created_at) | date:'dd MMMM yyyy'}}
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="text-left f12 font-bold sm-padder-v sm-padder cursor text-ov"
+                        <div class="col-sm-6">
+                            <div class="text-left f12 sm-padder-v sm-padder cursor text-ov"
                                 ng-click="viewItem(whatsnew)">
-                                {{whatsnew.title}}
-                            </div>
-                        </div>
-                        <div class="col-sm-2 p-r-none">
-                            <div class="text-left f12 sm-padder-v sm-padder color_2 text-ov">
-                                <strong>
-                                    <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
-                                    <span
-                                        ng-if="whatsnew.whatsnew_type == 3 || whatsnew.whatsnew_type == 6 || whatsnew.whatsnew_type == 8">
-                                        {{whatsnew.writerinfo ? whatsnew.writerinfo.name : (whatsnew.is_admin ?
-                                        whatsnew.ownerprofile.username + '(Admin)' : whatsnew.ownerprofile.first_name +
-                                        ' ' + whatsnew.ownerprofile.last_name + ' - ' +
-                                        whatsnew.ownerprofile.distributorinfo.name)}}
-                                    </span>
-                                    <span ng-if="whatsnew.whatsnew_type == 4"> Admin </span>
-                                    <span ng-if="whatsnew.whatsnew_type == 7"> Admin </span>
-                                </strong>
+                                {{whatsnew.content}}
                             </div>
                         </div>
                     </div>
@@ -59,7 +32,7 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t m-p-r-none">
-            <div ng-scrollbars ng-scrollbars-config="scrollconfig">
+            <div>
                 <div class="panel panel-default r-3x ">
                     <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold text-left">
                         SGA Schedule
@@ -67,11 +40,7 @@
                     <div class="panel-body">
                         <div class="r-b-6x">
                             <div class="col-xs-12 no-padder">
-                                <div class="m-b-xs">
-                                    <video class="img-responsive m-b-sm" id="video" preload="none" controls autoplay
-                                        muted loop src="media/video/21_Jun_21st_MEBIT_Convention_OP.mp4">
-                                    </video>
-                                </div>
+                                <img class="img-responsive sga_img" src="img/calc.png" />
                             </div>
                         </div>
                     </div>
@@ -79,34 +48,63 @@
             </div>
         </div>
     </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none ">
         <div class="block padder-v item">
             <div class="panel panel-default r-3x m-l bg-white">
                 <div class="panel-body wrapper">
-            <!-- <canvas id="user-bar" class="chart chart-bar" chart-options="baroptions" chart-data="userbarData" chart-colors="userbarColors" chart-labels="userbarLabels" height="250px"></canvas> -->
-                    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" height="350px" chart-options="baroptions" chart-colors="Colors">
+                    <canvas id="bar" class="chart chart-bar" chart-data="SGAData.values" chart-labels="SGAData.labels"
+                        chart-series="series" height="350px" chart-options="baroptions" chart-colors="SGAData.colors"  chart="mychart">
                     </canvas>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-xs m-b">  
-            <div class="panel panel-default r-3x m-l">
-                <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold bg_greean">
-                    AAB
-                </div>
-                <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b max_height_box" ng-scrollbars
-                    ng-scrollbars-config="scrollconfig">
-                    <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
-                    >
-                    <div class="f-10 color_2"> 01 Sep 2020</div>
-                    <div class="m-t m-b">Kaizen - BIT Foundation Kaizen - BIT FoundationKaizen - BIT Foundation Kaizen - BIT FoundationKaizen - BIT Foundation Kaizen - BIT Foundation </div>
-                    <div class="color_2 m-t m-b"> BIT Foundation  </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none p-r-none m-b">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-xs m-b"
+                ng-repeat="(key,distributor) in SGAData.distributors">
+                <div class="panel panel-default r-3x m-l">
+                    <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold bg_greean">
+                        {{distributor.name}}
                     </div>
+                    <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b max_height_box" ng-scrollbars
+                        ng-scrollbars-config="scrollconfig">
+                        <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
+                            ng-repeat="(no,post) in distributor.posts">
+                            <div class="f-10 color_2"> {{convertDate(post.created_at) | date:'dd MMMM yyyy'}}
+                                <!-- <div class="pull-right dist-ico">
+                                    <img class="m-r-xs" src="img/edit.png" ng-click="editHydrogen();">
+                                    <img src="img/delete.png" ng-click="removeHydrogen()">
+                                </div> -->
+                                <div class="btn-group dropdown pull-right"
+                                    ng-if="!post.is_admin && (user.id == post.user)">
+                                    <span data-toggle="dropdown" aria-expanded="false"><i
+                                            class="fa fa-ellipsis-v f13 cursor" aria-hidden="true"></i></span>
+                                    <ul class="dropdown-menu">
+                                        <li><a ng-click="deletePost(key,post.id)"><i class="fa fa-trash m-r color_2 f13"
+                                                    aria-hidden="true"></i>Delete post</a></li>
+                                        <li><a ng-click="editPost(key,post)"><i class="fa fa-pencil m-r color_2 f13"
+                                                    aria-hidden="true"></i>Edit post</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="m-t m-b text-justify">{{post.content}} </div>
+                            <div class="m-t m-b text-justify">
+                                <a class="color_2 m-xs pull-left" ng-repeat="(num,document) in post.documents"
+                                    ng-href="{{IMGURL}}{{document.file}}" target="_blank"> Attachment {{ num + 1 }} -
+                                    {{document.name}} </a>
+                            </div>
+                        </div>
+                        <div class="w-full text-center bg-white wrapper-lg m-t-xxl"
+                            ng-if="distributor.posts.length == 0">
+                            <h4>No Posts Found</h4>
+                        </div>
+                    </div>
+
                 </div>
-            </div>   
+            </div>
         </div>
     </div>
 </div>

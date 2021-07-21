@@ -1,0 +1,76 @@
+<form class="form-horizontal" name="PostForm" novalidate ng-submit="addData(PostForm);">
+    <div class="modal-header b-no text-center">
+        <button type="button" class="close" ng-click="closeModalPopup();" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{isEdititem ? 'Edit' : 'Create New'}} Post</h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " ng-class="{'wrapper' : !isMobile}">
+
+            <div class="form-group">
+                <label class="font-bold">Content </label><code>*</code>
+                <small class="pull-right text-red"
+                    ng-if="errorData.content_error">{{errorData.content_errorMsg}}</small>
+                <textarea name="content" class="form-control r-2x" placeholder="Enter text here...."
+                    rows="8" ng-model="formData.content" required></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 " ng-class="{'wrapper' : !isMobile}">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-p-n">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-p-n">
+                    <input type="hidden" name="documents" ng-model="formData.document"
+                        ng-required="formData.documents.length == 0 && !formData.sent_all">
+                    <div class="form-group">
+                        <label class="font-bold">Upload Documents</label><code>*</code>
+                        <small class="pull-right text-red"
+                            ng-if="errorData.document_error">{{errorData.document_errorMsg}}</small>
+                        <div class="b-a r-3x b-2x b wrapper-xl bg-white text-center" ngf-select ngf-drop
+                            ngf-max-size="{{maxFilesize}}" ngf-model-invalid="invalidFiles"
+                            ngf-model-options="modelOptionsObj" ngf-multiple="true" ngf-max-files="6"
+                            ngf-accept="'application/pdf,application/xls,application/xlsx,application/csv'"
+                            ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-ignore-invalid="ignoreInvalid" ngf-allow-dir="allowDir"
+                            ngf-drop-available="dropAvailable" ngf-change="addDocuments($files);">
+                            Upload Documents
+                        </div>
+                        <div class="m-t-sm" ng-if="formData.documents.length > 0">
+                            <div class="panel panel-default m-b-sm">
+                                <div class="table-responsive">
+                                    <table class="table table-striped b-t b-light">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Info</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="(key,data) in formData.documents">
+                                                <td><input type="text" class="form-control"
+                                                        ng-model="data.name"></td>
+                                                <td><textarea class="form-control" rows="2"
+                                                        ng-model="data.info"></textarea></td>
+                                                <td class="text-center">
+                                                    <a ng-click="removeDocuments(key,data)"><i
+                                                            class="fa fa-trash-o text-red text"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer text-center b-no">
+        <div class="col-xs-12 text-center ">
+            <button type="button" class="btn btn-primary no-border  m-auto bg-main2 w-xs"
+                ng-click="closeModalPopup()" ng-disabled="loading">Cancel</button>
+            <button type="submit" class="btn btn-primary no-border  m-auto bg-main1 w-xs"
+                button-spinner="loading" ng-disabled="loading">{{isEdititem ? 'Update' : 'Create'}}</button>
+        </div>
+    </div>
+</form>
