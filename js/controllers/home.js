@@ -53,7 +53,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             webServices.get('calendar/daily/events/' + date).then(function (getData) {
                 if (getData.status == 200) {
                     $scope.calenderevents = getData.data;
-                    $scope.openModal();
+                    $rootScope.openModal();
                 } else {
                     $rootScope.$emit("showISError", getData);
                 }

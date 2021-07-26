@@ -52,9 +52,14 @@
         <div class="block padder-v item">
             <div class="panel panel-default r-3x m-l bg-white">
                 <div class="panel-body wrapper">
-                    <canvas id="bar" class="chart chart-bar" chart-data="SGAData.values" chart-labels="SGAData.labels"
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                
+                    </figure>
+                    <!-- <highchart config="chartConfig" class="span10"></highchart> -->
+                    <!-- <canvas id="bar" class="chart chart-bar" chart-data="SGAData.values" chart-labels="SGAData.labels"
                         chart-series="series" height="350px" chart-options="baroptions" chart-colors="SGAData.colors"  chart="mychart">
-                    </canvas>
+                    </canvas> -->
                 </div>
             </div>
         </div>
@@ -90,7 +95,9 @@
                                 </div>
                             </div>
 
-                            <div class="m-t m-b text-justify">{{post.content}} </div>
+                            <div class="m-t m-b text-justify" read-more="post.content"   read-more-limit="150" read-more-label-expand="... See More"
+                            read-more-label-collapse="... See Less" ng-if="post.content.length > 149">{{post.content}} </div>
+                            <div class="m-t m-b text-justify" ng-if="post.content.length < 149">{{post.content}} </div>
                             <div class="m-t m-b text-justify">
                                 <a class="color_2 m-xs pull-left" ng-repeat="(num,document) in post.documents"
                                     ng-href="{{IMGURL}}{{document.file}}" target="_blank"> Attachment {{ num + 1 }} -
@@ -108,3 +115,20 @@
         </div>
     </div>
 </div>
+
+<style>
+    .highcharts-yaxis-labels text:nth-child(3),
+    .highcharts-yaxis-labels text:nth-child(5) {
+        fill: red !important;
+    }
+    .highcharts-button,.highcharts-credits{
+        display: none!important;
+    }
+    .highcharts-axis-line{
+        stroke: #0e5f77 !important;
+    }
+    .highcharts-plot-line 
+    {
+        stroke: transparent !important;   
+    }
+</style>

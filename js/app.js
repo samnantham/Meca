@@ -35,5 +35,6 @@ angular.module('app', [
     'videosharing-embed',
     'textAngular',
     'countTo',
-    'chart.js'
+    // 'chart.js',
+    'highcharts-ng'
 ]);

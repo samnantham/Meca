@@ -1,6 +1,6 @@
 'use strict';
-app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', '$filter',
-    function($scope, webServices, $rootScope, $http, $filter) {
+app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', '$filter', '$state',
+    function($scope, webServices, $rootScope, $http, $filter, $state) {
         $rootScope.loading = true;
         $scope.firstloadingdone = false;
 		
@@ -17,6 +17,12 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize,
                 eventMouseover: $scope.alertOnMouseOver,
+                eventClick: function (event) {
+                    $rootScope.formData = event;
+                    $scope.activeDate = event.start._d;
+                    $scope.calenderevents = [];
+                    $scope.getCalenderEvents(event.start._d.getTime());
+                },
                 viewRender: function(view, element) {
                     var monthyear = view.title.split(' ');
                     var month = $rootScope.getMonthFromString(view.title.split(' ')[0]);
@@ -28,6 +34,50 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                 }
             }
         };
+
+        $scope.getCalenderEvents = function (date) {
+            webServices.get('calendar/daily/events/' + date).then(function (getData) {
+                if (getData.status == 200) {
+                    $scope.calenderevents = getData.data;
+                    $scope.openModal();
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
+        }
+
+        $rootScope.openeventModal = function () {
+            $('#PopupModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+
+        $scope.openModal = function(){
+            $('#PopupModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+
+        $scope.gotoItem = function (type, item) {
+            $scope.closeModal();
+            if (type == 'kaizen') {
+                $state.go('app.viewkaizen', { 'id': item });
+            } else if (type == 'tbp') {
+                $state.go('app.viewtbp', { 'id': item });
+            } else if (type == 'event') {
+                $state.go('app.viewevent', { 'id': item });
+            } else if (type == 'gr') {
+                $state.go('app.viewgr', { 'id': item });
+            } else if (type == 'hydrogen') {
+                $state.go('app.viewhydrogen', { 'id': item });
+            } else if (type == 'maas') {
+                $state.go('app.viewmaas', { 'id': item });
+            } else if (type == 'sdgs') {
+                $state.go('app.viewsdgs', { 'id': item });
+            }
+        }
 
         $scope.getMonthevents = function(month,year) {
             webServices.get('calendar/info/'+month+'/'+year).then(function(getData) {
@@ -48,6 +98,13 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                     $rootScope.$emit("showerror", getData);
                 }
             });
+        }
+
+        $rootScope.closeModal = function () {
+            $rootScope.formData = {};
+            $('#PopupModal').modal('hide');
+            $('#EventInfoModal').modal('hide');
+            $('#PDFModal').modal('hide');
         }
 
         var d = new Date();
