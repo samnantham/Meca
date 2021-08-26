@@ -162,6 +162,10 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 $state.go('app.viewgr', {
                     id: item.id
                 });
+            } else if (item.whatsnew_type == 9) {
+                $state.go('app.viewmaas', {
+                    id: item.id
+                });
             }
         }
 
@@ -366,15 +370,27 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                             data.typeData = $rootScope.kaizentypes.filter(function (kaizen) {
                                 return kaizen.id == data.type;
                             })[0];
+                        }else if (data.whatsnew_type == 9) {
+                            data.typeData = $rootScope.maastypes.filter(function (kaizen) {
+                                return kaizen.id == data.type;
+                            })[0];
                         }
                     });
                     $scope.eventSources = [$scope.calendarevents];
-                    console.log($scope.homeData)
+                    $timeout(function() {
+                        $rootScope.showSnowfall();
+                    }, 500);
+        
+                    $timeout(function() {
+                        $rootScope.hideSnowfall();
+                    }, 10000);
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
             });
         }
+
+
 
 
 

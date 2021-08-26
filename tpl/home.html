@@ -26,18 +26,19 @@
                   </div>
                </div>
                <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
-                  ng-repeat="(key,whatsnew) in homeData.whatsnew">
+                  ng-repeat="(key,whatsnew) in homeData.whatsnew" ng-class="{'m-t': key == 0}">
                   <div class="col-sm-3 p-l-none m-p-r-none">
                      <div class="text-left f12 sm-padder-v sm-padder color_2">
                         <strong>
                            <img class="new-icon" src="img/new.png" ng-if="!whatsnew.viewinfo" />
                            <span ng-class="{'pad-left-30px': !whatsnew.viewinfo}"
-                              ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type <= 8">
+                              ng-if="whatsnew.whatsnew_type > 1 && whatsnew.whatsnew_type <= 9">
                               {{ whatsnew.whatsnew_type == 2 ? 'MEBIT Event' : whatsnew.whatsnew_type == 3 ?
                               'Kaizen - ' + whatsnew.typeData.type : whatsnew.whatsnew_type == 4 ?
                               'From TMC' : whatsnew.whatsnew_type == 6 ? 'One & Only Day' : whatsnew.whatsnew_type == 7
                               ? 'Training' : whatsnew.whatsnew_type == 8
-                              ? 'GR' : whatsnew.whatsnew_type }}
+                              ? 'GR' : whatsnew.whatsnew_type == 9
+                              ? 'MaaS - ' + whatsnew.typeData.type : whatsnew.whatsnew_type }}
                            </span>
                         </strong>
                         <div class="clear"></div>
@@ -58,7 +59,8 @@
                      <div class="text-left f12 sm-padder-v sm-padder color_2 text-ov">
                         <strong>
                            <span ng-if="whatsnew.whatsnew_type == 2">{{whatsnew.ownerprofile.username}}</span>
-                           <span ng-if="whatsnew.whatsnew_type == 3 || whatsnew.whatsnew_type == 6 || whatsnew.whatsnew_type == 8">
+                           <span
+                              ng-if="whatsnew.whatsnew_type == 3 || whatsnew.whatsnew_type == 6 || whatsnew.whatsnew_type == 8 || whatsnew.whatsnew_type ==  9">
                               {{whatsnew.writerinfo ? whatsnew.writerinfo.name : (whatsnew.is_admin ?
                               whatsnew.ownerprofile.username + '(Admin)' : whatsnew.ownerprofile.first_name +
                               ' ' + whatsnew.ownerprofile.last_name + ' - ' +
@@ -73,49 +75,28 @@
             </div>
          </div>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none promtearea">
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t m-p-r-none promtearea">
          <div ng-scrollbars ng-scrollbars-config="scrollconfig">
             <div class="promotion-area m-b">
                <div class="panel panel-default r-3x ">
-                  <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold text-left">
+                  <div class="panel-heading r-3x r-b-none text-center font-bold text-left bg-red">
                      Promotion: The advertising revenue of this space will be used for
                      contribution activities to the SDGs.
                   </div>
                   <div class="panel-body">
                      <div class="r-b-6x">
                         <div class="col-xs-12 no-padder">
+                           <a class="m-t-sm" target="_blank" href="https://toyotatimes.jp/en/sports/014.html">
                            <div class="m-b-xs">
-                              <video class="img-responsive m-b-sm" id="video" preload="none" controls autoplay muted loop 
-                                 src="media/video/21_Jun_21st_MEBIT_Convention_OP.mp4">
-                                 </video>
-                                 <!-- <iframe width="100%" style="height:150px;"
-                                 src="https://www.youtube.com/embed/c_qmnzScE6g?autoplay=1&mute=1&loop=1&playlist=c_qmnzScE6g"
-                                 title="YouTube video player" frameborder="0"
-                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                 allowfullscreen></iframe> -->
-                              <!-- <a target="_blank"
-                                 href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/Home.aspx"></a> -->
-                                 <span class="m-t-sm">
-                                    MEBIT Convention 2021 was conducted in June 21st (Mon).<br>
-                                 We were very excited to hold this convention with participation of many different
-                                 Toyota members and supporters beyond the MECA region.
-                                 For those who missed the chance to watch the opening video, please have a look at it!
-                                 Hope you enjoy it!
-                                 </span>
-                                 <!-- What is the KAIZEN TOOLBOX? Do you think it might be useful? Maybe you’d like
-                                 to try using it. Start by watching this video. If you have recently commenced
-                                 Kaizen and Small Group Activities, this video is a must-see! After watching
-                                 the video, you should have a clearer understanding of what the KAIZEN
-                                 TOOLBOX includes. -->
+                              <div class="dis-img box-shadow b r-3x cursor" background-image="img/promotion-thumb.jpg">
+                              </div>
+                              <h6><b>Tokyo 2020 Paralympic Games (Aug.24th -Sep. 5th)</b></h6>
+                              Paralympic games are going to be held in Tokyo from Aug. 24th (Thu) to Sep. 5th (Sun).
+                              Toyota supports 57 athletes in the Tokyo 2020 Paralympic Games.
+                              Let's cheer them up together! Go Paralympians!!
                               
                            </div>
-                           <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center m-t-sm m-b-sm">
-                              <a class="btn btn-xs btn-success text-u-c cursor"
-                                 download="KTB_M6 Order Form_ver20210401 (002).xlsx"
-                                 href="docs/KTB_M6 Order Form_ver20210401 (002).xlsx" target="_blank">
-                                 Order Form
-                              </a>
-                           </div> -->
+                        </a>
                         </div>
                      </div>
                   </div>
@@ -324,106 +305,108 @@
          </div>
       </div>
    </div>
-</div>
 
-<div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-   data-backdrop="static" data-keyboard="false" data-modalFade="true">
-   <div class="modal-dialog" role="document" style="width: 70%;">
-      <div class="modal-content m-p-r m-p-l" ng-class="{'wrapper-xl' : !isMobile}">
-         <div class="modal-header b-no text-center">
-            <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
-                  aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel" ng-if="showList">Event List ({{activeDate | date:'dd MMMM
-               yyyy'}})
-            </h4>
-         </div>
-         <div class="modal-body" ng-scrollbars ng-scrollbars-config="scrollconfig"
-            ng-scrollbars-update="updateScrollbar">
-            <div class="table-Data">
-               <div class="panel panel-default">
-                  <div class="table-responsive overx-visible">
-                     <table class="table table-striped b-t">
-                        <thead>
-                           <tr>
-                              <th class="text-left">#</th>
-                              <th class="text-center">Title</th>
-                              <th class="text-left">Description</th>
-                              <th class="text-left">Start Date</th>
-                              <th class="text-left">End Date</th>
-                              <th class="text-center">Action</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           <tr ng-repeat="(key,data) in calenderevents">
-                              <td class="text-left">{{ key + 1}}</td>
-                              <td class="text-center">{{::data.title}}</td>
-                              <td class="text-left">{{ data.description | cut:true:50:'' }}</td>
-                              <td class="text-center">{{ convertDate(data.start_date) | date:'dd-MM-yy' }}
-                              </td>
-                              <td class="text-center">{{ data.end_date ? (convertDate(data.end_date) |
-                                 date:'dd-MM-yy') : ' - ' }}
-                              </td>
-                              <td class="text-center">
-                                 <button class="btn m-b-xs btn-sm btn-info btn-addon text-capt"
-                                    ng-click="gotoItem(data.event_type,data.id)"><i class="fa fa-chevron-right"></i>Goto
-                                    {{data.event_type}}</button>
-                              </td>
-                           </tr>
-                           <tr ng-if="calenderevents.length == 0 && !loading">
-                              <td colspan="5" class="text-center">Sorry No Records</td>
-                           </tr>
-                           <tr ng-if="loading">
-                              <td colspan="5" class="loadingcss" ng-if="executives.length==0" button-spinner="loading">
-                                 {{loadingMsg}}</td>
-                           </tr>
-                        </tbody>
-                     </table>
+
+   <div class="modal fade" id="PopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      data-backdrop="static" data-keyboard="false" data-modalFade="true">
+      <div class="modal-dialog" role="document" style="width: 70%;">
+         <div class="modal-content m-p-r m-p-l" ng-class="{'wrapper-xl' : !isMobile}">
+            <div class="modal-header b-no text-center">
+               <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                     aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel" ng-if="showList">Event List ({{activeDate | date:'dd MMMM
+                  yyyy'}})
+               </h4>
+            </div>
+            <div class="modal-body" ng-scrollbars ng-scrollbars-config="scrollconfig"
+               ng-scrollbars-update="updateScrollbar">
+               <div class="table-Data">
+                  <div class="panel panel-default">
+                     <div class="table-responsive overx-visible">
+                        <table class="table table-striped b-t">
+                           <thead>
+                              <tr>
+                                 <th class="text-left">#</th>
+                                 <th class="text-center">Title</th>
+                                 <th class="text-left">Description</th>
+                                 <th class="text-left">Start Date</th>
+                                 <th class="text-left">End Date</th>
+                                 <th class="text-center">Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr ng-repeat="(key,data) in calenderevents">
+                                 <td class="text-left">{{ key + 1}}</td>
+                                 <td class="text-center">{{::data.title}}</td>
+                                 <td class="text-left">{{ data.description | cut:true:50:'' }}</td>
+                                 <td class="text-center">{{ convertDate(data.start_date) | date:'dd-MM-yy' }}
+                                 </td>
+                                 <td class="text-center">{{ data.end_date ? (convertDate(data.end_date) |
+                                    date:'dd-MM-yy') : ' - ' }}
+                                 </td>
+                                 <td class="text-center">
+                                    <button class="btn m-b-xs btn-sm btn-info btn-addon text-capt"
+                                       ng-click="gotoItem(data.event_type,data.id)"><i
+                                          class="fa fa-chevron-right"></i>Goto
+                                       {{data.event_type}}</button>
+                                 </td>
+                              </tr>
+                              <tr ng-if="calenderevents.length == 0 && !loading">
+                                 <td colspan="5" class="text-center">Sorry No Records</td>
+                              </tr>
+                              <tr ng-if="loading">
+                                 <td colspan="5" class="loadingcss" ng-if="executives.length==0"
+                                    button-spinner="loading">
+                                    {{loadingMsg}}</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-         <div class="modal-footer text-center b-no">
-            <div class="col-xs-12 text-center">
-               <button type="button" ng-click="closeModal();"
-                  class="btn btn-primary no-border m-auto bg-main1 w-xs">Close</button>
+            <div class="modal-footer text-center b-no">
+               <div class="col-xs-12 text-center">
+                  <button type="button" ng-click="closeModal();"
+                     class="btn btn-primary no-border m-auto bg-main1 w-xs">Close</button>
+               </div>
             </div>
          </div>
       </div>
    </div>
-</div>
-<div class="modal fade" id="EventInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-   data-backdrop="static" data-keyboard="false" data-modalFade="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header bg-main1 b-no text-center">
-            <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
-                  aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">{{formData.title}}</h4>
-         </div>
-         <div class="modal-body wrapper-lg">
-            <div class="row m-t-sm">
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <p>{{formData.info}}</p>
+   <div class="modal fade" id="EventInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      data-backdrop="static" data-keyboard="false" data-modalFade="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header bg-main1 b-no text-center">
+               <button type="button" class="close" ng-click="closeModal();" aria-label="Close"><span
+                     aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">{{formData.title}}</h4>
+            </div>
+            <div class="modal-body wrapper-lg">
+               <div class="row m-t-sm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                     <p>{{formData.info}}</p>
+                  </div>
+               </div>
+               <div class="row m-t-sm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="formData.caleventInfo.type < 4">
+                     <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor"
+                        ng-click="viewEvent()" target="_blank">
+                        Goto {{ (formData.caleventInfo.type == '1' ? 'Event' : formData.caleventInfo.type == '2'
+                        ? 'TBP' : (formData.caleventInfo.type == '3' ? 'Report' : formData.caleventInfo.type))
+                        }}
+                     </a>
+                  </div>
                </div>
             </div>
-            <div class="row m-t-sm">
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="formData.caleventInfo.type < 4">
-                  <a class="btn btn-default btn-xs btn-danger r-2x read_more pull-left text-u-c cursor"
-                     ng-click="viewEvent()" target="_blank">
-                     Goto {{ (formData.caleventInfo.type == '1' ? 'Event' : formData.caleventInfo.type == '2'
-                     ? 'TBP' : (formData.caleventInfo.type == '3' ? 'Report' : formData.caleventInfo.type))
-                     }}
-                  </a>
+            <div class="modal-footer text-center b-no">
+               <div class="col-xs-12 text-center">
+                  <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs" ng-click="closeModal()"
+                     ng-disabled="loading">Close</button>
                </div>
-            </div>
-         </div>
-         <div class="modal-footer text-center b-no">
-            <div class="col-xs-12 text-center">
-               <button type="button" class="btn btn-primary no-border m-auto bg-main2 w-xs" ng-click="closeModal()"
-                  ng-disabled="loading">Close</button>
             </div>
          </div>
       </div>
    </div>
-</div>
 </div>

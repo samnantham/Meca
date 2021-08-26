@@ -3034,20 +3034,39 @@ menu-icon {
 .bg-yellow {
 	background-color: #fa9f34!important;
 }
-.bg_greean
-{
-	background:#0e5f77 !important;
+
+.bg_greean {
+	background: #0e5f77 !important;
 }
-.max_height_box
-{
+
+.max_height_box {
 	max-height: 250px !important;
 }
-.SGACtrl .whatsup .mCustomScrollbar
-{
+
+.SGACtrl .whatsup .mCustomScrollbar {
 	max-height: 46.5vh !important;
 }
-.sga_img
-{
+
+.sga_img {
 	width: 100%;
 }
 
+.bg-red{
+	background-color: #F60404!important;
+	color: #fff!important;
+}
+
+.grdashboard .fc-title{
+	transition: 2s;
+}
+
+.grdashboard .fc-title:hover{
+	text-align: right;
+	margin-left: -5em;
+	font-weight: normal;
+}
+
+.icon_paralympic
+{
+  width: 80px;
+}

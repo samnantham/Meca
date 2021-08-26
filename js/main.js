@@ -141,6 +141,29 @@ angular.module('app')
             $rootScope.organizationList = angular.copy(app.organizationList);
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;
+            $rootScope.snowItems = [
+                {img:'img/single/Icon1.png' ,isMain: 1},
+                {img:'img/single/Icon2.png' ,isMain: 1},
+                {img:'img/single/Icon3.png' ,isMain: 1},
+                {img:'img/single/Icon4.png' ,isMain: 1},
+                {img:'img/single/Icon5.png' ,isMain: 1},
+                {img:'img/single/Icon6.png' ,isMain: 1},
+                // {img:'img/single/Icon7.png' ,isMain: 1},
+                // {img:'img/single/Icon8.png' ,isMain: 1},
+                // {img:'img/single/Icon9.png' ,isMain: 1},
+                // {img:'img/single/Icon10.png' ,isMain: 1},
+                // {img:'img/single/Icon11.png' ,isMain: 1},
+                // {img:'img/single/Icon12.png' ,isMain: 1},
+                {img:'img/single/Blue1.png' ,isMain: 0},
+                {img:'img/single/Blue2.png' ,isMain: 0},
+                // {img:'img/single/Blue3.png' ,isMain: 0},
+                // {img:'img/single/Green1.png' ,isMain: 0},
+                {img:'img/single/Green2.png' ,isMain: 0},
+                {img:'img/single/Green3.png' ,isMain: 0},
+                {img:'img/single/Red1.png' ,isMain: 0},
+                {img:'img/single/Red2.png' ,isMain: 0},
+                // {img:'img/single/Red3.png' ,isMain: 0}
+            ];
 
             $rootScope.scrollconfig = {
                 autoHideScrollbar: true,
@@ -447,6 +470,26 @@ angular.module('app')
                     }
                 }
             }
+
+            
+            $rootScope.showSnowfall = function(){
+                angular.forEach( $rootScope.snowItems, function(item, no) {
+                    if(!item.isMain){
+                        var minSize = 5;
+                        var maxSize = 10;
+                    }else{
+                        var minSize = 10;
+                        var maxSize = 48;
+                    }
+                    $(document).snowfall({image :item.img, minSize: minSize, maxSize:maxSize});  
+                });
+                
+            }
+
+            $rootScope.hideSnowfall = function(){
+                $(document).snowfall('clear');
+            }
+
 
         }
         ]);
