@@ -109,6 +109,8 @@ angular.module('app')
                 });
             }
 
+            $rootScope.snowfalling = false;
+            $rootScope.initialsnowfalling = false;
             $rootScope.height_to_reduce = 100;
             $rootScope.loadingMsg = 'Loading please Wait....';
             $rootScope.year = new Date().getFullYear();
@@ -490,6 +492,37 @@ angular.module('app')
                 $(document).snowfall('clear');
             }
 
+            $rootScope.$watch("snowfalling", function() {
+                console.log($rootScope.snowfalling)
+                console.log("**** reference checkers snow falling ****")
+                if(!$rootScope.snowfalling){
+                    $timeout(function() {
+                        $rootScope.snowfalling = false;
+                        $rootScope.initialsnowfalling = true;
+                        $rootScope.hideSnowfall();
+                    }, 15000);
+                }
+              });
 
+              $rootScope.showhidesnow = function(){
+                if(!$rootScope.snowfalling){
+                    $rootScope.snowfalling = true;
+                    $rootScope.showSnowfall();
+                }else{
+                    $rootScope.snowfalling = false;
+                    $rootScope.hideSnowfall();
+                }
+                
+              }
+              
+              $rootScope.showshowerButton = function(){
+                  $('.shower_button').css("bottom", "2px");
+              }
+
+              $rootScope.hideshowerButton = function(){
+                $('.shower_button').css("bottom", "-50px");
+            }
+              
+              
         }
-        ]);
+]);
