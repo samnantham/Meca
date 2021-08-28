@@ -377,19 +377,14 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                         }
                     });
                     $scope.eventSources = [$scope.calendarevents];
-                    if(!$rootScope.snowfalling){
-                        $timeout(function() {
-                            $rootScope.snowfalling = true;
-                            $rootScope.showSnowfall();
-                            if(!$rootScope.snowfalling){
+                            if(!$rootScope.initialsnowfalling){
                                 $timeout(function() {
-                                    $rootScope.snowfalling = false;
                                     $rootScope.initialsnowfalling = true;
-                                    $rootScope.hideSnowfall();
-                                }, 10000);
+                                    $rootScope.snowfalling = true;
+                                    $rootScope.showSnowfall();
+                                }, 500);
                             }
-                        }, 500);
-                    }
+                            
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }

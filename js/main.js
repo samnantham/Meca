@@ -350,6 +350,7 @@ angular.module('app')
             }
 
             $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                $rootScope.hideSnowfall();
                 $rootScope.loading = true;
                 $rootScope.currentState = toState.name;
                 console.log($rootScope.currentState)
@@ -483,7 +484,7 @@ angular.module('app')
                         var minSize = 10;
                         var maxSize = 48;
                     }
-                    $(document).snowfall({image :item.img, minSize: minSize, maxSize:maxSize});  
+                    $(document).snowfall({image :item.img, minSize: minSize, maxSize:maxSize,flakeCount: 6, minSpeed : 1, maxSpeed: 3});  
                 });
                 
             }
@@ -495,12 +496,11 @@ angular.module('app')
             $rootScope.$watch("snowfalling", function() {
                 console.log($rootScope.snowfalling)
                 console.log("**** reference checkers snow falling ****")
-                if(!$rootScope.snowfalling){
+                if($rootScope.snowfalling){
                     $timeout(function() {
                         $rootScope.snowfalling = false;
-                        $rootScope.initialsnowfalling = true;
                         $rootScope.hideSnowfall();
-                    }, 15000);
+                    }, 10000);
                 }
               });
 
@@ -513,16 +513,6 @@ angular.module('app')
                     $rootScope.hideSnowfall();
                 }
                 
-              }
-              
-              $rootScope.showshowerButton = function(){
-                  $('.shower_button').css("bottom", "2px");
-              }
-
-              $rootScope.hideshowerButton = function(){
-                $('.shower_button').css("bottom", "-50px");
-            }
-              
-              
+              }  
         }
 ]);

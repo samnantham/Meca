@@ -3074,7 +3074,7 @@ menu-icon {
 {
 	font-size: 1.5rem;
     position: fixed;
-    bottom: -50px;
+    bottom: 2px;
     z-index: 100000;
     right: 30%;
 	border-color: #fff !important;
@@ -3085,4 +3085,8 @@ menu-icon {
 
 .shower_button:focus{
 	background-color: #fff !important;
+}
+
+.promtearea .mCustomScrollbar {
+    height: calc(100vh - 138px) !important;
 }
