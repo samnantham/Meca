@@ -310,7 +310,7 @@ angular.module('app')
                 })
 
                 .state('app.dakar', {
-                    url: 'dakar',
+                    url: 'dakar/special',
                     templateUrl: 'tpl/dakar.html',
                     resolve: load(['js/controllers/sga.js'])
                 })
