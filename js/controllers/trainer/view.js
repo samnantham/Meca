@@ -12,6 +12,7 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pdca = getData.data;
+                console.log($scope.pdca)
                 $rootScope.viewModuleItem($scope.module_id,$stateParams.id);
             } else {
                 $rootScope.$emit("showISError", getData);

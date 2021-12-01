@@ -3,25 +3,26 @@
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none m-b">
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none">
          <div class="panel panel-default r-3x m-l whatsnew">
-            <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold m-b-sm">
+            <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold m-b-sm menu_bg_red">
                What's New
             </div>
             <div class="col-xs-12 bg-white padder-v padder r-b-6x m-b d_i_b" ng-scrollbars
                ng-scrollbars-config="scrollconfig">
-               <div class="col-xs-12 bg-main1 text-center sm-padder-v sm-padder">MECA CAMPUS</div>
+               <div class="col-xs-12 bg-main1 text-center sm-padder-v sm-padder menu_bg_yellow">MECA CAMPUS
+               </div>
                <div class="col-xs-12 p-l-none p-r-none">
                   <div class="m-t m-b">
                      <div class="col-sm-3 p-l-none p-xs-l">
-                        <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Category</div>
+                        <div class="bg-main1 menu_bg_orange text-center f12 sm-padder-v sm-padder">Category</div>
                      </div>
                      <div class="col-sm-3">
-                        <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Time</div>
+                        <div class="bg-main1 menu_bg_orange text-center f12 sm-padder-v sm-padder">Time</div>
                      </div>
                      <div class="col-sm-4">
-                        <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Title</div>
+                        <div class="bg-main1 menu_bg_orange text-center f12 sm-padder-v sm-padder">Title</div>
                      </div>
                      <div class="col-sm-2 p-r-none p-xs-r">
-                        <div class="bg-main1 text-center f12 sm-padder-v sm-padder">Written by</div>
+                        <div class="bg-main1 menu_bg_orange text-center f12 sm-padder-v sm-padder">Written by</div>
                      </div>
                   </div>
                </div>
@@ -79,24 +80,29 @@
          <div ng-scrollbars ng-scrollbars-config="scrollconfig">
             <div class="promotion-area m-b">
                <div class="panel panel-default r-3x ">
-                  <div class="panel-heading r-3x r-b-none text-center font-bold text-left bg-red">
-                     Promotion: The advertising revenue of this space will be used for
-                     contribution activities to the SDGs.
+                  <div class="panel-heading r-3x r-b-none text-center font-bold text-left bg-main1 menu_bg_orange">
+                     Promotion: The advertising revenue of this space will be used for contribution activities to the
+                     SDGs.
                   </div>
                   <div class="panel-body">
                      <div class="r-b-6x">
                         <div class="col-xs-12 no-padder">
-                           <a class="m-t-sm" target="_blank" href="https://toyotatimes.jp/en/sports/014.html">
-                           <div class="m-b-xs">
-                              <div class="dis-img box-shadow b r-3x cursor" background-image="img/promotion-thumb.jpg">
+                           <a class="m-t-sm">
+                              <div class="m-b-xs">
+                                 <div class="dis-img box-shadow b r-3x cursor"
+                                    background-image="img/promotion-thumb.png"
+                                    ng-click="openPDF('https://mecacampus.com/API/public/upload/fromTMC/documents/61527fb3d2ca8.pdf');">
+                                 </div>
+                                 <h6
+                                    ng-click="openPDF('https://mecacampus.com/API/public/upload/fromTMC/documents/61527fb3d2ca8.pdf');">
+                                    <b>Dear our valued distributors</b></h6>
+                                 <span read-more="promotionContent" read-more-limit="150"
+                                    read-more-label-expand="... See More" read-more-label-collapse="... See Less">
+                                    <div ng-bind-html="promotionContent"></div>
+                                 </span>
+
                               </div>
-                              <h6><b>Tokyo 2020 Paralympic Games (Aug.24th -Sep. 5th)</b></h6>
-                              Paralympic games are going to be held in Tokyo from Aug. 24th (Thu) to Sep. 5th (Sun).
-                              Toyota supports 57 athletes in the Tokyo 2020 Paralympic Games.
-                              Let's cheer them up together! Go Paralympians!!
-                              
-                           </div>
-                        </a>
+                           </a>
                         </div>
                      </div>
                   </div>
@@ -104,9 +110,10 @@
             </div>
             <div class="promotion-area m-t m-b" ng-if="homeData.onlyDays.length > 0">
                <div class="panel panel-default r-3x">
-                  <div class="panel-heading r-3x r-b-none bg-main1 text-left font-bold cursor">
+                  <div class="panel-heading r-3x r-b-none bg-main1 text-left font-bold cursor menu_bg_yellow">
                      <span class="cursor">One and Only Day</span><a
-                        class="btn btn-default btn-xs bg-main2 pull-right b-no f-10" ui-sref="app.oneandonly">Show
+                        class="btn btn-default btn-xs bg-main2 pull-right b-no f-10 menu_bg_orange"
+                        ui-sref="app.oneandonly">Show
                         All</a>
                   </div>
                   <div class="panel-body pos-rlt">
@@ -137,7 +144,7 @@
             </div>
             <div class="promotion-area">
                <div class="panel panel-default r-3x">
-                  <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold">
+                  <div class="panel-heading r-3x r-b-none bg-main1 text-center font-bold menu_bg_red">
                      From TMC
                   </div>
                   <div class="panel-body">
@@ -150,6 +157,11 @@
                                     <div class="m-b-xs">
                                        <a class="h5 font-bold"> {{data.title}} </a>
                                     </div>
+                                    <!-- <iframe width="100%" style="height:150px;"
+                                       src="https://www.youtube.com/embed/1BQXole_ZMI?autoplay=1&mute=1&loop=1"
+                                       title="YouTube video player" frameborder="0"
+                                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                       allowfullscreen></iframe> -->
                                     <div class="dis-img box-shadow b r-3x"
                                        background-image="{{IMGURL}}{{data.cover_image}}"></div>
                                  </div>
@@ -175,9 +187,8 @@
       <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-t mebit-ad m-p-r-none">
          <div class="promotion-area m-b feed-area" ng-scrollbars ng-scrollbars-config="scrollconfig">
             <div class="panel panel-default r-3x">
-               <div class="panel-heading r-3x r-b-none bg-main1 text-left">
-                  <span class="font-bold"> MECA Post </span> <a
-                     class="btn btn-default btn-xs bg-main2 pull-right b-no f-10"
+               <div class="panel-heading r-3x r-b-none bg-main1 text-left menu_bg_red">
+                  <span class="font-bold"> MECA Post </span> <a class="btn btn-default btn-xs pull-right b-no f-10"
                      ng-click="ModalOpen('feedModal','FeedModalController');">Add New</a>
                </div>
                <div class="panel-body p-t-none p-l-none p-r-none">
@@ -410,3 +421,42 @@
       </div>
    </div>
 </div>
+
+<!-- <div class="panel-body">
+   <div class="r-b-6x">
+      <div class="col-xs-12 no-padder">
+         <div class="m-b-xs">
+            <video class="img-responsive m-b-sm" id="video" preload="none" controls autoplay muted loop 
+               src="media/video/21_Jun_21st_MEBIT_Convention_OP.mp4">
+               </video>
+               <iframe width="100%" style="height:150px;"
+               src="https://www.youtube.com/embed/c_qmnzScE6g?autoplay=1&mute=1&loop=1&playlist=c_qmnzScE6g"
+               title="YouTube video player" frameborder="0"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+               allowfullscreen></iframe>
+            <a target="_blank"
+               href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/Home.aspx"></a>
+               <span class="m-t-sm">
+                  MEBIT Convention 2021 was conducted in June 21st (Mon).<br>
+               We were very excited to hold this convention with participation of many different
+               Toyota members and supporters beyond the MECA region.
+               For those who missed the chance to watch the opening video, please have a look at it!
+               Hope you enjoy it!
+               </span>
+               What is the KAIZEN TOOLBOX? Do you think it might be useful? Maybe you’d like
+               to try using it. Start by watching this video. If you have recently commenced
+               Kaizen and Small Group Activities, this video is a must-see! After watching
+               the video, you should have a clearer understanding of what the KAIZEN
+               TOOLBOX includes.
+            
+         </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center m-t-sm m-b-sm">
+            <a class="btn btn-xs btn-success text-u-c cursor"
+               download="KTB_M6 Order Form_ver20210401 (002).xlsx"
+               href="docs/KTB_M6 Order Form_ver20210401 (002).xlsx" target="_blank">
+               Order Form
+            </a>
+         </div>
+      </div>
+   </div>
+</div> -->

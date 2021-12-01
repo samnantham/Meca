@@ -141,6 +141,9 @@ angular.module('app')
             $rootScope.mentor_batch_medals = angular.copy(app.mentor_batch_medals);
             $rootScope.mentor_countries = angular.copy(app.mentor_countries);
             $rootScope.organizationList = angular.copy(app.organizationList);
+            $rootScope.Calendarkey = 'AIzaSyAB7PtdX_tXyBQ0sTptLL59JIuC4GN6yag';
+            $rootScope.CalendarID = 'imecad.20210401@gmail.com';
+            $rootScope.calendarURL = 'https://calendar.google.com/calendar/u/0/embed?src=imecad.20210401@gmail.com';
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;
             $rootScope.snowItems = [
@@ -367,6 +370,7 @@ angular.module('app')
                     }
                 } else {
                     $rootScope.getUserInfo();
+                    $rootScope.userToken = authServices.getToken();
                     if (!authServices.isLoggedIn()) {
                         $timeout(function() {
                             $state.go('access.signin');

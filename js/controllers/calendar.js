@@ -1,9 +1,9 @@
 'use strict';
-app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', '$filter', '$state',
-    function($scope, webServices, $rootScope, $http, $filter, $state) {
+app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', '$filter', '$state', '$window',
+    function ($scope, webServices, $rootScope, $http, $filter, $state, $window) {
         $rootScope.loading = true;
         $scope.firstloadingdone = false;
-		
+        
         $scope.uiConfig = {
             calendar: {
                 height: 'auto',
@@ -16,21 +16,24 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                 dayClick: $scope.alertOnEventClick,
                 eventDrop: $scope.alertOnDrop,
                 eventResize: $scope.alertOnResize,
+                fixedWeekCount: true,
+                weekMode: 'liquid',
                 eventMouseover: $scope.alertOnMouseOver,
                 eventClick: function (event) {
-                    $rootScope.formData = event;
-                    $scope.activeDate = event.start._d;
-                    $scope.calenderevents = [];
-                    $scope.getCalenderEvents(event.start._d.getTime());
+                    if(event.from_google){
+                        $window.open( $rootScope.calendarURL, '_blank' );
+                    }else{
+                        $rootScope.formData = event;
+                        $scope.activeDate = event.start._d;
+                        $scope.calenderevents = [];
+                        $scope.getCalenderEvents(event.start._d.getTime());
+                    }
                 },
-                viewRender: function(view, element) {
+                viewRender: function (view, element) {
                     var monthyear = view.title.split(' ');
                     var month = $rootScope.getMonthFromString(view.title.split(' ')[0]);
                     var year = parseInt(monthyear[1]);
-                    if($scope.firstloadingdone){
-                        $scope.getMonthevents(month,year);
-                    }
-                    
+                    $scope.getGoogleCalHolidays(month, year);
                 }
             }
         };
@@ -53,7 +56,7 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             });
         }
 
-        $scope.openModal = function(){
+        $scope.openModal = function () {
             $('#PopupModal').modal({
                 backdrop: 'static',
                 keyboard: false
@@ -79,21 +82,23 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             }
         }
 
-        $scope.getMonthevents = function(month,year) {
-            webServices.get('calendar/info/'+month+'/'+year).then(function(getData) {
+        $scope.getMonthevents = function (month, year) {
+            webServices.get('calendar/info/' + month + '/' + year).then(function (getData) {
                 if (getData.status == 200) {
                     $rootScope.loading = false;
-                    $scope.calendarevents = getData.data;
-                    angular.forEach($scope.calendarevents, function(data, no) {
+                    //$scope.calendarevents = getData.data;
+                    angular.forEach(getData.data, function (data, no) {
                         data.start = new Date(data.start);
+                        $scope.calendarevents.push(data)
                     });
-                    if(!$scope.firstloadingdone){
+                    if (!$scope.firstloadingdone) {
                         $scope.eventSources = [$scope.calendarevents];
                         $scope.firstloadingdone = true;
-                    }else{
-                        $scope.eventSources.splice(0,1);
+                    } else {
+                        $scope.eventSources.splice(0, 1);
                         $scope.eventSources.push($scope.calendarevents);
                     }
+                    console.log($scope.eventSources)
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
@@ -107,8 +112,55 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             $('#PDFModal').modal('hide');
         }
 
+        $scope.getGoogleCalEvents = function (month,year) {
+            $http({
+                method: 'GET',
+                url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/' + $rootScope.CalendarID + '/events?key=' + $rootScope.Calendarkey),
+                cache: false,
+                dataType: 'json',
+            }).then(function (response) {
+                angular.forEach(response.data.items, function (item, no) {
+                    var obj = {};
+                    obj.title = item.summary;
+                    obj.className = ['bg-info-cal'];
+                    obj.start = new Date(item.start.date);
+                    obj.from_google = 1;
+                    $scope.calendarevents.push(obj)
+                });
+                $scope.getMonthevents(month,year);
+            }, function (response) {
+                console.log(response)
+            });
+
+        }
+        
+
+        $scope.getGoogleCalHolidays = function (month,year) {
+            $scope.calendarevents = [];
+            $http({
+                method: 'GET',
+                url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/japanese@holiday.calendar.google.com/events?key=' + $rootScope.Calendarkey),
+                cache: false,
+                dataType: 'json',
+            }).then(function (response) {
+                console.log(response)
+                angular.forEach(response.data.items, function (item, no) {
+                    var obj = {};
+                    obj.title = item.summary;
+                    obj.className = ['bg-info-cal'];
+                    obj.start = new Date(item.start.date);
+                    obj.from_google = 1;
+                    $scope.calendarevents.push(obj)
+                });
+                $scope.getGoogleCalEvents(month,year);
+            }, function (response) {
+                console.log(response)
+            });
+
+        }
+
         var d = new Date();
-        $scope.getMonthevents(d.getMonth(),d.getYear());
+        $scope.getGoogleCalHolidays(d.getMonth(), d.getYear());
 
     }
 ]);
