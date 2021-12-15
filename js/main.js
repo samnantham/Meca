@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-.controller('AppCtrl', ['$scope', '$window', '$timeout', '$rootScope', 'authServices', '$sessionStorage', '$state', 'toaster', 'webServices', '$location', 'isMobile', '$sce', 'Lightbox', '$modal', '$filter',
-    function($scope, $window, $timeout, $rootScope, authServices, $sessionStorage, $state, toaster, webServices, $location, isMobile, $sce, Lightbox, $modal, $filter, $modalInstance) {
+    .controller('AppCtrl', ['$scope', '$window', '$timeout', '$rootScope', 'authServices', '$sessionStorage', '$state', 'toaster', 'webServices', '$location', 'isMobile', '$sce', 'Lightbox', '$modal', '$filter',
+        function($scope, $window, $timeout, $rootScope, authServices, $sessionStorage, $state, toaster, webServices, $location, isMobile, $sce, Lightbox, $modal, $filter, $modalInstance) {
 
             // config
             $scope.app = {
@@ -63,28 +63,41 @@ angular.module('app')
                 return !!pattern.test(url);
             }
 
-            $rootScope.showCover = function(file){
+            $rootScope.showCover = function(file) {
                 $rootScope.images = [];
                 var obj = {};
                 obj.isVideo = 0;
                 obj.url = $rootScope.IMGURL + file;
                 $rootScope.images.push(obj);
-                $rootScope.openLightbox($rootScope.images,0);
+                $rootScope.openLightbox($rootScope.images, 0);
             }
 
-            $rootScope.openFiles = function(key,files) {
+            $rootScope.openFiles = function(key, files) {
                 $rootScope.images = [];
-                
-                angular.forEach( files, function(file, no) {
+
+                angular.forEach(files, function(file, no) {
                     var obj = {};
                     obj.type = file.filetype;
                     obj.url = $rootScope.IMGURL + file.file;
-                    if(file.filetype == 'image'){
+                    if (file.filetype == 'image') {
                         $rootScope.images.push(obj);
                     }
                 });
 
-                $rootScope.openLightbox($rootScope.images,key);
+                $rootScope.openLightbox($rootScope.images, key);
+            };
+
+            $rootScope.openGallery = function(key, files) {
+                $rootScope.images = [];
+
+                angular.forEach(files, function(file, no) {
+                    var obj = {};
+                    obj.type = file.filetype;
+                    obj.url = file.file;
+                    $rootScope.images.push(obj);
+                });
+
+                $rootScope.openLightbox($rootScope.images, key);
             };
 
             $rootScope.opendemoVideo = function(url) {
@@ -94,14 +107,14 @@ angular.module('app')
                 obj.url = url;
                 console.log(obj)
                 files.push(obj);
-                $rootScope.openLightbox(files,0);
+                $rootScope.openLightbox(files, 0);
             };
 
-            $rootScope.openLightbox = function(files,key){
+            $rootScope.openLightbox = function(files, key) {
                 Lightbox.openModal(files, key);
             }
 
-            $rootScope.openPDF = function (link) {
+            $rootScope.openPDF = function(link) {
                 $rootScope.doclink = $sce.trustAsResourceUrl(link);
                 $('#PDFModal').modal({
                     backdrop: 'static',
@@ -147,28 +160,30 @@ angular.module('app')
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;
             $rootScope.snowItems = [
-                {img:'img/single/Icon1.png' ,isMain: 1},
-                {img:'img/single/Icon2.png' ,isMain: 1},
-                {img:'img/single/Icon3.png' ,isMain: 1},
-                {img:'img/single/Icon4.png' ,isMain: 1},
-                {img:'img/single/Icon5.png' ,isMain: 1},
-                {img:'img/single/Icon6.png' ,isMain: 1},
+                { img: 'img/single/Icon1.png', isMain: 1 },
+                { img: 'img/single/Icon2.png', isMain: 1 },
+                { img: 'img/single/Icon3.png', isMain: 1 },
+                { img: 'img/single/Icon4.png', isMain: 1 },
+                { img: 'img/single/Icon5.png', isMain: 1 },
+                { img: 'img/single/Icon6.png', isMain: 1 },
                 // {img:'img/single/Icon7.png' ,isMain: 1},
                 // {img:'img/single/Icon8.png' ,isMain: 1},
                 // {img:'img/single/Icon9.png' ,isMain: 1},
                 // {img:'img/single/Icon10.png' ,isMain: 1},
                 // {img:'img/single/Icon11.png' ,isMain: 1},
                 // {img:'img/single/Icon12.png' ,isMain: 1},
-                {img:'img/single/Blue1.png' ,isMain: 0},
-                {img:'img/single/Blue2.png' ,isMain: 0},
+                { img: 'img/single/Blue1.png', isMain: 0 },
+                { img: 'img/single/Blue2.png', isMain: 0 },
                 // {img:'img/single/Blue3.png' ,isMain: 0},
                 // {img:'img/single/Green1.png' ,isMain: 0},
-                {img:'img/single/Green2.png' ,isMain: 0},
-                {img:'img/single/Green3.png' ,isMain: 0},
-                {img:'img/single/Red1.png' ,isMain: 0},
-                {img:'img/single/Red2.png' ,isMain: 0},
+                { img: 'img/single/Green2.png', isMain: 0 },
+                { img: 'img/single/Green3.png', isMain: 0 },
+                { img: 'img/single/Red1.png', isMain: 0 },
+                { img: 'img/single/Red2.png', isMain: 0 },
                 // {img:'img/single/Red3.png' ,isMain: 0}
             ];
+
+            $rootScope.teams = angular.copy(app.teamstofollow);
 
             $rootScope.scrollconfig = {
                 autoHideScrollbar: true,
@@ -197,15 +212,15 @@ angular.module('app')
                 return files.filter((obj) => obj.filetype === type).length;
             }
 
-            $rootScope.closeLikeModal = function (module){
+            $rootScope.closeLikeModal = function(module) {
                 $('#ModuleLikeMembersModal').modal('hide');
             }
 
-            $rootScope.closePDFModal = function (module){
+            $rootScope.closePDFModal = function(module) {
                 $('#PDFModal').modal('hide');
             }
 
-            $rootScope.showLikedMembers = function(members){
+            $rootScope.showLikedMembers = function(members) {
                 $rootScope.likers = [];
                 $rootScope.likers = members;
                 $('#ModuleLikeMembersModal').modal({
@@ -214,7 +229,7 @@ angular.module('app')
                 });
             }
 
-            $rootScope.openDoc = function(URL){
+            $rootScope.openDoc = function(URL) {
                 var base = window.location.origin + '/';
                 window.open(base + URL, '_blank');
             }
@@ -224,9 +239,9 @@ angular.module('app')
                 splittedfiles.images = [];
                 splittedfiles.videos = [];
                 angular.forEach(files, function(file, no) {
-                    if(file.filetype == 'image'){
+                    if (file.filetype == 'image') {
                         splittedfiles.images.push(file);
-                    }else if(file.filetype == 'video'){
+                    } else if (file.filetype == 'video') {
                         splittedfiles.videos.push(file);
                     }
                 });
@@ -255,7 +270,7 @@ angular.module('app')
                 });
             }
 
-            
+
             $rootScope.closeModalPopup = function() {
                 $rootScope.formData = {};
                 $rootScope.ismodalopen = false;
@@ -308,14 +323,13 @@ angular.module('app')
                 history.back();
             }
 
-            $rootScope.viewModuleItem = function(module,item){
+            $rootScope.viewModuleItem = function(module, item) {
                 var obj = {};
                 obj.module = module;
                 obj.item = item;
-                webServices.post('view',obj).then(function(getData) {
-                    if (getData.status == 200) {
-                    } else {
-                        $rootScope.$emit("showISError",getData);
+                webServices.post('view', obj).then(function(getData) {
+                    if (getData.status == 200) {} else {
+                        $rootScope.$emit("showISError", getData);
                     }
                 });
             }
@@ -451,13 +465,12 @@ angular.module('app')
                 });
             }
 
-            $rootScope.updateView = function(){
+            $rootScope.updateView = function() {
                 var obj = {};
                 obj.date = $filter('date')(new Date(), 'yyyy-MM-dd');
-                webServices.post('viewer/info/update',obj).then(function(getData) {
+                webServices.post('viewer/info/update', obj).then(function(getData) {
                     console.log(getData)
-                    if (getData.status == 200) {
-                    }
+                    if (getData.status == 200) {}
                 });
             }
 
@@ -478,45 +491,45 @@ angular.module('app')
                 }
             }
 
-            
-            $rootScope.showSnowfall = function(){
-                angular.forEach( $rootScope.snowItems, function(item, no) {
-                    if(!item.isMain){
+
+            $rootScope.showSnowfall = function() {
+                angular.forEach($rootScope.snowItems, function(item, no) {
+                    if (!item.isMain) {
                         var minSize = 5;
                         var maxSize = 10;
-                    }else{
+                    } else {
                         var minSize = 10;
                         var maxSize = 48;
                     }
-                    $(document).snowfall({image :item.img, minSize: minSize, maxSize:maxSize,flakeCount: 6, minSpeed : 1, maxSpeed: 3});  
+                    $(document).snowfall({ image: item.img, minSize: minSize, maxSize: maxSize, flakeCount: 6, minSpeed: 1, maxSpeed: 3 });
                 });
-                
+
             }
 
-            $rootScope.hideSnowfall = function(){
+            $rootScope.hideSnowfall = function() {
                 $(document).snowfall('clear');
             }
 
             $rootScope.$watch("snowfalling", function() {
                 console.log($rootScope.snowfalling)
                 console.log("**** reference checkers snow falling ****")
-                if($rootScope.snowfalling){
+                if ($rootScope.snowfalling) {
                     $timeout(function() {
                         $rootScope.snowfalling = false;
                         $rootScope.hideSnowfall();
                     }, 10000);
                 }
-              });
+            });
 
-              $rootScope.showhidesnow = function(){
-                if(!$rootScope.snowfalling){
+            $rootScope.showhidesnow = function() {
+                if (!$rootScope.snowfalling) {
                     $rootScope.snowfalling = true;
                     $rootScope.showSnowfall();
-                }else{
+                } else {
                     $rootScope.snowfalling = false;
                     $rootScope.hideSnowfall();
                 }
-                
-              }  
+
+            }
         }
-]);
+    ]);

@@ -1,128 +1,150 @@
 angular.module('app')
-.directive('uiToggleClass', ['$timeout', '$document', function($timeout, $document) {
-    return {
-        restrict: 'AC',
-        link: function(scope, el, attr) {
-            el.on('click', function(e) {
-                e.preventDefault();
-                var classes = attr.uiToggleClass.split(','),
-                targets = (attr.target && attr.target.split(',')) || Array(el),
-                key = 0;
-                angular.forEach(classes, function(_class) {
-                    var target = targets[(targets.length && key)];
-                    (_class.indexOf('*') !== -1) && magic(_class, target);
-                    $(target).toggleClass(_class);
-                    key++;
-                });
-                $(el).toggleClass('active');
+    .directive('uiToggleClass', ['$timeout', '$document', function($timeout, $document) {
+        return {
+            restrict: 'AC',
+            link: function(scope, el, attr) {
+                el.on('click', function(e) {
+                    e.preventDefault();
+                    var classes = attr.uiToggleClass.split(','),
+                        targets = (attr.target && attr.target.split(',')) || Array(el),
+                        key = 0;
+                    angular.forEach(classes, function(_class) {
+                        var target = targets[(targets.length && key)];
+                        (_class.indexOf('*') !== -1) && magic(_class, target);
+                        $(target).toggleClass(_class);
+                        key++;
+                    });
+                    $(el).toggleClass('active');
 
-                function magic(_class, target) {
-                    var patt = new RegExp('\\s' +
-                        _class.replace(/\*/g, '[A-Za-z0-9-_]+').split(' ').join('\\s|\\s') +
-                        '\\s', 'g');
-                    var cn = ' ' + $(target)[0].className + ' ';
-                    while (patt.test(cn)) {
-                        cn = cn.replace(patt, ' ');
+                    function magic(_class, target) {
+                        var patt = new RegExp('\\s' +
+                            _class.replace(/\*/g, '[A-Za-z0-9-_]+').split(' ').join('\\s|\\s') +
+                            '\\s', 'g');
+                        var cn = ' ' + $(target)[0].className + ' ';
+                        while (patt.test(cn)) {
+                            cn = cn.replace(patt, ' ');
+                        }
+                        $(target)[0].className = $.trim(cn);
                     }
-                    $(target)[0].className = $.trim(cn);
-                }
-            });
-        }
-    };
-}])
+                });
+            }
+        };
+    }])
 
-.filter("trustUrl", ['$sce', function ($sce) {
-    return function (recordingUrl) {
+.filter("trustUrl", ['$sce', function($sce) {
+    return function(recordingUrl) {
         return $sce.trustAsResourceUrl(recordingUrl);
     };
 }])
 
-.filter('truncate', function () {
-    return function (text, length, end) {
-      if (isNaN(length)) {
-        length = 10;
-      }
-  
-      if (end === undefined) {
-        end = '...';
-      }
-  
-      if (text.length <= length || text.length - end.length <= length) {
-        return text;
-      } else {
-        return String(text).substring(0, length-end.length) + end;
-      }
-    };
-  })
+.filter('truncate', function() {
+    return function(text, length, end) {
+        if (isNaN(length)) {
+            length = 10;
+        }
 
-  .directive('readMore', function($filter) {
+        if (end === undefined) {
+            end = '...';
+        }
+
+        if (text.length <= length || text.length - end.length <= length) {
+            return text;
+        } else {
+            return String(text).substring(0, length - end.length) + end;
+        }
+    };
+})
+
+.directive('readMore', function($filter) {
     return {
-      restrict: 'A',
-      scope: {
-        text: '=readMore',
-        labelExpand: '@readMoreLabelExpand',
-        labelCollapse: '@readMoreLabelCollapse',
-        limit: '@readMoreLimit'
-      },
-      transclude: true,
-      template: '<span ng-transclude ng-bind-html="text"></span><a href="javascript:;" class="color_2 font-bold m-l" ng-click="toggleReadMore()" ng-bind="label"></a>',
-      link: function(scope /*, element, attrs */) {
-  
-        var originalText = scope.text;
-  
-        scope.label = scope.labelExpand;
-  
-        scope.$watch('expanded', function (expandedNew) {
-          if(expandedNew) {
-            scope.text = originalText;
-            scope.label = scope.labelCollapse;
-          } else {
-            scope.text = $filter('truncate')(originalText, scope.limit, '');
+        restrict: 'A',
+        scope: {
+            text: '=readMore',
+            labelExpand: '@readMoreLabelExpand',
+            labelCollapse: '@readMoreLabelCollapse',
+            limit: '@readMoreLimit'
+        },
+        transclude: true,
+        template: '<span ng-transclude ng-bind-html="text"></span><a href="javascript:;" class="color_2 font-bold m-l" ng-click="toggleReadMore()" ng-bind="label"></a>',
+        link: function(scope /*, element, attrs */ ) {
+
+            var originalText = scope.text;
+
             scope.label = scope.labelExpand;
-          }
-        });
-  
-        scope.toggleReadMore = function () {
-          scope.expanded = !scope.expanded;
-        };
-  
-      }
+
+            scope.$watch('expanded', function(expandedNew) {
+                if (expandedNew) {
+                    scope.text = originalText;
+                    scope.label = scope.labelCollapse;
+                } else {
+                    scope.text = $filter('truncate')(originalText, scope.limit, '');
+                    scope.label = scope.labelExpand;
+                }
+            });
+
+            scope.toggleReadMore = function() {
+                scope.expanded = !scope.expanded;
+            };
+
+        }
     }
 })
 
+.directive('compile', ['$compile', function($compile) {
+    return function(scope, element, attrs) {
+        scope.$watch(
+            function(scope) {
+                // watch the 'compile' expression for changes
+                return scope.$eval(attrs.compile);
+            },
+            function(value) {
+                // when the 'compile' expression changes
+                // assign it into the current DOM
+                element.html(value);
+
+                // compile the new DOM and link it to the current
+                // scope.
+                // NOTE: we only compile .childNodes so that
+                // we don't get into infinite loop compiling ourselves
+                $compile(element.contents())(scope);
+            }
+        );
+    };
+}])
+
 .filter('ageFilter', function() {
     function calculateAge(birthday) {
-     newdate =  new Date(birthday); // birthday is a date
-     var ageDifMs = Date.now() - newdate.getTime();
-         var ageDate = new Date(ageDifMs); // miliseconds from epoch
-         return Math.abs(ageDate.getUTCFullYear() - 1970) +' Years';
-     }
+        newdate = new Date(birthday); // birthday is a date
+        var ageDifMs = Date.now() - newdate.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970) + ' Years';
+    }
 
-     return function(birthdate) { 
-         return calculateAge(birthdate);
-     }; 
- })
+    return function(birthdate) {
+        return calculateAge(birthdate);
+    };
+})
 
-.directive('someVideo', function ($window, $timeout) {
+.directive('someVideo', function($window, $timeout) {
     return {
         scope: {
             videoCurrentTime: "=videoCurrentTime"
         },
-        controller: function ($scope, $element) {
+        controller: function($scope, $element) {
 
-            $scope.onTimeUpdate = function () {
+            $scope.onTimeUpdate = function() {
                 var currTime = $element[0].currentTime;
                 if (currTime - $scope.videoCurrentTime > 0.5 || $scope.videoCurrentTime - currTime > 0.5) {
                     $element[0].currentTime = $scope.videoCurrentTime;
                 }
-                $scope.$apply(function () {
+                $scope.$apply(function() {
                     $scope.videoCurrentTime = $element[0].currentTime;
                 });
             }
         },
-        link: function (scope, elm) {
+        link: function(scope, elm) {
             // Use this $watch to restart the video if it has ended
-            scope.$watch('videoCurrentTime', function (newVal) {
+            scope.$watch('videoCurrentTime', function(newVal) {
 
                 if (elm[0].ended) {
                     // Do a second check because the last 'timeupdate'
@@ -164,10 +186,9 @@ angular.module('app')
         link: function(scope, element, attrs) {
             var defaultSrc = attrs.src;
             element.bind('error', function() {
-                if(attrs.errSrc) {
+                if (attrs.errSrc) {
                     element.attr('src', attrs.errSrc);
-                }
-                else if(attrs.src) {
+                } else if (attrs.src) {
                     element.attr('src', defaultSrc);
                 }
             });
@@ -175,12 +196,12 @@ angular.module('app')
     }
 })
 
-.directive('backgroundImage', function(){
-    return function(scope, element, attrs){
+.directive('backgroundImage', function() {
+    return function(scope, element, attrs) {
         restrict: 'A',
         attrs.$observe('backgroundImage', function(value) {
             element.css({
-                'background-image': 'url(' + value +')'
+                'background-image': 'url(' + value + ')'
             });
         });
     };
@@ -209,22 +230,22 @@ angular.module('app')
 })
 
 .directive('notification', ['$timeout', function($timeout) {
-    return {
-        restrict: 'E',
-        template: "<div class='popup-error alert alert-{{alertData.type}}' ng-show='alertData.message' role='alert' data-notification='{{alertData.status}}'>{{alertData.message}}</div>",
-        scope: {
-            alertData: "="
-        },
-        replace: true
-    };
-}])
-.directive('restrictField', function() {
-    return {
-        restrict: 'AE',
-        scope: {
-            restrictField: '='
-        },
-        link: function(scope) {
+        return {
+            restrict: 'E',
+            template: "<div class='popup-error alert alert-{{alertData.type}}' ng-show='alertData.message' role='alert' data-notification='{{alertData.status}}'>{{alertData.message}}</div>",
+            scope: {
+                alertData: "="
+            },
+            replace: true
+        };
+    }])
+    .directive('restrictField', function() {
+        return {
+            restrict: 'AE',
+            scope: {
+                restrictField: '='
+            },
+            link: function(scope) {
                 // this will match spaces, tabs, line feeds etc
                 // you can change this regex as you want
                 var regex = /\s/g;
@@ -298,39 +319,39 @@ angular.module('app')
 
 
 .filter('minLength', function() {
-    return function(input, len, pad) {
-        input = input.toString();
-        if (input.length >= len) return input;
-        else {
-            pad = (pad || 0).toString();
-            return new Array(1 + len - input.length).join(pad) + input;
-        }
-    };
-})
-.filter('dateToISO', function() {
-    return function(input) {
-        input = new Date(input).toISOString();
-        return input;
-    };
-})
-.filter('htmlToPlaintext', function() {
-    return function(text) {
-        var newtext = text ? String(text).replace(/<[^>]+>/gm, '\n') : '';
-        return newtext.replace(/\&nbsp;/g, '').replace(/\&gt;-/g, '').replace(/\&lt;-/g, '');
-    };
-})
-.directive('myEnter', function() {
-    return function(scope, element, attrs) {
-        element.bind("keydown keypress", function(event) {
-            if (event.which === 13) {
-                scope.$apply(function() {
-                    scope.$eval(attrs.myEnter);
-                });
-                event.preventDefault();
+        return function(input, len, pad) {
+            input = input.toString();
+            if (input.length >= len) return input;
+            else {
+                pad = (pad || 0).toString();
+                return new Array(1 + len - input.length).join(pad) + input;
             }
-        });
-    };
-})
+        };
+    })
+    .filter('dateToISO', function() {
+        return function(input) {
+            input = new Date(input).toISOString();
+            return input;
+        };
+    })
+    .filter('htmlToPlaintext', function() {
+        return function(text) {
+            var newtext = text ? String(text).replace(/<[^>]+>/gm, '\n') : '';
+            return newtext.replace(/\&nbsp;/g, '').replace(/\&gt;-/g, '').replace(/\&lt;-/g, '');
+        };
+    })
+    .directive('myEnter', function() {
+        return function(scope, element, attrs) {
+            element.bind("keydown keypress", function(event) {
+                if (event.which === 13) {
+                    scope.$apply(function() {
+                        scope.$eval(attrs.myEnter);
+                    });
+                    event.preventDefault();
+                }
+            });
+        };
+    })
 
 .directive('validNumber', function() {
     return {
@@ -378,50 +399,50 @@ angular.module('app')
     };
 })
 
-.directive('slideable', function () {
-    return {
-        restrict:'C',
-        compile: function (element, attr) {
-            // wrap tag
-            var contents = element.html();
-            element.html('<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' + contents + '</div>');
+.directive('slideable', function() {
+        return {
+            restrict: 'C',
+            compile: function(element, attr) {
+                // wrap tag
+                var contents = element.html();
+                element.html('<div class="slideable_content" style="margin:0 !important; padding:0 !important" >' + contents + '</div>');
 
-            return function postLink(scope, element, attrs) {
-                // default properties
-                attrs.duration = (!attrs.duration) ? '1s' : attrs.duration;
-                attrs.easing = (!attrs.easing) ? 'ease-in-out' : attrs.easing;
-                element.css({
-                    'overflow': 'hidden',
-                    'height': '0px',
-                    'transitionProperty': 'height',
-                    'transitionDuration': attrs.duration,
-                    'transitionTimingFunction': attrs.easing
+                return function postLink(scope, element, attrs) {
+                    // default properties
+                    attrs.duration = (!attrs.duration) ? '1s' : attrs.duration;
+                    attrs.easing = (!attrs.easing) ? 'ease-in-out' : attrs.easing;
+                    element.css({
+                        'overflow': 'hidden',
+                        'height': '0px',
+                        'transitionProperty': 'height',
+                        'transitionDuration': attrs.duration,
+                        'transitionTimingFunction': attrs.easing
+                    });
+                };
+            }
+        };
+    })
+    .directive('slideToggle', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var target = document.querySelector(attrs.slideToggle);
+                attrs.expanded = false;
+                element.bind('click', function() {
+                    var content = target.querySelector('.slideable_content');
+                    if (!attrs.expanded) {
+                        content.style.border = '1px solid rgba(0,0,0,0)';
+                        var y = content.clientHeight;
+                        content.style.border = 0;
+                        target.style.height = '90px';
+                    } else {
+                        target.style.height = '0px';
+                    }
+                    attrs.expanded = !attrs.expanded;
                 });
-            };
+            }
         }
-    };
-})
-.directive('slideToggle', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var target = document.querySelector(attrs.slideToggle);
-            attrs.expanded = false;
-            element.bind('click', function() {
-                var content = target.querySelector('.slideable_content');
-                if(!attrs.expanded) {
-                    content.style.border = '1px solid rgba(0,0,0,0)';
-                    var y = content.clientHeight;
-                    content.style.border = 0;
-                    target.style.height = '90px';
-                } else {
-                    target.style.height = '0px';
-                }
-                attrs.expanded = !attrs.expanded;
-            });
-        }
-    }
-})
+    })
 
 .directive('numbersOnly', function() {
     return {
@@ -472,8 +493,8 @@ angular.module('app')
 
 .directive('testDirective', function() {
     return {
-        link: function(scope,elem,attrs) {
-            angular.element(elem).on('click', function (evt) {
+        link: function(scope, elem, attrs) {
+            angular.element(elem).on('click', function(evt) {
                 alert('You clicked on: ' + scope.vm.viewDate)
             });
         }
@@ -495,9 +516,9 @@ angular.module('app')
 .directive('parseStyle', function($interpolate) {
     return function(scope, elem) {
         var exp = $interpolate(elem.html()),
-        watchFunc = function() {
-            return exp(scope);
-        };
+            watchFunc = function() {
+                return exp(scope);
+            };
 
         scope.$watch(watchFunc, function(html) {
             elem.html(html);

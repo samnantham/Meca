@@ -36,5 +36,6 @@ angular.module('app', [
     'textAngular',
     'countTo',
     // 'chart.js',
-    'highcharts-ng'
+    'highcharts-ng',
+    'angular-carousel-3d'
 ]);

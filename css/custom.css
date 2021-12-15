@@ -17,9 +17,9 @@ body {
 
 .v-center {
     text-align: center;
-    display: table-cell!important;
+    display: table-cell !important;
     vertical-align: middle;
-    width: 20vw!important;
+    width: 20vw !important;
 }
 
 .w-max-550 {
@@ -244,7 +244,7 @@ textarea {
 }
 
 .lh-2rem {
-    line-height: 2rem!important;
+    line-height: 2rem !important;
 }
 
 
@@ -560,6 +560,13 @@ textarea {
     background-repeat: no-repeat;
     min-width: 100%;
     border: 1.5px solid #b2b3b678;
+}
+
+.mbit-img video {
+    width: 100%;
+    align-content: center;
+    display: flex;
+    height: inherit;
 }
 
 .mbit-img video {
@@ -1039,7 +1046,7 @@ input:read-only {
 }
 
 .calendar .fc-basic-view tbody .fc-row {
-    min-height: 6em!important;
+    min-height: 6em !important;
 }
 
 .dis-img {
@@ -1691,7 +1698,7 @@ menu-icon {
 }
 
 .navbar-right .bg-yellow:hover {
-    background-color: #fa9f34!important;
+    background-color: #fa9f34 !important;
 }
 
 .new-icon {
@@ -1904,7 +1911,7 @@ menu-icon {
 }
 
 .b-r-none {
-    border-right: solid 1px #fff!important;
+    border-right: solid 1px #fff !important;
 }
 
 .color-main-3 {
@@ -1952,7 +1959,7 @@ menu-icon {
 
 .newcalendar .fc-view-container,
 .sdgs-calendar .fc-view-container {
-    margin-bottom: 12px!important;
+    margin-bottom: 12px !important;
 }
 
 .f12,
@@ -1999,11 +2006,11 @@ menu-icon {
 }
 
 .mebit-ad .dis-img {
-    height: 18vh!important;
+    height: 18vh !important;
 }
 
 .sdgs-btn {
-    border-radius: 9px!important;
+    border-radius: 9px !important;
     box-shadow: 1px 5px 5px #00000057;
     vertical-align: middle;
     font-weight: bold;
@@ -2023,24 +2030,24 @@ menu-icon {
 }
 
 .minus-mt-5 {
-    margin-top: -5px!important;
-    padding: 0px 6px!important;
+    margin-top: -5px !important;
+    padding: 0px 6px !important;
 }
 
 .text-red {
-    color: red!important;
+    color: red !important;
 }
 
 .h-100 {
-    height: 100px!important;
+    height: 100px !important;
 }
 
 .h-60 {
-    height: 60px!important;
+    height: 60px !important;
 }
 
 .text-info {
-    color: #23b7e5!important;
+    color: #23b7e5 !important;
 }
 
 .allign-center {
@@ -2049,7 +2056,7 @@ menu-icon {
 }
 
 .pre {
-    white-space: pre!important;
+    white-space: pre !important;
 }
 
 #Bit_Foundation,
@@ -2119,7 +2126,7 @@ menu-icon {
 }
 
 .cursor-no {
-    cursor: default!important;
+    cursor: default !important;
     background-color: #ffffff !important;
 }
 
@@ -2210,9 +2217,9 @@ menu-icon {
 }
 
 .carousel-caption {
-    left: 5%!important;
-    right: 5%!important;
-    background: #110f0f4a!important;
+    left: 5% !important;
+    right: 5% !important;
+    background: #110f0f4a !important;
     cursor: pointer;
 }
 
@@ -2308,12 +2315,12 @@ menu-icon {
 } */
 
 .video-overlay .icon-overlay .fa-play {
-    font-size: 1em!important;
+    font-size: 1em !important;
     transition: all .5s;
 }
 
 .video-overlay .icon-overlay .fa-play:hover {
-    font-size: 1.5em!important;
+    font-size: 1.5em !important;
     transition: all .5s;
 }
 
@@ -2342,7 +2349,7 @@ menu-icon {
 }
 
 .m-b-2vh-imp {
-    margin-bottom: 3vh!important;
+    margin-bottom: 3vh !important;
 }
 
 .feed-img {
@@ -2848,7 +2855,7 @@ menu-icon {
 }
 
 .b-b-no {
-    border-bottom: transparent!important;
+    border-bottom: transparent !important;
 }
 
 @media only screen and (max-width: 767px) {
@@ -2898,7 +2905,7 @@ menu-icon {
 }
 
 .text-transparent {
-    color: transparent!important;
+    color: transparent !important;
 }
 
 .organization-page .btn a:hover {
@@ -2918,8 +2925,8 @@ menu-icon {
 
 .reminder-page .btn-default:hover,
 .btn-default:focus {
-    outline: 0!important;
-    background: #fff!important;
+    outline: 0 !important;
+    background: #fff !important;
     color: #58666e !important;
 }
 
@@ -3088,11 +3095,11 @@ menu-icon {
 }
 
 .auto-height .mCustomScrollbar {
-    height: auto!important;
+    height: auto !important;
 }
 
 .special-sites .auto-height .mCustomScrollbar {
-    height: auto!important;
+    height: auto !important;
 }
 
 .grview .color-main-1 {
@@ -3105,7 +3112,7 @@ menu-icon {
 
 .grview .btn-warning {
     background: #F60404 !important;
-    border-color: transparent!important;
+    border-color: transparent !important;
 }
 
 .grview .btn-default {
@@ -3114,11 +3121,11 @@ menu-icon {
 }
 
 .grview .btn-warning {
-    border-right-color: #fff!important;
+    border-right-color: #fff !important;
 }
 
 .bg-yellow {
-    background-color: #fa9f34!important;
+    background-color: #fa9f34 !important;
 }
 
 .bg_greean {
@@ -3200,18 +3207,18 @@ menu-icon {
 } */
 
 .bg-info-cal {
-    background-color: #23b7e5!important;
+    background-color: #23b7e5 !important;
     color: #fff !important;
 }
 
 .youtube-modal {
-    font-size: 14px!important;
+    font-size: 14px !important;
 }
 
 .special-img {
-    max-height: 80px!important;
-    min-height: 80px!important;
-    min-width: 100%!important;
+    max-height: 80px !important;
+    min-height: 80px !important;
+    min-width: 100% !important;
 }
 
 .gr-special .w-full {
@@ -3242,12 +3249,110 @@ menu-icon {
 
 @media only screen and (min-width: 1338px) {}
 
-.bg_brown {
+.docker_menu {
     background: #C4390E;
     padding: 15px;
-    color: #fff;
     font-size: 14px;
     border-radius: 9px;
     margin-left: 20px;
     margin-bottom: 20px;
+}
+
+.bg_brown {
+    background: #C4390E !important;
+    color: #fff !important;
+}
+
+.bg_black {
+    background: #000 !important;
+}
+
+.color_brown {
+    color: #C4390E !important;
+}
+
+.color_black {
+    color: #000;
+}
+
+.color_white {
+    color: white !important;
+}
+
+.border_brown {
+    border-color: #C4390E !important;
+}
+
+.border_black {
+    border-bottom: 1px solid #000;
+}
+
+.p-b-15 {
+    padding-bottom: 15px;
+}
+
+.docker-team {
+    text-align: center;
+    padding: 15px 0px;
+    display: block;
+}
+
+.docker-team img {
+    max-height: 120px;
+    margin: auto;
+}
+
+.gallery-slide {
+    min-height: 300px;
+    max-height: 300px;
+}
+
+.bg-dakar-yellow {
+    background-color: #FFDA00!important;
+    color: #000 !important;
+}
+
+.bg-dakar-maroon {
+    background-color: #C4390E!important;
+    color: #fff !important;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.inner_text {
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 2vw;
+    text-transform: uppercase;
+}
+
+.carousel-3d .slide-3d {
+    border-color: transparent;
+}
+
+.carousel-3d .slide-3d figure figcaption {
+    border-radius: 0px 0px 13px 13px;
+    text-align: left;
+}
+
+.carousel-3d .slide-3d figure img {
+    border-radius: 13px 13px 0px 0px;
+    text-align: left;
+}
+
+.carousel-3d-container {
+    margin: 70px 0px;
+}
+
+.carousel-btn {
+    height: 20px;
+    width: 20px !important;
+    float: right;
+    margin: 0px 5px;
+    cursor: pointer;
 }

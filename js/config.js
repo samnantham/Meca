@@ -409,11 +409,17 @@ var app =
                     lable: 'man',
                     country: 'Mangolia'
                 }];
+
+                app.teamstofollow = [{ name: 'Toyota GAZOO Racing', link: 'https://toyotagazooracing.com/motorsports', image: 'public/upload/dakar/teams/Toyota GAZOO Racing.png' },
+                    { name: 'Team Land Cruiser', link: 'https://www.toyota-body.co.jp/dakar/en/', image: 'public/upload/dakar/teams/Team Land Cruiser.png' },
+                    { name: 'HINO Team Sugawara', link: 'https://www.hino-global.com/corp/dakar/', image: 'public/upload/dakar/teams/HINO Team Sugawara.png' },
+                    { name: 'Overdrive Toyota', link: 'http://www.overdriveracing.be', image: 'public/upload/dakar/teams/Overdrive Toyota.png' }
+                ];
             }
 
         ])
 
-    .run(['bowser', '$rootScope', function(bowser, $rootScope) {
+.run(['bowser', '$rootScope', function(bowser, $rootScope) {
         $rootScope.browser = bowser.name;
         console.log($rootScope.browser)
         $rootScope.version = bowser.version;
@@ -428,14 +434,14 @@ var app =
             scrollInertia: 800, // enable 2 axis scrollbars by default
         };
     })
-    var firebaseConfig = {
-        apiKey: "AIzaSyC7RGp_m2veGMkx45dYXCtF3zZQdhifR14",
-        authDomain: "toyotamebit.firebaseapp.com",
-        databaseURL: "https://toyotamebit.firebaseio.com",
-        projectId: "toyotamebit",
-        storageBucket: "toyotamebit.appspot.com",
-        messagingSenderId: "773088280208",
-        appId: "1:773088280208:web:ccce0591dae7c25e902215",
-        measurementId: "G-E55C5BHMBH"
-    }
-    firebase.initializeApp(firebaseConfig);
+var firebaseConfig = {
+    apiKey: "AIzaSyC7RGp_m2veGMkx45dYXCtF3zZQdhifR14",
+    authDomain: "toyotamebit.firebaseapp.com",
+    databaseURL: "https://toyotamebit.firebaseio.com",
+    projectId: "toyotamebit",
+    storageBucket: "toyotamebit.appspot.com",
+    messagingSenderId: "773088280208",
+    appId: "1:773088280208:web:ccce0591dae7c25e902215",
+    measurementId: "G-E55C5BHMBH"
+}
+firebase.initializeApp(firebaseConfig);
