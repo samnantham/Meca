@@ -13,36 +13,36 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.event = getData.data;
-                if(!$scope.event.has_access){
-                    $state.go('app.maas',{type:1});
-                }else{
-                    $scope.mediafiles = $rootScope.splitFiles($scope.event.event_files); 
-                    $scope.event.videocount = $rootScope.getfileCounts($scope.event.event_files,'video'); 
-                    $scope.event.imagecount = $rootScope.getfileCounts($scope.event.event_files,'image'); 
+                if (!$scope.event.has_access) {
+                    $state.go('app.maas', { type: 1 });
+                } else {
+                    $scope.mediafiles = $rootScope.splitFiles($scope.event.event_files);
+                    $scope.event.videocount = $rootScope.getfileCounts($scope.event.event_files, 'video');
+                    $scope.event.imagecount = $rootScope.getfileCounts($scope.event.event_files, 'image');
                     $scope.getComments();
                 }
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
     $scope.openLightboxModal = function(key) {
         $scope.images = [];
-        angular.forEach( $scope.event.event_files, function(media, no) {
+        angular.forEach($scope.event.event_files, function(media, no) {
             var obj = {};
             obj.isVideo = 0;
-            if(media.filetype == video){
+            if (media.filetype == video) {
                 obj.isVideo = 1;
             }
-            
+
             obj.url = $rootScope.IMGURL + media.OriginalPath;
             $scope.images.push(obj);
         });
         Lightbox.openModal($scope.images, key);
     };
 
-    $scope.removeComment = function(id){
+    $scope.removeComment = function(id) {
         $ngConfirm({
             title: 'Are you sure want to remove?',
             content: '',
@@ -58,19 +58,18 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteComment = function(id){
+    $scope.deleteComment = function(id) {
         webServices.delete('comment/' + id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
@@ -80,17 +79,17 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.comments = getData.data;
-                $rootScope.viewModuleItem($scope.module_id,$stateParams.id);
+                $rootScope.viewModuleItem($scope.module_id, $stateParams.id);
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.showHidecomment = function(key){
-        if($scope.comments[key].showreply){
+    $scope.showHidecomment = function(key) {
+        if ($scope.comments[key].showreply) {
             $scope.commentData = {};
-        }else{
+        } else {
             $scope.comments[key].replycomment = '';
         }
         $scope.comments[key].showreply = !$scope.comments[key].showreply;
@@ -103,24 +102,24 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         $scope.commentData.reply_for = $scope.comments[key].id;
     }
 
-    $scope.sendCommentReply = function(comment){
-        if(comment){
+    $scope.sendCommentReply = function(comment) {
+        if (comment) {
             $scope.commentData.comment = comment;
             $scope.sendComment();
         }
     }
 
-    $scope.sendsubCommentReply = function(comment){
-        if(comment){
+    $scope.sendsubCommentReply = function(comment) {
+        if (comment) {
             $scope.commentData.comment = comment;
             $scope.sendComment();
         }
     }
 
-    $scope.showHideSubCommentcomment = function(key,no){
-        if($scope.comments[key].subcomments[no].showreply){
+    $scope.showHideSubCommentcomment = function(key, no) {
+        if ($scope.comments[key].subcomments[no].showreply) {
             $scope.commentData = {};
-        }else{
+        } else {
             $scope.comments[key].subcomments[no].replycomment = '';
         }
         $scope.commentData.isfile = 0;
@@ -136,13 +135,13 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
     $scope.openaddModal = function() {
         $scope.inputchange();
         $scope.formData = {};
-        if($scope.event.travelinfo){
+        if ($scope.event.travelinfo) {
             $scope.formData = angular.copy($scope.event.travelinfo);
             $scope.formData.travel_date = new Date(angular.copy($scope.formData.date_time));
             $scope.formData.arrival_time = new Date(angular.copy($scope.formData.date_time));
 
-        }else{
-            $scope.formData.arrival_time = new Date().setHours(0,0);
+        } else {
+            $scope.formData.arrival_time = new Date().setHours(0, 0);
         }
         $('#PopupModal').modal({
             backdrop: 'static',
@@ -173,8 +172,8 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         }
     }
 
-    $scope.addComment = function(){
-        if($scope.commentData.comment){
+    $scope.addComment = function() {
+        if ($scope.commentData.comment) {
             $scope.commentData.commentfile = '';
             $scope.commentData.isfile = 0;
             $scope.commentData.item = $stateParams.id;
@@ -183,14 +182,14 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         }
     }
 
-    $scope.sendComment = function(){
-         webServices.upload('comment',$scope.commentData).then(function(getData) {
+    $scope.sendComment = function() {
+        webServices.upload('comment', $scope.commentData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
-                 $scope.commentData = {};
-                 $scope.getComments();
+                $scope.commentData = {};
+                $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
@@ -200,27 +199,27 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         $scope.seterrorMsg();
     }
 
-    $scope.changeLike = function(){
+    $scope.changeLike = function() {
         var obj = {};
         obj.module = 1;
         obj.item = $stateParams.id;
-        if(parseInt($scope.event.isliked)){
+        if (parseInt($scope.event.isliked)) {
             obj.status = 0;
-        }else{
+        } else {
             obj.status = 1;
         }
-        webServices.post('like',obj).then(function(getData) {
+        webServices.post('like', obj).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.event.isliked = obj.status;
-                if(obj.status){
-                    $scope.event.likes ++ ;
-                }else{
-                    $scope.event.likes -- ;
+                if (obj.status) {
+                    $scope.event.likes++;
+                } else {
+                    $scope.event.likes--;
                 }
-                 
+
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
@@ -240,11 +239,11 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         $scope.errorData.flight_name_errorMsg = 'Enter Flight Name';
     }
 
-    $scope.setservererrorMsg = function(errors){
+    $scope.setservererrorMsg = function(errors) {
         $scope.errorData = {};
         angular.forEach(errors, function(error, no) {
-            $scope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-            $scope.errorData[no.replace('new','')+'_error'] = true;
+            $scope.errorData[no.replace('new', '') + '_errorMsg'] = error[0];
+            $scope.errorData[no.replace('new', '') + '_error'] = true;
         });
     }
 
@@ -252,26 +251,26 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         $scope.seterrorMsg();
         if (form.$valid) {
             $rootScope.loading = true;
-                var flightdate = angular.copy($scope.formData.travel_date);
-                var arrivaltime = angular.copy($scope.formData.arrival_time);
-                var hour = $filter('date')(angular.copy($scope.formData.arrival_time), 'HH');
-                var mins = $filter('date')(angular.copy($scope.formData.arrival_time), 'mm');
-                var datetime = flightdate.setHours(hour,mins);
-                $scope.formData.date_time = $filter('date')(datetime, 'yyyy-MM-dd HH:mm:ss');
-                webServices.upload('event/travel/'+$stateParams.id, $scope.formData).then(function(getData) {
+            var flightdate = angular.copy($scope.formData.travel_date);
+            var arrivaltime = angular.copy($scope.formData.arrival_time);
+            var hour = $filter('date')(angular.copy($scope.formData.arrival_time), 'HH');
+            var mins = $filter('date')(angular.copy($scope.formData.arrival_time), 'mm');
+            var datetime = flightdate.setHours(hour, mins);
+            $scope.formData.date_time = $filter('date')(datetime, 'yyyy-MM-dd HH:mm:ss');
+            webServices.upload('event/travel/' + $stateParams.id, $scope.formData).then(function(getData) {
+                $rootScope.loading = false;
+                if (getData.status == 200) {
+                    $scope.closeModal();
+                    $rootScope.$emit("showSuccessMsg", getData.data.message);
+                    $scope.getData();
+                } else if (getData.status == 401) {
+                    $scope.setservererrorMsg(getData.data.message);
                     $rootScope.loading = false;
-                    if (getData.status == 200) {
-                        $scope.closeModal();
-                        $rootScope.$emit("showSuccessMsg", getData.data.message);
-                        $scope.getData();
-                    } else if (getData.status == 401) {
-                        $scope.setservererrorMsg(getData.data.message);
-                        $rootScope.loading = false;
-                    } else {
-                        $rootScope.$emit("showISError", getData);
-                    }
-                });
-            } else {
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
+        } else {
             if (!form.name.$valid) {
                 $scope.errorData.name_error = true;
             }
@@ -293,6 +292,9 @@ app.controller('EventInfoController', ['$scope', '$http', '$state', '$stateParam
         }
     }
 
-   $scope.getData();
+    $scope.getData();
+
+    var obj = { page_component: 'event', page_name: 'info', module: $rootScope.module_id, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

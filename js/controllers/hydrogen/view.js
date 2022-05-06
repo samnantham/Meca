@@ -6,32 +6,32 @@ app.controller('HydrogenInfoController', ['$scope', '$http', '$state', '$statePa
     $scope.module_id = 7;
     $scope.commentData = {};
     $scope.commentData.isfile = 0;
-    
+
     $scope.getData = function() {
         webServices.get('hydrogen/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.hydrogen = getData.data;
-                if(!$scope.hydrogen.has_access){
-                    $state.go('app.hydrogen',{type:1});
-                }else{
-                    $scope.mediafiles = $rootScope.splitFiles($scope.hydrogen.hydrogen_files); 
-                    $scope.hydrogen.videocount = $rootScope.getfileCounts($scope.hydrogen.hydrogen_files,'video'); 
-                    $scope.hydrogen.imagecount = $rootScope.getfileCounts($scope.hydrogen.hydrogen_files,'image'); 
+                if (!$scope.hydrogen.has_access) {
+                    $state.go('app.hydrogen', { type: 1 });
+                } else {
+                    $scope.mediafiles = $rootScope.splitFiles($scope.hydrogen.hydrogen_files);
+                    $scope.hydrogen.videocount = $rootScope.getfileCounts($scope.hydrogen.hydrogen_files, 'video');
+                    $scope.hydrogen.imagecount = $rootScope.getfileCounts($scope.hydrogen.hydrogen_files, 'image');
                     $scope.getComments();
                 }
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.editHydrogen = function(){
+    $scope.editHydrogen = function() {
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.hydrogen;
-        $rootScope.ModalOpen('hydrogenModal','HydrogenModalController');
+        $rootScope.ModalOpen('hydrogenModal', 'HydrogenModalController');
     }
 
-    $scope.removeComment = function(id){
+    $scope.removeComment = function(id) {
         $ngConfirm({
             title: 'Are you sure want to remove?',
             content: '',
@@ -47,65 +47,64 @@ app.controller('HydrogenInfoController', ['$scope', '$http', '$state', '$statePa
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.changeLike = function(){
+    $scope.changeLike = function() {
         var obj = {};
         obj.module = $scope.module_id;
         obj.item = $stateParams.id;
-        if(parseInt($scope.hydrogen.isliked)){
+        if (parseInt($scope.hydrogen.isliked)) {
             obj.status = 0;
-        }else{
+        } else {
             obj.status = 1;
         }
-        webServices.post('like',obj).then(function(getData) {
+        webServices.post('like', obj).then(function(getData) {
             console.log(getData)
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.hydrogen.isliked = obj.status;
-                if(obj.status){
-                    $scope.hydrogen.likes ++ ;
-                }else{
-                    $scope.hydrogen.likes -- ;
+                if (obj.status) {
+                    $scope.hydrogen.likes++;
+                } else {
+                    $scope.hydrogen.likes--;
                 }
-                 
+
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.deleteComment = function(id){
+    $scope.deleteComment = function(id) {
         webServices.delete('comment/' + id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
     $scope.getComments = function() {
-        webServices.get('comments/'+$scope.module_id+'/' + $stateParams.id).then(function(getData) {
+        webServices.get('comments/' + $scope.module_id + '/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.comments = getData.data;
-                $rootScope.viewModuleItem($scope.module_id,$stateParams.id);
+                $rootScope.viewModuleItem($scope.module_id, $stateParams.id);
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.showHidecomment = function(key){
-        if($scope.comments[key].showreply){
+    $scope.showHidecomment = function(key) {
+        if ($scope.comments[key].showreply) {
             $scope.commentData = {};
-        }else{
+        } else {
             $scope.comments[key].replycomment = '';
         }
         $scope.comments[key].showreply = !$scope.comments[key].showreply;
@@ -118,24 +117,24 @@ app.controller('HydrogenInfoController', ['$scope', '$http', '$state', '$statePa
         $scope.commentData.reply_for = $scope.comments[key].id;
     }
 
-    $scope.sendCommentReply = function(comment){
-        if(comment){
+    $scope.sendCommentReply = function(comment) {
+        if (comment) {
             $scope.commentData.comment = comment;
             $scope.sendComment();
         }
     }
 
-    $scope.sendsubCommentReply = function(comment){
-        if(comment){
+    $scope.sendsubCommentReply = function(comment) {
+        if (comment) {
             $scope.commentData.comment = comment;
             $scope.sendComment();
         }
     }
 
-    $scope.showHideSubCommentcomment = function(key,no){
-        if($scope.comments[key].subcomments[no].showreply){
+    $scope.showHideSubCommentcomment = function(key, no) {
+        if ($scope.comments[key].subcomments[no].showreply) {
             $scope.commentData = {};
-        }else{
+        } else {
             $scope.comments[key].subcomments[no].replycomment = '';
         }
         $scope.commentData.isfile = 0;
@@ -148,8 +147,8 @@ app.controller('HydrogenInfoController', ['$scope', '$http', '$state', '$statePa
         $scope.commentData.reply_for = $scope.comments[key].subcomments[no].id;
     }
 
-    $scope.addComment = function(){
-        if($scope.commentData.comment){
+    $scope.addComment = function() {
+        if ($scope.commentData.comment) {
             $scope.commentData.commentfile = '';
             $scope.commentData.isfile = 0;
             $scope.commentData.item = $stateParams.id;
@@ -158,14 +157,14 @@ app.controller('HydrogenInfoController', ['$scope', '$http', '$state', '$statePa
         }
     }
 
-    $scope.sendComment = function(){
-         webServices.upload('comment',$scope.commentData).then(function(getData) {
+    $scope.sendComment = function() {
+        webServices.upload('comment', $scope.commentData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
-                 $scope.commentData = {};
-                 $scope.getComments();
+                $scope.commentData = {};
+                $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
@@ -186,24 +185,25 @@ app.controller('HydrogenInfoController', ['$scope', '$http', '$state', '$statePa
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteHydrogen = function(id){
+    $scope.deleteHydrogen = function(id) {
         webServices.delete('hydrogen/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
-                $state.go('app.hydrogen',{type:1});
+                $state.go('app.hydrogen', { type: 1 });
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-   $scope.getData();
+    $scope.getData();
+    var obj = { page_component: 'hydrogen', page_name: 'info', module: $scope.module_id, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

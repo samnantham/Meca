@@ -115,14 +115,22 @@ angular.module('app')
             }
 
             $rootScope.openPDF = function(link) {
-                $rootScope.doclink = $sce.trustAsResourceUrl(link);
-                $('#PDFModal').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
+                var extension = link.split(/[#?]/)[0].split('.').pop().trim();
+                if (extension.toLowerCase() == 'pdf') {
+                    $rootScope.doclink = $sce.trustAsResourceUrl(link);
+                    $('#PDFModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                } else {
+                    window.open(link, '_blank');
+                }
+
             }
 
             $rootScope.snowfalling = false;
+            $rootScope.showSearch = false;
+            $rootScope.universalkeyword = '';
             $rootScope.initialsnowfalling = false;
             $rootScope.height_to_reduce = 100;
             $rootScope.loadingMsg = 'Loading please Wait....';
@@ -159,29 +167,66 @@ angular.module('app')
             $rootScope.calendarURL = 'https://calendar.google.com/calendar/u/0/embed?src=imecad.20210401@gmail.com';
             $rootScope.ismodalopen = false;
             $rootScope.isEdititem = false;
-            $rootScope.snowItems = [
-                { img: 'img/single/Icon1.png', isMain: 1 },
-                { img: 'img/single/Icon2.png', isMain: 1 },
-                { img: 'img/single/Icon3.png', isMain: 1 },
-                { img: 'img/single/Icon4.png', isMain: 1 },
-                { img: 'img/single/Icon5.png', isMain: 1 },
-                { img: 'img/single/Icon6.png', isMain: 1 },
+            $rootScope.snowItems = [{
+                    img: 'img/single/Icon1.png',
+                    isMain: 1
+                },
+                {
+                    img: 'img/single/Icon2.png',
+                    isMain: 1
+                },
+                {
+                    img: 'img/single/Icon3.png',
+                    isMain: 1
+                },
+                {
+                    img: 'img/single/Icon4.png',
+                    isMain: 1
+                },
+                {
+                    img: 'img/single/Icon5.png',
+                    isMain: 1
+                },
+                {
+                    img: 'img/single/Icon6.png',
+                    isMain: 1
+                },
                 // {img:'img/single/Icon7.png' ,isMain: 1},
                 // {img:'img/single/Icon8.png' ,isMain: 1},
                 // {img:'img/single/Icon9.png' ,isMain: 1},
                 // {img:'img/single/Icon10.png' ,isMain: 1},
                 // {img:'img/single/Icon11.png' ,isMain: 1},
                 // {img:'img/single/Icon12.png' ,isMain: 1},
-                { img: 'img/single/Blue1.png', isMain: 0 },
-                { img: 'img/single/Blue2.png', isMain: 0 },
+                {
+                    img: 'img/single/Blue1.png',
+                    isMain: 0
+                },
+                {
+                    img: 'img/single/Blue2.png',
+                    isMain: 0
+                },
                 // {img:'img/single/Blue3.png' ,isMain: 0},
                 // {img:'img/single/Green1.png' ,isMain: 0},
-                { img: 'img/single/Green2.png', isMain: 0 },
-                { img: 'img/single/Green3.png', isMain: 0 },
-                { img: 'img/single/Red1.png', isMain: 0 },
-                { img: 'img/single/Red2.png', isMain: 0 },
+                {
+                    img: 'img/single/Green2.png',
+                    isMain: 0
+                },
+                {
+                    img: 'img/single/Green3.png',
+                    isMain: 0
+                },
+                {
+                    img: 'img/single/Red1.png',
+                    isMain: 0
+                },
+                {
+                    img: 'img/single/Red2.png',
+                    isMain: 0
+                },
                 // {img:'img/single/Red3.png' ,isMain: 0}
             ];
+
+            console.log($rootScope.isMobile)
 
             $rootScope.teams = angular.copy(app.teamstofollow);
 
@@ -197,6 +242,16 @@ angular.module('app')
 
             $rootScope.screenHeight = window.innerHeight;
 
+            $rootScope.gotoSearch = function() {
+                if ($('#universalKey').val().length > 1) {
+                    $rootScope.showhideSearch();
+                    $state.go('app.universalsearch', {
+                        keyword: $('#universalKey').val()
+                    });
+                }
+
+            }
+
             $rootScope.getMonthFromString = function(mon) {
                 return new Date(Date.parse(mon + " 1, 2012")).getMonth() + 1
             }
@@ -207,6 +262,18 @@ angular.module('app')
                 });
                 return ui;
             };
+
+            $(document).keyup(function(e) {
+                if (e.key === "Escape") { // escape key maps to keycode `27`
+                    if ($rootScope.showSearch) {
+                        $rootScope.showhideSearch();
+                    }
+                }
+            });
+
+            $rootScope.showhideSearch = function() {
+                $rootScope.showSearch = !$rootScope.showSearch;
+            }
 
             $rootScope.getfileCounts = function(files, type) {
                 return files.filter((obj) => obj.filetype === type).length;
@@ -334,6 +401,14 @@ angular.module('app')
                 });
             }
 
+            $rootScope.viewPage = function(obj) {
+                webServices.post('viewpage', obj).then(function(getData) {
+                    if (getData.status == 200) {} else {
+                        $rootScope.$emit("showISError", getData);
+                    }
+                });
+            }
+
             $rootScope.moveTop = function() {
                 $('html, body').animate({
                     scrollTop: 10
@@ -370,7 +445,6 @@ angular.module('app')
                 $rootScope.hideSnowfall();
                 $rootScope.loading = true;
                 $rootScope.currentState = toState.name;
-                console.log($rootScope.currentState)
                 $rootScope.previousState = fromState.name;
                 $rootScope.screenWidth = window.innerWidth * window.devicePixelRatio;
                 $rootScope.screenHeight = window.innerHeight;
@@ -439,6 +513,7 @@ angular.module('app')
                     draggable: true,
                     slidesToShow: $rootScope.slidecount,
                     slidesToScroll: $rootScope.scrollslides,
+                    autoplaySpeed: 3000,
                     arrows: true,
                     prevArrow: "<img class='slick-prev slick-arrow' src='img/sliderL.png'>",
                     nextArrow: "<img class='slick-next slick-arrow' src='img/sliderR.png'>",
@@ -446,6 +521,7 @@ angular.module('app')
                     dots: false,
                     infinite: true
                 };
+
             });
 
             $rootScope.getUserInfo = function() {
@@ -501,7 +577,14 @@ angular.module('app')
                         var minSize = 10;
                         var maxSize = 48;
                     }
-                    $(document).snowfall({ image: item.img, minSize: minSize, maxSize: maxSize, flakeCount: 6, minSpeed: 1, maxSpeed: 3 });
+                    $(document).snowfall({
+                        image: item.img,
+                        minSize: minSize,
+                        maxSize: maxSize,
+                        flakeCount: 6,
+                        minSpeed: 1,
+                        maxSpeed: 3
+                    });
                 });
 
             }

@@ -1,13 +1,13 @@
 'use strict';
 
-app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
+app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.pdca = {};
     $scope.filterData = {};
     $scope.pdca_uploads = angular.copy($rootScope.pdca_upload_types);
 
-    $scope.getData = function () {
-        webServices.get('pdca/training/' + $stateParams.id).then(function (getData) {
+    $scope.getData = function() {
+        webServices.get('pdca/training/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pdca = getData.data;
@@ -18,9 +18,9 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
         });
     }
 
-    $scope.viewVideo = function (data) {
+    $scope.viewVideo = function(data) {
         var obj = { video: data.id, pdca: $stateParams.id };
-        webServices.upload('pdca/view/video', obj).then(function (getData) {
+        webServices.upload('pdca/view/video', obj).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 data.viewstatus = getData.data;
@@ -31,7 +31,7 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
         });
     }
 
-    $scope.openVideo = function (key, data) {
+    $scope.openVideo = function(key, data) {
         if (!data.viewstatus) {
             $scope.viewVideo(data);
         } else {
@@ -39,7 +39,7 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
         }
     }
 
-    $scope.showVideo = function (data) {
+    $scope.showVideo = function(data) {
         $scope.videoData = data;
         var files = [];
         var obj = {};
@@ -55,7 +55,7 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
         $scope.getData();
     }
 
-    $scope.uploadReport = function (session, files) {
+    $scope.uploadReport = function(session, files) {
         $scope.errors = [];
         if (files && files.length) {
             var extn = files[0].name.split(".").pop();
@@ -78,7 +78,7 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
         }
     }
 
-    $scope.confirmUpload = function () {
+    $scope.confirmUpload = function() {
         $ngConfirm({
             title: 'Are you sure want to upload this?',
             content: '',
@@ -88,13 +88,13 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
                 tryAgain: {
                     text: 'Yes',
                     btnClass: 'btn-red',
-                    action: function () {
+                    action: function() {
                         $scope.uploadDocument();
                     }
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
+                    action: function() {
                         $scope.uploadData = {};
                         $scope.uploadData.newdocument = '';
                     }
@@ -103,8 +103,8 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
         });
     }
 
-    $scope.uploadDocument = function () {
-        webServices.upload('pdca/training/session/upload', $scope.uploadData).then(function (getData) {
+    $scope.uploadDocument = function() {
+        webServices.upload('pdca/training/session/upload', $scope.uploadData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -118,5 +118,8 @@ app.controller('PDCAController', ['$scope', '$state', '$stateParams', 'webServic
     };
 
     $scope.getData();
+
+    var obj = { page_component: 'pdca', page_name: 'info', module: 4, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

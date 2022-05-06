@@ -4,13 +4,10 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 m-t p-l-none m-p-r-none whatsup">
             <div class="panel panel-default r-3x m-l">
                 <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold">
-                    What's New <a class="btn btn-default btn-xs color_2 pull-right b-no newbtn"
-                        ng-click="ModalOpen('postModal','PostModalController');">New Post</a>
+                    What's New <a class="btn btn-default btn-xs color_2 pull-right b-no newbtn" ng-click="ModalOpen('postModal','PostModalController');">New Post</a>
                 </div>
-                <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b" ng-scrollbars
-                    ng-scrollbars-config="scrollconfig">
-                    <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
-                        ng-repeat="(key,whatsnew) in SGAData.whats_new">
+                <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                    <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs" ng-repeat="(key,whatsnew) in SGAData.whats_new">
                         <div class="col-sm-3 p-l-none m-p-r-none">
                             <div class="text-left f12 sm-padder-v sm-padder color_2">
                                 {{ whatsnew.distributorinfo.name | cut:true:5:' ' }}
@@ -22,16 +19,14 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="text-left f12 sm-padder-v sm-padder cursor text-ov"
-                                ng-click="viewItem(whatsnew)">
+                            <div class="text-left f12 sm-padder-v sm-padder cursor text-ov" ng-click="viewItem(whatsnew)">
                                 {{whatsnew.content}}
                             </div>
                         </div>
                     </div>
-                    <div class="w-full text-center bg-white wrapper-lg m-t-xxl"
-                            ng-if="SGAData.whats_new.length == 0">
-                            <h4>No Recent posts</h4>
-                        </div>
+                    <div class="w-full text-center bg-white wrapper-lg m-t-xxl" ng-if="SGAData.whats_new.length == 0">
+                        <h4>No Recent posts</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,10 +50,14 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none ">
         <div class="block padder-v item">
             <div class="panel panel-default r-3x m-l bg-white">
-                <div class="panel-body wrapper">
+                <div class="panel-heading r-3x r-b-none bg-main2 font-bold text-left">
+                    <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{ 'active': currentPeriod == 0 }" ng-click="showPeriodicalData(0)">Overall Statistics</button>
+                    <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{ 'active': currentPeriod == 1 }" ng-click="showPeriodicalData(1)">Jan - Mar, 2022 Statistics</button>
+                    <button class="btn no-shadow b-no btn-default panel-tab web-visible" ng-class="{ 'active': currentPeriod == 2}" ng-click="showPeriodicalData(2)">Apr - Jun, 2022 Statistics</button>
+                </div>
+                <div class="panel-body wrapper" ng-class="{'no-quarter' : currentPeriod == 0, 'quarterly-data' : currentPeriod == 1, 'halfyearly-data' : currentPeriod == 2}">
                     <figure class="highcharts-figure">
                         <div id="container"></div>
-                
                     </figure>
                     <!-- <highchart config="chartConfig" class="span10"></highchart> -->
                     <!-- <canvas id="bar" class="chart chart-bar" chart-data="SGAData.values" chart-labels="SGAData.labels"
@@ -71,23 +70,19 @@
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-xs p-l-none p-r-none m-b">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-xs m-b"
-                ng-repeat="(key,distributor) in SGAData.distributors">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 m-t-xs m-b" ng-repeat="(key,distributor) in SGAData.distributors">
                 <div class="panel panel-default r-3x m-l">
-                    <div class="panel-heading r-3x r-b-none bg-main2 text-center font-bold bg_greean">
+                    <div class="panel-heading r-3x r-b-none text-center font-bold" ng-class="{'bg-main2' : currentPeriod == 0, 'quadratical-bg text-white' : currentPeriod == 1, 'halfyearly-bg text-white' : currentPeriod == 2}">
                         {{distributor.name}}
                     </div>
-                    <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b max_height_box" ng-scrollbars
-                        ng-scrollbars-config="scrollconfig">
-                        <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs"
-                            ng-repeat="(no,post) in distributor.posts">
-                            <div class="f-10 color_2"> {{convertDate(post.created_at) | date:'dd MMMM yyyy'}}
+                    <div class="col-xs-12 bg-white padder-v padder r-b-6x d_i_b max_height_box" ng-scrollbars ng-scrollbars-config="scrollconfig">
+                        <div class="col-xs-12 p-l-none p-r-none border-bottom-1 m-b-xs" ng-repeat="(no,post) in distributor.posts" ng-class="{'' : currentPeriod == 0, 'border-quadratical' : currentPeriod == 1, 'border-halfyearly' : currentPeriod == 2}">
+                            <div class="f-10 color_2" ng-class="{'color_2' : currentPeriod == 0, 'quadratical-color' : currentPeriod == 1, 'halfyearly-color' : currentPeriod == 2}"> {{convertDate(post.created_at) | date:'dd MMMM yyyy'}}
                                 <!-- <div class="pull-right dist-ico">
                                     <img class="m-r-xs" src="img/edit.png" ng-click="editHydrogen();">
                                     <img src="img/delete.png" ng-click="removeHydrogen()">
                                 </div> -->
-                                <div class="btn-group dropdown pull-right"
-                                    ng-if="!post.is_admin && (user.id == post.user)">
+                                <div class="btn-group dropdown pull-right" ng-if="!post.is_admin && (user.id == post.user)">
                                     <span data-toggle="dropdown" aria-expanded="false"><i
                                             class="fa fa-ellipsis-v f13 cursor" aria-hidden="true"></i></span>
                                     <ul class="dropdown-menu">
@@ -99,17 +94,14 @@
                                 </div>
                             </div>
 
-                            <div class="m-t m-b text-justify" read-more="post.content"   read-more-limit="150" read-more-label-expand="... See More"
-                            read-more-label-collapse="... See Less" ng-if="post.content.length > 149">{{post.content}} </div>
+                            <div class="m-t m-b text-justify" read-more="post.content" read-more-limit="150" read-more-label-expand="... See More" read-more-label-collapse="... See Less" ng-if="post.content.length > 149">{{post.content}} </div>
                             <div class="m-t m-b text-justify" ng-if="post.content.length < 149">{{post.content}} </div>
                             <div class="m-t m-b text-justify">
-                                <a class="color_2 m-xs pull-left" ng-repeat="(num,document) in post.documents"
-                                    ng-href="{{IMGURL}}{{document.file}}" target="_blank"> Attachment {{ num + 1 }} -
+                                <a class="m-xs pull-left" ng-class="{'color_2' : currentPeriod == 0, 'quadratical-color' : currentPeriod == 1, 'halfyearly-color' : currentPeriod == 2}" ng-repeat="(num,document) in post.documents" ng-href="{{IMGURL}}{{document.file}}" target="_blank"> Attachment {{ num + 1 }} -
                                     {{document.name}} </a>
                             </div>
                         </div>
-                        <div class="w-full text-center bg-white wrapper-lg m-t-xxl"
-                            ng-if="distributor.posts.length == 0">
+                        <div class="w-full text-center bg-white wrapper-lg m-t-xxl" ng-if="distributor.posts.length == 0">
                             <h4>No Posts Found</h4>
                         </div>
                     </div>
@@ -121,18 +113,29 @@
 </div>
 
 <style>
-    .highcharts-yaxis-labels text:nth-child(3),
-    .highcharts-yaxis-labels text:nth-child(5) {
+    .no-quarter .highcharts-yaxis-labels text:nth-child(3),
+    .no-quarter .highcharts-yaxis-labels text:nth-child(5) {
         fill: red !important;
     }
-    .highcharts-button,.highcharts-credits{
+    
+    .highcharts-button,
+    .highcharts-credits {
         display: none!important;
     }
-    .highcharts-axis-line{
+    
+    .no-quarter .highcharts-axis-line {
         stroke: #0e5f77 !important;
     }
-    .highcharts-plot-line 
-    {
-        stroke: transparent !important;   
+    
+    .quarterly-data .highcharts-axis-line {
+        stroke: #629FD6 !important;
+    }
+    
+    .halfyearly-data .highcharts-axis-line {
+        stroke: #ED8239 !important;
+    }
+    
+    .highcharts-plot-line {
+        stroke: transparent !important;
     }
 </style>

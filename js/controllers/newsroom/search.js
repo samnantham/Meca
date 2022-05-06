@@ -15,7 +15,7 @@ app.controller('NewsRoomSearchController', ['$scope', '$http', '$state', 'authSe
     $scope.errorData = {};
     $scope.isSearch = false;
 
-    $scope.sortData = function(key,order,label) {
+    $scope.sortData = function(key, order, label) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.filterData.sortlabel = label;
@@ -24,18 +24,18 @@ app.controller('NewsRoomSearchController', ['$scope', '$http', '$state', 'authSe
         $scope.getResults();
     }
 
-    $scope.addremovetags = function(tag){
+    $scope.addremovetags = function(tag) {
         var index = $scope.filterData.tags.indexOf(tag);
         if (index > -1) {
             $scope.filterData.tags.splice(index, 1);
-        }else{
+        } else {
             $scope.filterData.tags.push(tag);
         }
         $scope.getResults();
     }
 
     $scope.getResults = function() {
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             console.log(getData)
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -65,7 +65,10 @@ app.controller('NewsRoomSearchController', ['$scope', '$http', '$state', 'authSe
         $scope.url = 'news/paginate/' + $scope.totalPerPage;
         $scope.getResults();
     };
-    
+
     $scope.getDatas();
+
+    var obj = { page_component: 'news_room', page_name: 'search', module: 10, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

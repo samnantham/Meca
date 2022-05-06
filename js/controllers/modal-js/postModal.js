@@ -2,6 +2,7 @@ app.controller('PostModalController', ['$timeout', '$state', '$stateParams', 'we
     if (!$rootScope.isEdititem) {
         $rootScope.formData = {};
         $rootScope.formData.documents = [];
+        $rootScope.formData.period = 2;
     } else {
         $rootScope.formData.deleted_documents  = [];
     }

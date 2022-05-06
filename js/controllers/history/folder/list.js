@@ -8,15 +8,15 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
     $scope.filterData = {};
     $scope.errorData = {};
 
-    $scope.seterrorMsg = function(){
+    $scope.seterrorMsg = function() {
         $scope.errorData.folder_name_errorMsg = 'Enter Folder Name';
     }
 
-    $scope.setservererrorMsg = function(errors){
+    $scope.setservererrorMsg = function(errors) {
         $scope.errorData = {};
         angular.forEach(errors, function(error, no) {
-            $scope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-            $scope.errorData[no.replace('new','')+'_error'] = true;
+            $scope.errorData[no.replace('new', '') + '_errorMsg'] = error[0];
+            $scope.errorData[no.replace('new', '') + '_error'] = true;
         });
     }
 
@@ -24,8 +24,8 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
         $scope.seterrorMsg();
         if (form.$valid) {
             $rootScope.loading = true;
-            if($scope.isedit){
-                webServices.post('history/folder/'+ $scope.formData.id, $scope.formData).then(function(getData) {
+            if ($scope.isedit) {
+                webServices.post('history/folder/' + $scope.formData.id, $scope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $scope.closeModal();
@@ -38,7 +38,7 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
                         $rootScope.$emit("showISError", getData);
                     }
                 });
-            }else{
+            } else {
                 webServices.post('history/folder', $scope.formData).then(function(getData) {
                     console.log(getData)
                     $rootScope.loading = false;
@@ -54,7 +54,7 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
                     }
                 });
             }
-               
+
         } else {
             if (!form.folder_name.$valid) {
                 $scope.errorData.folder_name_error = true;
@@ -111,19 +111,18 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteFolder = function(id){
+    $scope.deleteFolder = function(id) {
         webServices.delete('history/folder/' + id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.getFolders();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
@@ -140,7 +139,7 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
         $scope.seterrorMsg();
     }
 
-    $scope.getFolders = function(){
+    $scope.getFolders = function() {
         webServices.get('history/folder/get/all').then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -153,11 +152,11 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
         });
     }
 
-    $scope.openParticipantModal = function(data){
+    $scope.openParticipantModal = function(data) {
         $scope.addedData = {};
-        $scope.addedData.is_public  = data.is_public;
-        $scope.addedData.item  = data.id;
-        $scope.addedData.module  = 9;
+        $scope.addedData.is_public = data.is_public;
+        $scope.addedData.item = data.id;
+        $scope.addedData.module = 9;
         $scope.addedData.members = data.members;
         $scope.getUsers();
         $scope.filterData = {};
@@ -167,7 +166,7 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
         });
     }
 
-    $scope.updateParticipants = function(){
+    $scope.updateParticipants = function() {
         $rootScope.loading = true;
         webServices.post('history/participants/assign', $scope.addedData).then(function(getData) {
             if (getData.status == 200) {
@@ -187,10 +186,10 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
         $rootScope.modalerrors = [];
     }
 
-    $scope.addremoveMember = function(status,id){
-        if(status){
+    $scope.addremoveMember = function(status, id) {
+        if (status) {
             $scope.addedData.members.push(id);
-        }else{
+        } else {
             var index = $scope.addedData.members.indexOf(id);
             if (index !== -1) $scope.addedData.members.splice(index, 1);
         }
@@ -202,14 +201,17 @@ app.controller('HistoryFolderController', ['$scope', '$http', '$state', 'authSer
             if (getData.status == 200) {
                 $scope.users = getData.data;
                 angular.forEach($scope.users, function(member, no) {
-                    if($scope.addedData.members.includes(member.id)){
+                    if ($scope.addedData.members.includes(member.id)) {
                         member.is_added = 1;
                     }
                 });
             }
         });
     };
-    
+
     $scope.getFolders();
+
+    var obj = { page_name: 'folders', page_component: 'history', module: 0, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

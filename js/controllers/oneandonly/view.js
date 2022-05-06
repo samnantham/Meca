@@ -6,28 +6,28 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
     $scope.module_id = 11;
     $scope.commentData = {};
     $scope.commentData.isfile = 0;
-    
+
     $scope.getData = function() {
         webServices.get('oneandonlyday/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.oneandonly = getData.data;
-                $scope.mediafiles = $rootScope.splitFiles($scope.oneandonly.item_files); 
-                $scope.oneandonly.videocount = $rootScope.getfileCounts($scope.oneandonly.item_files,'video'); 
-                $scope.oneandonly.imagecount = $rootScope.getfileCounts($scope.oneandonly.item_files,'image'); 
+                $scope.mediafiles = $rootScope.splitFiles($scope.oneandonly.item_files);
+                $scope.oneandonly.videocount = $rootScope.getfileCounts($scope.oneandonly.item_files, 'video');
+                $scope.oneandonly.imagecount = $rootScope.getfileCounts($scope.oneandonly.item_files, 'image');
                 $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.editOnlyDay = function(){
+    $scope.editOnlyDay = function() {
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.oneandonly;
-        $rootScope.ModalOpen('onlydayModal','OnlyDayModalController');
+        $rootScope.ModalOpen('onlydayModal', 'OnlyDayModalController');
     }
 
-    $scope.removeComment = function(id){
+    $scope.removeComment = function(id) {
         $ngConfirm({
             title: 'Are you sure want to remove?',
             content: '',
@@ -43,64 +43,63 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.changeLike = function(){
+    $scope.changeLike = function() {
         var obj = {};
         obj.module = $scope.module_id;
         obj.item = $stateParams.id;
-        if(parseInt($scope.oneandonly.isliked)){
+        if (parseInt($scope.oneandonly.isliked)) {
             obj.status = 0;
-        }else{
+        } else {
             obj.status = 1;
         }
-        webServices.post('like',obj).then(function(getData) {
+        webServices.post('like', obj).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.oneandonly.isliked = obj.status;
-                if(obj.status){
-                    $scope.oneandonly.likes ++ ;
-                }else{
-                    $scope.oneandonly.likes -- ;
+                if (obj.status) {
+                    $scope.oneandonly.likes++;
+                } else {
+                    $scope.oneandonly.likes--;
                 }
-                 
+
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.deleteComment = function(id){
+    $scope.deleteComment = function(id) {
         webServices.delete('comment/' + id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
     $scope.getComments = function() {
-        webServices.get('comments/'+$scope.module_id+'/' + $stateParams.id).then(function(getData) {
+        webServices.get('comments/' + $scope.module_id + '/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.comments = getData.data;
-                $rootScope.viewModuleItem($scope.module_id,$stateParams.id);
+                $rootScope.viewModuleItem($scope.module_id, $stateParams.id);
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.showHidecomment = function(key){
-        if($scope.comments[key].showreply){
+    $scope.showHidecomment = function(key) {
+        if ($scope.comments[key].showreply) {
             $scope.commentData = {};
-        }else{
+        } else {
             $scope.comments[key].replycomment = '';
         }
         $scope.comments[key].showreply = !$scope.comments[key].showreply;
@@ -113,24 +112,24 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
         $scope.commentData.reply_for = $scope.comments[key].id;
     }
 
-    $scope.sendCommentReply = function(comment){
-        if(comment){
+    $scope.sendCommentReply = function(comment) {
+        if (comment) {
             $scope.commentData.comment = comment;
             $scope.sendComment();
         }
     }
 
-    $scope.sendsubCommentReply = function(comment){
-        if(comment){
+    $scope.sendsubCommentReply = function(comment) {
+        if (comment) {
             $scope.commentData.comment = comment;
             $scope.sendComment();
         }
     }
 
-    $scope.showHideSubCommentcomment = function(key,no){
-        if($scope.comments[key].subcomments[no].showreply){
+    $scope.showHideSubCommentcomment = function(key, no) {
+        if ($scope.comments[key].subcomments[no].showreply) {
             $scope.commentData = {};
-        }else{
+        } else {
             $scope.comments[key].subcomments[no].replycomment = '';
         }
         $scope.commentData.isfile = 0;
@@ -143,8 +142,8 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
         $scope.commentData.reply_for = $scope.comments[key].subcomments[no].id;
     }
 
-    $scope.addComment = function(){
-        if($scope.commentData.comment){
+    $scope.addComment = function() {
+        if ($scope.commentData.comment) {
             $scope.commentData.commentfile = '';
             $scope.commentData.isfile = 0;
             $scope.commentData.item = $stateParams.id;
@@ -153,14 +152,14 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
         }
     }
 
-    $scope.sendComment = function(){
-         webServices.upload('comment',$scope.commentData).then(function(getData) {
+    $scope.sendComment = function() {
+        webServices.upload('comment', $scope.commentData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
-                 $scope.commentData = {};
-                 $scope.getComments();
+                $scope.commentData = {};
+                $scope.getComments();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
@@ -181,24 +180,26 @@ app.controller('OnlyDayInfoController', ['$scope', '$http', '$state', '$statePar
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteOnlyDay = function(id){
+    $scope.deleteOnlyDay = function(id) {
         webServices.delete('oneandonlyday/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
                 $state.go('app.oneandonly');
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-   $scope.getData();
+    $scope.getData();
+
+    var obj = { page_component: 'one_and_only', page_name: 'info', module: $rootScope.module_id, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

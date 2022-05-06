@@ -1,9 +1,9 @@
 'use strict';
 app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', '$filter', '$state', '$window',
-    function ($scope, webServices, $rootScope, $http, $filter, $state, $window) {
+    function($scope, webServices, $rootScope, $http, $filter, $state, $window) {
         $rootScope.loading = true;
         $scope.firstloadingdone = false;
-        
+
         $scope.uiConfig = {
             calendar: {
                 height: 'auto',
@@ -19,17 +19,17 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                 fixedWeekCount: true,
                 weekMode: 'liquid',
                 eventMouseover: $scope.alertOnMouseOver,
-                eventClick: function (event) {
-                    if(event.from_google){
-                        $window.open( $rootScope.calendarURL, '_blank' );
-                    }else{
+                eventClick: function(event) {
+                    if (event.from_google) {
+                        $window.open($rootScope.calendarURL, '_blank');
+                    } else {
                         $rootScope.formData = event;
                         $scope.activeDate = event.start._d;
                         $scope.calenderevents = [];
                         $scope.getCalenderEvents(event.start._d.getTime());
                     }
                 },
-                viewRender: function (view, element) {
+                viewRender: function(view, element) {
                     var monthyear = view.title.split(' ');
                     var month = $rootScope.getMonthFromString(view.title.split(' ')[0]);
                     var year = parseInt(monthyear[1]);
@@ -38,8 +38,8 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             }
         };
 
-        $scope.getCalenderEvents = function (date) {
-            webServices.get('calendar/daily/events/' + date).then(function (getData) {
+        $scope.getCalenderEvents = function(date) {
+            webServices.get('calendar/daily/events/' + date).then(function(getData) {
                 if (getData.status == 200) {
                     $scope.calenderevents = getData.data;
                     $scope.openModal();
@@ -49,21 +49,21 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             });
         }
 
-        $rootScope.openeventModal = function () {
+        $rootScope.openeventModal = function() {
             $('#PopupModal').modal({
                 backdrop: 'static',
                 keyboard: false
             });
         }
 
-        $scope.openModal = function () {
+        $scope.openModal = function() {
             $('#PopupModal').modal({
                 backdrop: 'static',
                 keyboard: false
             });
         }
 
-        $scope.gotoItem = function (type, item) {
+        $scope.gotoItem = function(type, item) {
             $scope.closeModal();
             if (type == 'kaizen') {
                 $state.go('app.viewkaizen', { 'id': item });
@@ -82,12 +82,12 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             }
         }
 
-        $scope.getMonthevents = function (month, year) {
-            webServices.get('calendar/info/' + month + '/' + year).then(function (getData) {
+        $scope.getMonthevents = function(month, year) {
+            webServices.get('calendar/info/' + month + '/' + year).then(function(getData) {
                 if (getData.status == 200) {
                     $rootScope.loading = false;
                     //$scope.calendarevents = getData.data;
-                    angular.forEach(getData.data, function (data, no) {
+                    angular.forEach(getData.data, function(data, no) {
                         data.start = new Date(data.start);
                         $scope.calendarevents.push(data)
                     });
@@ -105,21 +105,21 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
             });
         }
 
-        $rootScope.closeModal = function () {
+        $rootScope.closeModal = function() {
             $rootScope.formData = {};
             $('#PopupModal').modal('hide');
             $('#EventInfoModal').modal('hide');
             $('#PDFModal').modal('hide');
         }
 
-        $scope.getGoogleCalEvents = function (month,year) {
+        $scope.getGoogleCalEvents = function(month, year) {
             $http({
                 method: 'GET',
                 url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/' + $rootScope.CalendarID + '/events?key=' + $rootScope.Calendarkey),
                 cache: false,
                 dataType: 'json',
-            }).then(function (response) {
-                angular.forEach(response.data.items, function (item, no) {
+            }).then(function(response) {
+                angular.forEach(response.data.items, function(item, no) {
                     var obj = {};
                     obj.title = item.summary;
                     obj.className = ['bg-info-cal'];
@@ -127,24 +127,24 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                     obj.from_google = 1;
                     $scope.calendarevents.push(obj)
                 });
-                $scope.getMonthevents(month,year);
-            }, function (response) {
+                $scope.getMonthevents(month, year);
+            }, function(response) {
                 console.log(response)
             });
 
         }
-        
 
-        $scope.getGoogleCalHolidays = function (month,year) {
+
+        $scope.getGoogleCalHolidays = function(month, year) {
             $scope.calendarevents = [];
             $http({
                 method: 'GET',
                 url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/japanese@holiday.calendar.google.com/events?key=' + $rootScope.Calendarkey),
                 cache: false,
                 dataType: 'json',
-            }).then(function (response) {
+            }).then(function(response) {
                 console.log(response)
-                angular.forEach(response.data.items, function (item, no) {
+                angular.forEach(response.data.items, function(item, no) {
                     var obj = {};
                     obj.title = item.summary;
                     obj.className = ['bg-info-cal'];
@@ -152,8 +152,8 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
                     obj.from_google = 1;
                     $scope.calendarevents.push(obj)
                 });
-                $scope.getGoogleCalEvents(month,year);
-            }, function (response) {
+                $scope.getGoogleCalEvents(month, year);
+            }, function(response) {
                 console.log(response)
             });
 
@@ -161,6 +161,8 @@ app.controller('CalendarCtrl', ['$scope', 'webServices', '$rootScope', '$http', 
 
         var d = new Date();
         $scope.getGoogleCalHolidays(d.getMonth(), d.getYear());
+        var obj = { page_name: 'calendar', page_component: 'common' };
+        $rootScope.viewPage(obj);
 
     }
 ]);

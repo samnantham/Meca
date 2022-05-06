@@ -15,8 +15,10 @@ app.controller('KaizenController', ['$scope', '$http', '$state', 'authServices',
     $scope.filterData.is_admin = $stateParams.tmc;
     $scope.errorData = {};
 
-    $scope.changeActive = function(tab){
-        if($scope.activetab != tab){
+    console.log($rootScope.kaizentypes[$stateParams.type])
+
+    $scope.changeActive = function(tab) {
+        if ($scope.activetab != tab) {
             $rootScope.loading = true;
             $scope.activetab = tab;
             $scope.filterData.type = tab;
@@ -38,7 +40,7 @@ app.controller('KaizenController', ['$scope', '$http', '$state', 'authServices',
         $scope.getResults();
     };
 
-    $scope.sortData = function(key,order) {
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -47,7 +49,7 @@ app.controller('KaizenController', ['$scope', '$http', '$state', 'authServices',
     }
 
     $scope.getResults = function() {
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pagination = {
@@ -78,5 +80,7 @@ app.controller('KaizenController', ['$scope', '$http', '$state', 'authServices',
     };
 
     $scope.getDatas();
+    var obj = { page_component: 'kaizen', page_name: $rootScope.kaizentypes[$stateParams.type - 1].type, module: 3, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

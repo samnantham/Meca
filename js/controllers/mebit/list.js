@@ -13,14 +13,14 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
     $scope.filterData.status = 'all';
     $scope.errorData = {};
 
-    $scope.seterrorMsg = function(){
+    $scope.seterrorMsg = function() {
         $scope.errorData.title_errorMsg = 'Enter Title';
         $scope.errorData.description_errorMsg = 'Please add workshop content';
         $scope.errorData.start_date_errorMsg = 'Select Event Date';
     }
 
-    $scope.changeActive = function(tab){
-        if($scope.activetab != tab){
+    $scope.changeActive = function(tab) {
+        if ($scope.activetab != tab) {
             $rootScope.loading = true;
             $scope.activetab = tab;
             $scope.filterData.category = tab;
@@ -28,19 +28,19 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
         }
     }
 
-    $scope.changeStatus = function(status){
-        if($scope.filterData.status != status){
+    $scope.changeStatus = function(status) {
+        if ($scope.filterData.status != status) {
             $rootScope.loading = true;
             $scope.filterData.status = status;
             $scope.getResults();
         }
     }
 
-    $scope.setservererrorMsg = function(errors){
+    $scope.setservererrorMsg = function(errors) {
         $scope.errorData = {};
         angular.forEach(errors, function(error, no) {
-            $scope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-            $scope.errorData[no.replace('new','')+'_error'] = true;
+            $scope.errorData[no.replace('new', '') + '_errorMsg'] = error[0];
+            $scope.errorData[no.replace('new', '') + '_error'] = true;
         });
     }
 
@@ -67,30 +67,33 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
         $scope.seterrorMsg();
         if (form.$valid) {
             $rootScope.loading = true;
-                $scope.formData.start_date = $filter('date')($scope.formData.event_start_date, 'yyyy-MM-dd');
-                if($scope.formData.event_end_date){
-                    $scope.formData.end_date = $filter('date')($scope.formData.event_end_date, 'yyyy-MM-dd');
-                }$scope.formData.start_time = $filter('date')($scope.formData.event_start_time, 'yyyy-MM-dd HH:mm:ss');
-                $scope.formData.end_time = $filter('date')($scope.formData.event_end_time, 'yyyy-MM-dd HH:mm:ss');
-                webServices.upload('event', $scope.formData).then(function(getData) {
+            $scope.formData.start_date = $filter('date')($scope.formData.event_start_date, 'yyyy-MM-dd');
+            if ($scope.formData.event_end_date) {
+                $scope.formData.end_date = $filter('date')($scope.formData.event_end_date, 'yyyy-MM-dd');
+            }
+            $scope.formData.start_time = $filter('date')($scope.formData.event_start_time, 'yyyy-MM-dd HH:mm:ss');
+            $scope.formData.end_time = $filter('date')($scope.formData.event_end_time, 'yyyy-MM-dd HH:mm:ss');
+            webServices.upload('event', $scope.formData).then(function(getData) {
+                $rootScope.loading = false;
+                if (getData.status == 200) {
+                    $rootScope.$emit("showSuccessMsg", getData.data.message);
+                    $scope.changeActive('upcoming');
+                    $scope.formData = {};
+                } else if (getData.status == 401) {
+                    $scope.setservererrorMsg(getData.data.message);
                     $rootScope.loading = false;
-                    if (getData.status == 200) {
-                        $rootScope.$emit("showSuccessMsg", getData.data.message);
-                        $scope.changeActive('upcoming');
-                        $scope.formData = {};
-                    } else if (getData.status == 401) {
-                        $scope.setservererrorMsg(getData.data.message);
-                        $rootScope.loading = false;
-                    } else {
-                        $rootScope.$emit("showISError", getData);
-                    }
-                });
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
         } else {
             if (!form.title.$valid) {
                 $scope.errorData.title_error = true;
-            }if (!form.description.$valid) {
+            }
+            if (!form.description.$valid) {
                 $scope.errorData.description_error = true;
-            }if (!form.start_date.$valid) {
+            }
+            if (!form.start_date.$valid) {
                 $scope.errorData.start_date_error = true;
             }
             $rootScope.$emit("showErrors", $scope.errors);
@@ -179,7 +182,7 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
         $scope.getResults();
     };
 
-    $scope.sortData = function(key,order) {
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -189,7 +192,7 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
 
     $scope.getResults = function() {
         $rootScope.loading = true;
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pagination = {
@@ -218,15 +221,15 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
         $scope.getResults();
     };
 
-    if(!$stateParams.type){
+    if (!$stateParams.type) {
         $scope.activetab = '0';
         $scope.filterData.category = '0';
-    }else{
+    } else {
         $scope.activetab = $stateParams.type;
         $scope.filterData.category = $stateParams.type;
     }
 
-     $scope.placeChanged =  function() {
+    $scope.placeChanged = function() {
         var location = this.getPlace();
         $scope.formData.location = location.formatted_address;
         $scope.formData.latitude = location.geometry.location.lat();
@@ -258,14 +261,17 @@ app.controller('EventsController', ['$scope', '$http', '$state', 'authServices',
         });
     }
 
-    $scope.removeFile = function(key,data){
-        $scope.formData.event_files.splice(key,1);
+    $scope.removeFile = function(key, data) {
+        $scope.formData.event_files.splice(key, 1);
     }
 
-    $scope.removeDocuments = function(key,data){
-        $scope.formData.event_documents.splice(key,1);
+    $scope.removeDocuments = function(key, data) {
+        $scope.formData.event_documents.splice(key, 1);
     }
-    
+
     $scope.getDatas();
+
+    var obj = { page_component: 'event', page_name: 'list', module: 1, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

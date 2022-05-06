@@ -1,12 +1,12 @@
 'use strict';
 
-app.controller('NewsInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
+app.controller('NewsInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.news = {};
     $scope.filterData = {};
 
-    $scope.getData = function () {
-        webServices.get('news/' + $stateParams.id).then(function (getData) {
+    $scope.getData = function() {
+        webServices.get('news/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.news = getData.data;
@@ -16,10 +16,10 @@ app.controller('NewsInfoController', ['$scope', '$state', '$stateParams', 'webSe
         });
     }
 
-    $scope.editNews = function(){
+    $scope.editNews = function() {
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.news;
-        $rootScope.ModalOpen('newsModal','NewsModalController');
+        $rootScope.ModalOpen('newsModal', 'NewsModalController');
     }
 
     $scope.removeNews = function() {
@@ -38,24 +38,26 @@ app.controller('NewsInfoController', ['$scope', '$state', '$stateParams', 'webSe
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteNews = function(id){
+    $scope.deleteNews = function(id) {
         webServices.delete('news/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
                 $state.go('app.newsroom');
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
     $scope.getData();
+
+    var obj = { page_component: 'news_room', page_name: 'news_info', module: 10, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

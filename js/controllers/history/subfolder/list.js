@@ -8,19 +8,19 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
     $scope.errorData = {};
     $scope.fileData = {};
 
-    $scope.seterrorMsg = function(){
+    $scope.seterrorMsg = function() {
         $scope.errorData.folder_name_errorMsg = 'Enter Folder Name';
     }
 
-    $scope.setservererrorMsg = function(errors){
+    $scope.setservererrorMsg = function(errors) {
         $scope.errorData = {};
         angular.forEach(errors, function(error, no) {
-            $scope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-            $scope.errorData[no.replace('new','')+'_error'] = true;
+            $scope.errorData[no.replace('new', '') + '_errorMsg'] = error[0];
+            $scope.errorData[no.replace('new', '') + '_error'] = true;
         });
     }
 
-    $scope.uploadDoc = function(files){
+    $scope.uploadDoc = function(files) {
         $scope.fileData.folder = $stateParams.id;
         $scope.fileData.newdocument = files[0];
         $ngConfirm({
@@ -38,7 +38,7 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
+                    action: function() {
                         $scope.fileData = {};
                     }
                 }
@@ -46,7 +46,7 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
         });
     }
 
-    $scope.uploadFile = function(){
+    $scope.uploadFile = function() {
         $rootScope.loading = true;
         webServices.upload('history/folder/file/upload', $scope.fileData).then(function(getData) {
             if (getData.status == 200) {
@@ -61,8 +61,8 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
         $scope.seterrorMsg();
         if (form.$valid) {
             $rootScope.loading = true;
-            if($scope.isedit){
-                webServices.post('history/folder/'+ $scope.formData.id, $scope.formData).then(function(getData) {
+            if ($scope.isedit) {
+                webServices.post('history/folder/' + $scope.formData.id, $scope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $scope.closeModal();
@@ -75,7 +75,7 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
                         $rootScope.$emit("showISError", getData);
                     }
                 });
-            }else{
+            } else {
                 webServices.post('history/folder', $scope.formData).then(function(getData) {
                     console.log(getData)
                     $rootScope.loading = false;
@@ -91,7 +91,7 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
                     }
                 });
             }
-               
+
         } else {
             if (!form.folder_name.$valid) {
                 $scope.errorData.folder_name_error = true;
@@ -149,8 +149,7 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
@@ -172,38 +171,37 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteFolderInfo = function(id){
+    $scope.deleteFolderInfo = function(id) {
         webServices.delete('history/folder/' + id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.getFolders();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.deleteFileInfo = function(id){
+    $scope.deleteFileInfo = function(id) {
         webServices.delete('history/folder/file/delete/' + id).then(function(getData) {
             if (getData.status == 200) {
                 $scope.getFolders();
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.openParticipantModal = function(data){
+    $scope.openParticipantModal = function(data) {
         $scope.addedData = {};
-        $scope.addedData.is_public  = data.is_public;
-        $scope.addedData.item  = data.id;
-        $scope.addedData.module  = 9;
+        $scope.addedData.is_public = data.is_public;
+        $scope.addedData.item = data.id;
+        $scope.addedData.module = 9;
         $scope.addedData.members = data.members;
         $scope.getUsers();
         $scope.filterData = {};
@@ -213,7 +211,7 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
         });
     }
 
-    $scope.updateParticipants = function(){
+    $scope.updateParticipants = function() {
         $rootScope.loading = true;
         webServices.post('history/participants/assign', $scope.addedData).then(function(getData) {
             if (getData.status == 200) {
@@ -246,8 +244,8 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
             $scope.folderlist = $scope.pagedata[$scope.pageno];
         }
     };
-    
-    $scope.getFolders = function(){
+
+    $scope.getFolders = function() {
         webServices.get('history/folder/get/all').then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -260,10 +258,10 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
         });
     }
 
-    $scope.addremoveMember = function(status,id){
-        if(status){
+    $scope.addremoveMember = function(status, id) {
+        if (status) {
             $scope.addedData.members.push(id);
-        }else{
+        } else {
             var index = $scope.addedData.members.indexOf(id);
             if (index !== -1) $scope.addedData.members.splice(index, 1);
         }
@@ -275,14 +273,16 @@ app.controller('HistorySubFolderController', ['$scope', '$http', '$state', 'auth
             if (getData.status == 200) {
                 $scope.users = getData.data;
                 angular.forEach($scope.users, function(member, no) {
-                    if($scope.addedData.members.includes(member.id)){
+                    if ($scope.addedData.members.includes(member.id)) {
                         member.is_added = 1;
                     }
                 });
             }
         });
     };
-    
+
     $scope.getFolders();
+    var obj = { page_name: 'subfolders', page_component: 'history', module: 0, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

@@ -17,9 +17,27 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
         ];
 
         $scope.visible = 3;
+        $scope.graphColor = '#0e5f77';
+
+        $scope.currentPeriod = 0;
 
         if ($rootScope.isMobile) {
             $scope.visible = 1;
+        }
+
+        $scope.showPeriodicalData = function(currentPeriod) {
+            if (currentPeriod != $scope.currentPeriod) {
+                $scope.currentPeriod = currentPeriod;
+                $rootScope.loading = true;
+                if ($scope.currentPeriod == 0) {
+                    $scope.graphColor = '#0e5f77';
+                } else if ($scope.currentPeriod == 1) {
+                    $scope.graphColor = '#629FD6';
+                } else if ($scope.currentPeriod == 2) {
+                    $scope.graphColor = '#ED8239';
+                }
+                $scope.getData();
+            }
         }
 
         $scope.selectedClick = function(index) {
@@ -44,11 +62,10 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
         };
 
         $scope.getData = function() {
-            webServices.get('sga/home').then(function(getData) {
+            webServices.get('sga/home/' + $scope.currentPeriod).then(function(getData) {
                 $rootScope.loading = false;
                 if (getData.status == 200) {
                     $scope.SGAData = getData.data;
-                    console.log($scope.SGAData)
                     $scope.setChart($scope.SGAData.labels, $scope.SGAData.values);
                 } else {
                     $rootScope.$emit("showerror", getData);
@@ -58,7 +75,7 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
 
         $scope.setChart = function(chartlabels, chartvalues) {
             $('#container').highcharts({
-                colors: ['#0e5f77'],
+                colors: [$scope.graphColor],
                 title: {
                     text: ''
                 },
@@ -72,13 +89,13 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
                     enabled: false
                 },
                 xAxis: {
-                    gridLineColor: '#0e5f77',
+                    gridLineColor: $scope.graphColor,
                     gridLineWidth: 0,
                     minorGridLineWidth: 0,
                     categories: chartlabels,
                     labels: {
                         style: {
-                            color: '#0e5f77',
+                            color: $scope.graphColor,
                             fontSize: '12px',
                             fontWeight: 'bold'
                         }
@@ -94,8 +111,8 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
                     title: {
                         text: ''
                     },
-                    gridLineColor: '#0e5f77',
-                    gridLineWidth: 0,
+                    gridLineColor: $scope.graphColor,
+                    gridLineWidth: 1,
                     minorGridLineWidth: 0,
                     lineWidth: 1,
                     plotLines: [{
@@ -104,11 +121,84 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
                         value: 0
                     }],
                     min: 0,
-                    max: 9,
-                    tickInterval: 1,
+                    // max: 9,
+                    // tickInterval: 1,
+                    endOnTick: false,
                     labels: {
                         style: {
-                            color: '#0e5f77',
+                            color: $scope.graphColor,
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+
+                series: [{
+                    type: 'column',
+
+                    data: chartvalues
+                }]
+            });
+
+            if($scope.currentPeriod == 2){
+                $scope.setCustom(chartlabels, chartvalues);
+            }
+        }
+        
+        $scope.setCustom =function(chartlabels, chartvalues){
+            $('#container').highcharts({
+                colors: [$scope.graphColor],
+                title: {
+                    text: ''
+                },
+                chart: {},
+                plotOptions: {
+                    series: {
+                        pointWidth: 25
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                xAxis: {
+                    gridLineColor: $scope.graphColor,
+                    gridLineWidth: 0,
+                    minorGridLineWidth: 0,
+                    categories: chartlabels,
+                    labels: {
+                        style: {
+                            color: $scope.graphColor,
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>' + this.x +
+                            '</b> : <b>' + this.y + '</b>';
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    gridLineColor: $scope.graphColor,
+                    gridLineWidth: 1,
+                    minorGridLineWidth: 0,
+                    lineWidth: 1,
+                    plotLines: [{
+                        color: '#FF0000',
+                        width: 1,
+                        value: 0
+                    }],
+                    min: 0,
+                    max: 8,
+                    tickInterval: 2,
+                    endOnTick: false,
+                    labels: {
+                        style: {
+                            color: $scope.graphColor,
                             fontSize: '12px',
                             fontWeight: 'bold'
                         }
@@ -124,6 +214,9 @@ app.controller('SGACtrl', ['$scope', '$state', 'webServices', '$rootScope', 'aut
         }
 
         $scope.getData();
+
+        var obj = { page_name: 'sga', page_component: 'common' };
+        $rootScope.viewPage(obj);
 
     }
 ]);

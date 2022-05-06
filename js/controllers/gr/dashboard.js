@@ -150,6 +150,9 @@ app.controller('GRDashboardCtrl', ['$scope', '$state', 'webServices', '$rootScop
             });
         }
 
+        var obj = { page_name: 'dashboard', page_component: 'gr', module: 6, item: 0 };
+        $rootScope.viewPage(obj);
+
         $scope.getData();
 
     }

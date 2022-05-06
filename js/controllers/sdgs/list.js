@@ -14,28 +14,28 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
     $scope.filterData.type = $stateParams.type;
     $scope.errorData = {};
 
-    $scope.changeActive = function(tab){
+    $scope.changeActive = function(tab) {
         $rootScope.loading = true;
         $scope.activetab = tab;
         $scope.filterData.type = tab;
         $scope.getResults();
     }
 
-    $scope.seterrorMsg = function(){
+    $scope.seterrorMsg = function() {
         $scope.errorData.title_errorMsg = 'Enter Title';
         $scope.errorData.description_errorMsg = 'Please add SDGs Study';
     }
 
-    $scope.removeVideoLink = function(key){
-        $scope.formData.video_links.splice(key,1);
+    $scope.removeVideoLink = function(key) {
+        $scope.formData.video_links.splice(key, 1);
     }
 
     $scope.uploadvideo = function() {
-        if (($rootScope.validURL($scope.videoData.link))&&($rootScope.validvideo($scope.videoData.link))) {
+        if (($rootScope.validURL($scope.videoData.link)) && ($rootScope.validvideo($scope.videoData.link))) {
 
-            if($scope.formData.video_links.some(videolink => videolink.link === $scope.videoData.link)){
+            if ($scope.formData.video_links.some(videolink => videolink.link === $scope.videoData.link)) {
                 $rootScope.$emit("showErrorMsg", 'Video already added');
-            } else{
+            } else {
                 var newobj = {};
                 newobj.link = $scope.videoData.link;
                 newobj.title = 'video link' + ($scope.formData.video_links.length + 1);
@@ -43,22 +43,22 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
                 $scope.formData.video_links.push(newobj);
                 $scope.videoData = {};
             }
-        }else{
+        } else {
             $rootScope.$emit("showErrorMsg", 'Please upload valid video url.');
             $scope.videoData.link = '';
-        }  
+        }
     }
 
-    $scope.removeDocumentLink = function(key){
-        $scope.formData.document_links.splice(key,1);
+    $scope.removeDocumentLink = function(key) {
+        $scope.formData.document_links.splice(key, 1);
     }
 
     $scope.uploaddocumentlink = function() {
         if ($rootScope.validURL($scope.documentData.link)) {
 
-            if($scope.formData.document_links.some(documentlink => documentlink.link === $scope.documentData.link)){
+            if ($scope.formData.document_links.some(documentlink => documentlink.link === $scope.documentData.link)) {
                 $rootScope.$emit("showErrorMsg", 'Document already added');
-            } else{
+            } else {
                 var newobj = {};
                 newobj.link = $scope.documentData.link;
                 newobj.name = 'External link' + ($scope.formData.document_links.length + 1);
@@ -66,17 +66,17 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
                 $scope.formData.document_links.push(newobj);
                 $scope.documentData = {};
             }
-        }else{
+        } else {
             $rootScope.$emit("showErrorMsg", 'Please enter a valid document link.');
             $scope.documentData.link = '';
-        }  
+        }
     }
-    
-    $scope.setservererrorMsg = function(errors){
+
+    $scope.setservererrorMsg = function(errors) {
         $scope.errorData = {};
         angular.forEach(errors, function(error, no) {
-            $scope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-            $scope.errorData[no.replace('new','')+'_error'] = true;
+            $scope.errorData[no.replace('new', '') + '_errorMsg'] = error[0];
+            $scope.errorData[no.replace('new', '') + '_error'] = true;
         });
     }
 
@@ -103,23 +103,24 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
         $scope.seterrorMsg();
         if (form.$valid) {
             $rootScope.loading = true;
-                webServices.upload('sdgs', $scope.formData).then(function(getData) {
+            webServices.upload('sdgs', $scope.formData).then(function(getData) {
+                $rootScope.loading = false;
+                if (getData.status == 200) {
+                    $scope.closeModal();
+                    $rootScope.$emit("showSuccessMsg", getData.data.message);
+                    $scope.changeActive($scope.activetab);
+                } else if (getData.status == 401) {
+                    $scope.setservererrorMsg(getData.data.message);
                     $rootScope.loading = false;
-                    if (getData.status == 200) {
-                        $scope.closeModal();
-                        $rootScope.$emit("showSuccessMsg", getData.data.message);
-                        $scope.changeActive($scope.activetab);
-                    } else if (getData.status == 401) {
-                        $scope.setservererrorMsg(getData.data.message);
-                        $rootScope.loading = false;
-                    } else {
-                        $rootScope.$emit("showISError", getData);
-                    }
-                });
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
         } else {
             if (!form.title.$valid) {
                 $scope.errorData.title_error = true;
-            }if (!form.description.$valid) {
+            }
+            if (!form.description.$valid) {
                 $scope.errorData.description_error = true;
             }
             $rootScope.$emit("showErrors", $scope.errors);
@@ -209,7 +210,7 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
         $scope.getResults();
     };
 
-    $scope.sortData = function(key,order) {
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -218,7 +219,7 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
     }
 
     $scope.getResults = function() {
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             console.log(getData)
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -275,14 +276,17 @@ app.controller('SDGsController', ['$scope', '$http', '$state', 'authServices', '
         $scope.getResults();
     };
 
-    $scope.removeFile = function(key,data){
-        $scope.formData.sdgs_files.splice(key,1);
+    $scope.removeFile = function(key, data) {
+        $scope.formData.sdgs_files.splice(key, 1);
     }
 
-    $scope.removeDocuments = function(key,data){
-        $scope.formData.sdgs_documents.splice(key,1);
+    $scope.removeDocuments = function(key, data) {
+        $scope.formData.sdgs_documents.splice(key, 1);
     }
-    
+
     $scope.getDatas();
+
+    var obj = { page_component: 'sdgs', page_name: 'list', module: 8, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

@@ -311,9 +311,23 @@ angular.module('app')
 
                 .state('app.dakar', {
                     url: 'dakar/special',
-                    templateUrl: 'tpl/dakar.html',
-                    resolve: load(['js/controllers/sga.js'])
+                    templateUrl: 'tpl/dakar/home.html',
+                    resolve: load(['js/controllers/dakar/home.js'])
                 })
+
+                .state('app.dakarinfo', {
+                    url: 'dakar/special/news/info/:id',
+                    templateUrl: 'tpl/dakar/info.html',
+                    resolve: load(['js/controllers/dakar/info.js'])
+                })
+
+                //
+                .state('app.universalsearch', {
+                    url: 'universal/search/:keyword',
+                    templateUrl: 'tpl/universalsearch.html',
+                    resolve: load(['js/controllers/universalsearch.js'])
+                })
+
 
                 // others
                 .state('access', {
@@ -371,13 +385,13 @@ angular.module('app')
                                     });
                                 });
                                 deferred.resolve();
-                                return callback ? promise.then(function() { return callback(); }) : promise;
+                                return callback ? promise.then(function() {
+                                    return callback();
+                                }) : promise;
                             }
                         ]
                     }
                 }
-
-
             }
         ]
     );

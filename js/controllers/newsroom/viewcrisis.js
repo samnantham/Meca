@@ -1,12 +1,12 @@
 'use strict';
 
-app.controller('CrisisInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
+app.controller('CrisisInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.crisis = {};
     $scope.filterData = {};
 
-    $scope.getData = function () {
-        webServices.get('news/crisis/' + $stateParams.id).then(function (getData) {
+    $scope.getData = function() {
+        webServices.get('news/crisis/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.crisis = getData.data;
@@ -16,10 +16,10 @@ app.controller('CrisisInfoController', ['$scope', '$state', '$stateParams', 'web
         });
     }
 
-    $scope.editCrisis = function(){
+    $scope.editCrisis = function() {
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.news;
-        $rootScope.ModalOpen('crisisModal','CrisisModalController');
+        $rootScope.ModalOpen('crisisModal', 'CrisisModalController');
     }
 
     $scope.removeCrisis = function() {
@@ -38,24 +38,26 @@ app.controller('CrisisInfoController', ['$scope', '$state', '$stateParams', 'web
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteCrisis = function(id){
+    $scope.deleteCrisis = function(id) {
         webServices.delete('news/crisis/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
                 $state.go('app.newsroom');
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
     $scope.getData();
+
+    var obj = { page_component: 'news_room', page_name: 'crisis_info', module: 10, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

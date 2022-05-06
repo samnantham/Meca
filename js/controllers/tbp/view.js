@@ -1,13 +1,13 @@
 'use strict';
 
-app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
+app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.tbp = {};
     $scope.filterData = {};
     $scope.tbp_uploads = angular.copy($rootScope.tbp_upload_types);
 
-    $scope.getData = function () {
-        webServices.get('tbp/' + $stateParams.id).then(function (getData) {
+    $scope.getData = function() {
+        webServices.get('tbp/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.tbp = getData.data;
@@ -20,14 +20,14 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
                         $scope.tbp.imagecount = $rootScope.getfileCounts($scope.tbp.tbp_files, 'image');
                         console.log($scope.tbp.uploads)
                         if ($scope.tbp.uploads) {
-                            angular.forEach($scope.tbp_uploads, function (upload, no) {
+                            angular.forEach($scope.tbp_uploads, function(upload, no) {
                                 upload.fileurl = $scope.tbp.uploads[upload.typename];
                                 upload.item_class = '';
                                 if ((no + 1) % 2 == 0) {
-                                    var previous_step_status = $scope.tbp_uploads[no-1].typename + '_approved';
-                                    if($scope.tbp.uploads[previous_step_status]){
+                                    var previous_step_status = $scope.tbp_uploads[no - 1].typename + '_approved';
+                                    if ($scope.tbp.uploads[previous_step_status]) {
                                         //upload.item_class = 'disabled';
-                                    }else{
+                                    } else {
 
                                     }
                                     //console.log($scope.tbp.uploads[previousitem + '_approved'])
@@ -60,7 +60,7 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
                                 }
                             });
                         } else {
-                            angular.forEach($scope.tbp_uploads, function (upload, no) {
+                            angular.forEach($scope.tbp_uploads, function(upload, no) {
                                 if (no > 0) {
                                     upload.item_class = 'disabled';
                                 }
@@ -79,7 +79,7 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
         });
     }
 
-    $scope.uploadReport = function (type, files) {
+    $scope.uploadReport = function(type, files) {
         $scope.errors = [];
         if (files && files.length) {
             var extn = files[0].name.split(".").pop();
@@ -102,7 +102,7 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
         }
     }
 
-    $scope.confirmUpload = function () {
+    $scope.confirmUpload = function() {
         $ngConfirm({
             title: 'Are you sure want to upload this?',
             content: '',
@@ -112,13 +112,13 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
                 tryAgain: {
                     text: 'Yes',
                     btnClass: 'btn-red',
-                    action: function () {
+                    action: function() {
                         $scope.uploadDocument();
                     }
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
+                    action: function() {
                         $scope.tbpuploadData = {};
                         $scope.tbpuploadData.newdocument = '';
                     }
@@ -127,8 +127,8 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
         });
     }
 
-    $scope.uploadDocument = function () {
-        webServices.upload('tbp/report/upload', $scope.tbpuploadData).then(function (getData) {
+    $scope.uploadDocument = function() {
+        webServices.upload('tbp/report/upload', $scope.tbpuploadData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -142,5 +142,8 @@ app.controller('TBPInfoController', ['$scope', '$state', '$stateParams', 'webSer
     };
 
     $scope.getData();
+
+    var obj = { page_component: 'tbp', page_name: 'info', module: 2, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

@@ -1,13 +1,14 @@
-app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$filter', function($timeout, $state, $stateParams, webServices, utility, $rootScope, $filter) {
-    
-    if(!$rootScope.isEdititem){
+app.controller('FeedModalController', ['$timeout', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$filter', function($timeout, $state, $stateParams, webServices, utility, $rootScope, $filter) {
+
+    if (!$rootScope.isEdititem) {
         $rootScope.formData = {};
         $rootScope.formData.images = [];
         $rootScope.formData.newImages = [];
         $rootScope.formData.type = 1;
-    }else{
+    } else {
         $rootScope.formData.newImages = [];
         $rootScope.formData.deletedImages = [];
+        $rootScope.formData.image = 1;
     }
     $rootScope.errorData = {};
 
@@ -16,16 +17,16 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         $rootScope.seterrorMsg();
     }
 
-    $rootScope.seterrorMsg = function(){
+    $rootScope.seterrorMsg = function() {
         $rootScope.errorData.content_errorMsg = 'Please enter content';
         $rootScope.errorData.image_errorMsg = 'Please upload feed Images';
     }
 
-    $rootScope.setservererrorMsg = function(errors){
+    $rootScope.setservererrorMsg = function(errors) {
         $rootScope.errorData = {};
         angular.forEach(errors, function(error, no) {
-            $rootScope.errorData[no.replace('new','')+'_errorMsg'] = error[0];
-            $rootScope.errorData[no.replace('new','')+'_error'] = true;
+            $rootScope.errorData[no.replace('new', '') + '_errorMsg'] = error[0];
+            $rootScope.errorData[no.replace('new', '') + '_error'] = true;
         });
     }
 
@@ -48,11 +49,11 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         }
     }
 
-    $rootScope.uploadDoc = function (files) {
+    $rootScope.uploadDoc = function(files) {
         $rootScope.formData.newdocument = files[0];
     }
 
-    $rootScope.addfeedImages = function (files) {
+    $rootScope.addfeedImages = function(files) {
         $rootScope.errors = [];
         if ($rootScope.formData.newImages.length < $rootScope.maxUploadFiles) {
             if (files && files.length) {
@@ -81,11 +82,11 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         }
     }
 
-    $rootScope.removeFile = function (key, data) {
+    $rootScope.removeFile = function(key, data) {
         $rootScope.formData.newImages.splice(key, 1);
     }
 
-    $rootScope.removeFileImage = function (key, data) {
+    $rootScope.removeFileImage = function(key, data) {
         $rootScope.formData.deletedImages.push(data);
         $rootScope.formData.images.splice(key, 1);
     }
@@ -94,8 +95,8 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         $rootScope.seterrorMsg();
         if (form.$valid) {
             $rootScope.loading = true;
-            if($rootScope.isEdititem){
-                webServices.upload('feed/'+$rootScope.formData.id, $rootScope.formData).then(function(getData) {
+            if ($rootScope.isEdititem) {
+                webServices.upload('feed/' + $rootScope.formData.id, $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
                         $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -108,7 +109,7 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
                         $rootScope.$emit("showISError", getData);
                     }
                 });
-            }else{
+            } else {
                 webServices.upload('feed', $rootScope.formData).then(function(getData) {
                     $rootScope.loading = false;
                     if (getData.status == 200) {
@@ -126,20 +127,20 @@ app.controller('FeedModalController', [ '$timeout', '$state', '$stateParams', 'w
         } else {
             if (!form.content.$valid) {
                 $rootScope.errorData.content_error = true;
-            } 
-            if($rootScope.formData.type == 1){
+            }
+            if ($rootScope.formData.type == 1) {
                 if (!form.image.$valid) {
                     $rootScope.errorData.image_error = true;
-                } 
+                }
             }
-            if($rootScope.formData.type == 2){
+            if ($rootScope.formData.type == 2) {
                 if (!form.video_link.$valid) {
                     $rootScope.errorData.video_link_error = true;
                 }
             }
-             
+
             $rootScope.$emit("showErrors", $rootScope.errors);
         }
     }
-    
+
 }]);

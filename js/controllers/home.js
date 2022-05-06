@@ -9,7 +9,51 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         $scope.doclink = '';
         $scope.commentData = {};
         $scope.feeds = [];
-        $scope.promotionContent = "This is Kanno, from TMC Middle East and Central Asia Div.<br>I may already have met many of you through Teams but again, Very Nice to e-Meet you !(^^)!<br>Thank you very much for your active participation during Tokyo Olympic and Paralympic. We had our NEW families here in Tokyo who were the serious athletes from MECA regionand all over the world. Especially at Paralympic games, we witnessed a lot of Super Human. They successfully went over the impossible and performed something which we ordinarypeople can't do. We learned so many things, which may result in one of our Umbrella phrase,Start your Impossible. Never admit who you are with what you have under what you are told. Go and challenge for it. We Toyota tend to choose what made us successful in the past over what requires effortsbecause it looks safe and efficient. However, rules, competitors, technologies and so on keepchanging every moment, we can't say Status Quo is ok. We all Toyota members are the challengersforever. <br>Our predecessors in MECA took a risk and decided to import unknown Toyota over couplesof thousand kilo meters across the ocean in 30-40-50-60 years ago. And following generations andsupporting team kept kaizen on themselves to seek for better - better for the brand and customers. That's where we are. There is a difference between Sports and Automotive but Olympic andParalympic gave me a great opportunity to think that again in myself. And this thought 'Start your Impossible' is reminded repeatedly by our Leader Akio Toyoda sanwho has been at president role from 2009. During his time up until now, Toyota company didovercome variety of challenges never experienced before. Of course, those success has been madebecause of your support and participation. <br>We can't enough say thank you to all.But how about Akio san ? what did he think? How did he react ?Because you are Team Toyota, I know you are very much interested in Akio san himself and his story.And now, it becomes finally available for you, our valued distributors.Would you please open the PDF attched on this ?<br>( if any difficulties, please contact to us and we are happy to support you )<br>And we want to hear your comment. Please kindly post when you are ready.<br>Thank you very much<br>And please make sure to stay safe and healthy under COVID pandemic<br>Best regards,<br><b>Kanno</b><br><br>";
+        $scope.promotionContent = "With the support we received from TMC to eliminate the Grey market, and while acknowledging the authenticity of our authorized dealers in Iraq, we have together launched Invest4Next campaign. Spend today, think next. Because you want to make a safe choice for what is next. Next for your children, Next for your friends and family, Next for the next generation. So go straight to where that choice is. Make key decisions with a trusted dealer. Invest 4 Next.";
+        $scope.isCurrent = 0;
+        $scope.showPopup = false;
+        $scope.feedTotal = 0;
+        $scope.promotions = [{ title:'Toyota Dream Car Art Contest', content:'Artworks Gallery for Middle East & Central Asia. Online Museum that collects from children in the Middle East and Central Asia.', type : 1, src:'https://mecacampus.com/API/public/upload/fromTMC/617f9d1682822.JPG'}];
+
+        // $scope.promotions = [{ content: 'With the support we received from TMC to eliminate the Grey market, and while acknowledging the authenticity of our authorized dealers in Iraq, we have together launched Invest4Next campaign. Spend today, think next. Because you want to make a safe choice for what is next. Next for your children, Next for your friends and family, Next for the next generation. So go straight to where that choice is. Make key decisions with a trusted dealer. Invest 4 Next.', type: 3, title: 'Invest 4 Next', src: $sce.trustAsResourceUrl('https://www.youtube.com/embed/02QUnL6sNks?autoplay=1&mute=1&loop=1&playlist=02QUnL6sNks') }, { content: ' <span> <b>Message from Okada san, Technical Service Div. Service Innovation Dept.</b>We have created comics to teach you about 5S(a part of Quick Kaizen) in a fun way! Does everyone know about 5S? Each S comes from the first letter of the words SIFTING, SORTING, SHINING, STANDARDIZING and SUSTAINING, and is one of the fundamental building blocks of Quick Kaizen. We have created some comics so you can learn about 5S in detail while having fun!</span><br><span>5S Comics Download available from below link:</span><a class="color_2" target="_blank" href="http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/5s-comic.aspx">http://oasis.mx.toyota.co.jp/sites/Contents/200101/SitePages/5s-comic.aspx</a></span>', type: 1, title: 'New 5S Comic (Kaizen Toolbox new contents) has been created!!', src: 'img/promo-thumb.jpg' }];
+
+        $scope.TMCslickConfig = {
+            enabled: true,
+            autoplay: true,
+            draggable: true,
+            autoplaySpeed: 5000,
+            slidesToShow: $rootScope.slidecount,
+            slidesToScroll: $rootScope.scrollslides,
+            arrows: true,
+            prevArrow: "<img class='slick-prev slick-arrow' src='img/sliderL.png'>",
+            nextArrow: "<img class='slick-next slick-arrow' src='img/sliderR.png'>",
+            method: {},
+            dots: false,
+            infinite: true,
+            event: {
+                beforeChange: function (event, slick, currentSlide, nextSlide) {
+                    $scope.isCurrent = $scope.homeData.tmcs[currentSlide].pinky;
+                },
+                afterChange: function (event, slick, currentSlide, nextSlide) {
+                    $scope.isCurrent = $scope.homeData.tmcs[currentSlide].pinky;
+                }
+            }
+        };
+
+        $scope.PromoslickConfig = {
+            enabled: true,
+            autoplay: true,
+            draggable: true,
+            autoplaySpeed: 4000,
+            slidesToShow: $rootScope.slidecount,
+            slidesToScroll: $rootScope.scrollslides,
+            arrows: true,
+            prevArrow: "<img class='slick-prev slick-arrow' src='img/sliderL.png'>",
+            nextArrow: "<img class='slick-next slick-arrow' src='img/sliderR.png'>",
+            method: {},
+            dots: false,
+            infinite: true
+        };
 
         $scope.clickTMC = function (data) {
             if (data.type == 1) {
@@ -22,12 +66,39 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             }
         }
 
-        $scope.toggleactiveCalendar = function(calendar){
-            if($scope.activeCalendar != calendar){
+        $scope.toggleactiveCalendar = function (calendar) {
+            if ($scope.activeCalendar != calendar) {
                 $rootScope.loading = true;
                 $scope.activeCalendar = calendar;
                 $scope.getCalenderData();
             }
+        }
+
+        $(document).on({
+            mouseenter: function () {
+                var feeditem = $(this).parent().context.offsetParent.id.replace("feed", "");
+                $scope.feeds[feeditem].showPopup = true;
+                $timeout(function () {
+                    $scope.feeds[feeditem].showPopup = false;
+                }, 10000);
+            },
+            mouseleave: function () {
+                // $timeout(function () {
+                //     if($(this).parent().context.offsetParent.id){
+                //         $scope.feeds[$(this).parent().context.offsetParent.id.replace("feed", "")].showPopup = false;
+                //     }
+                // }, 10000);
+            }
+        }, "#hoverable-Text");
+
+
+        $scope.showPopover = function (feed) {
+            feed.showPopup = true;
+        }
+        $scope.hidePopover = function (feed) {
+            $timeout(function () {
+                feed.showPopup = false;
+            }, 10000);
         }
 
         $scope.uiConfig = {
@@ -46,9 +117,9 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 eventResize: $scope.alertOnResize,
                 eventMouseover: $scope.alertOnMouseOver,
                 eventClick: function (event) {
-                    if(event.from_google){
-                        $window.open( $rootScope.calendarURL, '_blank' );
-                    }else{
+                    if (event.from_google) {
+                        $window.open($rootScope.calendarURL, '_blank');
+                    } else {
                         $rootScope.formData = event;
                         $scope.activeDate = event.start._d;
                         $scope.calenderevents = [];
@@ -59,9 +130,9 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                     var monthyear = view.title.split(' ');
                     var month = $rootScope.getMonthFromString(view.title.split(' ')[0]);
                     var year = parseInt(monthyear[1]);
-                    if($scope.activeCalendar == 'mebit'){
+                    if ($scope.activeCalendar == 'mebit') {
                         $scope.getMonthevents(month, year)
-                    }else if($scope.activeCalendar == 'imecad'){
+                    } else if ($scope.activeCalendar == 'imecad') {
                         $scope.getGoogleCalHolidays(month, year);
                     }
                 }
@@ -80,7 +151,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.getMonthevents = function (month, year) {
-            webServices.get('calendar/info/' + month + '/' + year+'/event').then(function (getData) {
+            webServices.get('calendar/info/' + month + '/' + year + '/event').then(function (getData) {
                 $rootScope.loading = false;
                 if (getData.status == 200) {
                     angular.forEach(getData.data, function (data, no) {
@@ -206,6 +277,10 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                 $state.go('app.viewmaas', {
                     id: item.id
                 });
+            } else if (item.whatsnew_type == 14) {
+                $state.go('app.dakarinfo', {
+                    id: item.id
+                });
             }
         }
 
@@ -280,8 +355,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                     },
                     cancel: {
                         text: 'No',
-                        action: function () {
-                        }
+                        action: function () { }
                     }
                 }
             });
@@ -297,10 +371,11 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             });
         }
 
-        $rootScope.getFeeds = function () {
-            webServices.get('feed/list/all').then(function (getData) {
+        $rootScope.getFeeds = function (offset) {
+            webServices.get('feed/list/all/' + offset).then(function (getData) {
                 if (getData.status == 200) {
-                    $scope.feeds = getData.data;
+                    $scope.feedTotal = getData.data['total'];
+                    Array.prototype.push.apply($scope.feeds, getData.data['data']);
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
@@ -323,8 +398,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
                     },
                     cancel: {
                         text: 'No',
-                        action: function () {
-                        }
+                        action: function () { }
                     }
                 }
             });
@@ -365,46 +439,63 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             });
         }
 
+        $scope.chatscrollconfig = {
+            autoHideScrollbar: true,
+            theme: 'dark',
+            advanced: {
+                updateOnContentResize: true
+            },
+            setHeight: 1000,
+            scrollInertia: 400,
+            callbacks: {
+                onTotalScroll: function () {
+                    $rootScope.getFeeds($scope.feeds.length);
+                }
+            }
+        }
+
         $scope.getData = function () {
             var obj = {};
             obj.title = 'We set up the "Regional Awards of Toyota Dream Car Art Contest" from 2021';
             obj.cover_image = 'public/upload/fromTMC/60596a1a68321.png';
             obj.doc_link = 'https://mecacampus.com/awards';
             obj.type = 'link';
+            $rootScope.getFeeds($scope.feeds.length);
             webServices.get('home/info').then(function (getData) {
-                $scope.getCalenderData();
+                //$scope.getCalenderData();
                 $rootScope.loading = false;
                 $scope.firstloadingdone = true;
+                var obj = { page_name: '', page_component: '' };
+                if ($rootScope.currentState == 'app.mebitdashboard') {
+                    obj.page_component = 'mebit';
+                    obj.page_name = 'mebit_section';
+                } else if ($rootScope.currentState == 'app.home') {
+                    obj.page_component = 'home';
+                    obj.page_name = 'home';
+                } else if ($rootScope.currentState == 'app.awards') {
+                    obj.page_component = 'common';
+                    obj.page_name = 'awards';
+                }
+                $rootScope.viewPage(obj);
                 if (getData.status == 200) {
                     $scope.homeData = getData.data;
-                    $scope.feeds = getData.data.feeds;
-                    $scope.calendarevents = getData.data.caldata;
-                    angular.forEach($scope.calendarevents, function (data, no) {
-                        data.start = new Date(data.start);
-                    });
                     angular.forEach($scope.homeData.whatsnew, function (data, no) {
                         if (data.whatsnew_type == 3) {
                             data.typeData = $rootScope.kaizentypes.filter(function (kaizen) {
                                 return kaizen.id == data.type;
                             })[0];
-                        } else if (data.whatsnew_type == 8) {
-                            data.typeData = $rootScope.kaizentypes.filter(function (kaizen) {
-                                return kaizen.id == data.type;
-                            })[0];
-                        } else if (data.whatsnew_type == 9) {
+                        }
+                        // else if (data.whatsnew_type == 8) {
+                        //     data.typeData = $rootScope.kaizentypes.filter(function (kaizen) {
+                        //         return kaizen.id == data.type;
+                        //     })[0];
+                        // } 
+                        else if (data.whatsnew_type == 9) {
                             data.typeData = $rootScope.maastypes.filter(function (kaizen) {
                                 return kaizen.id == data.type;
                             })[0];
                         }
                     });
-                    // if (!$rootScope.initialsnowfalling) {
-                    //     $timeout(function () {
-                    //         $rootScope.initialsnowfalling = true;
-                    //         $rootScope.snowfalling = true;
-                    //         $rootScope.showSnowfall();
-                    //     }, 500);
-                    // }
-
                 } else {
                     $rootScope.$emit("showerror", getData);
                 }
@@ -432,68 +523,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
             $('#PDFModal').modal('hide');
         }
 
-        $scope.getGoogleCalEvents = function (month,year) {
-            $http({
-                method: 'GET',
-                url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/' + $rootScope.CalendarID + '/events?key=' + $rootScope.Calendarkey),
-                cache: false,
-                dataType: 'json',
-            }).then(function (response) {
-                $rootScope.loading = false;
-                angular.forEach(response.data.items, function (item, no) {
-                    var obj = {};
-                    obj.title = item.summary;
-                    obj.className = ['bg-info-cal'];
-                    obj.start = new Date(item.start.date);
-                    obj.from_google = 1;
-                    $scope.calendarevents.push(obj)
-                });
-                $scope.eventSources.push($scope.calendarevents);
-                //$scope.getMonthevents(month,year);
-            }, function (response) {
-                console.log(response)
-            });
-
-        }
-        
-
-        $scope.getGoogleCalHolidays = function (month,year) {
-            $scope.eventSources = [];
-            $scope.calendarevents = [];
-            $http({
-                method: 'GET',
-                url: encodeURI('https://www.googleapis.com/calendar/v3/calendars/japanese@holiday.calendar.google.com/events?key=' + $rootScope.Calendarkey),
-                cache: false,
-                dataType: 'json',
-            }).then(function (response) {
-                console.log(response)
-                angular.forEach(response.data.items, function (item, no) {
-                    var obj = {};
-                    obj.title = item.summary;
-                    obj.className = ['bg-info-cal'];
-                    obj.start = new Date(item.start.date);
-                    obj.from_google = 1;
-                    $scope.calendarevents.push(obj)
-                });
-                $scope.getGoogleCalEvents(month,year);
-            }, function (response) {
-                console.log(response)
-            });
-
-        }
-
-        $scope.getCalenderData = function(){
-            var d = new Date();
-            $scope.calendarevents = [];
-            $scope.eventSources = [];
-            if($scope.activeCalendar == 'mebit'){
-                $scope.getMonthevents(d.getMonth(), d.getYear());
-            }else if($scope.activeCalendar == 'imecad'){
-                $scope.getGoogleCalHolidays(d.getMonth(), d.getYear());
-            }
-        }
-
         $scope.getData();
-        
+
     }
 ]);

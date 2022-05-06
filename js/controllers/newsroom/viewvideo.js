@@ -1,12 +1,12 @@
 'use strict';
 
-app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
+app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.video = {};
     $scope.filterData = {};
 
-    $scope.getData = function () {
-        webServices.get('news/video/' + $stateParams.id).then(function (getData) {
+    $scope.getData = function() {
+        webServices.get('news/video/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.video = getData.data;
@@ -16,10 +16,10 @@ app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webS
         });
     }
 
-    $scope.editVideo = function(){
+    $scope.editVideo = function() {
         $rootScope.isEdititem = true;
         $rootScope.formData = $scope.video;
-        $rootScope.ModalOpen('videoModal','videoModalController');
+        $rootScope.ModalOpen('videoModal', 'videoModalController');
     }
 
     $scope.removeVideo = function() {
@@ -38,24 +38,26 @@ app.controller('VideoInfoController', ['$scope', '$state', '$stateParams', 'webS
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
-                    }
+                    action: function() {}
                 }
             }
         });
     }
 
-    $scope.deleteVideo = function(id){
+    $scope.deleteVideo = function(id) {
         webServices.delete('news/video/' + $stateParams.id).then(function(getData) {
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
                 $state.go('app.newsroom');
             } else {
-                $rootScope.$emit("showISError",getData);
+                $rootScope.$emit("showISError", getData);
             }
         });
     }
 
     $scope.getData();
+
+    var obj = { page_component: 'news_room', page_name: 'video_info', module: 10, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

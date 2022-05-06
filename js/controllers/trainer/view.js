@@ -1,28 +1,28 @@
 'use strict';
 
-app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function ($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
+app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'webServices', 'utility', '$rootScope', '$timeout', '$filter', '$ngConfirm', '$sce', function($scope, $state, $stateParams, webServices, utility, $rootScope, $timeout, $filter, $ngConfirm, $sce) {
 
     $scope.pdca = {};
     $scope.filterData = {};
     $scope.pdca_uploads = angular.copy($rootScope.pdca_upload_types);
     $scope.module_id = 16;
-    
-    $scope.getData = function () {
-        webServices.get('trainer/training/' + $stateParams.id).then(function (getData) {
+
+    $scope.getData = function() {
+        webServices.get('trainer/training/' + $stateParams.id).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pdca = getData.data;
                 console.log($scope.pdca)
-                $rootScope.viewModuleItem($scope.module_id,$stateParams.id);
+                $rootScope.viewModuleItem($scope.module_id, $stateParams.id);
             } else {
                 $rootScope.$emit("showISError", getData);
             }
         });
     }
 
-    $scope.viewVideo = function (data) {
+    $scope.viewVideo = function(data) {
         var obj = { video: data.id, training: $stateParams.id };
-        webServices.upload('trainer/view/video', obj).then(function (getData) {
+        webServices.upload('trainer/view/video', obj).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 data.viewstatus = getData.data;
@@ -33,7 +33,7 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
         });
     }
 
-    $scope.openVideo = function (key, data) {
+    $scope.openVideo = function(key, data) {
         if (!data.viewstatus) {
             $scope.viewVideo(data);
         } else {
@@ -41,7 +41,7 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
         }
     }
 
-    $scope.showVideo = function (data) {
+    $scope.showVideo = function(data) {
         $scope.videoData = data;
         var files = [];
         var obj = {};
@@ -57,7 +57,7 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
         $scope.getData();
     }
 
-    $scope.uploadReport = function (session, files) {
+    $scope.uploadReport = function(session, files) {
         $scope.errors = [];
         if (files && files.length) {
             var extn = files[0].name.split(".").pop();
@@ -80,7 +80,7 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
         }
     }
 
-    $scope.confirmUpload = function () {
+    $scope.confirmUpload = function() {
         $ngConfirm({
             title: 'Are you sure want to upload this?',
             content: '',
@@ -90,13 +90,13 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
                 tryAgain: {
                     text: 'Yes',
                     btnClass: 'btn-red',
-                    action: function () {
+                    action: function() {
                         $scope.uploadDocument();
                     }
                 },
                 cancel: {
                     text: 'No',
-                    action: function () {
+                    action: function() {
                         $scope.uploadData = {};
                         $scope.uploadData.newdocument = '';
                     }
@@ -105,8 +105,8 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
         });
     }
 
-    $scope.uploadDocument = function () {
-        webServices.upload('trainer/training/session/upload', $scope.uploadData).then(function (getData) {
+    $scope.uploadDocument = function() {
+        webServices.upload('trainer/training/session/upload', $scope.uploadData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $rootScope.$emit("showSuccessMsg", getData.data.message);
@@ -120,5 +120,8 @@ app.controller('TrainerInfoController', ['$scope', '$state', '$stateParams', 'we
     };
 
     $scope.getData();
+
+    var obj = { page_component: 'trainer', page_name: 'info', module: 16, item: $stateParams.id };
+    $rootScope.viewPage(obj);
 
 }]);

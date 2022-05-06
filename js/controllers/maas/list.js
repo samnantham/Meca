@@ -14,8 +14,8 @@ app.controller('MaasController', ['$scope', '$http', '$state', 'authServices', '
     $scope.filterData.status = $stateParams.type;
     $scope.errorData = {};
 
-    $scope.changeActive = function(tab){
-        if($scope.activetab != tab){
+    $scope.changeActive = function(tab) {
+        if ($scope.activetab != tab) {
             $rootScope.loading = true;
             $scope.activetab = tab;
             $scope.filterData.type = tab;
@@ -37,7 +37,7 @@ app.controller('MaasController', ['$scope', '$http', '$state', 'authServices', '
         $scope.getResults();
     };
 
-    $scope.sortData = function(key,order) {
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -46,7 +46,7 @@ app.controller('MaasController', ['$scope', '$http', '$state', 'authServices', '
     }
 
     $scope.getResults = function() {
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             console.log(getData)
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -76,7 +76,10 @@ app.controller('MaasController', ['$scope', '$http', '$state', 'authServices', '
         $scope.url = 'maas/paginate/' + $scope.totalPerPage;
         $scope.getResults();
     };
-    
+
     $scope.getDatas();
+
+    var obj = { page_component: 'maas', page_name: 'list', module: 5, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

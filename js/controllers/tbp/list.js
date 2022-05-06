@@ -9,43 +9,44 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
     $scope.totalPerPage = $rootScope.pagelimits[0];
     $rootScope.loading = true;
     $scope.filterData = {};
-    $scope.activetab = $stateParams.type;
+    // $scope.activetab = $stateParams.type;
     $scope.filterData.type = $stateParams.type;
     $scope.filterData.sortorder = '';
     $scope.errorData = {};
     $scope.showMap = 0;
     $scope.showListing = 0;
 
-    $scope.seterrorMsg = function(){
+    $scope.seterrorMsg = function() {
         $scope.errorData.title_errorMsg = 'Enter Title';
         $scope.errorData.invitation_errorMsg = 'Please upload invitations';
         $scope.errorData.survey_link_errorMsg = 'Not a valid URL';
     }
 
-    $scope.changeActive = function(tab){
-        if($scope.activetab != tab){
+    $scope.changeActive = function(tab) {
+        if ($scope.activetab != tab) {
             $rootScope.loading = true;
             $scope.activetab = tab;
             $scope.filterData.type = tab;
-            if($scope.activetab == 4){
+            if ($scope.activetab == 4) {
                 $scope.url = 'pdca/training/paginate/' + $scope.totalPerPage;
                 $scope.getResults();
-            }else if($scope.activetab == 5){
+            } else if ($scope.activetab == 5) {
                 $rootScope.loading = false;
                 $scope.showMap = 0;
                 $scope.showListing = 1;
                 $scope.getCountryTrainees('lbn');
-            }else if($scope.activetab == 6){
+            } else if ($scope.activetab == 6) {
                 $scope.url = 'trainer/training/paginate/' + $scope.totalPerPage;
                 $scope.getResults();
-            }else{
+            } else {
                 $scope.url = 'tbp/paginate/' + $scope.totalPerPage;
                 $scope.getResults();
             }
+            $state.go('app.tbps', { 'type': tab });
         }
     }
 
-    $scope.getCountryTrainees = function(country){
+    $scope.getCountryTrainees = function(country) {
         $scope.trainees = {};
         $rootScope.loading = true;
         $scope.showMap = 0;
@@ -56,12 +57,12 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
                 $scope.trainees = getData.data;
                 console.log($scope.trainees)
             } else {
-               // $rootScope.logout();
+                // $rootScope.logout();
             }
         });
     }
 
-    $scope.viewTrainee = function(traineeInfo){
+    $scope.viewTrainee = function(traineeInfo) {
         $scope.traineeInfo = {};
         $scope.traineeInfo = traineeInfo;
         $('#TraineeInfopopup').modal({
@@ -70,12 +71,12 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         });
     }
 
-    $scope.gobacktoMap = function(){
+    $scope.gobacktoMap = function() {
         $scope.showMap = 1;
         $scope.showListing = 0;
     }
 
-    $scope.setservererrorMsg = function(errors){
+    $scope.setservererrorMsg = function(errors) {
         $scope.errorData = {};
         angular.forEach(errors, function(error, no) {
             $scope.errorData[no] = error[0];
@@ -88,24 +89,25 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         $scope.inputchange();
         $scope.checkInvitations();
         if (form.$valid) {
-                $rootScope.loading = true;
-                webServices.upload('tbp', $scope.formData).then(function(getData) {
+            $rootScope.loading = true;
+            webServices.upload('tbp', $scope.formData).then(function(getData) {
+                $rootScope.loading = false;
+                if (getData.status == 200) {
+                    $rootScope.$emit("showSuccessMsg", getData.data.message);
+                    $scope.closeModal();
+                    $scope.getResults();
+                } else if (getData.status == 401) {
+                    $scope.setservererrorMsg(getData.data.message);
                     $rootScope.loading = false;
-                    if (getData.status == 200) {
-                        $rootScope.$emit("showSuccessMsg", getData.data.message);
-                        $scope.closeModal();
-                        $scope.getResults();
-                    } else if (getData.status == 401) {
-                        $scope.setservererrorMsg(getData.data.message);
-                        $rootScope.loading = false;
-                    } else {
-                        $rootScope.$emit("showISError", getData);
-                    }
-                });
+                } else {
+                    $rootScope.$emit("showISError", getData);
+                }
+            });
         } else {
             if (!form.title.$valid) {
                 $scope.errorData.title_error = true;
-            }if(!$scope.formData.invitations_data){
+            }
+            if (!$scope.formData.invitations_data) {
                 if (!form.invitations.$valid) {
                     $scope.errorData.invitation_error = true;
                 }
@@ -117,19 +119,19 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         }
     }
 
-    $scope.checkInvitations = function(){
+    $scope.checkInvitations = function() {
         $scope.inputchange();
         if ($scope.formData.invitations.length > 0) {
             var invitations = angular.copy($scope.formData.invitations);
             for (var i = invitations.length - 1; i >= 0; i--) {
-                if (!invitations[i].name||!invitations[i].filename) {
+                if (!invitations[i].name || !invitations[i].filename) {
                     $scope.formData.invitations_data = 0;
                 }
             };
         }
     }
 
-    $scope.uploadInvitation = function(no,files) {
+    $scope.uploadInvitation = function(no, files) {
         $scope.errors = [];
         if (files && files.length) {
             var extn = files[0].name.split(".").pop();
@@ -152,7 +154,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         }
     }
 
-   $scope.addtbpfiles = function(files) {
+    $scope.addtbpfiles = function(files) {
         $scope.errors = [];
         if ($scope.formData.tbp_files.length < $rootScope.maxUploadFiles) {
             if (files && files.length) {
@@ -186,7 +188,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         }
     }
 
-    $scope.sortData = function(key,order) {
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -197,7 +199,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
     $scope.getResults = function() {
         $rootScope.loading = true;
         console.log
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             $rootScope.loading = false;
             console.log(getData)
             if (getData.status == 200) {
@@ -207,7 +209,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
                 $scope.pagedata[$scope.pageno] = getData.data;
                 $scope.tbps = getData.data;
             } else {
-               // $rootScope.logout();
+                // $rootScope.logout();
             }
         });
     };
@@ -217,7 +219,7 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         if (!$scope.pagedata[$scope.pageno]) {
             $scope.getResults();
         } else {
-            $scope.events = $scope.pagedata[$scope.pageno];
+            $scope.tbps = $scope.pagedata[$scope.pageno];
         }
     };
 
@@ -227,8 +229,8 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         $scope.getResults();
     };
 
-    $scope.removeFile = function(key,data){
-        $scope.formData.tbp_files.splice(key,1);
+    $scope.removeFile = function(key, data) {
+        $scope.formData.tbp_files.splice(key, 1);
     }
 
     $scope.closeModal = function() {
@@ -237,12 +239,12 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         $('#PopupModal').modal('hide');
         $rootScope.modalerrors = [];
     }
-    
+
     $scope.openaddModal = function() {
         $scope.inputchange();
         $scope.formData = {};
         $scope.formData.type = $stateParams.type;
-        $scope.formData.invitations = [{name:'',file:'',filename:''}];
+        $scope.formData.invitations = [{ name: '', file: '', filename: '' }];
         $scope.formData.tbp_files = [];
         $('#PopupModal').modal({
             backdrop: 'static',
@@ -250,20 +252,23 @@ app.controller('TBPController', ['$scope', '$http', '$state', 'authServices', '$
         });
     }
 
-    $scope.addInvitation = function(){
-        var obj = {name:'',file:'',filename:''};
+    $scope.addInvitation = function() {
+        var obj = { name: '', file: '', filename: '' };
         $scope.formData.invitations.push(obj);
     }
 
-    $scope.removeInvitation = function(key){
-        $scope.formData.invitations.splice(key,1);
+    $scope.removeInvitation = function(key) {
+        $scope.formData.invitations.splice(key, 1);
     }
 
     $scope.inputchange = function() {
         $scope.errorData = {};
         $scope.seterrorMsg();
     }
-    
-    $scope.getDatas();
+
+    $scope.changeActive($stateParams.type);
+
+    var obj = { page_component: 'tbp', page_name: 'list', module: 2, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);

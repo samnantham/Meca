@@ -15,10 +15,10 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
     $scope.activetab = '';
     $scope.activesubcategory = '';
     $scope.subcategorylist = [];
-    $scope.slides = [{image:'img/c1.jpg'},{image:'img/c2.jpg'},{image:'img/c3.jpg'},{image:'img/c4.jpg'}];
-    
+    $scope.slides = [{ image: 'img/c1.jpg' }, { image: 'img/c2.jpg' }, { image: 'img/c3.jpg' }, { image: 'img/c4.jpg' }];
 
-    $scope.sortData = function(key,order) {
+
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -26,37 +26,37 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
         $scope.getResults();
     }
 
-    $scope.searchClick = function(){
+    $scope.searchClick = function() {
         $scope.isSearch = !$scope.isSearch;
-        if(!$scope.isSearch){
+        if (!$scope.isSearch) {
             $scope.filterData.keyword = '';
             $scope.getResults();
         }
     }
 
-    $scope.changeActive = function(tab){
-        if($scope.activetab != tab){
+    $scope.changeActive = function(tab) {
+        if ($scope.activetab != tab) {
             console.log(tab)
             $scope.subcategorylist = [];
             $scope.activesubcategory = '';
-            if(tab != ''){
+            if (tab != '') {
                 $scope.subcategorylist = tab.subcategories;
                 $scope.activetab = tab.category;
                 $scope.filterData.category = tab.category;
                 $scope.filterData.subcategory = '';
-            }else{
+            } else {
                 $scope.activetab = '';
                 $scope.filterData.category = '';
                 $scope.filterData.subcategory = '';
             }
-            
+
             $rootScope.loading = true;
             $scope.getResults();
         }
     }
 
-    $scope.changeSub = function(sub){
-        if($scope.activesubcategory != sub){
+    $scope.changeSub = function(sub) {
+        if ($scope.activesubcategory != sub) {
             $scope.activesubcategory = sub;
             $scope.filterData.subcategory = sub;
             $rootScope.loading = true;
@@ -65,7 +65,7 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
     }
 
     $scope.getResults = function() {
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             $rootScope.loading = false;
             if (getData.status == 200) {
                 $scope.pagination = {
@@ -76,10 +76,11 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
                 $scope.marketTotal = 0;
                 $scope.toyotaTotal = 0;
                 angular.forEach($scope.newslist.data, function(data, no) {
-                    if(data.category == 'Toyota Latest News'){
-                        $scope.toyotaTotal ++;
-                    }if(data.category == 'Market Latest News'){
-                        $scope.marketTotal ++;
+                    if (data.category == 'Toyota Latest News') {
+                        $scope.toyotaTotal++;
+                    }
+                    if (data.category == 'Market Latest News') {
+                        $scope.marketTotal++;
                     }
                 });
                 console.log($scope.newslist)
@@ -105,7 +106,7 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
         $scope.getResults();
     };
 
-    $scope.getVideos = function(month,year) {
+    $scope.getVideos = function(month, year) {
         webServices.get('news/video/list').then(function(getData) {
             console.log(getData)
             if (getData.status == 200) {
@@ -123,6 +124,9 @@ app.controller('NewsRoomController', ['$scope', '$http', '$state', 'authServices
         });
     }
     $scope.getVideos();
-    
+
+    var obj = { page_component: 'news_room', page_name: 'list', module: 10, item: 0 };
+    $rootScope.viewPage(obj);
+
 
 }]);

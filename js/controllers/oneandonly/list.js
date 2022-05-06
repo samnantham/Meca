@@ -14,7 +14,7 @@ app.controller('OnlyDayController', ['$scope', '$http', '$state', 'authServices'
     $scope.filterData.status = $stateParams.type;
     $scope.errorData = {};
 
-    $scope.sortData = function(key,order) {
+    $scope.sortData = function(key, order) {
         $scope.filterData.sortkey = key;
         $scope.filterData.sortorder = order;
         $scope.pagedata = [];
@@ -23,7 +23,7 @@ app.controller('OnlyDayController', ['$scope', '$http', '$state', 'authServices'
     }
 
     $scope.getResults = function() {
-        webServices.post($scope.url + '?page=' + $scope.pageno,$scope.filterData).then(function(getData) {
+        webServices.post($scope.url + '?page=' + $scope.pageno, $scope.filterData).then(function(getData) {
             console.log(getData)
             $rootScope.loading = false;
             if (getData.status == 200) {
@@ -53,7 +53,10 @@ app.controller('OnlyDayController', ['$scope', '$http', '$state', 'authServices'
         $scope.url = 'oneandonlyday/paginate/' + $scope.totalPerPage;
         $scope.getResults();
     };
-    
+
     $scope.getDatas();
+
+    var obj = { page_component: 'one_and_only', page_name: 'list', module: 11, item: 0 };
+    $rootScope.viewPage(obj);
 
 }]);
