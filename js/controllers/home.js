@@ -294,7 +294,7 @@ app.controller('DashboardCtrl', ['$scope', '$state', 'webServices', '$rootScope'
         }
 
         $scope.openVideo = function () {
-            $scope.images = [{ type: 'video', url: 'https://mecacampus.com/media/video/Award-Ceremony.mp4' }];
+            $scope.images = [{ type: 'video', url: 'https://mecacampus.com/media/video/Toyota_Dream_Car_Art_Contest_MECA_Regional_Award.mp4' }];
             $rootScope.openLightbox($scope.images, 0);
         }
 
